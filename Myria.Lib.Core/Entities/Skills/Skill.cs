@@ -42,6 +42,44 @@ namespace Myria.Lib.Core.Entities.Skills
         // Optional code-defined effect hook for special cases not covered by EffectDefinition.
         [JsonIgnore]
         public Action<Character, ICombatant>? Effect { get; set; }
+
+        /// <summary>Purchasable upgrades for this specific skill, bought with points earned by
+        /// leveling it up through use - see SkillProgress/SkillLevelingService. Empty by default;
+        /// authoring these per skill is content work, not required for the leveling mechanism to
+        /// function (a skill with no upgrade options still levels up and gets its automatic
+        /// baseline growth, it just has nothing to spend points on yet).</summary>
+        public List<SkillUpgradeOption> UpgradeOptions { get; set; } = new();
+
+        /// <summary>Returns a copy of this Skill with the given deltas applied - used by
+        /// SkillLevelingService to build a character-specific effective Skill instance without
+        /// mutating the shared template every character of this class points to.</summary>
+        public Skill CloneWithDeltas(float scalingFactorDelta, int manaCostDelta, int cooldownDelta,
+            int castTimeDelta, int recoveryTimeDelta, IEnumerable<SkillEffectEntry> addedEffects)
+        {
+            var clone = new Skill
+            {
+                Id = Id,
+                Name = Name,
+                Description = Description,
+                CastTime = Math.Max(0, CastTime + castTimeDelta),
+                RecoveryTime = Math.Max(0, RecoveryTime + recoveryTimeDelta),
+                Cooldown = Math.Max(0, Cooldown + cooldownDelta),
+                Class = Class,
+                IsHealing = IsHealing,
+                ManaCost = Math.Max(0, ManaCost + manaCostDelta),
+                Type = Type,
+                Target = Target,
+                ScalingFactor = ScalingFactor + scalingFactorDelta,
+                StatToScaleFrom = StatToScaleFrom,
+                MinLevel = MinLevel,
+                AggroModifier = AggroModifier,
+                Effects = new List<SkillEffectEntry>(Effects),
+                Effect = Effect,
+                UpgradeOptions = UpgradeOptions
+            };
+            clone.Effects.AddRange(addedEffects);
+            return clone;
+        }
     }
 
 }

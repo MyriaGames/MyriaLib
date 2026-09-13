@@ -80,6 +80,11 @@ namespace Myria.Lib.Core.Entities.Characters
         [JsonIgnore]
         public int SkillSlotCount => ResolveSlotCount(Level);
 
+        /// <summary>Per-skill leveling progress (usage count, level, unspent points, purchased
+        /// upgrades) - keyed by skill id via SkillLevelingService.GetOrCreate. A skill with no
+        /// entry here simply hasn't been used yet (level 1, no points).</summary>
+        public List<SkillProgress> SkillProgress { get; set; } = new();
+
         // ── Race ─────────────────────────────────────────────────────────────────
         /// <summary>
         /// False for characters created before the race-selection UI existed.
@@ -342,6 +347,23 @@ namespace Myria.Lib.Core.Entities.Characters
 
             if (update.Equipment is not null)
                 ApplySyncedEquipment(update.Equipment);
+
+            if (update.SkillProgress is not null)
+                ApplySyncedSkillProgress(update.SkillProgress);
+        }
+
+        /// <summary>Overwrites SkillProgress with the server's authoritative per-skill leveling
+        /// state - whole-list replace, matching ApplySyncedRunes/ApplySyncedJobs's shape.</summary>
+        public void ApplySyncedSkillProgress(IEnumerable<SkillProgressSnapshot> progress)
+        {
+            SkillProgress = progress.Select(p => new SkillProgress
+            {
+                SkillId = p.SkillId,
+                UsageCount = p.UsageCount,
+                Level = p.Level,
+                UnspentPoints = p.UnspentPoints,
+                PurchasedUpgradeIds = new List<string>(p.PurchasedUpgradeIds)
+            }).ToList();
         }
 
         /// <summary>

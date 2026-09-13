@@ -61,6 +61,7 @@ namespace Myria.Lib.Core.Services.Builder
                 AggroModifier   = d.AggroModifier,
                 Cooldown        = d.Cooldown,
                 Effects         = d.Effects,
+                UpgradeOptions  = d.UpgradeOptions,
             }).ToList();
 
             _skillsById = _skills.ToDictionary(s => s.Id);

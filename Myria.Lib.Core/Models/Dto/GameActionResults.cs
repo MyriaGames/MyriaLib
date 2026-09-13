@@ -75,6 +75,13 @@ namespace Myria.Lib.Core.Models.Dto
     /// </summary>
     public record EquippedSnapshot(string? WeaponItemId, string? ArmorItemId, string? AccessoryItemId);
 
+    /// <summary>One skill's leveling progress - id-keyed, so the client reconciles by SkillId
+    /// rather than assuming list order/count matches. Level/UnspentPoints are the server's
+    /// anti-tamper-recomputed values (see SkillLevelingService.RecalculateLevelAndPoints), not
+    /// whatever the client last thought they were.</summary>
+    public record SkillProgressSnapshot(string SkillId, int UsageCount, int Level, int UnspentPoints,
+        List<string> PurchasedUpgradeIds);
+
     /// <summary>
     /// Generic "something about your character changed" push - sent after any session mutation
     /// that isn't already covered by a dedicated result DTO (shop deposit/withdraw, NPC buy/sell,
@@ -95,7 +102,8 @@ namespace Myria.Lib.Core.Models.Dto
         List<QuestProgressState>? QuestProgress = null,
         List<JobProgressSnapshot>? Jobs = null,
         List<RuneSnapshot>? Runes = null,
-        EquippedSnapshot? Equipment = null);
+        EquippedSnapshot? Equipment = null,
+        List<SkillProgressSnapshot>? SkillProgress = null);
 
     public record StartGroupCombatResult(
         bool Success,

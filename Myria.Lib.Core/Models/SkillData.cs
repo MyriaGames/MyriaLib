@@ -1,4 +1,5 @@
 ﻿using Myria.Lib.Core.Entities.Effects;
+using Myria.Lib.Core.Entities.Skills;
 
 namespace Myria.Lib.Core.Models
 {
@@ -18,6 +19,7 @@ namespace Myria.Lib.Core.Models
         public float AggroModifier { get; set; } = 0f;
         public int Cooldown { get; set; } = 0;
         public List<SkillEffectEntry> Effects { get; set; } = new();
+        public List<SkillUpgradeOption> UpgradeOptions { get; set; } = new();
     }
 
 }

@@ -3,6 +3,7 @@ using Myria.Lib.Core.Entities.Effects;
 using Myria.Lib.Core.Entities.Monsters;
 using Myria.Lib.Core.Entities.Characters;
 using Myria.Lib.Core.Entities.Skills;
+using Myria.Lib.Core.Services;
 using Myria.Lib.Core.Services.Builder;
 using Myria.Lib.Core.Services.Manager;
 using Myria.Lib.Core.Systems.Enums;
@@ -309,6 +310,7 @@ namespace Myria.Lib.Core.Systems
                     _skillCooldowns[caster] = casterCooldowns = new();
                 casterCooldowns[skill.Id] = skill.Cooldown + 1;
             }
+            SkillLevelingService.GrantUsage(caster, skill.Id);
             caster.AggroLevel += 1f + skill.AggroModifier;
 
             // Resolve primary effect targets based on skill targeting.

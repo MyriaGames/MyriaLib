@@ -78,14 +78,18 @@ namespace Myria.Lib.Core.Services
         }
 
         /// <summary>
-        /// Returns the resolved skills for all active slots in order.
-        /// Slots whose skill could not be resolved are skipped.
+        /// Returns the resolved skills for all active slots in order, with each character's own
+        /// leveling/upgrades already applied (see SkillLevelingService.ResolveEffectiveSkill).
+        /// Deliberately always resolves fresh rather than trusting SkillSlot.ResolvedSkill's cache -
+        /// that cache is only safe for display purposes (e.g. a slot's skill name never changes),
+        /// not for combat-facing stats, which can change mid-session as the character levels a
+        /// skill up or buys an upgrade. Slots whose skill could not be resolved are skipped.
         /// </summary>
         public static IEnumerable<(Skill Skill, SlottedSkillSource Source)> GetCombatSkills(Character character)
         {
             foreach (var slot in character.SkillSlots)
             {
-                var skill = slot.ResolvedSkill ?? Resolve(character, slot);
+                var skill = Resolve(character, slot);
                 if (skill != null)
                     yield return (skill, slot.Source);
             }
@@ -96,7 +100,10 @@ namespace Myria.Lib.Core.Services
         private static Skill? Resolve(Character character, SkillSlot slot) =>
             ResolveById(character, slot.Source, slot.SkillId);
 
-        private static Skill? ResolveById(Character character, SlottedSkillSource source, string skillId) =>
-            character.Skills.FirstOrDefault(s => s.Id == skillId);
+        private static Skill? ResolveById(Character character, SlottedSkillSource source, string skillId)
+        {
+            var baseSkill = character.Skills.FirstOrDefault(s => s.Id == skillId);
+            return baseSkill == null ? null : SkillLevelingService.ResolveEffectiveSkill(character, baseSkill);
+        }
     }
 }

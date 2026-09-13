@@ -9,7 +9,11 @@
     "Target": "SingleEnemy",
     "ScalingFactor": 1.7,
     "StatToScaleFrom": "ATK",
-    "MinLevel": 1
+    "MinLevel": 1,
+    "UpgradeOptions": [
+      { "Id": "quick_shot_power", "Description": "Increases damage.", "ScalingFactorDelta": 0.3 },
+      { "Id": "quick_shot_cost", "Description": "Reduces mana cost.", "ManaCostDelta": -2 }
+    ]
   },
   {
     "Id": "venomous_shot",
@@ -23,8 +27,13 @@
     "StatToScaleFrom": "STR",
     "MinLevel": 1,
     "AggroModifier": 1.5,
+    "Cooldown": 2,
     "Effects": [
       { "EffectId": "poison_weak", "ApplyTo": "Target" }
+    ],
+    "UpgradeOptions": [
+      { "Id": "venomous_shot_potency", "Description": "Increases damage and poison potency.", "ScalingFactorDelta": 0.3 },
+      { "Id": "venomous_shot_cooldown", "Description": "Reduces cooldown by 1 turn.", "CooldownDelta": -1 }
     ]
   },
   {

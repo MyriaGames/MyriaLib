@@ -3,6 +3,7 @@ using Myria.Lib.Core.Entities.Items;
 using Myria.Lib.Core.Entities.Monsters;
 using Myria.Lib.Core.Entities.Characters;
 using Myria.Lib.Core.Entities.Skills;
+using Myria.Lib.Core.Services;
 using Myria.Lib.Core.Services.Builder;
 using Myria.Lib.Core.Services.Manager;
 using Myria.Lib.Core.Systems.Enums;
@@ -212,6 +213,7 @@ namespace Myria.Lib.Core.Systems
         {
             Character.SpendMana(skill.ManaCost);
             if (skill.Cooldown > 0) _skillCooldowns[skill.Id] = skill.Cooldown + 1;
+            SkillLevelingService.GrantUsage(Character, skill.Id);
 
             // In solo encounters AllAllies and SingleAlly both resolve to the character themselves.
             var primaryTarget = (skill.Target == SkillTarget.Self
