@@ -16,6 +16,7 @@ namespace Myria.Lib.Core.Models
         public int MinLevel { get; set; }
         public bool IsHealing { get; set; }
         public float AggroModifier { get; set; } = 0f;
+        public int Cooldown { get; set; } = 0;
         public List<SkillEffectEntry> Effects { get; set; } = new();
     }
 

@@ -48,6 +48,7 @@
   "pg.fight.log.skillHit": "{0} nutzt {1} für {2}.",
   "pg.fight.log.heal": "{0} heilt {1}.",
   "pg.fight.log.nomana": "Nicht genug Mana.",
+  "pg.fight.log.onCooldown": "{0} ist noch nicht bereit ({1} Runde(n) verbleibend).",
   "pg.fight.log.enemyHit": "{0} trifft dich für {1}.",
   "pg.fight.log.enemyMiss": "{0} verfehlt.",
   "pg.fight.log.win": "Du hast {0} besiegt!",

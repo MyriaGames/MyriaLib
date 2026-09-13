@@ -59,6 +59,7 @@ namespace Myria.Lib.Core.Services.Builder
                 MinLevel        = d.MinLevel,
                 IsHealing       = d.IsHealing,
                 AggroModifier   = d.AggroModifier,
+                Cooldown        = d.Cooldown,
                 Effects         = d.Effects,
             }).ToList();
 

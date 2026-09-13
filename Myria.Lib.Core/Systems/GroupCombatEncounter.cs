@@ -27,6 +27,19 @@ namespace Myria.Lib.Core.Systems
 
         private int _currentCharacterIndex;
 
+        // Per-character, per-skill cooldowns for this fight only - reset every new encounter
+        // (never persisted on Character). Keyed per-character (unlike solo CombatEncounter, which
+        // only ever has one character) since two party members can independently be on/off
+        // cooldown for the same skill id. Stored as Cooldown+1, see CombatEncounter's matching
+        // field for why - decremented once per completed action, for the acting character only,
+        // in AdvanceAfterCharacterAction (this encounter has no Tick()/multi-turn casting at all,
+        // every action resolves synchronously).
+        private readonly Dictionary<Character, Dictionary<string, int>> _skillCooldowns = new();
+
+        private int GetSkillCooldownRemaining(Character character, string skillId) =>
+            _skillCooldowns.TryGetValue(character, out var cds) && cds.TryGetValue(skillId, out var v)
+                ? Math.Max(0, v - 1) : 0;
+
         // ── DEX-driven bonus turns ──────────────────────────────────────────────
         // Turn order itself is still the initiative roll from the constructor (unchanged) - this
         // only lets a character who's fast *relative to this fight's other participants* earn
@@ -282,7 +295,20 @@ namespace Myria.Lib.Core.Systems
                 return false;
             }
 
+            int cooldownRemaining = GetSkillCooldownRemaining(caster, skill.Id);
+            if (cooldownRemaining > 0)
+            {
+                Log.Add(new CombatLogEntry("pg.fight.log.onCooldown", skill.Name, cooldownRemaining));
+                return false;
+            }
+
             caster.SpendMana(skill.ManaCost);
+            if (skill.Cooldown > 0)
+            {
+                if (!_skillCooldowns.TryGetValue(caster, out var casterCooldowns))
+                    _skillCooldowns[caster] = casterCooldowns = new();
+                casterCooldowns[skill.Id] = skill.Cooldown + 1;
+            }
             caster.AggroLevel += 1f + skill.AggroModifier;
 
             // Resolve primary effect targets based on skill targeting.
@@ -476,6 +502,18 @@ namespace Myria.Lib.Core.Systems
 
         private void AdvanceAfterCharacterAction()
         {
+            // Decrement whoever just acted's own skill cooldowns - _currentCharacterIndex still
+            // points at them here, before any of the advancement logic below runs.
+            var actor = Characters[_currentCharacterIndex];
+            if (_skillCooldowns.TryGetValue(actor, out var actorCooldowns) && actorCooldowns.Count > 0)
+            {
+                foreach (var key in actorCooldowns.Keys.ToList())
+                {
+                    if (--actorCooldowns[key] <= 0)
+                        actorCooldowns.Remove(key);
+                }
+            }
+
             // A DEX-earned bonus action keeps the turn on the same character instead of moving
             // on - CurrentTurnCharacterName is unchanged, so no protocol/client change is needed
             // for this to work; the client just gets prompted for the same character's action again.

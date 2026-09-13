@@ -14,7 +14,10 @@ namespace Myria.Lib.Core.Entities.Skills
         public string Name { get; set; }
         public string Description { get; set; }
         public int CastTime { get; set; } = 0;     // turns before it activates
-        public int RecoveryTime { get; set; } = 0; // turns before you can act again
+        public int RecoveryTime { get; set; } = 0; // turns before you can act again (universal, any skill)
+        // Turns before THIS specific skill can be used again, independent of RecoveryTime - 0 means
+        // no cooldown (usable every time RecoveryTime allows an action, same as before this existed).
+        public int Cooldown { get; set; } = 0;
         [JsonConverter(typeof(CharacterClassJsonConverter))]
         public string Class { get; set; } = "";
         public bool IsHealing { get; set; } = false;

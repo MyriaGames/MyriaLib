@@ -21,6 +21,17 @@ namespace Myria.Lib.Core.Systems
         public int TurnsUntilActionExecutes { get; private set; } = 0;
         public int RecoveryTurnsRemaining { get; private set; } = 0;
 
+        // Per-skill cooldowns for this fight only - reset every new encounter (never persisted on
+        // Character), independent of RecoveryTurnsRemaining above (that's a universal "can the
+        // character act at all" timer; this is "is THIS specific skill available"). Stored as
+        // Cooldown+1 and decremented once per completed player action (see TickSkillCooldowns) so
+        // a skill used on turn N is actually unusable for skill.Cooldown full turns afterward,
+        // not skill.Cooldown-1.
+        private readonly Dictionary<string, int> _skillCooldowns = new();
+
+        public int GetSkillCooldownRemaining(string skillId) =>
+            _skillCooldowns.TryGetValue(skillId, out var v) ? Math.Max(0, v - 1) : 0;
+
         public List<CombatLogEntry> Log { get; } = new();
 
         private Action? _pendingAction;
@@ -105,6 +116,13 @@ namespace Myria.Lib.Core.Systems
                 return false;
             }
 
+            int cooldownRemaining = GetSkillCooldownRemaining(skill.Id);
+            if (cooldownRemaining > 0)
+            {
+                Log.Add(new CombatLogEntry("pg.fight.log.onCooldown", skill.Name, cooldownRemaining));
+                return false;
+            }
+
             if (skill.CastTime > 0)
             {
                 Phase = CombatPhase.Casting;
@@ -170,6 +188,7 @@ namespace Myria.Lib.Core.Systems
                 {
                     _pendingAction?.Invoke();
                     _pendingAction = null;
+                    TickSkillCooldowns();
 
                     if (Enemy.IsAlive) EnemyTurn();
                     else FinishCharacterWon();
@@ -192,6 +211,7 @@ namespace Myria.Lib.Core.Systems
         private void ExecuteSkill(Skill skill)
         {
             Character.SpendMana(skill.ManaCost);
+            if (skill.Cooldown > 0) _skillCooldowns[skill.Id] = skill.Cooldown + 1;
 
             // In solo encounters AllAllies and SingleAlly both resolve to the character themselves.
             var primaryTarget = (skill.Target == SkillTarget.Self
@@ -310,8 +330,25 @@ namespace Myria.Lib.Core.Systems
                 _                 => Character.TotalSTR
             };
 
+        /// <summary>Decrements every active per-skill cooldown by one turn, removing any that
+        /// reach zero. Called exactly once per completed player action (see ExecuteSkill's remark
+        /// on why cooldowns are stored as Cooldown+1) - NOT from Tick(), since GameHub's multiplayer
+        /// combat path never calls Tick() at all (only Myria.Console's combat loop does), so
+        /// anything relying on Tick() to advance would never decrement there.</summary>
+        private void TickSkillCooldowns()
+        {
+            if (_skillCooldowns.Count == 0) return;
+            foreach (var key in _skillCooldowns.Keys.ToList())
+            {
+                if (--_skillCooldowns[key] <= 0)
+                    _skillCooldowns.Remove(key);
+            }
+        }
+
         private void EndCharacterAction()
         {
+            TickSkillCooldowns();
+
             if (!Enemy.IsAlive)
             {
                 FinishCharacterWon();
