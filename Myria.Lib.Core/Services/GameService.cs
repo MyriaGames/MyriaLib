@@ -178,9 +178,6 @@ namespace Myria.Lib.Core.Services
                     ModLoader.ResolvePath("Data/common/rune_families.json"),
                     ModLoader.ResolvePath("Data/common/rune_word_pairs.json"));
                 BaseRuneService.Load(ModLoader.ResolvePath("Data/common/base_runes.json"));
-                BaseSkillLoader.Load(ModLoader.ResolvePath("Data/common/base_skills.json"));
-                FusionRecipeService.Load(ModLoader.ResolvePath("Data/common/fusion_recipes.json"));
-                SkillCombinationService.Load(ModLoader.ResolvePath("Data/common/skill_combinations.json"));
                 StartingEquipmentService.Load(ModLoader.ResolvePath("Data/common/starting_items.json"));
             }
             else
@@ -188,9 +185,6 @@ namespace Myria.Lib.Core.Services
                 var (words, families, pairs) = source.GetRuneWords();
                 RuneWordService.Load(words, families, pairs);
                 BaseRuneService.Load(source.GetBaseRunes());
-                BaseSkillLoader.Load(source.GetBaseSkills());
-                FusionRecipeService.Load(source.GetFusionRecipes());
-                SkillCombinationService.Load(source.GetSkillCombinations());
                 StartingEquipmentService.Load(source.GetStartingItems());
             }
             Report("skill_systems");

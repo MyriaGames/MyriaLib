@@ -161,9 +161,9 @@ namespace Myria.Lib.Core.Services
         }
 
         /// <summary>
-        /// Converts numeric keys in ClassXp and Stashed* dictionaries that were saved as enum
-        /// integers (old format) to string IDs. Character.Class/Race themselves are handled by
-        /// CharacterClassJsonConverter/CharacterRaceJsonConverter at deserialize time.
+        /// Converts numeric keys in ClassXp that were saved as enum integers (old format) to
+        /// string IDs. Character.Class/Race themselves are handled by CharacterClassJsonConverter/
+        /// CharacterRaceJsonConverter at deserialize time.
         /// </summary>
         private static void MigrateLegacyClassRace(Character character)
         {
@@ -178,31 +178,11 @@ namespace Myria.Lib.Core.Services
                     character.ClassXp.Remove(key);
                 }
             }
-
-            // StashedCombinedSkills / StashedCompositeSkills
-            MigrateDictKeys(character.StashedCombinedSkills);
-            MigrateDictKeys(character.StashedCompositeSkills);
-        }
-
-        private static void MigrateDictKeys<T>(Dictionary<string, T> dict)
-        {
-            var legacyKeys = dict.Keys.Where(k => int.TryParse(k, out _)).ToList();
-            foreach (var key in legacyKeys)
-            {
-                if (int.TryParse(key, out var n)
-                    && Myria.Lib.Core.Systems.Enums.CharacterClass.FromLegacyInt.TryGetValue(n, out var newKey))
-                {
-                    dict[newKey] = dict[key];
-                    dict.Remove(key);
-                }
-            }
         }
 
         private static void ResolveAdvancedSystems(Character character)
         {
             BaseRuneService.ResolveRunes(character);
-            SkillFusionSystem.ResolveCompositeSkills(character);
-            SkillCombinationService.ResolveCombinedSkills(character);
             SkillSlotService.ResolveSlots(character);
             SkillSlotService.MigrateIfEmpty(character);
         }

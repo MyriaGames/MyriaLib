@@ -2,7 +2,7 @@ using System.Text.Json.Serialization;
 
 namespace Myria.Lib.Core.Entities.Skills
 {
-    public enum SlottedSkillSource { Regular, Combined, CompositeFusion }
+    public enum SlottedSkillSource { Regular }
 
     /// <summary>
     /// One entry in the player's combat skill bar.
@@ -14,14 +14,7 @@ namespace Myria.Lib.Core.Entities.Skills
         /// <summary>Which pool the skill comes from.</summary>
         public SlottedSkillSource Source { get; set; }
 
-        /// <summary>
-        /// The ID of the skill within its pool:
-        /// <list type="bullet">
-        ///   <item>Regular — <c>Skill.Id</c> from <c>player.Skills</c></item>
-        ///   <item>Combined — <c>CombinedSkill.Id</c> from <c>player.CombinedSkills</c></item>
-        ///   <item>CompositeFusion — <c>CompositeSkill.Id</c> from <c>player.CompositeSkills</c></item>
-        /// </list>
-        /// </summary>
+        /// <summary>The <c>Skill.Id</c> from <c>player.Skills</c> this slot holds.</summary>
         public string SkillId { get; set; } = "";
 
         /// <summary>The resolved combat skill. Populated at runtime — not serialized.</summary>

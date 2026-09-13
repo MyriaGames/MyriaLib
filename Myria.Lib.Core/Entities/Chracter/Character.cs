@@ -46,25 +46,12 @@ namespace Myria.Lib.Core.Entities.Characters
         public int? LastHealerRoomId { get; set; } = null;
         public Dictionary<int, DateTime> RoomGatheringStatus { get; set; } = new();
 
-        // ── Skill Fusion (WPF / Unity — physical/combat classes) ─────────────────
-        /// <summary>All composite skills the player has created via fusion.</summary>
-        public List<CompositeSkill> CompositeSkills { get; set; } = new();
-
         /// <summary>
-        /// Which composite skill IDs are currently slotted for combat.
-        /// Count is capped by <see cref="FusionSlotCount"/>.
-        /// </summary>
-        public List<string> ActiveCompositeSkillIds { get; set; } = new();
-
-        /// <summary>Composite skills stashed per class; restored when the player switches back.</summary>
-        public Dictionary<string, List<CompositeSkill>> StashedCompositeSkills { get; set; } = new(StringComparer.OrdinalIgnoreCase);
-
-        /// <summary>
-        /// Level breakpoints shared by <see cref="FusionSlotCount"/> and <see cref="SkillSlotCount"/>
-        /// (both use the same curve by default). Base is 1 slot; each entry raises the cap once
-        /// Level reaches it. Pass entries sorted ascending by level — mirrors the shape and the
-        /// same ordering assumption as JobXpService.GatherBonusThresholds/UpgradeGates. A mod or a
-        /// differently-paced game can replace this instead of being stuck with a hardcoded curve.
+        /// Level breakpoints for <see cref="SkillSlotCount"/>. Base is 1 slot; each entry raises
+        /// the cap once Level reaches it. Pass entries sorted ascending by level — mirrors the
+        /// shape and the same ordering assumption as JobXpService.GatherBonusThresholds/
+        /// UpgradeGates. A mod or a differently-paced game can replace this instead of being stuck
+        /// with a hardcoded curve.
         /// </summary>
         public static (int Level, int Slots)[] SkillSlotBreakpoints { get; set; } =
         {
@@ -78,17 +65,6 @@ namespace Myria.Lib.Core.Entities.Characters
                 if (level >= breakLevel) slots = breakSlots;
             return slots;
         }
-
-        /// <summary>Maximum number of fusion skills the player can have active, based on level.</summary>
-        [JsonIgnore]
-        public int FusionSlotCount => ResolveSlotCount(Level);
-
-        // ── Skill Combination (combining 2–5 learned base skills) ─────────────────
-        /// <summary>All combined skills the player has created by pairing their learned skills.</summary>
-        public List<CombinedSkill> CombinedSkills { get; set; } = new();
-
-        /// <summary>Combined skills stashed per class; restored when the player switches back.</summary>
-        public Dictionary<string, List<CombinedSkill>> StashedCombinedSkills { get; set; } = new(StringComparer.OrdinalIgnoreCase);
 
         // ── Combat Skill Slots ────────────────────────────────────────────────────
         /// <summary>

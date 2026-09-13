@@ -6,8 +6,8 @@ namespace Myria.Lib.Tests;
 
 /// <summary>
 /// ClassProfile/RaceProfile are static, process-wide registries (see README §21, Known
-/// Limitations). Unlike RuneWordService/FusionRecipeService (see RuneEvaluatorTests /
-/// SkillFusionSystemTests), both expose a public <c>All</c> dictionary, so each test here
+/// Limitations). Unlike RuneWordService (see RuneEvaluatorTests), both expose a public
+/// <c>All</c> dictionary, so each test here
 /// snapshots the ambient state, swaps in a small controlled fixture, and restores the
 /// original snapshot in `finally` — safe to run regardless of whether real classes.json/
 /// races.json content happened to already be loaded elsewhere in the same test run.

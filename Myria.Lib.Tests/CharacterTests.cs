@@ -16,15 +16,7 @@ public class CharacterTests
     }
 
     [Fact]
-    public void FusionSlotCount_SharesTheSameBreakpointsAsSkillSlotCount()
-    {
-        var character = TestHelpers.CreateCharacter(level: 45);
-        Assert.Equal(character.SkillSlotCount, character.FusionSlotCount);
-        Assert.Equal(7, character.FusionSlotCount);
-    }
-
-    [Fact]
-    public void SkillSlotBreakpoints_IsSettable_AndAffectsBothSlotCounts()
+    public void SkillSlotBreakpoints_IsSettable_AndAffectsSkillSlotCount()
     {
         var original = Character.SkillSlotBreakpoints;
         try
@@ -33,7 +25,6 @@ public class CharacterTests
             var character = TestHelpers.CreateCharacter(level: 10);
 
             Assert.Equal(99, character.SkillSlotCount);
-            Assert.Equal(99, character.FusionSlotCount);
         }
         finally
         {

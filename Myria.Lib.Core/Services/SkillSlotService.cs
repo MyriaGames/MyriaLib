@@ -1,6 +1,5 @@
 using Myria.Lib.Core.Entities.Characters;
 using Myria.Lib.Core.Entities.Skills;
-using Myria.Lib.Core.Services.Builder;
 
 namespace Myria.Lib.Core.Services
 {
@@ -8,7 +7,6 @@ namespace Myria.Lib.Core.Services
     {
         /// <summary>
         /// Re-populates <see cref="SkillSlot.ResolvedSkill"/> for all slots after a save load.
-        /// Must be called after <c>SkillCombinationService.ResolveCombinedSkills</c>.
         /// </summary>
         public static void ResolveSlots(Character character)
         {
@@ -99,15 +97,6 @@ namespace Myria.Lib.Core.Services
             ResolveById(character, slot.Source, slot.SkillId);
 
         private static Skill? ResolveById(Character character, SlottedSkillSource source, string skillId) =>
-            source switch
-            {
-                SlottedSkillSource.Regular =>
-                    character.Skills.FirstOrDefault(s => s.Id == skillId),
-                SlottedSkillSource.Combined =>
-                    character.CombinedSkills.FirstOrDefault(c => c.Id == skillId)?.ResolvedSkill,
-                SlottedSkillSource.CompositeFusion =>
-                    character.CompositeSkills.FirstOrDefault(c => c.Id == skillId)?.ResolvedSkill,
-                _ => null
-            };
+            character.Skills.FirstOrDefault(s => s.Id == skillId);
     }
 }

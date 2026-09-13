@@ -29,9 +29,9 @@ namespace Myria.Lib.Core.Systems
         }
         /// <summary>
         /// Controls how steeply damage scales with the attack/defense gap. Higher values make
-        /// large stat differences more dramatic. Public/settable like RuneEvaluator's and
-        /// SkillFusionSystem's tuning constants, instead of a private const only editable by
-        /// recompiling — a mod or a meaningfully different game can rebalance this at startup.
+        /// large stat differences more dramatic. Public/settable like RuneEvaluator's tuning
+        /// constants, instead of a private const only editable by recompiling — a mod or a
+        /// meaningfully different game can rebalance this at startup.
         /// </summary>
         public static float DamageSteepness { get; set; } = 0.8f;
 

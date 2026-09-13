@@ -12,9 +12,8 @@ namespace Myria.Lib.Tests;
 /// which had each drifted from the others in different ways — see the service's doc comments for
 /// specifics. Tests use the real "smith_default" recipe/NPC data (recipes.json/npcs.json) rather
 /// than injecting synthetic recipes, since CraftingService has no public accessor to snapshot and
-/// restore its loaded state (same constraint as FusionRecipeService/RuneWordService — see
-/// SkillFusionSystemTests/RuneEvaluatorTests). Needs [Collection("GameData")] for ItemFactory and
-/// the real recipes.json content.
+/// restore its loaded state (same constraint as RuneWordService — see RuneEvaluatorTests). Needs
+/// [Collection("GameData")] for ItemFactory and the real recipes.json content.
 /// </summary>
 [Collection("GameData")]
 public class CraftExecutionServiceTests

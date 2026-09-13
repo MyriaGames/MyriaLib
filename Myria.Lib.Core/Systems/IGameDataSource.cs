@@ -39,8 +39,5 @@ namespace Myria.Lib.Core.Systems
         List<Forest> GetForests();
         (List<RuneWord> Words, List<WordFamily> Families, List<WordPairRelation> Pairs) GetRuneWords();
         List<BaseRuneData> GetBaseRunes();
-        List<BaseSkillData> GetBaseSkills();
-        List<FusionRecipe> GetFusionRecipes();
-        List<SkillCombinationRecipe> GetSkillCombinations();
     }
 }

@@ -84,19 +84,8 @@ namespace Myria.Lib.Core.Services.Manager
                                  .Select(s => s.Id));
             character.Skills.RemoveAll(s => s.Class.Equals(oldClass, StringComparison.OrdinalIgnoreCase));
 
-            var oldCombinedIds  = new HashSet<string>(character.CombinedSkills.Select(c => c.Id));
-            var oldCompositeIds = new HashSet<string>(character.CompositeSkills.Select(c => c.Id));
-
-            character.StashedCombinedSkills[oldClass]  = character.CombinedSkills.ToList();
-            character.StashedCompositeSkills[oldClass] = character.CompositeSkills.ToList();
-            character.CombinedSkills.Clear();
-            character.CompositeSkills.Clear();
-            character.ActiveCompositeSkillIds.Clear();
-
             character.SkillSlots.RemoveAll(slot =>
-                (slot.Source == SlottedSkillSource.Regular         && removedBaseIds.Contains(slot.SkillId))    ||
-                (slot.Source == SlottedSkillSource.Combined        && oldCombinedIds.Contains(slot.SkillId))    ||
-                (slot.Source == SlottedSkillSource.CompositeFusion && oldCompositeIds.Contains(slot.SkillId)));
+                slot.Source == SlottedSkillSource.Regular && removedBaseIds.Contains(slot.SkillId));
 
             character.Class = cls;
             character.LastClassChanged = DateTime.UtcNow;
@@ -108,17 +97,6 @@ namespace Myria.Lib.Core.Services.Manager
                 long transfer = GetClassXp(character, oldClass) / 2;
                 if (transfer > 0)
                     character.ClassXp[cls] = GetClassXp(character, cls) + transfer;
-            }
-
-            if (character.StashedCombinedSkills.TryGetValue(cls, out var stashedCombined))
-            {
-                character.CombinedSkills.AddRange(stashedCombined);
-                character.StashedCombinedSkills.Remove(cls);
-            }
-            if (character.StashedCompositeSkills.TryGetValue(cls, out var stashedComposite))
-            {
-                character.CompositeSkills.AddRange(stashedComposite);
-                character.StashedCompositeSkills.Remove(cls);
             }
 
             SkillFactory.UpdateSkills(character);
