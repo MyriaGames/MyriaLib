@@ -34,12 +34,15 @@ namespace Myria.Lib.Core.Systems
         // cooldown for the same skill id. Stored as Cooldown+1, see CombatEncounter's matching
         // field for why - decremented once per completed action, for the acting character only,
         // in AdvanceAfterCharacterAction (this encounter has no Tick()/multi-turn casting at all,
-        // every action resolves synchronously).
+        // every action resolves synchronously). That +1 offset is the ONLY compensation needed for
+        // the guaranteed same-turn decrement - GetSkillCooldownRemaining must return the raw stored
+        // value as-is; subtracting again here double-compensates and cuts every skill's effective
+        // cooldown one turn short of what was authored.
         private readonly Dictionary<Character, Dictionary<string, int>> _skillCooldowns = new();
 
         private int GetSkillCooldownRemaining(Character character, string skillId) =>
             _skillCooldowns.TryGetValue(character, out var cds) && cds.TryGetValue(skillId, out var v)
-                ? Math.Max(0, v - 1) : 0;
+                ? v : 0;
 
         // ── DEX-driven bonus turns ──────────────────────────────────────────────
         // Turn order itself is still the initiative roll from the constructor (unchanged) - this

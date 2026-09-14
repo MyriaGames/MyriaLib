@@ -26,12 +26,15 @@ namespace Myria.Lib.Core.Systems
         // Character), independent of RecoveryTurnsRemaining above (that's a universal "can the
         // character act at all" timer; this is "is THIS specific skill available"). Stored as
         // Cooldown+1 and decremented once per completed player action (see TickSkillCooldowns) so
-        // a skill used on turn N is actually unusable for skill.Cooldown full turns afterward,
-        // not skill.Cooldown-1.
+        // a skill used on turn N is actually unusable for skill.Cooldown full turns afterward, not
+        // skill.Cooldown-1. That +1 offset is the ONLY compensation needed for the guaranteed
+        // same-turn decrement - GetSkillCooldownRemaining must return the raw stored value as-is;
+        // subtracting again here (as an earlier version of this did) double-compensates and cuts
+        // every skill's effective cooldown one turn short of what was authored.
         private readonly Dictionary<string, int> _skillCooldowns = new();
 
         public int GetSkillCooldownRemaining(string skillId) =>
-            _skillCooldowns.TryGetValue(skillId, out var v) ? Math.Max(0, v - 1) : 0;
+            _skillCooldowns.TryGetValue(skillId, out var v) ? v : 0;
 
         public List<CombatLogEntry> Log { get; } = new();
 
