@@ -12,7 +12,9 @@
     "MinLevel": 1,
     "UpgradeOptions": [
       { "Id": "quick_shot_power", "Description": "Increases damage.", "ScalingFactorDelta": 0.3 },
-      { "Id": "quick_shot_cost", "Description": "Reduces mana cost.", "ManaCostDelta": -2 }
+      { "Id": "quick_shot_cost", "Description": "Reduces mana cost.", "ManaCostDelta": -2 },
+      { "Id": "quick_shot_power_2", "Description": "Further increases damage.", "ScalingFactorDelta": 0.4, "RequiredLevel": 11 },
+      { "Id": "quick_shot_stagger", "Description": "A precise follow-up that can stagger the target.", "RequiredLevel": 11, "MaxPurchases": 1, "AddedEffects": [ { "EffectId": "stun_short", "ApplyTo": "Target" } ] }
     ]
   },
   {
@@ -33,7 +35,9 @@
     ],
     "UpgradeOptions": [
       { "Id": "venomous_shot_potency", "Description": "Increases damage and poison potency.", "ScalingFactorDelta": 0.3 },
-      { "Id": "venomous_shot_cooldown", "Description": "Reduces cooldown by 1 turn.", "CooldownDelta": -1 }
+      { "Id": "venomous_shot_cooldown", "Description": "Reduces cooldown by 1 turn.", "CooldownDelta": -1 },
+      { "Id": "venomous_shot_potency_2", "Description": "Further increases damage and poison potency.", "ScalingFactorDelta": 0.4, "RequiredLevel": 11 },
+      { "Id": "venomous_shot_double_tip", "Description": "Coats the arrowhead twice, adding a second, stronger poison.", "RequiredLevel": 11, "MaxPurchases": 1, "AddedEffects": [ { "EffectId": "poison_moderate", "ApplyTo": "Target" } ] }
     ]
   },
   {

@@ -1,3 +1,4 @@
+using Myria.Lib.Core.Entities.Effects;
 using Myria.Lib.Core.Entities.Skills;
 using Myria.Lib.Core.Services;
 using Xunit;
@@ -91,31 +92,72 @@ public class SkillLevelingServiceTests
     }
 
     [Fact]
-    public void TrySpendPoint_AlreadyPurchased_Fails()
+    public void TrySpendPoint_RepeatableUpgrade_CanBePurchasedMultipleTimes()
     {
         var character = TestHelpers.CreateCharacter();
         var skill = MakeSkill();
-        skill.UpgradeOptions.Add(new SkillUpgradeOption { Id = "more_power", ScalingFactorDelta = 2f });
-        skill.UpgradeOptions.Add(new SkillUpgradeOption { Id = "less_mana", ManaCostDelta = -1 });
+        skill.UpgradeOptions.Add(new SkillUpgradeOption { Id = "more_power", ScalingFactorDelta = 2f }); // no AddedEffects - unlimited by default
         LevelUpOnce(character, skill.Id);
-        LevelUpOnce(character, skill.Id); // reach level 3 - two points earned total, so a second spend attempt fails for the right reason (duplicate), not lack of points
+        LevelUpOnce(character, skill.Id); // two points earned total
 
         Assert.True(SkillLevelingService.TrySpendPoint(character, skill, "more_power", out _));
         bool ok = SkillLevelingService.TrySpendPoint(character, skill, "more_power", out var error);
 
-        Assert.False(ok);
-        Assert.Equal("already_purchased", error);
+        Assert.True(ok);
+        Assert.Equal("", error);
+        var progress = SkillLevelingService.GetOrCreate(character, skill.Id);
+        Assert.Equal(2, progress.PurchasedUpgradeIds.Count(id => id == "more_power"));
+        Assert.Equal(0, progress.UnspentPoints);
     }
 
     [Fact]
-    public void ResolveEffectiveSkill_NoProgress_ReturnsSameInstance()
+    public void TrySpendPoint_EffectGrantingUpgrade_DefaultsToMaxPurchasesOne_Fails()
     {
         var character = TestHelpers.CreateCharacter();
         var skill = MakeSkill();
+        skill.UpgradeOptions.Add(new SkillUpgradeOption
+        {
+            Id = "adds_stun",
+            AddedEffects = new List<SkillEffectEntry> { new SkillEffectEntry { EffectId = "stun_short", ApplyTo = EffectTarget.Target } }
+        });
+        LevelUpOnce(character, skill.Id);
+        LevelUpOnce(character, skill.Id); // two points earned total
+
+        Assert.True(SkillLevelingService.TrySpendPoint(character, skill, "adds_stun", out _));
+        bool ok = SkillLevelingService.TrySpendPoint(character, skill, "adds_stun", out var error);
+
+        Assert.False(ok);
+        Assert.Equal("max_purchases_reached", error);
+    }
+
+    [Fact]
+    public void TrySpendPoint_BelowRequiredLevel_Fails()
+    {
+        var character = TestHelpers.CreateCharacter();
+        var skill = MakeSkill();
+        skill.UpgradeOptions.Add(new SkillUpgradeOption { Id = "tier2_power", ScalingFactorDelta = 2f, RequiredLevel = 11 });
+        LevelUpOnce(character, skill.Id); // level 2 - well below RequiredLevel 11
+
+        bool ok = SkillLevelingService.TrySpendPoint(character, skill, "tier2_power", out var error);
+
+        Assert.False(ok);
+        Assert.Equal("level_too_low", error);
+    }
+
+    [Fact]
+    public void ResolveEffectiveSkill_NoProgress_AppliesFullBaseNerf()
+    {
+        var character = TestHelpers.CreateCharacter();
+        var skill = MakeSkill(scalingFactor: 10f); // ManaCost 5, Cooldown 0 (default)
 
         var effective = SkillLevelingService.ResolveEffectiveSkill(character, skill);
 
-        Assert.Same(skill, effective);
+        Assert.NotSame(skill, effective); // level 1 is fully nerfed relative to the target/authored numbers
+        Assert.Equal(10f, skill.ScalingFactor); // base template untouched
+        Assert.Equal(5, skill.ManaCost);
+        Assert.Equal(10f * (1f - SkillLevelingService.BaseScalingNerfFraction), effective.ScalingFactor, precision: 3);
+        Assert.Equal((int)Math.Round(5 * (1f + SkillLevelingService.BaseManaCostSurchargeFraction)), effective.ManaCost);
+        Assert.Equal(SkillLevelingService.BaseCooldownBonusTurns, effective.Cooldown);
     }
 
     [Fact]
@@ -128,14 +170,46 @@ public class SkillLevelingServiceTests
         Assert.True(SkillLevelingService.TrySpendPoint(character, skill, "more_power", out _));
 
         var effective = SkillLevelingService.ResolveEffectiveSkill(character, skill);
+        var progress = SkillLevelingService.GetOrCreate(character, skill.Id);
 
         Assert.NotSame(skill, effective);
         Assert.Equal(10f, skill.ScalingFactor); // base template untouched
         Assert.Equal(5, skill.ManaCost);
-        // level 2 baseline growth (5% of base 10 = 0.5) + the purchased upgrade's +3
-        Assert.Equal(10f + 0.5f + 3f, effective.ScalingFactor, precision: 3);
-        Assert.Equal(6, effective.ManaCost);
+
+        // Same fade formula ResolveEffectiveSkill uses, at whatever level LevelUpOnce actually reached,
+        // plus the purchased upgrade's own deltas on top.
+        float fade = Math.Clamp((progress.Level - 1) / (float)(SkillLevelingService.NerfFadeReferenceLevel - 1), 0f, 1f);
+        float expectedScaling = progress.Level < SkillLevelingService.NerfFadeReferenceLevel
+            ? 10f * (1f - SkillLevelingService.BaseScalingNerfFraction * (1f - fade))
+            : 10f * (1f + SkillLevelingService.BaselineScalingGrowthPerLevel * (progress.Level - SkillLevelingService.NerfFadeReferenceLevel));
+        int expectedManaCost = progress.Level < SkillLevelingService.NerfFadeReferenceLevel
+            ? (int)Math.Round(5 * (1f + SkillLevelingService.BaseManaCostSurchargeFraction * (1f - fade)))
+            : 5;
+
+        Assert.Equal(expectedScaling + 3f, effective.ScalingFactor, precision: 3);
+        Assert.Equal(expectedManaCost + 1, effective.ManaCost);
         Assert.Equal(skill.Id, effective.Id);
+    }
+
+    [Fact]
+    public void ResolveEffectiveSkill_PastReferenceLevel_GrowsBeyondTarget()
+    {
+        var character = TestHelpers.CreateCharacter();
+        var skill = MakeSkill(scalingFactor: 10f);
+
+        // Level up well past NerfFadeReferenceLevel into the "continue upgrading" territory.
+        var progress = SkillLevelingService.GetOrCreate(character, skill.Id);
+        progress.UsageCount = SkillLevelingService.LevelBreakpoints.First(b => b.Level == 12).Uses;
+        SkillLevelingService.RecalculateLevelAndPoints(character, skill.Id);
+        Assert.Equal(12, progress.Level);
+
+        var effective = SkillLevelingService.ResolveEffectiveSkill(character, skill);
+
+        // Beyond the reference level the base-nerf is fully gone and it grows past the target instead.
+        float expected = 10f * (1f + SkillLevelingService.BaselineScalingGrowthPerLevel * (12 - SkillLevelingService.NerfFadeReferenceLevel));
+        Assert.Equal(expected, effective.ScalingFactor, precision: 3);
+        Assert.True(effective.ScalingFactor > 10f);
+        Assert.Equal(5, effective.ManaCost); // no further mana discount past target from leveling alone
     }
 
     [Fact]

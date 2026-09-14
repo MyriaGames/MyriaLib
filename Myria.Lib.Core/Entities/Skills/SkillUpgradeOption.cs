@@ -20,6 +20,20 @@ namespace Myria.Lib.Core.Entities.Skills
         public int CastTimeDelta { get; set; } = 0;
         public int RecoveryTimeDelta { get; set; } = 0;
 
+        /// <summary>Minimum skill Level (SkillProgress.Level) required before this upgrade can be
+        /// bought - lets higher-tier upgrades unlock only once a skill has been leveled far enough,
+        /// on top of just having a point to spend. Default 1 means available from the first point
+        /// earned (a "tier 1" upgrade).</summary>
+        public int RequiredLevel { get; set; } = 1;
+
+        /// <summary>How many times this exact upgrade can be purchased, stacking its deltas/effects
+        /// again each time - see SkillLevelingService.GetEffectiveMaxPurchases for the actual
+        /// resolved cap. 0 (the default) means "infer automatically": unlimited for a purely
+        /// numeric upgrade (repeatable power/cost/cooldown tweaks are meant to keep a skill growing
+        /// with continued use), but capped to 1 if this upgrade has AddedEffects (granting the same
+        /// new effect twice is rarely meaningful - set this explicitly if that's actually wanted).</summary>
+        public int MaxPurchases { get; set; } = 0;
+
         /// <summary>New effects this upgrade grants on top of the skill's own Effects list (e.g. an
         /// upgrade that adds a stun chance to a skill that didn't have one). To make an *existing*
         /// effect stronger, use ScalingFactorDelta instead - effect magnitude already scales from
