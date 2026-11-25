@@ -9,8 +9,8 @@ namespace Myria.Lib.Core.Models.Settings
         public Visuals VisualSettings { get; set; } = new();
         public KeybindingSettings Keybindings { get; set; } = new();
 
-        /// <summary>Auth/lobby server address (e.g. "http://myria.duckdns.org:5000"), typed in on
-        /// the Game settings tab. Empty means "use the built-in localhost default" for local dev.</summary>
+        /// <summary>Auth server address (e.g. "myria.example.org/auth"), typed in on
+        /// the Game settings tab. Empty means "use the official Myria server" (the clients' built-in default).</summary>
         public string ServerAddress { get; set; } = "";
 
         /// <summary>Whether to check for and silently install alpha updates on startup.</summary>
