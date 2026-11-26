@@ -531,17 +531,6 @@ namespace Myria.Lib.Core.Systems
                 }
             }
 
-            // Mirrors CombatEncounter.FinishCharacterWon's dungeon room-clearing - previously only
-            // the solo path did this, so dungeon monsters killed via group combat never left the
-            // room and dungeons could never be marked cleared.
-            var room = Characters.FirstOrDefault()?.CurrentRoom;
-            if (room != null && room.IsDungeonRoom)
-            {
-                room.CurrentMonsters.Remove(monster);
-                if (room.CurrentMonsters.Count == 0)
-                    room.IsCleared = true;
-            }
-
             if (Monsters.All(m => !m.IsAlive))
                 FinishCharactersWon();
         }

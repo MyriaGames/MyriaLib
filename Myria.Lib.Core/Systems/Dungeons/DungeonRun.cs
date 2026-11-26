@@ -144,3 +144,36 @@ namespace Myria.Lib.Core.Systems.Dungeons
         }
     }
 }
+
+namespace Myria.Lib.Core.Systems.Dungeons
+{
+    /// <summary>
+    /// The offline (singleplayer) counterpart of the server's per-party dungeon instances: one
+    /// local <see cref="DungeonRun"/> for the dungeon the player is in, dropped as soon as they're
+    /// anywhere outside it (walked out, or died and woke up at a healer).
+    /// </summary>
+    public static class LocalDungeonRuns
+    {
+        private static DungeonRun? _run;
+
+        /// <summary>The run for <paramref name="room"/>'s dungeon (started on first use); null outside dungeons.</summary>
+        public static DungeonRun? For(Room? room)
+        {
+            var id = DungeonRules.DungeonIdOf(room);
+            if (id is null) return null;
+            if (_run?.DungeonId != id) _run = new DungeonRun(id);
+            return _run;
+        }
+
+        /// <summary>Whether moving from <paramref name="from"/> to <paramref name="to"/> is allowed.</summary>
+        public static bool CanMove(Room? from, Room to) => For(to)?.CanMove(from, to) ?? true;
+
+        /// <summary>Call with the room the player is in now: outside the run's dungeon, it's dropped.</summary>
+        public static void NoteLocation(Room? room)
+        {
+            if (_run is not null && DungeonRules.DungeonIdOf(room) != _run.DungeonId) _run = null;
+        }
+
+        public static void Reset() => _run = null;
+    }
+}

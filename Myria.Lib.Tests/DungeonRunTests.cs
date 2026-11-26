@@ -83,4 +83,22 @@ public class DungeonRunTests
         Assert.False(run.CanMove(R(65), R(66)));                 // 65 isn't cleared yet...
         Assert.True(run.CanMove(R(65), R(64)));                  // ...but back into cleared 64 is
     }
+
+    [Fact]
+    public void OfflineRuns_LastWhileInside_AndResetOnceThePlayerIsOutside()
+    {
+        LocalDungeonRuns.Reset();
+        var run = LocalDungeonRuns.For(R(64))!;
+        ClearRoom(run, R(64));
+
+        LocalDungeonRuns.NoteLocation(R(65));                    // still inside: same run
+        Assert.Same(run, LocalDungeonRuns.For(R(65)));
+        Assert.True(LocalDungeonRuns.CanMove(R(64), R(65)));
+
+        LocalDungeonRuns.NoteLocation(R(1));                     // walked out, or woke up at a healer
+        Assert.NotSame(run, LocalDungeonRuns.For(R(64)));
+        Assert.False(LocalDungeonRuns.CanMove(R(64), R(65)));
+        Assert.Null(LocalDungeonRuns.For(R(2)));                 // no run outside dungeons
+        LocalDungeonRuns.Reset();
+    }
 }

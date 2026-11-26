@@ -21,7 +21,6 @@ namespace Myria.Lib.Core.Entities.Maps
         /// <summary>PvP is only ever possible in rooms flagged like this (v0.3: no world PvP) -
         /// enforced by the server (GameHub.StartPvpFight).</summary>
         public bool IsPvpRoom { get; set; } = false;
-        public bool IsCleared { get; set; } = false; // unlocked once all dungeon monsters are defeated
         /// <summary>When true, Name and Description are display strings, not locale keys.</summary>
         public bool IsLiteral { get; set; } = false;
         public int DailyGatherLimit { get; set; } = 0;
@@ -39,16 +38,9 @@ namespace Myria.Lib.Core.Entities.Maps
         /// <summary>
         /// Monster templates for this room — loaded once at startup by RoomService.ConnectMonsterRooms.
         /// Used as the source for random encounters (overworld) or dungeon spawns.
-        /// Do not mutate these; use <see cref="SpawnDungeonMonsters"/> for dungeon combat.
+        /// Do not mutate these; dungeon rooms fight instances from a DungeonRun (Systems/Dungeons).
         /// </summary>
         public List<Monster> Monsters { get; set; } = new();
-
-        /// <summary>
-        /// Active monster instances currently alive in this room.
-        /// Only populated in dungeon rooms via <see cref="SpawnDungeonMonsters"/>.
-        /// When this list reaches zero the room becomes <see cref="IsCleared"/>.
-        /// </summary>
-        public List<Monster> CurrentMonsters { get; set; } = new();
 
         public List<Corpse> Corpses { get; set; } = new();
         public List<Npc> NpcRefs { get; set; } = new();
@@ -75,18 +67,6 @@ namespace Myria.Lib.Core.Entities.Maps
         public void AddGatherBonus(int bonus)
         {
             if (bonus > 0) GathersRemaining += bonus;
-        }
-
-        /// <summary>
-        /// Spawns fresh monster instances into <see cref="CurrentMonsters"/> from the room's
-        /// <see cref="Monsters"/> templates. Call this when the player enters a dungeon room.
-        /// </summary>
-        public void SpawnDungeonMonsters()
-        {
-            if (!IsDungeonRoom) return;
-            CurrentMonsters.Clear();
-            foreach (var template in Monsters)
-                CurrentMonsters.Add(template.Clone());
         }
 
         /// <summary>

@@ -446,13 +446,6 @@ namespace Myria.Lib.Core.Systems
                 if (!Character.Inventory.AddItem(drop, Character))
                     InventoryFull = true;
             }
-            if (Character.CurrentRoom.IsDungeonRoom)
-            {
-                Character.CurrentRoom.CurrentMonsters.Remove(Enemy);
-                if (Character.CurrentRoom.CurrentMonsters.Count == 0)
-                    Character.CurrentRoom.IsCleared = true;
-            }
-
             DayCycleManager.AddTicks(GameTick.CombatVictory);
             Log.Add(new CombatLogEntry("pg.fight.log.win", Enemy.Name));
         }

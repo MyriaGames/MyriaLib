@@ -83,9 +83,6 @@ namespace Myria.Lib.Core.Services
         }
         public static bool CanEnterRoom(Room room, Character character)
         {
-            if (room.IsDungeonRoom && room.CurrentMonsters.Count > 0)
-                return false;
-
             switch (room.RequirementType)
             {
                 case RoomRequirementType.None:

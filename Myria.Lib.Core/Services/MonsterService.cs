@@ -52,18 +52,14 @@ namespace Myria.Lib.Core.Services
         }
 
         /// <summary>Group-fight counterpart of <see cref="TryPickMonsterForFight"/> - an empty list
-        /// when nothing is available. Dungeon rooms (their own spawned monsters) are unaffected.</summary>
+        /// when nothing is available. (Dungeon rooms don't come here: they fight their DungeonRun's pack.)</summary>
         public static List<Monster> TryPickMonstersForGroupFight(
-            List<Monster> templates, Dictionary<int, float> chances, List<Monster> currentMonsters,
-            bool isDungeonRoom, Func<int, bool> isAvailable, int max = 5)
+            List<Monster> templates, Dictionary<int, float> chances, Func<int, bool> isAvailable, int max = 5)
         {
-            if (isDungeonRoom && currentMonsters.Count > 0)
-                return currentMonsters.Take(max).ToList();
-
             var available = templates.Where(m => isAvailable(m.Id)).ToList();
             if (available.Count == 0) return new List<Monster>();
             var availableChances = chances.Where(kv => isAvailable(kv.Key)).ToDictionary(kv => kv.Key, kv => kv.Value);
-            return PickMonstersForGroupFight(available, availableChances, currentMonsters, isDungeonRoom, max);
+            return PickMonstersForGroupFight(available, availableChances, max);
         }
 
         public static Monster PickMonsterForFight(List<Monster> monsters, Dictionary<int, float> chances)
@@ -86,20 +82,14 @@ namespace Myria.Lib.Core.Services
         }
 
         /// <summary>
-        /// Picks up to <paramref name="max"/> monsters for a group fight.
-        /// Dungeon rooms use their spawned <paramref name="currentMonsters"/> instances (capped at max).
-        /// Overworld rooms always fill up to max slots by weighted-random selection from templates.
+        /// Picks <paramref name="max"/> monsters for an overworld group fight by weighted-random
+        /// selection from templates.
         /// </summary>
         public static List<Monster> PickMonstersForGroupFight(
             List<Monster> templates,
             Dictionary<int, float> chances,
-            List<Monster> currentMonsters,
-            bool isDungeonRoom,
             int max = 5)
         {
-            if (isDungeonRoom && currentMonsters.Count > 0)
-                return currentMonsters.Take(max).ToList();
-
             var result = new List<Monster>();
             for (int i = 0; i < max; i++)
                 result.Add(PickMonsterForFight(templates, chances).Clone());

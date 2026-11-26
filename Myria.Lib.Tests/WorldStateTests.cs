@@ -98,7 +98,7 @@ public class WorldStateTests
         for (int i = 0; i < WorldRules.PopulationStart; i++) world.RecordKill(2, 36);
         Assert.Null(MonsterService.TryPickMonsterForFight(room.Monsters, room.EncounterableMonsters, m => world.IsMonsterAvailable(2, m)));
         Assert.Empty(MonsterService.TryPickMonstersForGroupFight(room.Monsters, room.EncounterableMonsters,
-            room.CurrentMonsters, room.IsDungeonRoom, m => world.IsMonsterAvailable(2, m)));
+            m => world.IsMonsterAvailable(2, m)));
     }
 
     // ── Stock: purchases, deposits, gaps ──────────────────────────────────
