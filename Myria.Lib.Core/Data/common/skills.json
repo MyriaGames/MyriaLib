@@ -12,7 +12,8 @@
     "MinLevel": 1,
     "UpgradeOptions": [
       { "Id": "quick_shot_power", "Description": "Increases damage.", "ScalingFactorDelta": 0.3 },
-      { "Id": "quick_shot_cost", "Description": "Reduces mana cost.", "ManaCostDelta": -2 },
+      { "Id": "quick_shot_cost", "Description": "Reduces mana cost.", "ManaCostDelta": -2, "MaxPurchases": 1 },
+      { "Id": "quick_shot_mastery", "Description": "Greatly increases damage.", "ScalingFactorDelta": 0.45, "RequiredLevel": 6, "MaxPurchases": 2 },
       { "Id": "quick_shot_power_2", "Description": "Further increases damage.", "ScalingFactorDelta": 0.4, "RequiredLevel": 11 },
       { "Id": "quick_shot_stagger", "Description": "A precise follow-up that can stagger the target.", "RequiredLevel": 11, "MaxPurchases": 1, "AddedEffects": [ { "EffectId": "stun_short", "ApplyTo": "Target" } ] }
     ]
@@ -35,7 +36,8 @@
     ],
     "UpgradeOptions": [
       { "Id": "venomous_shot_potency", "Description": "Increases damage and poison potency.", "ScalingFactorDelta": 0.3 },
-      { "Id": "venomous_shot_cooldown", "Description": "Reduces cooldown by 1 turn.", "CooldownDelta": -1 },
+      { "Id": "venomous_shot_cooldown", "Description": "Reduces cooldown by 1 turn.", "CooldownDelta": -1, "MaxPurchases": 1 },
+      { "Id": "venomous_shot_mastery", "Description": "Greatly increases damage.", "ScalingFactorDelta": 0.3, "RequiredLevel": 6, "MaxPurchases": 2 },
       { "Id": "venomous_shot_potency_2", "Description": "Further increases damage and poison potency.", "ScalingFactorDelta": 0.4, "RequiredLevel": 11 },
       { "Id": "venomous_shot_double_tip", "Description": "Coats the arrowhead twice, adding a second, stronger poison.", "RequiredLevel": 11, "MaxPurchases": 1, "AddedEffects": [ { "EffectId": "poison_moderate", "ApplyTo": "Target" } ] }
     ]
@@ -51,7 +53,14 @@
     "ScalingFactor": 1.0,
     "StatToScaleFrom": "ATK",
     "MinLevel": 1,
-    "AggroModifier": 1
+    "AggroModifier": 1,
+    "UpgradeOptions": [
+      { "Id": "volley_power", "Description": "Increases damage.", "ScalingFactorDelta": 0.15 },
+      { "Id": "volley_efficiency", "Description": "Reduces mana cost.", "ManaCostDelta": -2, "MaxPurchases": 2 },
+      { "Id": "volley_mastery", "Description": "Greatly increases damage.", "ScalingFactorDelta": 0.25, "RequiredLevel": 6, "MaxPurchases": 2 },
+      { "Id": "volley_power_2", "Description": "Further increases damage.", "ScalingFactorDelta": 0.2, "RequiredLevel": 11 },
+      { "Id": "volley_barbed", "Description": "Barbed arrowheads poison every target hit.", "RequiredLevel": 11, "MaxPurchases": 1, "AddedEffects": [ { "EffectId": "poison_weak", "ApplyTo": "Target" } ] }
+    ]
   },
   {
     "Id": "crippling_shot",
@@ -67,6 +76,13 @@
     "AggroModifier": 1,
     "Effects": [
       { "EffectId": "stun_short", "ApplyTo": "Target" }
+    ],
+    "UpgradeOptions": [
+      { "Id": "crippling_shot_power", "Description": "Increases damage.", "ScalingFactorDelta": 0.25 },
+      { "Id": "crippling_shot_efficiency", "Description": "Reduces mana cost.", "ManaCostDelta": -1, "MaxPurchases": 3 },
+      { "Id": "crippling_shot_mastery", "Description": "Greatly increases damage.", "ScalingFactorDelta": 0.4, "RequiredLevel": 6, "MaxPurchases": 2 },
+      { "Id": "crippling_shot_power_2", "Description": "Further increases damage.", "ScalingFactorDelta": 0.3, "RequiredLevel": 11 },
+      { "Id": "crippling_shot_hamstring", "Description": "Also weakens the target's defense.", "RequiredLevel": 11, "MaxPurchases": 1, "AddedEffects": [ { "EffectId": "def_debuff_minor", "ApplyTo": "Target" } ] }
     ]
   },
   {
@@ -83,6 +99,13 @@
     "AggroModifier": 0,
     "Effects": [
       { "EffectId": "aim_buff_minor", "ApplyTo": "Caster" }
+    ],
+    "UpgradeOptions": [
+      { "Id": "eagle_eye_power", "Description": "Strengthens the effect.", "ScalingFactorDelta": 0.3 },
+      { "Id": "eagle_eye_efficiency", "Description": "Reduces mana cost.", "ManaCostDelta": -1, "MaxPurchases": 3 },
+      { "Id": "eagle_eye_mastery", "Description": "Greatly strengthens the effect.", "ScalingFactorDelta": 0.55, "RequiredLevel": 6, "MaxPurchases": 2 },
+      { "Id": "eagle_eye_power_2", "Description": "Further strengthens the effect.", "ScalingFactorDelta": 0.4, "RequiredLevel": 11 },
+      { "Id": "eagle_eye_calm", "Description": "Steadies your draw, also raising attack.", "RequiredLevel": 11, "MaxPurchases": 1, "AddedEffects": [ { "EffectId": "atk_buff_minor", "ApplyTo": "Caster" } ] }
     ]
   },
   {
@@ -95,7 +118,14 @@
     "Target": "SingleEnemy",
     "ScalingFactor": 1.8,
     "StatToScaleFrom": "DEX",
-    "MinLevel": 1
+    "MinLevel": 1,
+    "UpgradeOptions": [
+      { "Id": "swift_strike_power", "Description": "Increases damage.", "ScalingFactorDelta": 0.25 },
+      { "Id": "swift_strike_efficiency", "Description": "Reduces mana cost.", "ManaCostDelta": -1, "MaxPurchases": 1 },
+      { "Id": "swift_strike_mastery", "Description": "Greatly increases damage.", "ScalingFactorDelta": 0.45, "RequiredLevel": 6, "MaxPurchases": 2 },
+      { "Id": "swift_strike_power_2", "Description": "Further increases damage.", "ScalingFactorDelta": 0.35, "RequiredLevel": 11 },
+      { "Id": "swift_strike_momentum", "Description": "Each strike quickens you, raising DEX.", "RequiredLevel": 11, "MaxPurchases": 1, "AddedEffects": [ { "EffectId": "dex_buff_minor", "ApplyTo": "Caster" } ] }
+    ]
   },
   {
     "Id": "mark_prey",
@@ -111,6 +141,13 @@
     "AggroModifier": 1,
     "Effects": [
       { "EffectId": "def_debuff_minor", "ApplyTo": "Target" }
+    ],
+    "UpgradeOptions": [
+      { "Id": "mark_prey_power", "Description": "Increases damage.", "ScalingFactorDelta": 0.25 },
+      { "Id": "mark_prey_efficiency", "Description": "Reduces mana cost.", "ManaCostDelta": -1, "MaxPurchases": 2 },
+      { "Id": "mark_prey_mastery", "Description": "Greatly increases damage.", "ScalingFactorDelta": 0.4, "RequiredLevel": 6, "MaxPurchases": 2 },
+      { "Id": "mark_prey_power_2", "Description": "Further increases damage.", "ScalingFactorDelta": 0.3, "RequiredLevel": 11 },
+      { "Id": "mark_prey_tracker", "Description": "Marking prey also sharpens your aim.", "RequiredLevel": 11, "MaxPurchases": 1, "AddedEffects": [ { "EffectId": "aim_buff_minor", "ApplyTo": "Caster" } ] }
     ]
   },
   {
@@ -127,6 +164,13 @@
     "AggroModifier": 1,
     "Effects": [
       { "EffectId": "stun_short", "ApplyTo": "Target" }
+    ],
+    "UpgradeOptions": [
+      { "Id": "snare_power", "Description": "Increases damage.", "ScalingFactorDelta": 0.2 },
+      { "Id": "snare_efficiency", "Description": "Reduces mana cost.", "ManaCostDelta": -1, "MaxPurchases": 3 },
+      { "Id": "snare_mastery", "Description": "Greatly increases damage.", "ScalingFactorDelta": 0.35, "RequiredLevel": 6, "MaxPurchases": 2 },
+      { "Id": "snare_power_2", "Description": "Further increases damage.", "ScalingFactorDelta": 0.3, "RequiredLevel": 11 },
+      { "Id": "snare_barbed", "Description": "A barbed snare that also poisons.", "RequiredLevel": 11, "MaxPurchases": 1, "AddedEffects": [ { "EffectId": "poison_weak", "ApplyTo": "Target" } ] }
     ]
   },
   {
@@ -143,6 +187,13 @@
     "AggroModifier": 1.5,
     "Effects": [
       { "EffectId": "poison_weak", "ApplyTo": "Target" }
+    ],
+    "UpgradeOptions": [
+      { "Id": "feral_slash_power", "Description": "Increases damage.", "ScalingFactorDelta": 0.25 },
+      { "Id": "feral_slash_efficiency", "Description": "Reduces mana cost.", "ManaCostDelta": -1, "MaxPurchases": 3 },
+      { "Id": "feral_slash_mastery", "Description": "Greatly increases damage.", "ScalingFactorDelta": 0.45, "RequiredLevel": 6, "MaxPurchases": 2 },
+      { "Id": "feral_slash_power_2", "Description": "Further increases damage.", "ScalingFactorDelta": 0.35, "RequiredLevel": 11 },
+      { "Id": "feral_slash_maim", "Description": "Also weakens the target's attack.", "RequiredLevel": 11, "MaxPurchases": 1, "AddedEffects": [ { "EffectId": "atk_debuff_minor", "ApplyTo": "Target" } ] }
     ]
   },
   {
@@ -155,7 +206,14 @@
     "Target": "SingleEnemy",
     "ScalingFactor": 2.0,
     "StatToScaleFrom": "DEX",
-    "MinLevel": 1
+    "MinLevel": 1,
+    "UpgradeOptions": [
+      { "Id": "hunters_focus_power", "Description": "Increases damage.", "ScalingFactorDelta": 0.3 },
+      { "Id": "hunters_focus_efficiency", "Description": "Reduces mana cost.", "ManaCostDelta": -2, "MaxPurchases": 2 },
+      { "Id": "hunters_focus_mastery", "Description": "Greatly increases damage.", "ScalingFactorDelta": 0.5, "RequiredLevel": 6, "MaxPurchases": 2 },
+      { "Id": "hunters_focus_power_2", "Description": "Further increases damage.", "ScalingFactorDelta": 0.4, "RequiredLevel": 11 },
+      { "Id": "hunters_focus_exposed", "Description": "Finds a gap in the target's guard, weakening its defense.", "RequiredLevel": 11, "MaxPurchases": 1, "AddedEffects": [ { "EffectId": "def_debuff_minor", "ApplyTo": "Target" } ] }
+    ]
   },
   {
     "Id": "guard_strike",
@@ -171,6 +229,13 @@
     "AggroModifier": 0.5,
     "Effects": [
       { "EffectId": "def_buff_minor", "ApplyTo": "Caster" }
+    ],
+    "UpgradeOptions": [
+      { "Id": "guard_strike_power", "Description": "Increases damage.", "ScalingFactorDelta": 0.25 },
+      { "Id": "guard_strike_efficiency", "Description": "Reduces mana cost.", "ManaCostDelta": -1, "MaxPurchases": 2 },
+      { "Id": "guard_strike_mastery", "Description": "Greatly increases damage.", "ScalingFactorDelta": 0.4, "RequiredLevel": 6, "MaxPurchases": 2 },
+      { "Id": "guard_strike_power_2", "Description": "Further increases damage.", "ScalingFactorDelta": 0.3, "RequiredLevel": 11 },
+      { "Id": "guard_strike_ward", "Description": "Your guard also raises magic resistance.", "RequiredLevel": 11, "MaxPurchases": 1, "AddedEffects": [ { "EffectId": "mdef_buff_minor", "ApplyTo": "Caster" } ] }
     ]
   },
   {
@@ -184,7 +249,14 @@
     "ScalingFactor": 1.8,
     "AggroModifier": 3,
     "StatToScaleFrom": "ATK",
-    "MinLevel": 1
+    "MinLevel": 1,
+    "UpgradeOptions": [
+      { "Id": "holy_strike_power", "Description": "Increases damage.", "ScalingFactorDelta": 0.25 },
+      { "Id": "holy_strike_efficiency", "Description": "Reduces mana cost.", "ManaCostDelta": -1, "MaxPurchases": 3 },
+      { "Id": "holy_strike_mastery", "Description": "Greatly increases damage.", "ScalingFactorDelta": 0.45, "RequiredLevel": 6, "MaxPurchases": 2 },
+      { "Id": "holy_strike_power_2", "Description": "Further increases damage.", "ScalingFactorDelta": 0.35, "RequiredLevel": 11 },
+      { "Id": "holy_strike_judgment", "Description": "Holy judgment silences the target.", "RequiredLevel": 11, "MaxPurchases": 1, "AddedEffects": [ { "EffectId": "silence_short", "ApplyTo": "Target" } ] }
+    ]
   },
   {
     "Id": "shield_wall",
@@ -201,6 +273,13 @@
     "AggroModifier": 1.0,
     "Effects": [
       { "EffectId": "def_buff_minor", "ApplyTo": "Caster" }
+    ],
+    "UpgradeOptions": [
+      { "Id": "shield_wall_power", "Description": "Increases healing.", "ScalingFactorDelta": 0.15 },
+      { "Id": "shield_wall_efficiency", "Description": "Reduces mana cost.", "ManaCostDelta": -2, "MaxPurchases": 2 },
+      { "Id": "shield_wall_mastery", "Description": "Greatly increases healing.", "ScalingFactorDelta": 0.25, "RequiredLevel": 6, "MaxPurchases": 2 },
+      { "Id": "shield_wall_power_2", "Description": "Further increases healing.", "ScalingFactorDelta": 0.2, "RequiredLevel": 11 },
+      { "Id": "shield_wall_second_wind", "Description": "Also grants minor regeneration.", "RequiredLevel": 11, "MaxPurchases": 1, "AddedEffects": [ { "EffectId": "hp_regen_small", "ApplyTo": "Caster" } ] }
     ]
   },
   {
@@ -214,7 +293,14 @@
     "ScalingFactor": 1.6,
     "StatToScaleFrom": "ATK",
     "MinLevel": 1,
-    "AggroModifier": 4.0
+    "AggroModifier": 4.0,
+    "UpgradeOptions": [
+      { "Id": "challenge_power", "Description": "Increases damage.", "ScalingFactorDelta": 0.25 },
+      { "Id": "challenge_efficiency", "Description": "Reduces mana cost.", "ManaCostDelta": -1, "MaxPurchases": 3 },
+      { "Id": "challenge_mastery", "Description": "Greatly increases damage.", "ScalingFactorDelta": 0.4, "RequiredLevel": 6, "MaxPurchases": 2 },
+      { "Id": "challenge_power_2", "Description": "Further increases damage.", "ScalingFactorDelta": 0.3, "RequiredLevel": 11 },
+      { "Id": "challenge_intimidate", "Description": "Intimidates the target, weakening its attack.", "RequiredLevel": 11, "MaxPurchases": 1, "AddedEffects": [ { "EffectId": "atk_debuff_minor", "ApplyTo": "Target" } ] }
+    ]
   },
   {
     "Id": "crusader_strike",
@@ -227,7 +313,14 @@
     "ScalingFactor": 2.1,
     "AggroModifier": 2,
     "StatToScaleFrom": "ATK",
-    "MinLevel": 1
+    "MinLevel": 1,
+    "UpgradeOptions": [
+      { "Id": "crusader_strike_power", "Description": "Increases damage.", "ScalingFactorDelta": 0.3 },
+      { "Id": "crusader_strike_efficiency", "Description": "Reduces mana cost.", "ManaCostDelta": -2, "MaxPurchases": 2 },
+      { "Id": "crusader_strike_mastery", "Description": "Greatly increases damage.", "ScalingFactorDelta": 0.55, "RequiredLevel": 6, "MaxPurchases": 2 },
+      { "Id": "crusader_strike_power_2", "Description": "Further increases damage.", "ScalingFactorDelta": 0.4, "RequiredLevel": 11 },
+      { "Id": "crusader_strike_vigor", "Description": "A righteous blow that briefly heals you.", "RequiredLevel": 11, "MaxPurchases": 1, "AddedEffects": [ { "EffectId": "hp_regen_burst", "ApplyTo": "Caster" } ] }
+    ]
   },
   {
     "Id": "heavy_blow",
@@ -243,6 +336,13 @@
     "AggroModifier": 1,
     "Effects": [
       { "EffectId": "def_debuff_minor", "ApplyTo": "Target" }
+    ],
+    "UpgradeOptions": [
+      { "Id": "heavy_blow_power", "Description": "Increases damage.", "ScalingFactorDelta": 0.25 },
+      { "Id": "heavy_blow_efficiency", "Description": "Reduces mana cost.", "ManaCostDelta": -1, "MaxPurchases": 2 },
+      { "Id": "heavy_blow_mastery", "Description": "Greatly increases damage.", "ScalingFactorDelta": 0.45, "RequiredLevel": 6, "MaxPurchases": 2 },
+      { "Id": "heavy_blow_power_2", "Description": "Further increases damage.", "ScalingFactorDelta": 0.35, "RequiredLevel": 11 },
+      { "Id": "heavy_blow_bone_breaker", "Description": "A crushing blow that can stun.", "RequiredLevel": 11, "MaxPurchases": 1, "AddedEffects": [ { "EffectId": "stun_short", "ApplyTo": "Target" } ] }
     ]
   },
   {
@@ -255,7 +355,14 @@
     "Target": "SingleEnemy",
     "ScalingFactor": 1.5,
     "StatToScaleFrom": "STR",
-    "MinLevel": 1
+    "MinLevel": 1,
+    "UpgradeOptions": [
+      { "Id": "double_strike_power", "Description": "Increases damage.", "ScalingFactorDelta": 0.25 },
+      { "Id": "double_strike_efficiency", "Description": "Reduces mana cost.", "ManaCostDelta": -1, "MaxPurchases": 3 },
+      { "Id": "double_strike_mastery", "Description": "Greatly increases damage.", "ScalingFactorDelta": 0.4, "RequiredLevel": 6, "MaxPurchases": 2 },
+      { "Id": "double_strike_power_2", "Description": "Further increases damage.", "ScalingFactorDelta": 0.3, "RequiredLevel": 11 },
+      { "Id": "double_strike_flurry", "Description": "The flurry also raises your attack.", "RequiredLevel": 11, "MaxPurchases": 1, "AddedEffects": [ { "EffectId": "atk_buff_minor", "ApplyTo": "Caster" } ] }
+    ]
   },
   {
     "Id": "war_cry",
@@ -271,6 +378,13 @@
     "AggroModifier": 0.5,
     "Effects": [
       { "EffectId": "str_buff_minor", "ApplyTo": "Caster" }
+    ],
+    "UpgradeOptions": [
+      { "Id": "war_cry_power", "Description": "Increases damage.", "ScalingFactorDelta": 0.25 },
+      { "Id": "war_cry_efficiency", "Description": "Reduces mana cost.", "ManaCostDelta": -1, "MaxPurchases": 3 },
+      { "Id": "war_cry_mastery", "Description": "Greatly increases damage.", "ScalingFactorDelta": 0.4, "RequiredLevel": 6, "MaxPurchases": 2 },
+      { "Id": "war_cry_power_2", "Description": "Further increases damage.", "ScalingFactorDelta": 0.3, "RequiredLevel": 11 },
+      { "Id": "war_cry_stand_firm", "Description": "Your cry also hardens your defense.", "RequiredLevel": 11, "MaxPurchases": 1, "AddedEffects": [ { "EffectId": "def_buff_minor", "ApplyTo": "Caster" } ] }
     ]
   },
   {
@@ -287,6 +401,13 @@
     "AggroModifier": 1,
     "Effects": [
       { "EffectId": "stun_short", "ApplyTo": "Target" }
+    ],
+    "UpgradeOptions": [
+      { "Id": "slam_power", "Description": "Increases damage.", "ScalingFactorDelta": 0.25 },
+      { "Id": "slam_efficiency", "Description": "Reduces mana cost.", "ManaCostDelta": -1, "MaxPurchases": 3 },
+      { "Id": "slam_mastery", "Description": "Greatly increases damage.", "ScalingFactorDelta": 0.4, "RequiredLevel": 6, "MaxPurchases": 2 },
+      { "Id": "slam_power_2", "Description": "Further increases damage.", "ScalingFactorDelta": 0.3, "RequiredLevel": 11 },
+      { "Id": "slam_shatter", "Description": "Also shatters the target's guard, weakening its defense.", "RequiredLevel": 11, "MaxPurchases": 1, "AddedEffects": [ { "EffectId": "def_debuff_minor", "ApplyTo": "Target" } ] }
     ]
   },
   {
@@ -299,7 +420,14 @@
     "Target": "SingleEnemy",
     "ScalingFactor": 2.0,
     "StatToScaleFrom": "ATK",
-    "MinLevel": 1
+    "MinLevel": 1,
+    "UpgradeOptions": [
+      { "Id": "battle_rush_power", "Description": "Increases damage.", "ScalingFactorDelta": 0.3 },
+      { "Id": "battle_rush_efficiency", "Description": "Reduces mana cost.", "ManaCostDelta": -2, "MaxPurchases": 2 },
+      { "Id": "battle_rush_mastery", "Description": "Greatly increases damage.", "ScalingFactorDelta": 0.5, "RequiredLevel": 6, "MaxPurchases": 2 },
+      { "Id": "battle_rush_power_2", "Description": "Further increases damage.", "ScalingFactorDelta": 0.4, "RequiredLevel": 11 },
+      { "Id": "battle_rush_adrenaline", "Description": "The rush also raises your STR.", "RequiredLevel": 11, "MaxPurchases": 1, "AddedEffects": [ { "EffectId": "str_buff_minor", "ApplyTo": "Caster" } ] }
+    ]
   },
   {
     "Id": "berserk_blow",
@@ -315,6 +443,13 @@
     "AggroModifier": 1,
     "Effects": [
       { "EffectId": "str_buff_minor", "ApplyTo": "Caster" }
+    ],
+    "UpgradeOptions": [
+      { "Id": "berserk_blow_power", "Description": "Increases damage.", "ScalingFactorDelta": 0.3 },
+      { "Id": "berserk_blow_efficiency", "Description": "Reduces mana cost.", "ManaCostDelta": -1, "MaxPurchases": 2 },
+      { "Id": "berserk_blow_mastery", "Description": "Greatly increases damage.", "ScalingFactorDelta": 0.5, "RequiredLevel": 6, "MaxPurchases": 2 },
+      { "Id": "berserk_blow_power_2", "Description": "Further increases damage.", "ScalingFactorDelta": 0.4, "RequiredLevel": 11 },
+      { "Id": "berserk_blow_blood_rush", "Description": "Bloodlust briefly heals you.", "RequiredLevel": 11, "MaxPurchases": 1, "AddedEffects": [ { "EffectId": "hp_regen_burst", "ApplyTo": "Caster" } ] }
     ]
   },
   {
@@ -328,7 +463,14 @@
     "ScalingFactor": 1.1,
     "StatToScaleFrom": "STR",
     "MinLevel": 1,
-    "AggroModifier": 1
+    "AggroModifier": 1,
+    "UpgradeOptions": [
+      { "Id": "cleave_power", "Description": "Increases damage.", "ScalingFactorDelta": 0.15 },
+      { "Id": "cleave_efficiency", "Description": "Reduces mana cost.", "ManaCostDelta": -2, "MaxPurchases": 3 },
+      { "Id": "cleave_mastery", "Description": "Greatly increases damage.", "ScalingFactorDelta": 0.3, "RequiredLevel": 6, "MaxPurchases": 2 },
+      { "Id": "cleave_power_2", "Description": "Further increases damage.", "ScalingFactorDelta": 0.2, "RequiredLevel": 11 },
+      { "Id": "cleave_sunder", "Description": "Sunders the armor of everything it hits.", "RequiredLevel": 11, "MaxPurchases": 1, "AddedEffects": [ { "EffectId": "def_debuff_minor", "ApplyTo": "Target" } ] }
+    ]
   },
   {
     "Id": "battle_roar",
@@ -345,6 +487,13 @@
     "Effects": [
       { "EffectId": "str_debuff_minor", "ApplyTo": "Target" },
       { "EffectId": "atk_buff_minor", "ApplyTo": "Caster" }
+    ],
+    "UpgradeOptions": [
+      { "Id": "battle_roar_power", "Description": "Increases damage.", "ScalingFactorDelta": 0.25 },
+      { "Id": "battle_roar_efficiency", "Description": "Reduces mana cost.", "ManaCostDelta": -1, "MaxPurchases": 3 },
+      { "Id": "battle_roar_mastery", "Description": "Greatly increases damage.", "ScalingFactorDelta": 0.4, "RequiredLevel": 6, "MaxPurchases": 2 },
+      { "Id": "battle_roar_power_2", "Description": "Further increases damage.", "ScalingFactorDelta": 0.3, "RequiredLevel": 11 },
+      { "Id": "battle_roar_terrify", "Description": "The roar also throws off the target's aim.", "RequiredLevel": 11, "MaxPurchases": 1, "AddedEffects": [ { "EffectId": "aim_debuff_minor", "ApplyTo": "Target" } ] }
     ]
   },
   {
@@ -357,7 +506,14 @@
     "Target": "SingleEnemy",
     "ScalingFactor": 2.1,
     "StatToScaleFrom": "STR",
-    "MinLevel": 1
+    "MinLevel": 1,
+    "UpgradeOptions": [
+      { "Id": "reckless_strike_power", "Description": "Increases damage.", "ScalingFactorDelta": 0.3 },
+      { "Id": "reckless_strike_efficiency", "Description": "Reduces mana cost.", "ManaCostDelta": -1, "MaxPurchases": 3 },
+      { "Id": "reckless_strike_mastery", "Description": "Greatly increases damage.", "ScalingFactorDelta": 0.55, "RequiredLevel": 6, "MaxPurchases": 2 },
+      { "Id": "reckless_strike_power_2", "Description": "Further increases damage.", "ScalingFactorDelta": 0.4, "RequiredLevel": 11 },
+      { "Id": "reckless_strike_concussive", "Description": "A reckless blow that can stun.", "RequiredLevel": 11, "MaxPurchases": 1, "AddedEffects": [ { "EffectId": "stun_short", "ApplyTo": "Target" } ] }
+    ]
   },
   {
     "Id": "primal_fury",
@@ -373,6 +529,13 @@
     "AggroModifier": 1.0,
     "Effects": [
       { "EffectId": "atk_buff_strong", "ApplyTo": "Caster" }
+    ],
+    "UpgradeOptions": [
+      { "Id": "primal_fury_power", "Description": "Increases damage.", "ScalingFactorDelta": 0.35 },
+      { "Id": "primal_fury_efficiency", "Description": "Reduces mana cost.", "ManaCostDelta": -2, "MaxPurchases": 2 },
+      { "Id": "primal_fury_mastery", "Description": "Greatly increases damage.", "ScalingFactorDelta": 0.55, "RequiredLevel": 6, "MaxPurchases": 2 },
+      { "Id": "primal_fury_power_2", "Description": "Further increases damage.", "ScalingFactorDelta": 0.45, "RequiredLevel": 11 },
+      { "Id": "primal_fury_unbridled", "Description": "Fury also raises your STR.", "RequiredLevel": 11, "MaxPurchases": 1, "AddedEffects": [ { "EffectId": "str_buff_minor", "ApplyTo": "Caster" } ] }
     ]
   },
   {
@@ -389,6 +552,13 @@
     "AggroModifier": 1,
     "Effects": [
       { "EffectId": "silence_short", "ApplyTo": "Target" }
+    ],
+    "UpgradeOptions": [
+      { "Id": "holy_light_power", "Description": "Increases damage.", "ScalingFactorDelta": 0.25 },
+      { "Id": "holy_light_efficiency", "Description": "Reduces mana cost.", "ManaCostDelta": -1, "MaxPurchases": 3 },
+      { "Id": "holy_light_mastery", "Description": "Greatly increases damage.", "ScalingFactorDelta": 0.4, "RequiredLevel": 6, "MaxPurchases": 2 },
+      { "Id": "holy_light_power_2", "Description": "Further increases damage.", "ScalingFactorDelta": 0.3, "RequiredLevel": 11 },
+      { "Id": "holy_light_radiance", "Description": "The light also briefly heals your allies.", "RequiredLevel": 11, "MaxPurchases": 1, "AddedEffects": [ { "EffectId": "hp_regen_burst", "ApplyTo": "AllAllies" } ] }
     ]
   },
   {
@@ -403,7 +573,14 @@
     "StatToScaleFrom": "SPR",
     "MinLevel": 1,
     "IsHealing": true,
-    "AggroModifier": 1
+    "AggroModifier": 1,
+    "UpgradeOptions": [
+      { "Id": "minor_heal_power", "Description": "Increases healing.", "ScalingFactorDelta": 0.7 },
+      { "Id": "minor_heal_efficiency", "Description": "Reduces mana cost.", "ManaCostDelta": -1, "MaxPurchases": 2 },
+      { "Id": "minor_heal_mastery", "Description": "Greatly increases healing.", "ScalingFactorDelta": 1.2, "RequiredLevel": 6, "MaxPurchases": 2 },
+      { "Id": "minor_heal_power_2", "Description": "Further increases healing.", "ScalingFactorDelta": 0.95, "RequiredLevel": 11 },
+      { "Id": "minor_heal_lingering", "Description": "Leaves lingering light that regenerates HP.", "RequiredLevel": 11, "MaxPurchases": 1, "AddedEffects": [ { "EffectId": "hp_regen_small", "ApplyTo": "Target" } ] }
+    ]
   },
   {
     "Id": "divine_protection",
@@ -420,6 +597,13 @@
     "Effects": [
       { "EffectId": "def_buff_minor", "ApplyTo": "Target" },
       { "EffectId": "mdef_buff_minor", "ApplyTo": "Target" }
+    ],
+    "UpgradeOptions": [
+      { "Id": "divine_protection_power", "Description": "Strengthens the effect.", "ScalingFactorDelta": 0.2 },
+      { "Id": "divine_protection_efficiency", "Description": "Reduces mana cost.", "ManaCostDelta": -1, "MaxPurchases": 3 },
+      { "Id": "divine_protection_mastery", "Description": "Greatly strengthens the effect.", "ScalingFactorDelta": 0.3, "RequiredLevel": 6, "MaxPurchases": 2 },
+      { "Id": "divine_protection_power_2", "Description": "Further strengthens the effect.", "ScalingFactorDelta": 0.25, "RequiredLevel": 11 },
+      { "Id": "divine_protection_sanctuary", "Description": "Also grants minor regeneration.", "RequiredLevel": 11, "MaxPurchases": 1, "AddedEffects": [ { "EffectId": "hp_regen_small", "ApplyTo": "Target" } ] }
     ]
   },
   {
@@ -437,6 +621,13 @@
     "Effects": [
       { "EffectId": "atk_buff_minor", "ApplyTo": "Target" },
       { "EffectId": "matk_buff_minor", "ApplyTo": "Target" }
+    ],
+    "UpgradeOptions": [
+      { "Id": "blessing_power", "Description": "Strengthens the effect.", "ScalingFactorDelta": 0.2 },
+      { "Id": "blessing_efficiency", "Description": "Reduces mana cost.", "ManaCostDelta": -1, "MaxPurchases": 3 },
+      { "Id": "blessing_mastery", "Description": "Greatly strengthens the effect.", "ScalingFactorDelta": 0.35, "RequiredLevel": 6, "MaxPurchases": 2 },
+      { "Id": "blessing_power_2", "Description": "Further strengthens the effect.", "ScalingFactorDelta": 0.25, "RequiredLevel": 11 },
+      { "Id": "blessing_swiftness", "Description": "The blessing also raises DEX.", "RequiredLevel": 11, "MaxPurchases": 1, "AddedEffects": [ { "EffectId": "dex_buff_minor", "ApplyTo": "Target" } ] }
     ]
   },
   {
@@ -454,6 +645,13 @@
     "Effects": [
       { "EffectId": "def_debuff_minor", "ApplyTo": "Target" },
       { "EffectId": "mdef_debuff_minor", "ApplyTo": "Target" }
+    ],
+    "UpgradeOptions": [
+      { "Id": "smite_power", "Description": "Increases damage.", "ScalingFactorDelta": 0.25 },
+      { "Id": "smite_efficiency", "Description": "Reduces mana cost.", "ManaCostDelta": -2, "MaxPurchases": 2 },
+      { "Id": "smite_mastery", "Description": "Greatly increases damage.", "ScalingFactorDelta": 0.45, "RequiredLevel": 6, "MaxPurchases": 2 },
+      { "Id": "smite_power_2", "Description": "Further increases damage.", "ScalingFactorDelta": 0.35, "RequiredLevel": 11 },
+      { "Id": "smite_rebuke", "Description": "Briefly silences the target.", "RequiredLevel": 11, "MaxPurchases": 1, "AddedEffects": [ { "EffectId": "silence_burst", "ApplyTo": "Target" } ] }
     ]
   },
   {
@@ -466,7 +664,14 @@
     "Target": "SingleEnemy",
     "ScalingFactor": 1.5,
     "StatToScaleFrom": "DEX",
-    "MinLevel": 1
+    "MinLevel": 1,
+    "UpgradeOptions": [
+      { "Id": "quick_slash_power", "Description": "Increases damage.", "ScalingFactorDelta": 0.25 },
+      { "Id": "quick_slash_efficiency", "Description": "Reduces mana cost.", "ManaCostDelta": -1, "MaxPurchases": 1 },
+      { "Id": "quick_slash_mastery", "Description": "Greatly increases damage.", "ScalingFactorDelta": 0.4, "RequiredLevel": 6, "MaxPurchases": 2 },
+      { "Id": "quick_slash_power_2", "Description": "Further increases damage.", "ScalingFactorDelta": 0.3, "RequiredLevel": 11 },
+      { "Id": "quick_slash_slip_away", "Description": "Slip away after striking, raising evasion.", "RequiredLevel": 11, "MaxPurchases": 1, "AddedEffects": [ { "EffectId": "eva_buff_minor", "ApplyTo": "Caster" } ] }
+    ]
   },
   {
     "Id": "backstab",
@@ -482,6 +687,13 @@
     "AggroModifier": 0.5,
     "Effects": [
       { "EffectId": "atk_buff_minor", "ApplyTo": "Caster" }
+    ],
+    "UpgradeOptions": [
+      { "Id": "backstab_power", "Description": "Increases damage.", "ScalingFactorDelta": 0.3 },
+      { "Id": "backstab_efficiency", "Description": "Reduces mana cost.", "ManaCostDelta": -1, "MaxPurchases": 3 },
+      { "Id": "backstab_mastery", "Description": "Greatly increases damage.", "ScalingFactorDelta": 0.5, "RequiredLevel": 6, "MaxPurchases": 2 },
+      { "Id": "backstab_power_2", "Description": "Further increases damage.", "ScalingFactorDelta": 0.4, "RequiredLevel": 11 },
+      { "Id": "backstab_ambush", "Description": "A strike from the shadows that can stun.", "RequiredLevel": 11, "MaxPurchases": 1, "AddedEffects": [ { "EffectId": "stun_short", "ApplyTo": "Target" } ] }
     ]
   },
   {
@@ -498,6 +710,13 @@
     "AggroModifier": 0.5,
     "Effects": [
       { "EffectId": "poison_moderate", "ApplyTo": "Target" }
+    ],
+    "UpgradeOptions": [
+      { "Id": "poison_dagger_power", "Description": "Increases damage.", "ScalingFactorDelta": 0.25 },
+      { "Id": "poison_dagger_efficiency", "Description": "Reduces mana cost.", "ManaCostDelta": -1, "MaxPurchases": 3 },
+      { "Id": "poison_dagger_mastery", "Description": "Greatly increases damage.", "ScalingFactorDelta": 0.4, "RequiredLevel": 6, "MaxPurchases": 2 },
+      { "Id": "poison_dagger_power_2", "Description": "Further increases damage.", "ScalingFactorDelta": 0.3, "RequiredLevel": 11 },
+      { "Id": "poison_dagger_corrode", "Description": "The venom also corrodes the target's defense.", "RequiredLevel": 11, "MaxPurchases": 1, "AddedEffects": [ { "EffectId": "def_debuff_minor", "ApplyTo": "Target" } ] }
     ]
   },
   {
@@ -514,6 +733,13 @@
     "AggroModifier": 0.5,
     "Effects": [
       { "EffectId": "dex_buff_minor", "ApplyTo": "Caster" }
+    ],
+    "UpgradeOptions": [
+      { "Id": "evasive_strike_power", "Description": "Increases damage.", "ScalingFactorDelta": 0.25 },
+      { "Id": "evasive_strike_efficiency", "Description": "Reduces mana cost.", "ManaCostDelta": -1, "MaxPurchases": 3 },
+      { "Id": "evasive_strike_mastery", "Description": "Greatly increases damage.", "ScalingFactorDelta": 0.45, "RequiredLevel": 6, "MaxPurchases": 2 },
+      { "Id": "evasive_strike_power_2", "Description": "Further increases damage.", "ScalingFactorDelta": 0.35, "RequiredLevel": 11 },
+      { "Id": "evasive_strike_shadowstep", "Description": "Also raises your evasion.", "RequiredLevel": 11, "MaxPurchases": 1, "AddedEffects": [ { "EffectId": "eva_buff_minor", "ApplyTo": "Caster" } ] }
     ]
   },
   {
@@ -530,6 +756,13 @@
     "AggroModifier": 0.5,
     "Effects": [
       { "EffectId": "def_debuff_minor", "ApplyTo": "Target" }
+    ],
+    "UpgradeOptions": [
+      { "Id": "exploit_weakness_power", "Description": "Increases damage.", "ScalingFactorDelta": 0.3 },
+      { "Id": "exploit_weakness_efficiency", "Description": "Reduces mana cost.", "ManaCostDelta": -2, "MaxPurchases": 2 },
+      { "Id": "exploit_weakness_mastery", "Description": "Greatly increases damage.", "ScalingFactorDelta": 0.5, "RequiredLevel": 6, "MaxPurchases": 2 },
+      { "Id": "exploit_weakness_power_2", "Description": "Further increases damage.", "ScalingFactorDelta": 0.4, "RequiredLevel": 11 },
+      { "Id": "exploit_weakness_open_wound", "Description": "Leaves an open wound that poisons.", "RequiredLevel": 11, "MaxPurchases": 1, "AddedEffects": [ { "EffectId": "poison_weak", "ApplyTo": "Target" } ] }
     ]
   },
   {
@@ -546,6 +779,13 @@
     "AggroModifier": 1,
     "Effects": [
       { "EffectId": "poison_weak", "ApplyTo": "Target" }
+    ],
+    "UpgradeOptions": [
+      { "Id": "flame_bolt_power", "Description": "Increases damage.", "ScalingFactorDelta": 0.25 },
+      { "Id": "flame_bolt_efficiency", "Description": "Reduces mana cost.", "ManaCostDelta": -1, "MaxPurchases": 3 },
+      { "Id": "flame_bolt_mastery", "Description": "Greatly increases damage.", "ScalingFactorDelta": 0.45, "RequiredLevel": 6, "MaxPurchases": 2 },
+      { "Id": "flame_bolt_power_2", "Description": "Further increases damage.", "ScalingFactorDelta": 0.35, "RequiredLevel": 11 },
+      { "Id": "flame_bolt_scorch", "Description": "Scorches the target, weakening its magic resistance.", "RequiredLevel": 11, "MaxPurchases": 1, "AddedEffects": [ { "EffectId": "mdef_debuff_minor", "ApplyTo": "Target" } ] }
     ]
   },
   {
@@ -562,6 +802,13 @@
     "AggroModifier": 1,
     "Effects": [
       { "EffectId": "stun_short", "ApplyTo": "Target" }
+    ],
+    "UpgradeOptions": [
+      { "Id": "frost_shard_power", "Description": "Increases damage.", "ScalingFactorDelta": 0.2 },
+      { "Id": "frost_shard_efficiency", "Description": "Reduces mana cost.", "ManaCostDelta": -1, "MaxPurchases": 3 },
+      { "Id": "frost_shard_mastery", "Description": "Greatly increases damage.", "ScalingFactorDelta": 0.35, "RequiredLevel": 6, "MaxPurchases": 2 },
+      { "Id": "frost_shard_power_2", "Description": "Further increases damage.", "ScalingFactorDelta": 0.3, "RequiredLevel": 11 },
+      { "Id": "frost_shard_frostbite", "Description": "Frostbite weakens the target's attack.", "RequiredLevel": 11, "MaxPurchases": 1, "AddedEffects": [ { "EffectId": "atk_debuff_minor", "ApplyTo": "Target" } ] }
     ]
   },
   {
@@ -578,6 +825,13 @@
     "AggroModifier": 1,
     "Effects": [
       { "EffectId": "silence_short", "ApplyTo": "Target" }
+    ],
+    "UpgradeOptions": [
+      { "Id": "spark_power", "Description": "Increases damage.", "ScalingFactorDelta": 0.2 },
+      { "Id": "spark_efficiency", "Description": "Reduces mana cost.", "ManaCostDelta": -1, "MaxPurchases": 2 },
+      { "Id": "spark_mastery", "Description": "Greatly increases damage.", "ScalingFactorDelta": 0.3, "RequiredLevel": 6, "MaxPurchases": 2 },
+      { "Id": "spark_power_2", "Description": "Further increases damage.", "ScalingFactorDelta": 0.25, "RequiredLevel": 11 },
+      { "Id": "spark_arc_burn", "Description": "The spark leaves an electric burn.", "RequiredLevel": 11, "MaxPurchases": 1, "AddedEffects": [ { "EffectId": "poison_spark", "ApplyTo": "Target" } ] }
     ]
   },
   {
@@ -591,7 +845,14 @@
     "ScalingFactor": 1.1,
     "StatToScaleFrom": "MATK",
     "MinLevel": 1,
-    "AggroModifier": 1
+    "AggroModifier": 1,
+    "UpgradeOptions": [
+      { "Id": "elemental_wave_power", "Description": "Increases damage.", "ScalingFactorDelta": 0.15 },
+      { "Id": "elemental_wave_efficiency", "Description": "Reduces mana cost.", "ManaCostDelta": -3, "MaxPurchases": 2 },
+      { "Id": "elemental_wave_mastery", "Description": "Greatly increases damage.", "ScalingFactorDelta": 0.3, "RequiredLevel": 6, "MaxPurchases": 2 },
+      { "Id": "elemental_wave_power_2", "Description": "Further increases damage.", "ScalingFactorDelta": 0.2, "RequiredLevel": 11 },
+      { "Id": "elemental_wave_overload", "Description": "Overloads every target, briefly silencing it.", "RequiredLevel": 11, "MaxPurchases": 1, "AddedEffects": [ { "EffectId": "silence_burst", "ApplyTo": "Target" } ] }
+    ]
   },
   {
     "Id": "mana_barrier",
@@ -608,6 +869,13 @@
     "AggroModifier": 1,
     "Effects": [
       { "EffectId": "def_buff_minor", "ApplyTo": "Caster" }
+    ],
+    "UpgradeOptions": [
+      { "Id": "mana_barrier_power", "Description": "Increases healing.", "ScalingFactorDelta": 0.15 },
+      { "Id": "mana_barrier_efficiency", "Description": "Reduces mana cost.", "ManaCostDelta": -2, "MaxPurchases": 2 },
+      { "Id": "mana_barrier_mastery", "Description": "Greatly increases healing.", "ScalingFactorDelta": 0.25, "RequiredLevel": 6, "MaxPurchases": 2 },
+      { "Id": "mana_barrier_power_2", "Description": "Further increases healing.", "ScalingFactorDelta": 0.2, "RequiredLevel": 11 },
+      { "Id": "mana_barrier_spell_ward", "Description": "The barrier also raises magic resistance.", "RequiredLevel": 11, "MaxPurchases": 1, "AddedEffects": [ { "EffectId": "mdef_buff_minor", "ApplyTo": "Caster" } ] }
     ]
   },
   {
@@ -620,7 +888,14 @@
     "Target": "SingleEnemy",
     "ScalingFactor": 2.0,
     "StatToScaleFrom": "MATK",
-    "MinLevel": 1
+    "MinLevel": 1,
+    "UpgradeOptions": [
+      { "Id": "arcane_bolt_power", "Description": "Increases damage.", "ScalingFactorDelta": 0.3 },
+      { "Id": "arcane_bolt_efficiency", "Description": "Reduces mana cost.", "ManaCostDelta": -1, "MaxPurchases": 3 },
+      { "Id": "arcane_bolt_mastery", "Description": "Greatly increases damage.", "ScalingFactorDelta": 0.5, "RequiredLevel": 6, "MaxPurchases": 2 },
+      { "Id": "arcane_bolt_power_2", "Description": "Further increases damage.", "ScalingFactorDelta": 0.4, "RequiredLevel": 11 },
+      { "Id": "arcane_bolt_siphon", "Description": "Converts part of the damage dealt into mana.", "RequiredLevel": 11, "MaxPurchases": 1, "AddedEffects": [ { "EffectId": "mana_siphon_arcane", "ApplyTo": "Caster" } ] }
+    ]
   },
   {
     "Id": "mana_drain",
@@ -636,6 +911,13 @@
     "AggroModifier": 1,
     "Effects": [
       { "EffectId": "mana_regen_small", "ApplyTo": "Caster" }
+    ],
+    "UpgradeOptions": [
+      { "Id": "mana_drain_power", "Description": "Increases damage.", "ScalingFactorDelta": 0.25 },
+      { "Id": "mana_drain_efficiency", "Description": "Reduces mana cost.", "ManaCostDelta": -1, "MaxPurchases": 3 },
+      { "Id": "mana_drain_mastery", "Description": "Greatly increases damage.", "ScalingFactorDelta": 0.4, "RequiredLevel": 6, "MaxPurchases": 2 },
+      { "Id": "mana_drain_power_2", "Description": "Further increases damage.", "ScalingFactorDelta": 0.3, "RequiredLevel": 11 },
+      { "Id": "mana_drain_unravel", "Description": "Also unravels the target's magic resistance.", "RequiredLevel": 11, "MaxPurchases": 1, "AddedEffects": [ { "EffectId": "mdef_debuff_minor", "ApplyTo": "Target" } ] }
     ]
   },
   {
@@ -649,7 +931,14 @@
     "ScalingFactor": 1.2,
     "StatToScaleFrom": "MATK",
     "MinLevel": 1,
-    "AggroModifier": 1
+    "AggroModifier": 1,
+    "UpgradeOptions": [
+      { "Id": "arcane_blast_power", "Description": "Increases damage.", "ScalingFactorDelta": 0.2 },
+      { "Id": "arcane_blast_efficiency", "Description": "Reduces mana cost.", "ManaCostDelta": -3, "MaxPurchases": 2 },
+      { "Id": "arcane_blast_mastery", "Description": "Greatly increases damage.", "ScalingFactorDelta": 0.3, "RequiredLevel": 6, "MaxPurchases": 2 },
+      { "Id": "arcane_blast_power_2", "Description": "Further increases damage.", "ScalingFactorDelta": 0.25, "RequiredLevel": 11 },
+      { "Id": "arcane_blast_disruption", "Description": "Disrupts every target, briefly silencing it.", "RequiredLevel": 11, "MaxPurchases": 1, "AddedEffects": [ { "EffectId": "silence_burst", "ApplyTo": "Target" } ] }
+    ]
   },
   {
     "Id": "void_spike",
@@ -665,6 +954,13 @@
     "AggroModifier": 1,
     "Effects": [
       { "EffectId": "mdef_debuff_minor", "ApplyTo": "Target" }
+    ],
+    "UpgradeOptions": [
+      { "Id": "void_spike_power", "Description": "Increases damage.", "ScalingFactorDelta": 0.3 },
+      { "Id": "void_spike_efficiency", "Description": "Reduces mana cost.", "ManaCostDelta": -2, "MaxPurchases": 2 },
+      { "Id": "void_spike_mastery", "Description": "Greatly increases damage.", "ScalingFactorDelta": 0.5, "RequiredLevel": 6, "MaxPurchases": 2 },
+      { "Id": "void_spike_power_2", "Description": "Further increases damage.", "ScalingFactorDelta": 0.4, "RequiredLevel": 11 },
+      { "Id": "void_spike_void_lock", "Description": "The void can lock the target in place, stunning it.", "RequiredLevel": 11, "MaxPurchases": 1, "AddedEffects": [ { "EffectId": "stun_short", "ApplyTo": "Target" } ] }
     ]
   },
   {
@@ -677,7 +973,14 @@
     "Target": "SingleEnemy",
     "ScalingFactor": 2.2,
     "StatToScaleFrom": "MATK",
-    "MinLevel": 1
+    "MinLevel": 1,
+    "UpgradeOptions": [
+      { "Id": "arcane_surge_power", "Description": "Increases damage.", "ScalingFactorDelta": 0.35 },
+      { "Id": "arcane_surge_efficiency", "Description": "Reduces mana cost.", "ManaCostDelta": -2, "MaxPurchases": 2 },
+      { "Id": "arcane_surge_mastery", "Description": "Greatly increases damage.", "ScalingFactorDelta": 0.55, "RequiredLevel": 6, "MaxPurchases": 2 },
+      { "Id": "arcane_surge_power_2", "Description": "Further increases damage.", "ScalingFactorDelta": 0.45, "RequiredLevel": 11 },
+      { "Id": "arcane_surge_resonance", "Description": "The surge also raises your magic attack.", "RequiredLevel": 11, "MaxPurchases": 1, "AddedEffects": [ { "EffectId": "matk_buff_minor", "ApplyTo": "Caster" } ] }
+    ]
   },
   {
     "Id": "thorn_lash",
@@ -693,6 +996,13 @@
     "AggroModifier": 1,
     "Effects": [
       { "EffectId": "poison_weak", "ApplyTo": "Target" }
+    ],
+    "UpgradeOptions": [
+      { "Id": "thorn_lash_power", "Description": "Increases damage.", "ScalingFactorDelta": 0.25 },
+      { "Id": "thorn_lash_efficiency", "Description": "Reduces mana cost.", "ManaCostDelta": -1, "MaxPurchases": 2 },
+      { "Id": "thorn_lash_mastery", "Description": "Greatly increases damage.", "ScalingFactorDelta": 0.4, "RequiredLevel": 6, "MaxPurchases": 2 },
+      { "Id": "thorn_lash_power_2", "Description": "Further increases damage.", "ScalingFactorDelta": 0.3, "RequiredLevel": 11 },
+      { "Id": "thorn_lash_entangle", "Description": "Thorns can entangle the target, stunning it.", "RequiredLevel": 11, "MaxPurchases": 1, "AddedEffects": [ { "EffectId": "stun_short", "ApplyTo": "Target" } ] }
     ]
   },
   {
@@ -705,7 +1015,14 @@
     "Target": "SingleEnemy",
     "ScalingFactor": 1.6,
     "StatToScaleFrom": "MATK",
-    "MinLevel": 1
+    "MinLevel": 1,
+    "UpgradeOptions": [
+      { "Id": "nature_bolt_power", "Description": "Increases damage.", "ScalingFactorDelta": 0.25 },
+      { "Id": "nature_bolt_efficiency", "Description": "Reduces mana cost.", "ManaCostDelta": -1, "MaxPurchases": 3 },
+      { "Id": "nature_bolt_mastery", "Description": "Greatly increases damage.", "ScalingFactorDelta": 0.4, "RequiredLevel": 6, "MaxPurchases": 2 },
+      { "Id": "nature_bolt_power_2", "Description": "Further increases damage.", "ScalingFactorDelta": 0.3, "RequiredLevel": 11 },
+      { "Id": "nature_bolt_verdant_echo", "Description": "Nature's echo briefly heals you.", "RequiredLevel": 11, "MaxPurchases": 1, "AddedEffects": [ { "EffectId": "hp_regen_burst", "ApplyTo": "Caster" } ] }
+    ]
   },
   {
     "Id": "barkskin",
@@ -722,6 +1039,13 @@
     "AggroModifier": 1,
     "Effects": [
       { "EffectId": "hp_regen_small", "ApplyTo": "Caster" }
+    ],
+    "UpgradeOptions": [
+      { "Id": "barkskin_power", "Description": "Increases healing.", "ScalingFactorDelta": 0.75 },
+      { "Id": "barkskin_efficiency", "Description": "Reduces mana cost.", "ManaCostDelta": -1, "MaxPurchases": 3 },
+      { "Id": "barkskin_mastery", "Description": "Greatly increases healing.", "ScalingFactorDelta": 1.25, "RequiredLevel": 6, "MaxPurchases": 2 },
+      { "Id": "barkskin_power_2", "Description": "Further increases healing.", "ScalingFactorDelta": 1.0, "RequiredLevel": 11 },
+      { "Id": "barkskin_ironbark", "Description": "Bark hardens, also raising defense.", "RequiredLevel": 11, "MaxPurchases": 1, "AddedEffects": [ { "EffectId": "def_buff_minor", "ApplyTo": "Caster" } ] }
     ]
   },
   {
@@ -738,6 +1062,13 @@
     "AggroModifier": 0.5,
     "Effects": [
       { "EffectId": "dex_buff_minor", "ApplyTo": "Target" }
+    ],
+    "UpgradeOptions": [
+      { "Id": "wind_gust_power", "Description": "Strengthens the effect.", "ScalingFactorDelta": 0.25 },
+      { "Id": "wind_gust_efficiency", "Description": "Reduces mana cost.", "ManaCostDelta": -1, "MaxPurchases": 3 },
+      { "Id": "wind_gust_mastery", "Description": "Greatly strengthens the effect.", "ScalingFactorDelta": 0.4, "RequiredLevel": 6, "MaxPurchases": 2 },
+      { "Id": "wind_gust_power_2", "Description": "Further strengthens the effect.", "ScalingFactorDelta": 0.3, "RequiredLevel": 11 },
+      { "Id": "wind_gust_tailwind", "Description": "The tailwind also raises evasion.", "RequiredLevel": 11, "MaxPurchases": 1, "AddedEffects": [ { "EffectId": "eva_buff_minor", "ApplyTo": "Target" } ] }
     ]
   },
   {
@@ -755,6 +1086,13 @@
     "AggroModifier": 1.0,
     "Effects": [
       { "EffectId": "hp_regen_small", "ApplyTo": "Target" }
+    ],
+    "UpgradeOptions": [
+      { "Id": "natures_healing_power", "Description": "Increases healing.", "ScalingFactorDelta": 0.5 },
+      { "Id": "natures_healing_efficiency", "Description": "Reduces mana cost.", "ManaCostDelta": -2, "MaxPurchases": 3 },
+      { "Id": "natures_healing_mastery", "Description": "Greatly increases healing.", "ScalingFactorDelta": 0.8, "RequiredLevel": 6, "MaxPurchases": 2 },
+      { "Id": "natures_healing_power_2", "Description": "Further increases healing.", "ScalingFactorDelta": 0.65, "RequiredLevel": 11 },
+      { "Id": "natures_healing_embrace", "Description": "The grove's embrace also raises magic resistance.", "RequiredLevel": 11, "MaxPurchases": 1, "AddedEffects": [ { "EffectId": "mdef_buff_minor", "ApplyTo": "Target" } ] }
     ]
   },
   {
@@ -771,6 +1109,13 @@
     "AggroModifier": 1.5,
     "Effects": [
       { "EffectId": "atk_debuff_minor", "ApplyTo": "Target" }
+    ],
+    "UpgradeOptions": [
+      { "Id": "dark_slash_power", "Description": "Increases damage.", "ScalingFactorDelta": 0.25 },
+      { "Id": "dark_slash_efficiency", "Description": "Reduces mana cost.", "ManaCostDelta": -1, "MaxPurchases": 3 },
+      { "Id": "dark_slash_mastery", "Description": "Greatly increases damage.", "ScalingFactorDelta": 0.45, "RequiredLevel": 6, "MaxPurchases": 2 },
+      { "Id": "dark_slash_power_2", "Description": "Further increases damage.", "ScalingFactorDelta": 0.35, "RequiredLevel": 11 },
+      { "Id": "dark_slash_hunger", "Description": "A hungering blade that heals you for part of the damage.", "RequiredLevel": 11, "MaxPurchases": 1, "AddedEffects": [ { "EffectId": "lifesteal_soul", "ApplyTo": "Caster" } ] }
     ]
   },
   {
@@ -787,6 +1132,13 @@
     "AggroModifier": 1.0,
     "Effects": [
       { "EffectId": "lifesteal_soul", "ApplyTo": "Caster" }
+    ],
+    "UpgradeOptions": [
+      { "Id": "soul_drain_power", "Description": "Increases damage.", "ScalingFactorDelta": 0.25 },
+      { "Id": "soul_drain_efficiency", "Description": "Reduces mana cost.", "ManaCostDelta": -1, "MaxPurchases": 3 },
+      { "Id": "soul_drain_mastery", "Description": "Greatly increases damage.", "ScalingFactorDelta": 0.4, "RequiredLevel": 6, "MaxPurchases": 2 },
+      { "Id": "soul_drain_power_2", "Description": "Further increases damage.", "ScalingFactorDelta": 0.3, "RequiredLevel": 11 },
+      { "Id": "soul_drain_enervate", "Description": "Also weakens the target's attack.", "RequiredLevel": 11, "MaxPurchases": 1, "AddedEffects": [ { "EffectId": "atk_debuff_minor", "ApplyTo": "Target" } ] }
     ]
   },
   {
@@ -803,6 +1155,13 @@
     "AggroModifier": 1,
     "Effects": [
       { "EffectId": "def_buff_minor", "ApplyTo": "Caster" }
+    ],
+    "UpgradeOptions": [
+      { "Id": "dark_shield_power", "Description": "Strengthens the effect.", "ScalingFactorDelta": 0.2 },
+      { "Id": "dark_shield_efficiency", "Description": "Reduces mana cost.", "ManaCostDelta": -1, "MaxPurchases": 3 },
+      { "Id": "dark_shield_mastery", "Description": "Greatly strengthens the effect.", "ScalingFactorDelta": 0.3, "RequiredLevel": 6, "MaxPurchases": 2 },
+      { "Id": "dark_shield_power_2", "Description": "Further strengthens the effect.", "ScalingFactorDelta": 0.25, "RequiredLevel": 11 },
+      { "Id": "dark_shield_umbral_ward", "Description": "The shield also raises magic resistance.", "RequiredLevel": 11, "MaxPurchases": 1, "AddedEffects": [ { "EffectId": "mdef_buff_minor", "ApplyTo": "Caster" } ] }
     ]
   },
   {
@@ -820,6 +1179,13 @@
     "Effects": [
       { "EffectId": "poison_moderate", "ApplyTo": "Target" },
       { "EffectId": "def_debuff_minor", "ApplyTo": "Target" }
+    ],
+    "UpgradeOptions": [
+      { "Id": "necrotic_strike_power", "Description": "Increases damage.", "ScalingFactorDelta": 0.25 },
+      { "Id": "necrotic_strike_efficiency", "Description": "Reduces mana cost.", "ManaCostDelta": -1, "MaxPurchases": 3 },
+      { "Id": "necrotic_strike_mastery", "Description": "Greatly increases damage.", "ScalingFactorDelta": 0.4, "RequiredLevel": 6, "MaxPurchases": 2 },
+      { "Id": "necrotic_strike_power_2", "Description": "Further increases damage.", "ScalingFactorDelta": 0.3, "RequiredLevel": 11 },
+      { "Id": "necrotic_strike_deaths_feast", "Description": "Feeds on the target, healing you for part of the damage.", "RequiredLevel": 11, "MaxPurchases": 1, "AddedEffects": [ { "EffectId": "lifesteal_soul", "ApplyTo": "Caster" } ] }
     ]
   },
   {
@@ -833,6 +1199,13 @@
     "ScalingFactor": 2.0,
     "StatToScaleFrom": "INT",
     "AggroModifier": 5,
-    "MinLevel": 1
+    "MinLevel": 1,
+    "UpgradeOptions": [
+      { "Id": "shadow_veil_power", "Description": "Increases damage.", "ScalingFactorDelta": 0.3 },
+      { "Id": "shadow_veil_efficiency", "Description": "Reduces mana cost.", "ManaCostDelta": -2, "MaxPurchases": 2 },
+      { "Id": "shadow_veil_mastery", "Description": "Greatly increases damage.", "ScalingFactorDelta": 0.5, "RequiredLevel": 6, "MaxPurchases": 2 },
+      { "Id": "shadow_veil_power_2", "Description": "Further increases damage.", "ScalingFactorDelta": 0.4, "RequiredLevel": 11 },
+      { "Id": "shadow_veil_night", "Description": "The veil blinds the target, reducing its aim.", "RequiredLevel": 11, "MaxPurchases": 1, "AddedEffects": [ { "EffectId": "aim_debuff_minor", "ApplyTo": "Target" } ] }
+    ]
   }
 ]
