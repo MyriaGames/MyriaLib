@@ -3,7 +3,7 @@
     "Id": "city_hydea",
     "Name": "city.lumina",
     "AnchorRoomId": 8,
-    "RoomIds": [ 8, 9, 10, 11, 12, 13 ]
+    "RoomIds": [ 8, 9, 10, 11, 12, 13, 73 ]
   },
   {
     "Id": "city_royas",

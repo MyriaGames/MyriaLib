@@ -112,6 +112,15 @@ namespace Myria.Lib.Core.Entities.Characters
         /// <summary>UTC timestamp of the last time the player switched to a new active job.</summary>
         public DateTime LastJobChanged { get; set; } = DateTime.MinValue;
 
+        // ── PvP (server-authoritative; only ever changed by PvpRatingService) ──────
+        /// <summary>Elo-style PvP rank. Starts at <see cref="Services.PvpRatingService.StartingRating"/>.</summary>
+        public int PvpRating { get; set; } = Services.PvpRatingService.StartingRating;
+        /// <summary>PvP-only currency earned from PvP fights. Deliberately separate from Money and
+        /// with no use yet (see v0.3.md, PvP section).</summary>
+        public long PvpCurrency { get; set; }
+        public int PvpWins { get; set; }
+        public int PvpLosses { get; set; }
+
         // ── Runic Magic (WPF / Unity — magic classes) ────────────────────────────
         /// <summary>All runes the player knows, including those gained via word combinations.</summary>
         public List<CompositeRune> KnownRunes { get; set; } = new();
@@ -348,6 +357,14 @@ namespace Myria.Lib.Core.Entities.Characters
 
             if (update.Runes is not null)
                 ApplySyncedRunes(update.Runes);
+
+            if (update.Pvp is not null)
+            {
+                PvpRating   = update.Pvp.Rating;
+                PvpCurrency = update.Pvp.Currency;
+                PvpWins     = update.Pvp.Wins;
+                PvpLosses   = update.Pvp.Losses;
+            }
 
             if (update.Equipment is not null)
                 ApplySyncedEquipment(update.Equipment);

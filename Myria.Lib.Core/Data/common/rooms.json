@@ -162,7 +162,8 @@
     "RequirementType": 1,
     "AccessLevel": 10,
     "ExitIds": {
-      "east": 9
+      "east": 9,
+      "west": 73
     }
   },
   {
@@ -1378,6 +1379,18 @@
     },
     "EncounterableMonsters": {
       "7": 1.0
+    }
+  },
+  {
+    "Id": 73,
+    "Name": "room.hydea.arena",
+    "Description": "room.hydea.arena.desc",
+    "IsCity": true,
+    "IsPvpRoom": true,
+    "RequirementType": 1,
+    "AccessLevel": 10,
+    "ExitIds": {
+      "east": 10
     }
   }
 ]

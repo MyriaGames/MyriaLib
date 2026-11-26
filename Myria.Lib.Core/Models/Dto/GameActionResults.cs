@@ -103,7 +103,37 @@ namespace Myria.Lib.Core.Models.Dto
         List<JobProgressSnapshot>? Jobs = null,
         List<RuneSnapshot>? Runes = null,
         EquippedSnapshot? Equipment = null,
-        List<SkillProgressSnapshot>? SkillProgress = null);
+        List<SkillProgressSnapshot>? SkillProgress = null,
+        PvpStatsSnapshot? Pvp = null);
+
+    // ── PvP (v0.3) ──────────────────────────────────────────────────────────
+
+    /// <summary>A character's PvP standing - server-authoritative, only ever pushed to clients.</summary>
+    public record PvpStatsSnapshot(int Rating, long Currency, int Wins, int Losses);
+
+    /// <summary>Someone in the caller's PvP room who can be challenged right now. PartyId groups
+    /// targets into parties for the party-fight list; PartySizeHere is how many of that party are
+    /// present and free (1 for an unpartied player).</summary>
+    public record PvpTargetInfo(string Name, int Level, string Class, string? PartyId, int PartySizeHere);
+
+    /// <summary>One participant's settled outcome (forfeits are settled when they happen).</summary>
+    public record PvpResultEntry(string Name, bool Won, int RatingDelta, int NewRating, long CurrencyDelta);
+
+    /// <summary>
+    /// PvP fight state. SideA/SideB keep a fixed order for the whole fight (a participant who fled
+    /// stays listed with IsAlive=false), so the opponent/ally indices a client sends stay valid.
+    /// Each client works out its own side by name.
+    /// </summary>
+    public record PvpSnapshot(
+        List<GroupCombatantState> SideA,
+        List<GroupCombatantState> SideB,
+        string CurrentTurnCharacterName,
+        bool Finished,
+        int WinningSide,
+        List<CombatLogMessage> LogEntries,
+        List<PvpResultEntry>? Results = null);
+
+    public record StartPvpResult(bool Success, string? Reason, PvpSnapshot? Snapshot);
 
     public record StartGroupCombatResult(
         bool Success,

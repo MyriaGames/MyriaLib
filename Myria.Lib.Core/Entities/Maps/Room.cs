@@ -18,6 +18,9 @@ namespace Myria.Lib.Core.Entities.Maps
         public bool IsBossRoom { get; set; } = false;
         public bool IsCaveRoom { get; set; } = false;
         public bool IsCity { get; set; } = false;
+        /// <summary>PvP is only ever possible in rooms flagged like this (v0.3: no world PvP) -
+        /// enforced by the server (GameHub.StartPvpFight).</summary>
+        public bool IsPvpRoom { get; set; } = false;
         public bool IsCleared { get; set; } = false; // unlocked once all dungeon monsters are defeated
         /// <summary>When true, Name and Description are display strings, not locale keys.</summary>
         public bool IsLiteral { get; set; } = false;
