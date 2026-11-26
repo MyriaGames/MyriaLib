@@ -72,8 +72,10 @@ namespace Myria.Lib.Core.Entities.NPCs
             if (amount <= 0) return NpcActionResult.Fail("npc.action.amount.invalid");
             if (item == null) return NpcActionResult.Fail("npc.action.item.null");
 
-            // Find matching inventory item (by Id)
-            var invItem = character.Inventory.Items.FirstOrDefault(i => i.Id == item.Id);
+            // The exact piece handed in if it's in the bag (equipment doesn't stack, so two items
+            // with the same id can differ in upgrade level), else the first one with that id.
+            var invItem = character.Inventory.Items.FirstOrDefault(i => ReferenceEquals(i, item))
+                          ?? character.Inventory.Items.FirstOrDefault(i => i.Id == item.Id);
             if (invItem == null)
                 return NpcActionResult.Fail("npc.action.sell.notOwned", item.Id);
 
@@ -82,13 +84,18 @@ namespace Myria.Lib.Core.Entities.NPCs
 
             int totalGain = JobManager.GetSellValue(invItem, character) * amount;
 
+            // Check the purse first: the item used to be taken and the payment silently dropped when
+            // the purse was full (same check as the realm server's SellItemToNpc).
+            if (!character.Money.CanHold(totalGain))
+                return NpcActionResult.Fail("npc.action.sell.moneyFull");
+
             // reduce stack / remove item
             if (invItem.StackSize == amount)
                 character.Inventory.RemoveItem(invItem);
             else
                 invItem.StackSize -= amount;
 
-            character.Money.TryAdd(totalGain); // placeholder API
+            character.Money.TryAdd(totalGain);
 
             return NpcActionResult.Ok("npc.action.sell.ok", amount, item.Id, totalGain);
         }
