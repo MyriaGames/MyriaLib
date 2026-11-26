@@ -32,8 +32,9 @@ namespace Myria.Lib.Core.Services
         public const int PointsPerLevel = 1;
         public const float BaselineScalingGrowthPerLevel = 0.05f;
 
-        // Flat gold cost to respec one skill's purchased upgrades - placeholder, balance work.
-        public const long RespecCostGold = 100;
+        // Flat cost to respec one skill's purchased upgrades, in BRONZE (what MoneyBag.TrySpend takes).
+        // 100 silver: meant to hurt but stay reachable (kills drop 25-75 bronze) - placeholder, balance work.
+        public static long RespecCostBronze => 100 * Money.BRONZE_PER_SILVER;
 
         // ── Base-nerf fade ──────────────────────────────────────────────────────────────────────
         // A skill's authored numbers in skills.json (ScalingFactor/ManaCost/Cooldown) are treated as
