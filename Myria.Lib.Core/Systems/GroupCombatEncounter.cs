@@ -495,7 +495,7 @@ namespace Myria.Lib.Core.Systems
             }
 
             Log.Add(new CombatLogEntry("pg.fight.log.win", monster.Name));
-            MonsterKilled?.Invoke(this, new MonsterKilledEventArgs(monster.Id));
+            MonsterKilled?.Invoke(this, new MonsterKilledEventArgs(monster.Id, monster));
 
             // Quest kill-credit goes to every party member, alive or not (matches prior behavior);
             // XP/class-XP is alive-only, handled separately below.

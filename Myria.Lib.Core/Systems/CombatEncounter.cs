@@ -430,7 +430,7 @@ namespace Myria.Lib.Core.Systems
             ClassManager.GrantClassXp(Character, xpGained);
             SkillFactory.UpdateSkills(Character);
 
-            MonsterKilled?.Invoke(this, new MonsterKilledEventArgs(Enemy.Id));
+            MonsterKilled?.Invoke(this, new MonsterKilledEventArgs(Enemy.Id, Enemy));
             GameEvents.FireMonsterKilled(Character, Enemy);
 
             _drops = LootGenerator.GetLootFor(Enemy);

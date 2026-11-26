@@ -31,6 +31,10 @@ namespace Myria.Lib.Core.Entities.Maps
         public Dictionary<string, int> ExitIds { get; set; } = new();
         public Dictionary<string, Room> Exits { get; set; } = new();     // populated after loading
         public Dictionary<int, float> EncounterableMonsters { get; set; } = new();
+        /// <summary>Dungeon rooms (v0.3): the fixed pack the room holds, monster id -> count. Fought in
+        /// one or more pack fights; the room is cleared once all are dead. Empty = a default pack rolled
+        /// from <see cref="EncounterableMonsters"/> (a boss room: one of each listed monster).</summary>
+        public Dictionary<int, int> DungeonPack { get; set; } = new();
 
         /// <summary>
         /// Monster templates for this room — loaded once at startup by RoomService.ConnectMonsterRooms.
