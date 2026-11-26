@@ -67,6 +67,16 @@ namespace Myria.Lib.Core.Services.Builder
         /// Tries to create an item by ID. Returns <c>false</c> silently if not found.
         /// Use this when absence is an acceptable outcome (e.g. optional loot).
         /// </summary>
+        /// <summary>Creates an item and, if it's equipment, restores its upgrade level and craft
+        /// quality (see <see cref="EquipmentItem.RestoreUpgradeState"/>).</summary>
+        public static Item? CreateItem(string id, int stackSize, int upgradeLevel, float craftQuality)
+        {
+            var item = CreateItem(id, stackSize);
+            if (item is EquipmentItem equipment && (upgradeLevel > 0 || craftQuality != 1f))
+                equipment.RestoreUpgradeState(upgradeLevel, craftQuality);
+            return item;
+        }
+
         public static bool TryCreateItem(string id, out Item? item)
         {
             if (!_itemDefs.TryGetValue(id, out var def))
@@ -149,6 +159,7 @@ namespace Myria.Lib.Core.Services.Builder
                 Name             = def.Name,
                 Description      = def.Description,
                 BuyPrice         = def.BuyPrice,
+                MaxStackSize     = Math.Max(1, def.MaxStackSize), // never Item's default of 50 (equipment carries its own upgrade state)
                 SlotType         = EquipmentType.FromLegacyInt.GetValueOrDefault(def.SlotType, EquipmentType.Weapon),
                 ToolType         = def.ToolType,
                 IsTool           = def.ToolType != null,

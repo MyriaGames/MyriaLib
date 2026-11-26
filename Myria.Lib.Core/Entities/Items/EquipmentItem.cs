@@ -8,6 +8,16 @@ namespace Myria.Lib.Core.Entities.Items
         public string SlotType { get; set; } = Myria.Lib.Core.Systems.Enums.EquipmentType.Weapon;
         public override int BuyPrice { get; set; } = 300;
 
+        /// <summary>Equipment doesn't stack: each piece carries its own upgrade level and craft
+        /// quality. (It used to fall back to Item's default of 50, and since stacking only compared
+        /// ids, a +3 sword merged into a +0 sword's stack and lost its upgrade.)</summary>
+        public override int MaxStackSize { get; set; } = 1;
+
+        /// <summary>Even with a MaxStackSize above 1 (mod data), only identical pieces stack.</summary>
+        public override bool CanStackWith(Item other) =>
+            base.CanStackWith(other) && other is EquipmentItem e
+            && e.UpgradeLevel == UpgradeLevel && e.CraftQuality.Equals(CraftQuality);
+
         /// <summary>Base bonus values as defined in item data (before upgrades).</summary>
         public EquipmentBonuses BaseStats { get; set; }
 
@@ -46,6 +56,20 @@ namespace Myria.Lib.Core.Entities.Items
             || AllowedClasses.Any(c => c.Equals(character.Class, StringComparison.OrdinalIgnoreCase));
 
         public override void Use(Character character) { }
+
+        /// <summary>
+        /// Puts a fresh item (from ItemFactory) into a saved upgrade state: the craft quality first,
+        /// then each upgrade level re-applied - exactly how the bonuses were reached in play. Used by
+        /// every load/sync path (local saves, the realm database, server pushes).
+        /// </summary>
+        public void RestoreUpgradeState(int upgradeLevel, float craftQuality)
+        {
+            CraftQuality = craftQuality > 0 ? craftQuality : 1f;
+            UpgradeLevel = 0;
+            Bonuses = BaseStats;
+            for (int i = 0; i < upgradeLevel; i++)
+                TryUpgrade_Internal();
+        }
 
         /// <summary>
         /// Applies one upgrade level, scaling Bonuses from BaseStats.

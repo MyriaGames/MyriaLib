@@ -383,12 +383,12 @@ namespace Myria.Lib.Core.Entities.Characters
         /// </summary>
         public void ApplySyncedEquipment(EquippedSnapshot equipment)
         {
-            WeaponSlot    = ResolveEquippedSlot(equipment.WeaponItemId);
-            ArmorSlot     = ResolveEquippedSlot(equipment.ArmorItemId);
-            AccessorySlot = ResolveEquippedSlot(equipment.AccessoryItemId);
+            WeaponSlot    = ResolveEquippedSlot(equipment.WeaponItemId, equipment.WeaponUpgradeLevel, equipment.WeaponCraftQuality);
+            ArmorSlot     = ResolveEquippedSlot(equipment.ArmorItemId, equipment.ArmorUpgradeLevel, equipment.ArmorCraftQuality);
+            AccessorySlot = ResolveEquippedSlot(equipment.AccessoryItemId, equipment.AccessoryUpgradeLevel, equipment.AccessoryCraftQuality);
 
-            static EquipmentItem? ResolveEquippedSlot(string? itemId) =>
-                itemId is not null && ItemFactory.TryCreateItem(itemId, out var item) ? item as EquipmentItem : null;
+            static EquipmentItem? ResolveEquippedSlot(string? itemId, int level, float quality) =>
+                itemId is not null ? ItemFactory.CreateItem(itemId, 1, level, quality) as EquipmentItem : null;
         }
 
         /// <summary>

@@ -205,6 +205,7 @@ namespace Myria.Lib.Core.Services
             SkillCombinationService.ResolveCombinedSkills(character);
             SkillSlotService.ResolveSlots(character);
             SkillSlotService.MigrateIfEmpty(character);
+            character.Inventory.SplitOverfullStacks(); // repairs equipment merged by the old stack-to-50 bug
         }
     }
 }

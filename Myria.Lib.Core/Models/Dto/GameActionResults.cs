@@ -55,7 +55,10 @@ namespace Myria.Lib.Core.Models.Dto
         int  UnusedPoints,
         int  BaseHealth,
         int  BaseMana);
-    public record InventoryItemSnapshot(string ItemId, int StackSize);
+    /// <summary>One inventory stack. Equipment also carries its upgrade level and craft quality
+    /// (defaults for everything else) - pieces don't stack, and an upgraded one must not come back
+    /// as a plain copy. The defaults keep older clients/servers compatible.</summary>
+    public record InventoryItemSnapshot(string ItemId, int StackSize, int UpgradeLevel = 0, float CraftQuality = 1f);
 
     /// <summary>One job's full progress (skill/knowledge/fame XP) - id-keyed, so the client
     /// reconciles by JobId rather than assuming list order/count matches.</summary>
@@ -67,13 +70,14 @@ namespace Myria.Lib.Core.Models.Dto
     public record RuneSnapshot(string Id, string BaseRuneId, List<string> AddedWordIds);
 
     /// <summary>
-    /// Which item id (if any) occupies each equip slot - null slot means empty. Identity-only,
-    /// same tradeoff as <see cref="InventoryItemSnapshot"/>: a slot's UpgradeLevel/CraftQuality
-    /// isn't part of this (equipped items can't be upgraded in this codebase - Upgrade only
-    /// operates on loose Inventory.Items - so that's a non-issue in practice), only which item id
-    /// is in which slot.
+    /// Which item (if any) occupies each equip slot - null slot means empty - with its upgrade
+    /// level and craft quality. (These used to be left out on the grounds that equipped items can't
+    /// be upgraded - but an item upgraded in the bag and then equipped came back as a plain +0 copy.)
     /// </summary>
-    public record EquippedSnapshot(string? WeaponItemId, string? ArmorItemId, string? AccessoryItemId);
+    public record EquippedSnapshot(string? WeaponItemId, string? ArmorItemId, string? AccessoryItemId,
+        int WeaponUpgradeLevel = 0, float WeaponCraftQuality = 1f,
+        int ArmorUpgradeLevel = 0, float ArmorCraftQuality = 1f,
+        int AccessoryUpgradeLevel = 0, float AccessoryCraftQuality = 1f);
 
     /// <summary>
     /// Generic "something about your character changed" push - sent after any session mutation
