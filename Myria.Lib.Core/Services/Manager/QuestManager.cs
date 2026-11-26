@@ -115,6 +115,15 @@ namespace Myria.Lib.Core.Services.Manager
                 .ToList();
         }
 
+        /// <summary>
+        /// Every condition for accepting <paramref name="q"/> (level, prerequisites, not already done /
+        /// repeat limits, class, race, job, party). The same rules the quest lists use - and what the
+        /// realm server must check before accepting, which it didn't: completed quests could be
+        /// accepted and handed in again endlessly (security review 2026-11-26, A06 F5).
+        /// </summary>
+        public static bool IsAcceptable(Quest q, Character character, int partySize = 1)
+            => character.Level >= q.RequiredLevel && CanAccept(q, character, partySize);
+
         private static bool CanAccept(Quest q, Character character, int partySize = 1)
         {
             // Already accepted and in progress

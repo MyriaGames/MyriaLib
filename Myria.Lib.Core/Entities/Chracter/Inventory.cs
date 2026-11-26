@@ -230,43 +230,56 @@ namespace Myria.Lib.Core.Entities.Characters
         /// <param name="item">item to add</param>
         /// <param name="player">player character</param>
         /// <returns>if the item was added</returns>
+        // All-or-nothing (security review 2026-11-26, A06 F3/F4): it used to top up existing stacks
+        // first and only then report "full" without undoing that - callers that charge only after a
+        // successful add (NPC shop) then handed out items for free - and it put whatever was left into
+        // ONE new stack regardless of MaxStackSize (a crafted quantity of ~10^9 became one stack).
+        // Now: nothing changes unless the whole amount fits, and new stacks respect MaxStackSize.
         public bool AddItem(Item item, Character character, string? source = null)
         {
             int stackSize = item.StackSize;
+            if (stackSize <= 0 || !CanAdd(item, stackSize))
+                return false;
 
-            // First try to stack
-            foreach (var existing in Items)
+            // First top up existing stacks
+            foreach (var existing in Items.ToList())
             {
+                if (item.StackSize == 0) break;
                 if (existing.CanStackWith(item) && existing.StackSize < existing.MaxStackSize)
                 {
-                    int space = existing.MaxStackSize - existing.StackSize;
-                    int toAdd = Math.Min(space, item.StackSize);
-
+                    int toAdd = Math.Min(existing.MaxStackSize - existing.StackSize, item.StackSize);
                     existing.StackSize += toAdd;
                     item.StackSize -= toAdd;
-
-                    Restack();
-
-                    if (item.StackSize == 0)
-                    {
-                        GameEvents.FireItemReceived(character, item, stackSize);
-                        ItemReceived?.Invoke(this, new ItemReceivedEventArgs(item, stackSize, source));
-                        return true;
-                    }
                 }
             }
 
-            // Add remaining as new stack
-            if (Items.Count < Capacity)
+            // Then the rest as new stacks of at most MaxStackSize each (CanAdd guaranteed the slots)
+            int max = Math.Max(1, item.MaxStackSize);
+            while (item.StackSize > max)
             {
-                Items.Add(item);
-                Restack();
-                GameEvents.FireItemReceived(character, item, stackSize);
-                ItemReceived?.Invoke(this, new ItemReceivedEventArgs(item, stackSize, source));
-                return true;
+                var full = item.CloneOne();
+                full.StackSize = max;
+                item.StackSize -= max;
+                Items.Add(full);
             }
+            if (item.StackSize > 0)
+                Items.Add(item);                        // the caller's object holds the last part
 
-            return false; // inventory full
+            Restack();
+            GameEvents.FireItemReceived(character, item, stackSize);
+            ItemReceived?.Invoke(this, new ItemReceivedEventArgs(item, stackSize, source));
+            return true;
+        }
+
+        /// <summary>Whether <paramref name="quantity"/> of <paramref name="item"/> fits completely
+        /// (free space in matching stacks plus free slots × MaxStackSize).</summary>
+        public bool CanAdd(Item item, int quantity)
+        {
+            if (quantity <= 0) return false;
+            long space = Items.Where(e => e.CanStackWith(item))
+                              .Sum(e => (long)Math.Max(0, e.MaxStackSize - e.StackSize));
+            space += (long)Math.Max(0, Capacity - Items.Count) * Math.Max(1, item.MaxStackSize);
+            return space >= quantity;
         }
         /// <summary>
         /// removes an item from the inventory
