@@ -38,6 +38,34 @@ namespace Myria.Lib.Core.Services
                 GameLog.Error($"Monster ID {id} not found in loaded data.");
             return monster;
         }
+        /// <summary>
+        /// Like <see cref="PickMonsterForFight"/>, but only among monster types
+        /// <paramref name="isAvailable"/> allows (v0.3: a room's population of a type can run out) -
+        /// null when none are left.
+        /// </summary>
+        public static Monster? TryPickMonsterForFight(List<Monster> monsters, Dictionary<int, float> chances, Func<int, bool> isAvailable)
+        {
+            var available = monsters.Where(m => isAvailable(m.Id)).ToList();
+            if (available.Count == 0) return null;
+            var availableChances = chances.Where(kv => isAvailable(kv.Key)).ToDictionary(kv => kv.Key, kv => kv.Value);
+            return PickMonsterForFight(available, availableChances);
+        }
+
+        /// <summary>Group-fight counterpart of <see cref="TryPickMonsterForFight"/> - an empty list
+        /// when nothing is available. Dungeon rooms (their own spawned monsters) are unaffected.</summary>
+        public static List<Monster> TryPickMonstersForGroupFight(
+            List<Monster> templates, Dictionary<int, float> chances, List<Monster> currentMonsters,
+            bool isDungeonRoom, Func<int, bool> isAvailable, int max = 5)
+        {
+            if (isDungeonRoom && currentMonsters.Count > 0)
+                return currentMonsters.Take(max).ToList();
+
+            var available = templates.Where(m => isAvailable(m.Id)).ToList();
+            if (available.Count == 0) return new List<Monster>();
+            var availableChances = chances.Where(kv => isAvailable(kv.Key)).ToDictionary(kv => kv.Key, kv => kv.Value);
+            return PickMonstersForGroupFight(available, availableChances, currentMonsters, isDungeonRoom, max);
+        }
+
         public static Monster PickMonsterForFight(List<Monster> monsters, Dictionary<int, float> chances)
         {
             var eligible = monsters.Where(m => chances.ContainsKey(m.Id)).ToList();
