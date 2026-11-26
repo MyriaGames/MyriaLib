@@ -15,6 +15,7 @@ namespace Myria.Lib.Core.Models
         public float ScalingFactor { get; set; }
         public string StatToScaleFrom { get; set; }
         public int MinLevel { get; set; }
+        public float Range { get; set; } = 0f;
         public bool IsHealing { get; set; }
         public float AggroModifier { get; set; } = 0f;
         public int Cooldown { get; set; } = 0;

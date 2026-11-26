@@ -57,6 +57,7 @@ namespace Myria.Lib.Core.Services.Builder
                 ScalingFactor   = d.ScalingFactor,
                 StatToScaleFrom = d.StatToScaleFrom,
                 MinLevel        = d.MinLevel,
+                Range           = d.Range,
                 IsHealing       = d.IsHealing,
                 AggroModifier   = d.AggroModifier,
                 Cooldown        = d.Cooldown,

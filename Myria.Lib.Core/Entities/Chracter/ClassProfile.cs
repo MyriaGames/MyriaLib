@@ -16,6 +16,16 @@ namespace Myria.Lib.Core.Entities.Characters
         public int                HpPerLevel   { get; set; }
         public int                ManaPerLevel { get; set; }
 
+        /// <summary>
+        /// How far a character of this class can be from a target and still land a basic attack
+        /// or a skill that doesn't specify its own <see cref="Skills.Skill.Range"/> — only
+        /// meaningful to a real-time client with actual positions (see
+        /// Myria.Mono.Screens.WorldScreen); turn-based clients ignore it entirely. Defaults to a
+        /// melee-typical reach so classes/mods that don't set this explicitly behave exactly as
+        /// they did before this field existed.
+        /// </summary>
+        public float AttackRange { get; set; } = 2.4f;
+
         // ── Registry ─────────────────────────────────────────────────────────────
 
         private static Dictionary<string, ClassProfile> _all = new(StringComparer.OrdinalIgnoreCase);

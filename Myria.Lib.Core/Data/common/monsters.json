@@ -1,654 +1,692 @@
 [
-  {
-    "Id": 1,
-    "Name": "monster.goblin.name",
-    "Description": "monster.goblin.desc",
-    "Type": 5,
-    "Level": 10,
-    "Exp": 85,
-    "Stats": {
-      "Strength": 70,
-      "Dexterity": 110,
-      "Endurance": 60,
-      "Intelligence": 60,
-      "Spirit": 65,
-      "BaseHealth": 25,
-      "BaseMana": 0
-    }
-  },
-  {
-    "Id": 2,
-    "Name": "monster.troll.name",
-    "Description": "monster.troll.desc",
-    "Type": 5,
-    "Level": 11,
-    "Exp": 95,
-    "Stats": {
-      "Strength": 115,
-      "Dexterity": 45,
-      "Endurance": 110,
-      "Intelligence": 30,
-      "Spirit": 50,
-      "BaseHealth": 55,
-      "BaseMana": 0
-    }
-  },
-  {
-    "Id": 3,
-    "Name": "monster.wraith.name",
-    "Description": "monster.wraith.desc",
-    "Type": 3,
-    "Level": 14,
-    "Exp": 126,
-    "Stats": {
-      "Strength": 30,
-      "Dexterity": 138,
-      "Endurance": 50,
-      "Intelligence": 135,
-      "Spirit": 160,
-      "BaseHealth": 28,
-      "BaseMana": 55
-    }
-  },
-  {
-    "Id": 15,
-    "Name": "monster.cave_bat.name",
-    "Description": "monster.cave_bat.desc",
-    "Type": 0,
-    "Level": 10,
-    "Exp": 82,
-    "Stats": {
-      "Strength": 55,
-      "Dexterity": 145,
-      "Endurance": 45,
-      "Intelligence": 35,
-      "Spirit": 55,
-      "BaseHealth": 18,
-      "BaseMana": 0
-    }
-  },
-  {
-    "Id": 16,
-    "Name": "monster.stone_imp.name",
-    "Description": "monster.stone_imp.desc",
-    "Type": 5,
-    "Level": 12,
-    "Exp": 108,
-    "Stats": {
-      "Strength": 90,
-      "Dexterity": 80,
-      "Endurance": 85,
-      "Intelligence": 100,
-      "Spirit": 88,
-      "BaseHealth": 40,
-      "BaseMana": 20
-    }
-  },
-  {
-    "Id": 17,
-    "Name": "monster.bone_crawler.name",
-    "Description": "monster.bone_crawler.desc",
-    "Type": 3,
-    "Level": 13,
-    "Exp": 118,
-    "Stats": {
-      "Strength": 115,
-      "Dexterity": 82,
-      "Endurance": 108,
-      "Intelligence": 55,
-      "Spirit": 50,
-      "BaseHealth": 50,
-      "BaseMana": 0
-    }
-  },
-  {
-    "Id": 8,
-    "Name": "monster.thornhopper.name",
-    "Description": "monster.thornhopper.desc",
-    "Type": 0,
-    "Level": 5,
-    "Exp": 42,
-    "Stats": {
-      "Strength": 63,
-      "Dexterity": 48,
-      "Endurance": 35,
-      "Intelligence": 35,
-      "Spirit": 49,
-      "BaseHealth": 50,
-      "BaseMana": 20
-    }
-  },
-  {
-    "Id": 10,
-    "Name": "monster.river_raptor.name",
-    "Description": "monster.river_raptor.desc",
-    "Type": 0,
-    "Level": 6,
-    "Exp": 51,
-    "Stats": {
-      "Strength": 90,
-      "Dexterity": 76,
-      "Endurance": 49,
-      "Intelligence": 65,
-      "Spirit": 45,
-      "BaseHealth": 20,
-      "BaseMana": 10
-    }
-  },
-  {
-    "Id": 12,
-    "Name": "monster.maka_maka_scout.name",
-    "Description": "monster.maka_maka_scout.desc",
-    "Type": 4,
-    "Level": 7,
-    "Exp": 56,
-    "Stats": {
-      "Strength": 58,
-      "Dexterity": 102,
-      "Endurance": 63,
-      "Intelligence": 54,
-      "Spirit": 76,
-      "BaseHealth": 30,
-      "BaseMana": 20
-    }
-  },
-  {
-    "Id": 13,
-    "Name": "monster.river_spirit.name",
-    "Description": "monster.river_spirit.desc",
-    "Type": 1,
-    "Level": 8,
-    "Exp": 71,
-    "Stats": {
-      "Strength": 66,
-      "Dexterity": 82,
-      "Endurance": 77,
-      "Intelligence": 104,
-      "Spirit": 93,
-      "BaseHealth": 35,
-      "BaseMana": 40
-    }
-  },
-  {
-    "Id": 11,
-    "Name": "monster.maka_maka_hunter.name",
-    "Description": "monster.maka_maka_hunter.desc",
-    "Type": 4,
-    "Level": 9,
-    "Exp": 76,
-    "Stats": {
-      "Strength": 93,
-      "Dexterity": 104,
-      "Endurance": 88,
-      "Intelligence": 88,
-      "Spirit": 94,
-      "BaseHealth": 35,
-      "BaseMana": 30
-    }
-  },
-  {
-    "Id": 14,
-    "Name": "monster.mossback_boar.name",
-    "Description": "monster.mossback_boar.desc",
-    "Type": 0,
-    "Level": 9,
-    "Exp": 79,
-    "Stats": {
-      "Strength": 108,
-      "Dexterity": 84,
-      "Endurance": 124,
-      "Intelligence": 72,
-      "Spirit": 82,
-      "BaseHealth": 50,
-      "BaseMana": 30
-    }
-  },
-  {
-    "Id": 4,
-    "Name": "monster.nightwalker.name",
-    "Description": "monster.nightwalker.desc",
-    "Type": 3,
-    "Level": 15,
-    "Exp": 135,
-    "Stats": {
-      "Strength": 135,
-      "Dexterity": 145,
-      "Endurance": 100,
-      "Intelligence": 130,
-      "Spirit": 192,
-      "BaseHealth": 30,
-      "BaseMana": 40
-    }
-  },
-  {
-    "Id": 6,
-    "Name": "monster.tomb_spider.name",
-    "Description": "monster.tomb_spider.desc",
-    "Type": 0,
-    "Level": 16,
-    "Exp": 142,
-    "Stats": {
-      "Strength": 122,
-      "Dexterity": 108,
-      "Endurance": 118,
-      "Intelligence": 95,
-      "Spirit": 100,
-      "BaseHealth": 50,
-      "BaseMana": 20
-    }
-  },
-  {
-    "Id": 5,
-    "Name": "monster.bodak.name",
-    "Description": "monster.bodak.desc",
-    "Type": 5,
-    "Level": 18,
-    "Exp": 162,
-    "Stats": {
-      "Strength": 50,
-      "Dexterity": 140,
-      "Endurance": 95,
-      "Intelligence": 150,
-      "Spirit": 162,
-      "BaseHealth": 50,
-      "BaseMana": 95
-    }
-  },
-  {
-    "Id": 9,
-    "Name": "monster.forest_spider.name",
-    "Description": "monster.forest_spider.desc",
-    "Type": 0,
-    "Level": 16,
-    "Exp": 133,
-    "Stats": {
-      "Strength": 120,
-      "Dexterity": 125,
-      "Endurance": 120,
-      "Intelligence": 95,
-      "Spirit": 110,
-      "BaseHealth": 60,
-      "BaseMana": 20
-    }
-  },
-  {
-    "Id": 7,
-    "Name": "monster.lich_hollow_crypt.name",
-    "Description": "monster.lich_hollow_crypt.desc",
-    "Type": 3,
-    "Level": 22,
-    "Exp": 205,
-    "Stats": {
-      "Strength": 95,
-      "Dexterity": 125,
-      "Endurance": 158,
-      "Intelligence": 188,
-      "Spirit": 198,
-      "BaseHealth": 105,
-      "BaseMana": 165
+    {
+        "Id":  1,
+        "Name":  "monster.goblin.name",
+        "Description":  "monster.goblin.desc",
+        "Type":  5,
+        "Level":  10,
+        "Exp":  85,
+        "Stats":  {
+                      "Strength":  70,
+                      "Dexterity":  110,
+                      "Endurance":  60,
+                      "Intelligence":  60,
+                      "Spirit":  65,
+                      "BaseHealth":  25,
+                      "BaseMana":  0
+                  },
+        "RespawnSeconds":  5.5
     },
-    "UniqueLootTable": [
-      {
-        "ItemId": "soulbound_phylactery",
-        "DropChance": 0.05
-      }
-    ]
-  },
-  {
-    "Id": 18,
-    "Name": "monster.shadow_wolf.name",
-    "Description": "monster.shadow_wolf.desc",
-    "Type": 0,
-    "Level": 10,
-    "Exp": 92,
-    "Stats": {
-      "Strength": 95,
-      "Dexterity": 155,
-      "Endurance": 80,
-      "Intelligence": 65,
-      "Spirit": 85,
-      "BaseHealth": 32,
-      "BaseMana": 0
+    {
+        "Id":  2,
+        "Name":  "monster.troll.name",
+        "Description":  "monster.troll.desc",
+        "Type":  5,
+        "Level":  11,
+        "Exp":  95,
+        "Stats":  {
+                      "Strength":  115,
+                      "Dexterity":  45,
+                      "Endurance":  110,
+                      "Intelligence":  30,
+                      "Spirit":  50,
+                      "BaseHealth":  55,
+                      "BaseMana":  0
+                  },
+        "RespawnSeconds":  5.6
+    },
+    {
+        "Id":  3,
+        "Name":  "monster.wraith.name",
+        "Description":  "monster.wraith.desc",
+        "Type":  3,
+        "Level":  14,
+        "Exp":  126,
+        "Stats":  {
+                      "Strength":  30,
+                      "Dexterity":  138,
+                      "Endurance":  50,
+                      "Intelligence":  135,
+                      "Spirit":  160,
+                      "BaseHealth":  28,
+                      "BaseMana":  55
+                  },
+        "RespawnSeconds":  6.1
+    },
+    {
+        "Id":  15,
+        "Name":  "monster.cave_bat.name",
+        "Description":  "monster.cave_bat.desc",
+        "Type":  0,
+        "Level":  10,
+        "Exp":  82,
+        "Stats":  {
+                      "Strength":  55,
+                      "Dexterity":  145,
+                      "Endurance":  45,
+                      "Intelligence":  35,
+                      "Spirit":  55,
+                      "BaseHealth":  18,
+                      "BaseMana":  0
+                  },
+        "RespawnSeconds":  5.5
+    },
+    {
+        "Id":  16,
+        "Name":  "monster.stone_imp.name",
+        "Description":  "monster.stone_imp.desc",
+        "Type":  5,
+        "Level":  12,
+        "Exp":  108,
+        "Stats":  {
+                      "Strength":  90,
+                      "Dexterity":  80,
+                      "Endurance":  85,
+                      "Intelligence":  100,
+                      "Spirit":  88,
+                      "BaseHealth":  40,
+                      "BaseMana":  20
+                  },
+        "RespawnSeconds":  5.8
+    },
+    {
+        "Id":  17,
+        "Name":  "monster.bone_crawler.name",
+        "Description":  "monster.bone_crawler.desc",
+        "Type":  3,
+        "Level":  13,
+        "Exp":  118,
+        "Stats":  {
+                      "Strength":  115,
+                      "Dexterity":  82,
+                      "Endurance":  108,
+                      "Intelligence":  55,
+                      "Spirit":  50,
+                      "BaseHealth":  50,
+                      "BaseMana":  0
+                  },
+        "RespawnSeconds":  6
+    },
+    {
+        "Id":  8,
+        "Name":  "monster.thornhopper.name",
+        "Description":  "monster.thornhopper.desc",
+        "Type":  0,
+        "Level":  5,
+        "Exp":  42,
+        "Stats":  {
+                      "Strength":  63,
+                      "Dexterity":  48,
+                      "Endurance":  35,
+                      "Intelligence":  35,
+                      "Spirit":  49,
+                      "BaseHealth":  50,
+                      "BaseMana":  20
+                  },
+        "RespawnSeconds":  4.8
+    },
+    {
+        "Id":  10,
+        "Name":  "monster.river_raptor.name",
+        "Description":  "monster.river_raptor.desc",
+        "Type":  0,
+        "Level":  6,
+        "Exp":  51,
+        "Stats":  {
+                      "Strength":  90,
+                      "Dexterity":  76,
+                      "Endurance":  49,
+                      "Intelligence":  65,
+                      "Spirit":  45,
+                      "BaseHealth":  20,
+                      "BaseMana":  10
+                  },
+        "RespawnSeconds":  4.9
+    },
+    {
+        "Id":  12,
+        "Name":  "monster.maka_maka_scout.name",
+        "Description":  "monster.maka_maka_scout.desc",
+        "Type":  4,
+        "Level":  7,
+        "Exp":  56,
+        "Stats":  {
+                      "Strength":  58,
+                      "Dexterity":  102,
+                      "Endurance":  63,
+                      "Intelligence":  54,
+                      "Spirit":  76,
+                      "BaseHealth":  30,
+                      "BaseMana":  20
+                  },
+        "RespawnSeconds":  5
+    },
+    {
+        "Id":  13,
+        "Name":  "monster.river_spirit.name",
+        "Description":  "monster.river_spirit.desc",
+        "Type":  1,
+        "Level":  8,
+        "Exp":  71,
+        "Stats":  {
+                      "Strength":  66,
+                      "Dexterity":  82,
+                      "Endurance":  77,
+                      "Intelligence":  104,
+                      "Spirit":  93,
+                      "BaseHealth":  35,
+                      "BaseMana":  40
+                  },
+        "RespawnSeconds":  5.2
+    },
+    {
+        "Id":  11,
+        "Name":  "monster.maka_maka_hunter.name",
+        "Description":  "monster.maka_maka_hunter.desc",
+        "Type":  4,
+        "Level":  9,
+        "Exp":  76,
+        "Stats":  {
+                      "Strength":  93,
+                      "Dexterity":  104,
+                      "Endurance":  88,
+                      "Intelligence":  88,
+                      "Spirit":  94,
+                      "BaseHealth":  35,
+                      "BaseMana":  30
+                  },
+        "RespawnSeconds":  5.4
+    },
+    {
+        "Id":  14,
+        "Name":  "monster.mossback_boar.name",
+        "Description":  "monster.mossback_boar.desc",
+        "Type":  0,
+        "Level":  9,
+        "Exp":  79,
+        "Stats":  {
+                      "Strength":  108,
+                      "Dexterity":  84,
+                      "Endurance":  124,
+                      "Intelligence":  72,
+                      "Spirit":  82,
+                      "BaseHealth":  50,
+                      "BaseMana":  30
+                  },
+        "RespawnSeconds":  5.4
+    },
+    {
+        "Id":  4,
+        "Name":  "monster.nightwalker.name",
+        "Description":  "monster.nightwalker.desc",
+        "Type":  3,
+        "Level":  15,
+        "Exp":  135,
+        "Stats":  {
+                      "Strength":  135,
+                      "Dexterity":  145,
+                      "Endurance":  100,
+                      "Intelligence":  130,
+                      "Spirit":  192,
+                      "BaseHealth":  30,
+                      "BaseMana":  40
+                  },
+        "RespawnSeconds":  6.2
+    },
+    {
+        "Id":  6,
+        "Name":  "monster.tomb_spider.name",
+        "Description":  "monster.tomb_spider.desc",
+        "Type":  0,
+        "Level":  16,
+        "Exp":  142,
+        "Stats":  {
+                      "Strength":  122,
+                      "Dexterity":  108,
+                      "Endurance":  118,
+                      "Intelligence":  95,
+                      "Spirit":  100,
+                      "BaseHealth":  50,
+                      "BaseMana":  20
+                  },
+        "RespawnSeconds":  6.4
+    },
+    {
+        "Id":  5,
+        "Name":  "monster.bodak.name",
+        "Description":  "monster.bodak.desc",
+        "Type":  5,
+        "Level":  18,
+        "Exp":  162,
+        "Stats":  {
+                      "Strength":  50,
+                      "Dexterity":  140,
+                      "Endurance":  95,
+                      "Intelligence":  150,
+                      "Spirit":  162,
+                      "BaseHealth":  50,
+                      "BaseMana":  95
+                  },
+        "RespawnSeconds":  6.7
+    },
+    {
+        "Id":  9,
+        "Name":  "monster.forest_spider.name",
+        "Description":  "monster.forest_spider.desc",
+        "Type":  0,
+        "Level":  16,
+        "Exp":  133,
+        "Stats":  {
+                      "Strength":  120,
+                      "Dexterity":  125,
+                      "Endurance":  120,
+                      "Intelligence":  95,
+                      "Spirit":  110,
+                      "BaseHealth":  60,
+                      "BaseMana":  20
+                  },
+        "RespawnSeconds":  6.4
+    },
+    {
+        "Id":  7,
+        "Name":  "monster.lich_hollow_crypt.name",
+        "Description":  "monster.lich_hollow_crypt.desc",
+        "Type":  3,
+        "Level":  22,
+        "Exp":  205,
+        "Stats":  {
+                      "Strength":  95,
+                      "Dexterity":  125,
+                      "Endurance":  158,
+                      "Intelligence":  188,
+                      "Spirit":  198,
+                      "BaseHealth":  105,
+                      "BaseMana":  165
+                  },
+        "UniqueLootTable":  [
+                                {
+                                    "ItemId":  "soulbound_phylactery",
+                                    "DropChance":  0.05
+                                }
+                            ],
+        "RespawnSeconds":  7.3
+    },
+    {
+        "Id":  18,
+        "Name":  "monster.shadow_wolf.name",
+        "Description":  "monster.shadow_wolf.desc",
+        "Type":  0,
+        "Level":  10,
+        "Exp":  92,
+        "Stats":  {
+                      "Strength":  95,
+                      "Dexterity":  155,
+                      "Endurance":  80,
+                      "Intelligence":  65,
+                      "Spirit":  85,
+                      "BaseHealth":  32,
+                      "BaseMana":  0
+                  },
+        "RespawnSeconds":  5.5
+    },
+    {
+        "Id":  19,
+        "Name":  "monster.withered_treant.name",
+        "Description":  "monster.withered_treant.desc",
+        "Type":  1,
+        "Level":  12,
+        "Exp":  108,
+        "Stats":  {
+                      "Strength":  95,
+                      "Dexterity":  60,
+                      "Endurance":  110,
+                      "Intelligence":  80,
+                      "Spirit":  90,
+                      "BaseHealth":  70,
+                      "BaseMana":  25
+                  },
+        "RespawnSeconds":  5.8
+    },
+    {
+        "Id":  20,
+        "Name":  "monster.bandit_marauder.name",
+        "Description":  "monster.bandit_marauder.desc",
+        "Type":  4,
+        "Level":  14,
+        "Exp":  124,
+        "Stats":  {
+                      "Strength":  125,
+                      "Dexterity":  120,
+                      "Endurance":  100,
+                      "Intelligence":  75,
+                      "Spirit":  80,
+                      "BaseHealth":  55,
+                      "BaseMana":  0
+                  },
+        "RespawnSeconds":  6.1
+    },
+    {
+        "Id":  21,
+        "Name":  "monster.plague_rat.name",
+        "Description":  "monster.plague_rat.desc",
+        "Type":  0,
+        "Level":  15,
+        "Exp":  132,
+        "Stats":  {
+                      "Strength":  105,
+                      "Dexterity":  145,
+                      "Endurance":  105,
+                      "Intelligence":  75,
+                      "Spirit":  80,
+                      "BaseHealth":  45,
+                      "BaseMana":  0
+                  },
+        "RespawnSeconds":  6.2
+    },
+    {
+        "Id":  22,
+        "Name":  "monster.dread_archer.name",
+        "Description":  "monster.dread_archer.desc",
+        "Type":  4,
+        "Level":  17,
+        "Exp":  148,
+        "Stats":  {
+                      "Strength":  110,
+                      "Dexterity":  185,
+                      "Endurance":  95,
+                      "Intelligence":  95,
+                      "Spirit":  95,
+                      "BaseHealth":  50,
+                      "BaseMana":  10
+                  },
+        "RespawnSeconds":  6.6
+    },
+    {
+        "Id":  23,
+        "Name":  "monster.hollow_knight.name",
+        "Description":  "monster.hollow_knight.desc",
+        "Type":  3,
+        "Level":  19,
+        "Exp":  166,
+        "Stats":  {
+                      "Strength":  140,
+                      "Dexterity":  90,
+                      "Endurance":  160,
+                      "Intelligence":  70,
+                      "Spirit":  75,
+                      "BaseHealth":  90,
+                      "BaseMana":  0
+                  },
+        "RespawnSeconds":  6.8
+    },
+    {
+        "Id":  24,
+        "Name":  "monster.void_wraith.name",
+        "Description":  "monster.void_wraith.desc",
+        "Type":  3,
+        "Level":  22,
+        "Exp":  195,
+        "Stats":  {
+                      "Strength":  60,
+                      "Dexterity":  160,
+                      "Endurance":  95,
+                      "Intelligence":  150,
+                      "Spirit":  165,
+                      "BaseHealth":  55,
+                      "BaseMana":  130
+                  },
+        "RespawnSeconds":  7.3
+    },
+    {
+        "Id":  25,
+        "Name":  "monster.storm_harpy.name",
+        "Description":  "monster.storm_harpy.desc",
+        "Type":  1,
+        "Level":  26,
+        "Exp":  232,
+        "Stats":  {
+                      "Strength":  170,
+                      "Dexterity":  240,
+                      "Endurance":  145,
+                      "Intelligence":  180,
+                      "Spirit":  170,
+                      "BaseHealth":  70,
+                      "BaseMana":  60
+                  },
+        "RespawnSeconds":  7.9
+    },
+    {
+        "Id":  26,
+        "Name":  "monster.elder_golem.name",
+        "Description":  "monster.elder_golem.desc",
+        "Type":  1,
+        "Level":  31,
+        "Exp":  278,
+        "Stats":  {
+                      "Strength":  210,
+                      "Dexterity":  100,
+                      "Endurance":  260,
+                      "Intelligence":  140,
+                      "Spirit":  130,
+                      "BaseHealth":  150,
+                      "BaseMana":  40
+                  },
+        "RespawnSeconds":  8
+    },
+    {
+        "Id":  27,
+        "Name":  "monster.crimson_drake.name",
+        "Description":  "monster.crimson_drake.desc",
+        "Type":  1,
+        "Level":  36,
+        "Exp":  335,
+        "Stats":  {
+                      "Strength":  300,
+                      "Dexterity":  220,
+                      "Endurance":  270,
+                      "Intelligence":  250,
+                      "Spirit":  260,
+                      "BaseHealth":  130,
+                      "BaseMana":  100
+                  },
+        "RespawnSeconds":  8
+    },
+    {
+        "Id":  28,
+        "Name":  "monster.moss_creeper.name",
+        "Description":  "monster.moss_creeper.desc",
+        "Type":  0,
+        "Level":  11,
+        "Exp":  99,
+        "Stats":  {
+                      "Strength":  95,
+                      "Dexterity":  70,
+                      "Endurance":  95,
+                      "Intelligence":  60,
+                      "Spirit":  65,
+                      "BaseHealth":  55,
+                      "BaseMana":  0
+                  },
+        "RespawnSeconds":  5.6
+    },
+    {
+        "Id":  29,
+        "Name":  "monster.giant_forest_beetle.name",
+        "Description":  "monster.giant_forest_beetle.desc",
+        "Type":  0,
+        "Level":  13,
+        "Exp":  115,
+        "Stats":  {
+                      "Strength":  105,
+                      "Dexterity":  70,
+                      "Endurance":  125,
+                      "Intelligence":  65,
+                      "Spirit":  75,
+                      "BaseHealth":  70,
+                      "BaseMana":  0
+                  },
+        "RespawnSeconds":  6
+    },
+    {
+        "Id":  30,
+        "Name":  "monster.feral_dire_wolf.name",
+        "Description":  "monster.feral_dire_wolf.desc",
+        "Type":  0,
+        "Level":  16,
+        "Exp":  140,
+        "Stats":  {
+                      "Strength":  130,
+                      "Dexterity":  160,
+                      "Endurance":  100,
+                      "Intelligence":  80,
+                      "Spirit":  80,
+                      "BaseHealth":  50,
+                      "BaseMana":  0
+                  },
+        "RespawnSeconds":  6.4
+    },
+    {
+        "Id":  31,
+        "Name":  "monster.corrupted_stag.name",
+        "Description":  "monster.corrupted_stag.desc",
+        "Type":  1,
+        "Level":  18,
+        "Exp":  162,
+        "Stats":  {
+                      "Strength":  145,
+                      "Dexterity":  135,
+                      "Endurance":  130,
+                      "Intelligence":  120,
+                      "Spirit":  105,
+                      "BaseHealth":  65,
+                      "BaseMana":  30
+                  },
+        "RespawnSeconds":  6.7
+    },
+    {
+        "Id":  32,
+        "Name":  "monster.forest_witch.name",
+        "Description":  "monster.forest_witch.desc",
+        "Type":  4,
+        "Level":  21,
+        "Exp":  186,
+        "Stats":  {
+                      "Strength":  90,
+                      "Dexterity":  125,
+                      "Endurance":  110,
+                      "Intelligence":  150,
+                      "Spirit":  130,
+                      "BaseHealth":  55,
+                      "BaseMana":  100
+                  },
+        "RespawnSeconds":  7.2
+    },
+    {
+        "Id":  33,
+        "Name":  "monster.marsh_viper.name",
+        "Description":  "monster.marsh_viper.desc",
+        "Type":  0,
+        "Level":  1,
+        "Exp":  12,
+        "Stats":  {
+                      "Strength":  20,
+                      "Dexterity":  30,
+                      "Endurance":  15,
+                      "Intelligence":  10,
+                      "Spirit":  18,
+                      "BaseHealth":  8,
+                      "BaseMana":  0
+                  },
+        "RespawnSeconds":  4.2
+    },
+    {
+        "Id":  34,
+        "Name":  "monster.river_toad.name",
+        "Description":  "monster.river_toad.desc",
+        "Type":  0,
+        "Level":  3,
+        "Exp":  28,
+        "Stats":  {
+                      "Strength":  38,
+                      "Dexterity":  22,
+                      "Endurance":  35,
+                      "Intelligence":  18,
+                      "Spirit":  25,
+                      "BaseHealth":  16,
+                      "BaseMana":  0
+                  },
+        "RespawnSeconds":  4.4
+    },
+    {
+        "Id":  35,
+        "Name":  "monster.maka_maka_youth.name",
+        "Description":  "monster.maka_maka_youth.desc",
+        "Type":  4,
+        "Level":  4,
+        "Exp":  36,
+        "Stats":  {
+                      "Strength":  48,
+                      "Dexterity":  55,
+                      "Endurance":  38,
+                      "Intelligence":  35,
+                      "Spirit":  42,
+                      "BaseHealth":  18,
+                      "BaseMana":  10
+                  },
+        "RespawnSeconds":  4.6
+    },
+    {
+        "Id":  36,
+        "Name":  "monster.mudcrawler.name",
+        "Description":  "monster.mudcrawler.desc",
+        "Type":  0,
+        "Level":  2,
+        "Exp":  20,
+        "Stats":  {
+                      "Strength":  28,
+                      "Dexterity":  30,
+                      "Endurance":  28,
+                      "Intelligence":  12,
+                      "Spirit":  20,
+                      "BaseHealth":  12,
+                      "BaseMana":  0
+                  },
+        "RespawnSeconds":  4.3
+    },
+    {
+        "Id":  37,
+        "Name":  "monster.swamp_leech.name",
+        "Description":  "monster.swamp_leech.desc",
+        "Type":  0,
+        "Level":  3,
+        "Exp":  26,
+        "Stats":  {
+                      "Strength":  20,
+                      "Dexterity":  42,
+                      "Endurance":  22,
+                      "Intelligence":  15,
+                      "Spirit":  28,
+                      "BaseHealth":  10,
+                      "BaseMana":  0
+                  },
+        "RespawnSeconds":  4.4
+    },
+    {
+        "Id":  38,
+        "Name":  "monster.bramble_hound.name",
+        "Description":  "monster.bramble_hound.desc",
+        "Type":  0,
+        "Level":  5,
+        "Exp":  40,
+        "Stats":  {
+                      "Strength":  65,
+                      "Dexterity":  75,
+                      "Endurance":  50,
+                      "Intelligence":  35,
+                      "Spirit":  48,
+                      "BaseHealth":  22,
+                      "BaseMana":  0
+                  },
+        "RespawnSeconds":  4.8
     }
-  },
-  {
-    "Id": 19,
-    "Name": "monster.withered_treant.name",
-    "Description": "monster.withered_treant.desc",
-    "Type": 1,
-    "Level": 12,
-    "Exp": 108,
-    "Stats": {
-      "Strength": 95,
-      "Dexterity": 60,
-      "Endurance": 110,
-      "Intelligence": 80,
-      "Spirit": 90,
-      "BaseHealth": 70,
-      "BaseMana": 25
-    }
-  },
-  {
-    "Id": 20,
-    "Name": "monster.bandit_marauder.name",
-    "Description": "monster.bandit_marauder.desc",
-    "Type": 4,
-    "Level": 14,
-    "Exp": 124,
-    "Stats": {
-      "Strength": 125,
-      "Dexterity": 120,
-      "Endurance": 100,
-      "Intelligence": 75,
-      "Spirit": 80,
-      "BaseHealth": 55,
-      "BaseMana": 0
-    }
-  },
-  {
-    "Id": 21,
-    "Name": "monster.plague_rat.name",
-    "Description": "monster.plague_rat.desc",
-    "Type": 0,
-    "Level": 15,
-    "Exp": 132,
-    "Stats": {
-      "Strength": 105,
-      "Dexterity": 145,
-      "Endurance": 105,
-      "Intelligence": 75,
-      "Spirit": 80,
-      "BaseHealth": 45,
-      "BaseMana": 0
-    }
-  },
-  {
-    "Id": 22,
-    "Name": "monster.dread_archer.name",
-    "Description": "monster.dread_archer.desc",
-    "Type": 4,
-    "Level": 17,
-    "Exp": 148,
-    "Stats": {
-      "Strength": 110,
-      "Dexterity": 185,
-      "Endurance": 95,
-      "Intelligence": 95,
-      "Spirit": 95,
-      "BaseHealth": 50,
-      "BaseMana": 10
-    }
-  },
-  {
-    "Id": 23,
-    "Name": "monster.hollow_knight.name",
-    "Description": "monster.hollow_knight.desc",
-    "Type": 3,
-    "Level": 19,
-    "Exp": 166,
-    "Stats": {
-      "Strength": 140,
-      "Dexterity": 90,
-      "Endurance": 160,
-      "Intelligence": 70,
-      "Spirit": 75,
-      "BaseHealth": 90,
-      "BaseMana": 0
-    }
-  },
-  {
-    "Id": 24,
-    "Name": "monster.void_wraith.name",
-    "Description": "monster.void_wraith.desc",
-    "Type": 3,
-    "Level": 22,
-    "Exp": 195,
-    "Stats": {
-      "Strength": 60,
-      "Dexterity": 160,
-      "Endurance": 95,
-      "Intelligence": 150,
-      "Spirit": 165,
-      "BaseHealth": 55,
-      "BaseMana": 130
-    }
-  },
-  {
-    "Id": 25,
-    "Name": "monster.storm_harpy.name",
-    "Description": "monster.storm_harpy.desc",
-    "Type": 1,
-    "Level": 26,
-    "Exp": 232,
-    "Stats": {
-      "Strength": 170,
-      "Dexterity": 240,
-      "Endurance": 145,
-      "Intelligence": 180,
-      "Spirit": 170,
-      "BaseHealth": 70,
-      "BaseMana": 60
-    }
-  },
-  {
-    "Id": 26,
-    "Name": "monster.elder_golem.name",
-    "Description": "monster.elder_golem.desc",
-    "Type": 1,
-    "Level": 31,
-    "Exp": 278,
-    "Stats": {
-      "Strength": 210,
-      "Dexterity": 100,
-      "Endurance": 260,
-      "Intelligence": 140,
-      "Spirit": 130,
-      "BaseHealth": 150,
-      "BaseMana": 40
-    }
-  },
-  {
-    "Id": 27,
-    "Name": "monster.crimson_drake.name",
-    "Description": "monster.crimson_drake.desc",
-    "Type": 1,
-    "Level": 36,
-    "Exp": 335,
-    "Stats": {
-      "Strength": 300,
-      "Dexterity": 220,
-      "Endurance": 270,
-      "Intelligence": 250,
-      "Spirit": 260,
-      "BaseHealth": 130,
-      "BaseMana": 100
-    }
-  },
-  {
-    "Id": 28,
-    "Name": "monster.moss_creeper.name",
-    "Description": "monster.moss_creeper.desc",
-    "Type": 0,
-    "Level": 11,
-    "Exp": 99,
-    "Stats": {
-      "Strength": 95,
-      "Dexterity": 70,
-      "Endurance": 95,
-      "Intelligence": 60,
-      "Spirit": 65,
-      "BaseHealth": 55,
-      "BaseMana": 0
-    }
-  },
-  {
-    "Id": 29,
-    "Name": "monster.giant_forest_beetle.name",
-    "Description": "monster.giant_forest_beetle.desc",
-    "Type": 0,
-    "Level": 13,
-    "Exp": 115,
-    "Stats": {
-      "Strength": 105,
-      "Dexterity": 70,
-      "Endurance": 125,
-      "Intelligence": 65,
-      "Spirit": 75,
-      "BaseHealth": 70,
-      "BaseMana": 0
-    }
-  },
-  {
-    "Id": 30,
-    "Name": "monster.feral_dire_wolf.name",
-    "Description": "monster.feral_dire_wolf.desc",
-    "Type": 0,
-    "Level": 16,
-    "Exp": 140,
-    "Stats": {
-      "Strength": 130,
-      "Dexterity": 160,
-      "Endurance": 100,
-      "Intelligence": 80,
-      "Spirit": 80,
-      "BaseHealth": 50,
-      "BaseMana": 0
-    }
-  },
-  {
-    "Id": 31,
-    "Name": "monster.corrupted_stag.name",
-    "Description": "monster.corrupted_stag.desc",
-    "Type": 1,
-    "Level": 18,
-    "Exp": 162,
-    "Stats": {
-      "Strength": 145,
-      "Dexterity": 135,
-      "Endurance": 130,
-      "Intelligence": 120,
-      "Spirit": 105,
-      "BaseHealth": 65,
-      "BaseMana": 30
-    }
-  },
-  {
-    "Id": 32,
-    "Name": "monster.forest_witch.name",
-    "Description": "monster.forest_witch.desc",
-    "Type": 4,
-    "Level": 21,
-    "Exp": 186,
-    "Stats": {
-      "Strength": 90,
-      "Dexterity": 125,
-      "Endurance": 110,
-      "Intelligence": 150,
-      "Spirit": 130,
-      "BaseHealth": 55,
-      "BaseMana": 100
-    }
-  },
-  {
-    "Id": 33,
-    "Name": "monster.marsh_viper.name",
-    "Description": "monster.marsh_viper.desc",
-    "Type": 0,
-    "Level": 1,
-    "Exp": 12,
-    "Stats": {
-      "Strength": 20,
-      "Dexterity": 30,
-      "Endurance": 15,
-      "Intelligence": 10,
-      "Spirit": 18,
-      "BaseHealth": 8,
-      "BaseMana": 0
-    }
-  },
-  {
-    "Id": 34,
-    "Name": "monster.river_toad.name",
-    "Description": "monster.river_toad.desc",
-    "Type": 0,
-    "Level": 3,
-    "Exp": 28,
-    "Stats": {
-      "Strength": 38,
-      "Dexterity": 22,
-      "Endurance": 35,
-      "Intelligence": 18,
-      "Spirit": 25,
-      "BaseHealth": 16,
-      "BaseMana": 0
-    }
-  },
-  {
-    "Id": 35,
-    "Name": "monster.maka_maka_youth.name",
-    "Description": "monster.maka_maka_youth.desc",
-    "Type": 4,
-    "Level": 4,
-    "Exp": 36,
-    "Stats": {
-      "Strength": 48,
-      "Dexterity": 55,
-      "Endurance": 38,
-      "Intelligence": 35,
-      "Spirit": 42,
-      "BaseHealth": 18,
-      "BaseMana": 10
-    }
-  },
-  {
-    "Id": 36,
-    "Name": "monster.mudcrawler.name",
-    "Description": "monster.mudcrawler.desc",
-    "Type": 0,
-    "Level": 2,
-    "Exp": 20,
-    "Stats": {
-      "Strength": 28,
-      "Dexterity": 30,
-      "Endurance": 28,
-      "Intelligence": 12,
-      "Spirit": 20,
-      "BaseHealth": 12,
-      "BaseMana": 0
-    }
-  },
-  {
-    "Id": 37,
-    "Name": "monster.swamp_leech.name",
-    "Description": "monster.swamp_leech.desc",
-    "Type": 0,
-    "Level": 3,
-    "Exp": 26,
-    "Stats": {
-      "Strength": 20,
-      "Dexterity": 42,
-      "Endurance": 22,
-      "Intelligence": 15,
-      "Spirit": 28,
-      "BaseHealth": 10,
-      "BaseMana": 0
-    }
-  },
-  {
-    "Id": 38,
-    "Name": "monster.bramble_hound.name",
-    "Description": "monster.bramble_hound.desc",
-    "Type": 0,
-    "Level": 5,
-    "Exp": 40,
-    "Stats": {
-      "Strength": 65,
-      "Dexterity": 75,
-      "Endurance": 50,
-      "Intelligence": 35,
-      "Spirit": 48,
-      "BaseHealth": 22,
-      "BaseMana": 0
-    }
-  }
 ]
