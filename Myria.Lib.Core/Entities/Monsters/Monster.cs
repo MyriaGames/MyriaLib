@@ -14,6 +14,15 @@ namespace Myria.Lib.Core.Entities.Monsters
         public int MaxLoot { get; set; } = 75;
         public List<Item> LootTable { get; set; } = new(); // optional overrides
         public List<UniqueLootEntry> UniqueLootTable { get; set; } = new();
+
+        /// <summary>
+        /// Seconds before this monster reappears after being killed — only meaningful to a
+        /// real-time client with a persistent world (see Myria.Mono.World.WorldMonster);
+        /// turn-based clients roll a fresh monster per fight and never read this. Defaults to a
+        /// fast, roughly-uniform respawn so existing/mod-added monster data that omits it still
+        /// behaves reasonably; individual monsters can set a longer value in monsters.json.
+        /// </summary>
+        public float RespawnSeconds { get; set; } = 5f;
         public bool DropsCorpse =>
             Type != MonsterType.Spirit && Type != MonsterType.Shadow;
 
@@ -44,6 +53,7 @@ namespace Myria.Lib.Core.Entities.Monsters
             MaxLoot          = MaxLoot,
             LootTable        = new List<Item>(LootTable),
             UniqueLootTable  = new List<UniqueLootEntry>(UniqueLootTable),
+            RespawnSeconds   = RespawnSeconds,
         };
     }
 

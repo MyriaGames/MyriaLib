@@ -31,6 +31,16 @@ namespace Myria.Lib.Core.Entities.Skills
 
         public int MinLevel { get; set; } = 1;
 
+        /// <summary>
+        /// How far the caster can be from the target and still activate this skill, in the same
+        /// world units a real-time client's positions use (turn-based clients ignore this
+        /// entirely — see Myria.Mono.Screens.WorldScreen). 0 (the default) means "use the
+        /// caster's class-level default reach" rather than a literal zero range, so existing
+        /// skill data needs no changes: only skills meant to reach further (or less far) than
+        /// their class's usual attack range need an explicit value here.
+        /// </summary>
+        public float Range { get; set; } = 0f;
+
         // Extra aggro generated when this skill is cast, on top of the base +1.
         // Default 0 means the skill generates the standard 1.0 aggro.
         public float AggroModifier { get; set; } = 0f;
@@ -72,6 +82,7 @@ namespace Myria.Lib.Core.Entities.Skills
                 ScalingFactor = ScalingFactor + scalingFactorDelta,
                 StatToScaleFrom = StatToScaleFrom,
                 MinLevel = MinLevel,
+                Range = Range,
                 AggroModifier = AggroModifier,
                 Effects = new List<SkillEffectEntry>(Effects),
                 Effect = Effect,

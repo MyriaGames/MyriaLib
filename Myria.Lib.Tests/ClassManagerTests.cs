@@ -42,6 +42,36 @@ public class ClassManagerTests
         }
     }
 
+    /// <summary>
+    /// AttackRange (added for Myria.Mono's ranged-class combat reach) defaults to a melee-typical
+    /// value when a class's JSON entry doesn't set it — this is what keeps every class unaffected
+    /// by the field's addition unless classes.json explicitly opts a class into a longer reach,
+    /// so existing/mod-added classes never accidentally end up with zero range.
+    /// </summary>
+    [Fact]
+    public void AttackRange_DefaultsToMeleeReach_WhenNotSetInData()
+    {
+        WithClassProfiles(new List<ClassProfile>
+        {
+            new() { Class = "Knight" }, // no AttackRange set
+        }, () =>
+        {
+            Assert.Equal(2.4f, ClassProfile.All["Knight"].AttackRange);
+        });
+    }
+
+    [Fact]
+    public void AttackRange_UsesTheValueGivenInData_ForRangedClasses()
+    {
+        WithClassProfiles(new List<ClassProfile>
+        {
+            new() { Class = "Archer", AttackRange = 10f },
+        }, () =>
+        {
+            Assert.Equal(10f, ClassProfile.All["Archer"].AttackRange);
+        });
+    }
+
     [Fact]
     public void GetClassGroup_ReturnsRegisteredGroup_OrPhysicalDefaultForUnknownClass()
     {

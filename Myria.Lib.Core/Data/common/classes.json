@@ -10,7 +10,8 @@
     },
     "hpPerLevel": 100,
     "manaPerLevel": 40,
-    "group": "RangerRogue"
+    "group": "RangerRogue",
+    "attackRange": 10.0
   },
   {
     "class": "Hunter",
@@ -23,7 +24,8 @@
     },
     "hpPerLevel": 100,
     "manaPerLevel": 35,
-    "group": "RangerRogue"
+    "group": "RangerRogue",
+    "attackRange": 10.0
   },
   {
     "class": "Knight",
@@ -101,7 +103,8 @@
     },
     "hpPerLevel": 80,
     "manaPerLevel": 60,
-    "group": "Mage"
+    "group": "Mage",
+    "attackRange": 8.0
   },
   {
     "class": "ArcanMage",
@@ -114,7 +117,8 @@
     },
     "hpPerLevel": 50,
     "manaPerLevel": 65,
-    "group": "Mage"
+    "group": "Mage",
+    "attackRange": 8.0
   },
   {
     "class": "Druid",
@@ -153,6 +157,7 @@
     },
     "hpPerLevel": 120,
     "manaPerLevel": 35,
-    "group": "Mage"
+    "group": "Mage",
+    "attackRange": 8.0
   }
 ]
