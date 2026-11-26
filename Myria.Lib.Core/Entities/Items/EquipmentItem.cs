@@ -8,6 +8,16 @@ namespace Myria.Lib.Core.Entities.Items
         public string SlotType { get; set; } = Myria.Lib.Core.Systems.Enums.EquipmentType.Weapon;
         public override int BuyPrice { get; set; } = 300;
 
+        /// <summary>Equipment doesn't stack: each piece carries its own upgrade level and craft
+        /// quality. (It used to fall back to Item's default of 50, and since stacking only compared
+        /// ids, a +3 sword merged into a +0 sword's stack and lost its upgrade.)</summary>
+        public override int MaxStackSize { get; set; } = 1;
+
+        /// <summary>Even with a MaxStackSize above 1 (mod data), only identical pieces stack.</summary>
+        public override bool CanStackWith(Item other) =>
+            base.CanStackWith(other) && other is EquipmentItem e
+            && e.UpgradeLevel == UpgradeLevel && e.CraftQuality.Equals(CraftQuality);
+
         /// <summary>Base bonus values as defined in item data (before upgrades).</summary>
         public EquipmentBonuses BaseStats { get; set; }
 

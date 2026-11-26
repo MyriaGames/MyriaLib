@@ -149,6 +149,7 @@ namespace Myria.Lib.Core.Services.Builder
                 Name             = def.Name,
                 Description      = def.Description,
                 BuyPrice         = def.BuyPrice,
+                MaxStackSize     = Math.Max(1, def.MaxStackSize), // never Item's default of 50 (equipment carries its own upgrade state)
                 SlotType         = EquipmentType.FromLegacyInt.GetValueOrDefault(def.SlotType, EquipmentType.Weapon),
                 ToolType         = def.ToolType,
                 IsTool           = def.ToolType != null,

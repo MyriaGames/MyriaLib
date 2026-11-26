@@ -186,6 +186,7 @@ namespace Myria.Lib.Core.Services
             SkillSlotService.ResolveSlots(character);
             SkillSlotService.MigrateIfEmpty(character);
             Myria.Lib.Core.Services.Manager.RaceMigration.Apply(character); // v0.3: retired races -> lore races
+            character.Inventory.SplitOverfullStacks(); // repairs equipment merged by the old stack-to-50 bug
         }
     }
 }

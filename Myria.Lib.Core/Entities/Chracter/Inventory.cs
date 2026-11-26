@@ -396,6 +396,27 @@ namespace Myria.Lib.Core.Entities.Characters
             Restack();
         }
 
+        /// <summary>
+        /// Splits stacks larger than their item allows back into single items - repairs saves written
+        /// while equipment wrongly stacked to 50 (each piece of a merged stack comes back with the
+        /// stack's upgrade state; whatever a merge already overwrote can't be recovered). Returns how
+        /// many items were split off. Called on every character load path.
+        /// </summary>
+        public int SplitOverfullStacks()
+        {
+            int split = 0;
+            foreach (var item in Items.Where(i => i is EquipmentItem && i.StackSize > Math.Max(1, i.MaxStackSize)).ToList())
+            {
+                int index = Items.IndexOf(item);
+                int extra = item.StackSize - 1;
+                item.StackSize = 1;
+                for (int n = 0; n < extra; n++)
+                    Items.Insert(index + 1, item.CloneOne());
+                split += extra;
+            }
+            return split;
+        }
+
         public void Restack()
         {
             var grouped = Items
