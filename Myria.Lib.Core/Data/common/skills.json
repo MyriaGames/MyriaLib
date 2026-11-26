@@ -94,7 +94,7 @@
     "Type": "Physical",
     "Target": "Self",
     "ScalingFactor": 2.1,
-    "StatToScaleFrom": "DEX",
+    "StatToScaleFrom": "STR",
     "MinLevel": 1,
     "AggroModifier": 0,
     "Effects": [

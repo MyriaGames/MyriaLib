@@ -2,13 +2,13 @@
   {
     "class": "Archer",
     "statGrowth": {
-      "STR": 6,
+      "STR": 7,
       "DEX": 4,
       "END": 3,
-      "INT": 2,
+      "INT": 1,
       "SPR": 2
     },
-    "hpPerLevel": 100,
+    "hpPerLevel": 120,
     "manaPerLevel": 40,
     "group": "RangerRogue",
     "attackRange": 10.0
@@ -16,27 +16,27 @@
   {
     "class": "Hunter",
     "statGrowth": {
-      "STR": 4,
-      "DEX": 6,
+      "STR": 3,
+      "DEX": 7,
       "END": 2,
       "INT": 2,
-      "SPR": 4
+      "SPR": 3
     },
-    "hpPerLevel": 100,
-    "manaPerLevel": 35,
+    "hpPerLevel": 110,
+    "manaPerLevel": 45,
     "group": "RangerRogue",
     "attackRange": 10.0
   },
   {
     "class": "Knight",
     "statGrowth": {
-      "STR": 1,
+      "STR": 3,
       "DEX": 2,
       "END": 8,
       "INT": 0,
-      "SPR": 3
+      "SPR": 4
     },
-    "hpPerLevel": 200,
+    "hpPerLevel": 190,
     "manaPerLevel": 5,
     "group": "Physical"
   },
@@ -44,13 +44,13 @@
     "class": "Fighter",
     "statGrowth": {
       "STR": 7,
-      "DEX": 2,
+      "DEX": 3,
       "END": 4,
       "INT": 1,
-      "SPR": 3
+      "SPR": 2
     },
-    "hpPerLevel": 150,
-    "manaPerLevel": 15,
+    "hpPerLevel": 160,
+    "manaPerLevel": 20,
     "group": "Physical"
   },
   {
@@ -58,12 +58,12 @@
     "statGrowth": {
       "STR": 9,
       "DEX": 3,
-      "END": 2,
-      "INT": 1,
+      "END": 3,
+      "INT": 0,
       "SPR": 2
     },
-    "hpPerLevel": 170,
-    "manaPerLevel": 5,
+    "hpPerLevel": 180,
+    "manaPerLevel": 10,
     "group": "Physical"
   },
   {
@@ -72,24 +72,24 @@
       "STR": 2,
       "DEX": 1,
       "END": 4,
-      "INT": 3,
-      "SPR": 5
+      "INT": 4,
+      "SPR": 6
     },
-    "hpPerLevel": 180,
-    "manaPerLevel": 10,
+    "hpPerLevel": 160,
+    "manaPerLevel": 20,
     "group": "DivineHybrid"
   },
   {
     "class": "Rogue",
     "statGrowth": {
       "STR": 4,
-      "DEX": 9,
+      "DEX": 8,
       "END": 2,
       "INT": 1,
-      "SPR": 3
+      "SPR": 2
     },
-    "hpPerLevel": 120,
-    "manaPerLevel": 20,
+    "hpPerLevel": 130,
+    "manaPerLevel": 35,
     "group": "RangerRogue"
   },
   {
@@ -112,11 +112,11 @@
       "STR": 0,
       "DEX": 2,
       "END": 1,
-      "INT": 11,
-      "SPR": 3
+      "INT": 10,
+      "SPR": 4
     },
-    "hpPerLevel": 50,
-    "manaPerLevel": 65,
+    "hpPerLevel": 60,
+    "manaPerLevel": 70,
     "group": "Mage",
     "attackRange": 8.0
   },
@@ -129,21 +129,21 @@
       "INT": 5,
       "SPR": 5
     },
-    "hpPerLevel": 80,
-    "manaPerLevel": 50,
+    "hpPerLevel": 90,
+    "manaPerLevel": 55,
     "group": "DivineHybrid"
   },
   {
     "class": "SoulsKnight",
     "statGrowth": {
-      "STR": 1,
+      "STR": 3,
       "DEX": 1,
       "END": 6,
       "INT": 1,
       "SPR": 6
     },
-    "hpPerLevel": 180,
-    "manaPerLevel": 10,
+    "hpPerLevel": 170,
+    "manaPerLevel": 15,
     "group": "DivineHybrid"
   },
   {
@@ -153,10 +153,10 @@
       "DEX": 2,
       "END": 3,
       "INT": 6,
-      "SPR": 4
+      "SPR": 5
     },
-    "hpPerLevel": 120,
-    "manaPerLevel": 35,
+    "hpPerLevel": 110,
+    "manaPerLevel": 45,
     "group": "Mage",
     "attackRange": 8.0
   }

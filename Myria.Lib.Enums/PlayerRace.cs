@@ -9,15 +9,21 @@ namespace Myria.Lib.Core.Systems.Enums
         public const string Rotuka = "Rotuka";
         public const string Iymva  = "Iymva";
         public const string Myralu = "Myralu";
+        public const string Elf    = "Elf";
+        public const string Faerie = "Faerie";
+        public const string Aoyu   = "Aoyu";
+        public const string Amato  = "Amato";
+
+        /// <summary>Retired in v0.3 (not part of the story's peoples); characters of these races are
+        /// moved to a lore race on load - see RaceMigration.</summary>
         public const string Zalu   = "Zalu";
         public const string Gavon  = "Gavon";
         public const string Gamato = "Gamato";
-        public const string Amato  = "Amato";
 
-        /// <summary>All built-in race IDs.</summary>
+        /// <summary>All built-in, playable race IDs.</summary>
         public static readonly IReadOnlyList<string> AllBuiltIn = new[]
         {
-            Rotuka, Iymva, Myralu, Zalu, Gavon, Gamato, Amato
+            Rotuka, Iymva, Myralu, Elf, Faerie, Aoyu, Amato
         };
 
         /// <summary>Maps the old enum integer values to string IDs (for save-file migration).</summary>

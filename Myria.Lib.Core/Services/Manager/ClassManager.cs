@@ -33,6 +33,19 @@ namespace Myria.Lib.Core.Services.Manager
             return !profile.ForbiddenClasses.Contains(cls);
         }
 
+        /// <summary>
+        /// Why <paramref name="race"/> can't take <paramref name="cls"/>, already localized - the race's
+        /// own reason ("race.{race}.restriction", e.g. Amato have no inner magic) or a generic line.
+        /// Null when the class is allowed.
+        /// </summary>
+        public static string? GetRestrictionReason(string race, string cls)
+        {
+            if (IsClassAllowed(race, cls)) return null;
+            string key = $"race.{race}.restriction";
+            string text = Myria.Lib.Core.Systems.Localization.T(key);
+            return text == key ? Myria.Lib.Core.Systems.Localization.T("pg.class.forbidden") : text;
+        }
+
         public static long GetClassXp(Character character, string cls)
             => character.ClassXp.TryGetValue(cls, out var xp) ? xp : 0L;
 

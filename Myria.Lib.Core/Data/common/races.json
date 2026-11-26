@@ -15,52 +15,47 @@
     "baseManaBonus": 10,
     "statGrowth": { "STR": 3, "DEX": 2, "END": 2, "INT": 0, "SPR": 1 },
     "hpPerLevel": 7,
-    "manaPerLevel": 1,
-    "forbiddenClasses": [ "RunicMage" ]
+    "manaPerLevel": 1
   },
   {
     "race": "Iymva",
-    "baseStatBonus": { "STR": 3, "DEX": 7, "END": 2, "INT": 3, "SPR": 4 },
+    "baseStatBonus": { "STR": 3, "DEX": 7, "END": 2, "INT": 3, "SPR": 3 },
     "baseHpBonus": 20,
     "baseManaBonus": 15,
     "statGrowth": { "STR": 2, "DEX": 3, "END": 1, "INT": 1, "SPR": 1 },
     "hpPerLevel": 4,
-    "manaPerLevel": 3,
-    "forbiddenClasses": [ "RunicMage" ]
+    "manaPerLevel": 3
   },
   {
-    "race": "Zalu",
-    "baseStatBonus": { "STR": 6, "DEX": 1, "END": 7, "INT": 2, "SPR": 3 },
-    "baseHpBonus": 25,
-    "baseManaBonus": 10,
-    "statGrowth": { "STR": 2, "DEX": 1, "END": 2, "INT": 1, "SPR": 2 },
-    "hpPerLevel": 5,
-    "manaPerLevel": 2,
-    "forbiddenClasses": [ "RunicMage" ]
-  },
-  {
-    "race": "Gavon",
-    "baseStatBonus": { "STR": -3, "DEX": 6, "END": 1, "INT": 8, "SPR": 6 },
-    "baseHpBonus": 10,
-    "baseManaBonus": 30,
-    "statGrowth": { "STR": 0, "DEX": 2, "END": 1, "INT": 3, "SPR": 2 },
-    "hpPerLevel": 3,
-    "manaPerLevel": 6,
-    "forbiddenClasses": [ "RunicMage" ]
-  },
-  {
-    "race": "Gamato",
-    "baseStatBonus": { "STR": 3, "DEX": 4, "END": 4, "INT": 4, "SPR": 3 },
-    "baseHpBonus": 15,
+    "race": "Elf",
+    "baseStatBonus": { "STR": 2, "DEX": 5, "END": 2, "INT": 5, "SPR": 4 },
+    "baseHpBonus": 20,
     "baseManaBonus": 25,
     "statGrowth": { "STR": 1, "DEX": 2, "END": 1, "INT": 2, "SPR": 2 },
+    "hpPerLevel": 4,
+    "manaPerLevel": 4
+  },
+  {
+    "race": "Faerie",
+    "baseStatBonus": { "STR": -3, "DEX": 7, "END": 0, "INT": 6, "SPR": 8 },
+    "baseHpBonus": 5,
+    "baseManaBonus": 35,
+    "statGrowth": { "STR": 0, "DEX": 2, "END": 1, "INT": 2, "SPR": 3 },
+    "hpPerLevel": 2,
+    "manaPerLevel": 7
+  },
+  {
+    "race": "Aoyu",
+    "baseStatBonus": { "STR": 3, "DEX": 3, "END": 4, "INT": 3, "SPR": 5 },
+    "baseHpBonus": 25,
+    "baseManaBonus": 20,
+    "statGrowth": { "STR": 1, "DEX": 1, "END": 2, "INT": 1, "SPR": 3 },
     "hpPerLevel": 5,
-    "manaPerLevel": 3,
-    "forbiddenClasses": [ "RunicMage" ]
+    "manaPerLevel": 3
   },
   {
     "race": "Amato",
-    "baseStatBonus": { "STR": 4, "DEX": 3, "END": 3, "INT": 3, "SPR": 3 },
+    "baseStatBonus": { "STR": 5, "DEX": 3, "END": 4, "INT": 3, "SPR": 3 },
     "baseHpBonus": 25,
     "baseManaBonus": 25,
     "statGrowth": { "STR": 2, "DEX": 1, "END": 2, "INT": 1, "SPR": 2 },
