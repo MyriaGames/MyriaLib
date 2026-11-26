@@ -216,6 +216,7 @@
     "masterJobId": "herbalist",
     "services": [
       "learn_job",
+      "craft",
       "shop_general"
     ]
   },

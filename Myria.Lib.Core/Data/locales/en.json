@@ -765,6 +765,7 @@
   "npc.craft.success": "Successfully crafted {0}x {1}",
   "npc.craft.inventoryFull": "Inventory full! Materials returned.",
   "npc.craft.fail": "Failed to craft item",
+  "pg.jobs.craft.not_allowed": "Your active job can't craft away from its master.",
   "npc.jobmaster.title": "Job Training",
   "npc.jobmaster.work_as": "Work as {0}",
   "npc.jobmaster.stop_working": "Stop Working",

@@ -15,7 +15,8 @@
     "Id": "herbalist",
     "Name": "job.herbalist.name",
     "Description": "job.herbalist.desc",
-    "Type": "Gathering"
+    "Type": "Gathering",
+    "AllowJobPageCrafting": true
   },
   {
     "Id": "blacksmith",

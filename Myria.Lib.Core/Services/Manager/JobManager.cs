@@ -2,6 +2,7 @@ using System.Text.Json;
 using Myria.Lib.Core.Entities.Items;
 using Myria.Lib.Core.Entities.Jobs;
 using Myria.Lib.Core.Entities.Characters;
+using Myria.Lib.Core.Entities.NPCs;
 
 namespace Myria.Lib.Core.Services.Manager
 {
@@ -26,6 +27,21 @@ namespace Myria.Lib.Core.Services.Manager
             => _allJobs.FirstOrDefault(j => j.Id == id);
 
         public static IReadOnlyList<Job> GetAll() => _allJobs;
+
+        /// <summary>
+        /// The NPC whose recipes the Jobs page may craft for <paramref name="jobId"/> - its master
+        /// NPC (<see cref="Npc.MasterJobId"/>) that actually has recipes - or null when the job
+        /// isn't opted in via <see cref="Job.AllowJobPageCrafting"/> (or has no such NPC).
+        /// </summary>
+        public static Npc? GetJobPageCraftNpc(string? jobId)
+        {
+            if (string.IsNullOrEmpty(jobId) || GetById(jobId) is not { AllowJobPageCrafting: true })
+                return null;
+
+            return NpcService.AllNpcs.FirstOrDefault(n =>
+                string.Equals(n.MasterJobId, jobId, StringComparison.OrdinalIgnoreCase)
+                && CraftingService.GetRecipes(n.Id).Length > 0);
+        }
 
         public static TimeSpan JobChangeCooldown         { get; set; } = TimeSpan.FromDays(7);
         public static long     FameTickPerDay            { get; set; } = 5;

@@ -399,5 +399,18 @@
         }
       ]
     }
+  ],
+  "herbalist_master": [
+    {
+      "OutputId": "t1_healing_potion",
+      "XpReward": 5,
+      "RequiredKnowledgeLevel": 1,
+      "Ingredients": [
+        {
+          "ItemId": "sunleaf",
+          "Amount": 2
+        }
+      ]
+    }
   ]
 }

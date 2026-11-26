@@ -369,6 +369,7 @@
   "npc.craft.success": "Erfolgreich {0}x {1} hergestellt",
   "npc.craft.inventoryFull": "Inventar voll! Material zurückgegeben.",
   "npc.craft.fail": "Herstellung fehlgeschlagen",
+  "pg.jobs.craft.not_allowed": "Dein aktiver Beruf kann nicht fern seines Meisters herstellen.",
   "item.t1_healing_potion": "Einfacher Heiltrank",
   "item.t1_mana_potion": "Einfacher Manatrank",
   "item.soulbound_phylactery": "Seelengebundenes Phylakterium",
