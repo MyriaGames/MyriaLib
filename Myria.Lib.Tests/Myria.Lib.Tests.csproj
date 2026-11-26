@@ -27,6 +27,10 @@
     <Content Include="..\Myria.Lib.Core\Data\common\**\*.json" LinkBase="Data\common\">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <!-- Locale strings, for tests that check player-facing text (e.g. dynamic quest titles). -->
+    <Content Include="..\Myria.Lib.Core\Data\locales\*.json" LinkBase="Data\locales\">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
 </Project>

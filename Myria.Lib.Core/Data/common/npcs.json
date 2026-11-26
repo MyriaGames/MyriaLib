@@ -243,5 +243,15 @@
       "craft",
       "shop_general"
     ]
+  },
+  {
+    "id": "adventurers_guild",
+    "nameKey": "game.npc.adventurers_guild.name",
+    "descriptionKey": "game.npc.adventurers_guild.desc",
+    "type": 14,
+    "services": [
+      "talk",
+      "adventurers_guild"
+    ]
   }
 ]

@@ -83,6 +83,21 @@ namespace Myria.Lib.Core.Entities.NPCs
         public string? JobFameRewardJobId        { get; set; }
         public long    JobFameRewardAmount       { get; set; }
 
+        // ── Dynamic quests (v0.3 quest rework) ───────────────────────────────────
+        /// <summary>Generated from the world state (an NPC running low, a room overrun) rather than
+        /// authored in quests.json; its Id is "dyn.&lt;grantId&gt;" and it isn't repeatable or saved as completed.</summary>
+        public bool IsDynamic { get; set; }
+        /// <summary>Kill objectives only count in this room (dynamic kill quests are about one room's population).</summary>
+        public int? RequiredRoomId { get; set; }
+        /// <summary>Can only be handed in at <see cref="ReturnNpcIdResolved"/> in this room (NPC ids are
+        /// templates reused across rooms; a fetch quest belongs to one NPC instance).</summary>
+        public int? ReturnRoomId { get; set; }
+        /// <summary>Format arguments for <see cref="Name"/>/<see cref="Description"/> when those are
+        /// localization keys with placeholders (dynamic quests). Args that are themselves keys
+        /// (item./monster./room./game.npc.) are localized too - see QuestText.</summary>
+        public List<string> NameArgs { get; set; } = new();
+        public List<string> DescriptionArgs { get; set; } = new();
+
         /// <summary>Returns a fresh copy of the quest template ready to be accepted.</summary>
         public Quest Clone() => new Quest
         {
@@ -122,6 +137,11 @@ namespace Myria.Lib.Core.Entities.NPCs
             JobKnowledgeRewardAmount = JobKnowledgeRewardAmount,
             JobFameRewardJobId       = JobFameRewardJobId,
             JobFameRewardAmount      = JobFameRewardAmount,
+            IsDynamic                = IsDynamic,
+            RequiredRoomId           = RequiredRoomId,
+            ReturnRoomId             = ReturnRoomId,
+            NameArgs                 = new List<string>(NameArgs),
+            DescriptionArgs          = new List<string>(DescriptionArgs),
         };
 
         /// <summary>Grants any items listed in <see cref="AcceptItems"/> to the player's inventory.</summary>

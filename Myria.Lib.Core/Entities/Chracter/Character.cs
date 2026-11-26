@@ -121,6 +121,9 @@ namespace Myria.Lib.Core.Entities.Characters
         public int PvpWins { get; set; }
         public int PvpLosses { get; set; }
 
+        // ── Adventurers' Guild (v0.3) - separate from player guilds; members get bounties ──
+        public bool AdventurersGuildMember { get; set; }
+
         // ── Runic Magic (WPF / Unity — magic classes) ────────────────────────────
         /// <summary>All runes the player knows, including those gained via word combinations.</summary>
         public List<CompositeRune> KnownRunes { get; set; } = new();

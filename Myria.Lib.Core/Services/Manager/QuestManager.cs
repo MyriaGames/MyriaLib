@@ -80,6 +80,9 @@ namespace Myria.Lib.Core.Services.Manager
             {
                 if (!quest.RequiredKills.TryGetValue(monsterId, out int required))
                     continue;
+                // Room-bound objectives (dynamic kill quests) only count kills in that room.
+                if (quest.RequiredRoomId is int roomId && character.CurrentRoomId != roomId)
+                    continue;
 
                 if (!quest.KillProgress.ContainsKey(monsterId))
                     quest.KillProgress[monsterId] = 0;
@@ -221,7 +224,17 @@ namespace Myria.Lib.Core.Services.Manager
         }
 
         public static Quest? GetQuestById(string id) =>
-            _allQuests.FirstOrDefault(q => q.Id == id);
+            _allQuests.FirstOrDefault(q => q.Id == id)
+            ?? (_dynamic.TryGetValue(id, out var dyn) ? dyn : null);
+
+        // ── Dynamic quests (v0.3) ────────────────────────────────────────────
+        // Generated quests aren't in quests.json, but everything that rebuilds a character's active
+        // quests resolves them by id through GetQuestById - so their definitions are registered here:
+        // by the server for every open grant, by clients for the ones their character holds.
+        private static readonly System.Collections.Concurrent.ConcurrentDictionary<string, Quest> _dynamic = new();
+
+        public static void RegisterDynamic(Quest quest) => _dynamic[quest.Id] = quest;
+        public static void UnregisterDynamic(string id) => _dynamic.TryRemove(id, out _);
 
         /// <summary>Quests this NPC can give that the player is currently eligible to accept.</summary>
         public static List<Quest> GetAcceptableForNpc(Character character, string npcId, int partySize = 1)
@@ -234,7 +247,8 @@ namespace Myria.Lib.Core.Services.Manager
         {
             UpdateItemProgress(character);   // what's in the bag now decides, not what was picked up once
             return character.ActiveQuests
-                .Where(q => q.Status == QuestStatus.Completed && q.ReturnNpcIdResolved == npcId)
+                .Where(q => q.Status == QuestStatus.Completed && q.ReturnNpcIdResolved == npcId
+                            && (q.ReturnRoomId is not int room || room == character.CurrentRoomId))
                 .ToList();
         }
     }

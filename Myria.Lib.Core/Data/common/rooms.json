@@ -5,6 +5,7 @@
     "Description": "room.royas.desc",
     "IsCity": true,
     "Npcs": [
+      "adventurers_guild",
       "healer_default",
       "smith_default",
       "villager_ceralith",
@@ -140,6 +141,7 @@
     "Description": "room.hydea.center.desc",
     "IsCity": true,
     "Npcs": [
+      "adventurers_guild",
       "healer_default",
       "trader_default",
       "artificer_default"
@@ -533,6 +535,7 @@
     "Description": "room.gerlyas.desc",
     "IsCity": true,
     "Npcs": [
+      "adventurers_guild",
       "healer_default",
       "villager_default"
     ],
@@ -1197,6 +1200,7 @@
     "Description": "room.xarra.eastern_gate.desc",
     "IsCity": true,
     "Npcs": [
+      "adventurers_guild",
       "villager_default"
     ],
     "RequirementType": 1,

@@ -135,6 +135,23 @@ namespace Myria.Lib.Core.Models.Dto
 
     public record StartPvpResult(bool Success, string? Reason, PvpSnapshot? Snapshot);
 
+    // ── Dynamic quests (v0.3 quest rework) ──────────────────────────────────
+
+    /// <summary>A generated quest's full definition - clients can't look these up in quests.json, so
+    /// the server sends them (on load for held quests, on offer/accept for new ones). See
+    /// DynamicQuests.ToDto/FromDto.</summary>
+    public record DynamicQuestDto(
+        string Id,
+        string Name, List<string> NameArgs,
+        string Description, List<string> DescriptionArgs,
+        string GiverNpcId, string ReturnNpcId, int? ReturnRoomId, int? RequiredRoomId,
+        Dictionary<int, int> RequiredKills, Dictionary<string, int> RequiredItems,
+        int RewardXp, int RewardGold);
+
+    /// <summary>A quest an NPC is offering right now. Accept by sending Token back; the size may be
+    /// recomputed at that moment if others accepted in between.</summary>
+    public record DynamicQuestOfferDto(string Token, DynamicQuestDto Preview);
+
     public record StartGroupCombatResult(
         bool Success,
         string? Reason,

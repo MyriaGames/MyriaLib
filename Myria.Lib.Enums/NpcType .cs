@@ -15,7 +15,8 @@
         Miner,
         Herbalist,
         Alchemist,
-        Cook
+        Cook,
+        AdventurersGuild // v0.3: the Adventurers' Guild house (bounties); appended so existing ids keep their numbers
     }
 
 }
