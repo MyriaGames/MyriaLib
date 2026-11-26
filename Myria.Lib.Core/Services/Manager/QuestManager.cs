@@ -37,7 +37,10 @@ namespace Myria.Lib.Core.Services.Manager
         /// </summary>
         public static void UpdateItemProgress(Character character)
         {
-            foreach (var quest in character.ActiveQuests.Where(q => q.Status == QuestStatus.InProgress))
+            // Completed quests too: items sold, traded away or used up after the counter was full must
+            // count down again (and the quest go back to in progress) - item progress is "how many you
+            // have", not "how many you ever picked up".
+            foreach (var quest in character.ActiveQuests.Where(q => q.Status is QuestStatus.InProgress or QuestStatus.Completed))
             {
                 foreach (var itemReq in quest.RequiredItems)
                 {
@@ -45,8 +48,24 @@ namespace Myria.Lib.Core.Services.Manager
                     quest.ItemProgress[itemReq.Key] = Math.Min(owned, itemReq.Value);
                 }
 
-                TryCompleteQuest(quest);
+                RefreshStatus(quest);
             }
+        }
+
+        /// <summary>
+        /// Starts <paramref name="template"/> for <paramref name="character"/>: adds a fresh copy to the active
+        /// quests, hands out its accept items and counts items the character already carries. The one way to
+        /// accept a quest - on the server and in the clients - so a quest accepted with the items already in
+        /// the bag doesn't show 0/N until something new is picked up.
+        /// </summary>
+        public static Quest StartQuest(Character character, Quest template)
+        {
+            var clone = template.Clone();
+            clone.Status = clone.IsTalkOnly ? QuestStatus.Completed : QuestStatus.InProgress;
+            character.ActiveQuests.Add(clone);
+            clone.GrantAcceptItems(character);
+            UpdateItemProgress(character);
+            return clone;
         }
 
         /// <summary>
@@ -80,13 +99,25 @@ namespace Myria.Lib.Core.Services.Manager
         /// </summary>
         private static void TryCompleteQuest(Quest quest)
         {
-            bool allKillsDone = quest.RequiredKills.All(rk =>
-                quest.KillProgress.TryGetValue(rk.Key, out int kills) && kills >= rk.Value);
-            bool allItemsDone = quest.RequiredItems.All(ri =>
-                quest.ItemProgress.TryGetValue(ri.Key, out int items) && items >= ri.Value);
-
-            if (allKillsDone && allItemsDone)
+            if (ObjectivesMet(quest))
                 quest.Status = QuestStatus.Completed;
+        }
+
+        /// <summary>True when every kill and item objective of <paramref name="quest"/> is met.</summary>
+        public static bool ObjectivesMet(Quest quest) =>
+            quest.RequiredKills.All(rk => quest.KillProgress.TryGetValue(rk.Key, out int kills) && kills >= rk.Value) &&
+            quest.RequiredItems.All(ri => quest.ItemProgress.TryGetValue(ri.Key, out int items) && items >= ri.Value);
+
+        /// <summary>
+        /// Sets an active quest's status from its counters - Completed when every objective is met, back to
+        /// InProgress when not. The clients take the server's counters (Character.ApplySyncedQuestProgress);
+        /// without this the status stayed what it was, so a quest showing 5/5 still couldn't be handed in.
+        /// Returned/not-started quests are left alone.
+        /// </summary>
+        public static void RefreshStatus(Quest quest)
+        {
+            if (quest.Status is QuestStatus.InProgress or QuestStatus.Completed)
+                quest.Status = ObjectivesMet(quest) ? QuestStatus.Completed : QuestStatus.InProgress;
         }
 
         public static void LoadQuests(string path = "Data/common/quests.json")
@@ -114,6 +145,15 @@ namespace Myria.Lib.Core.Services.Manager
                 .Where(q => character.Level >= q.RequiredLevel && CanAccept(q, character, partySize))
                 .ToList();
         }
+
+        /// <summary>
+        /// Every condition for accepting <paramref name="q"/> (level, prerequisites, not already done /
+        /// repeat limits, class, race, job, party). The same rules the quest lists use - and what the
+        /// realm server must check before accepting, which it didn't: completed quests could be
+        /// accepted and handed in again endlessly (security review 2026-11-26, A06 F5).
+        /// </summary>
+        public static bool IsAcceptable(Quest q, Character character, int partySize = 1)
+            => character.Level >= q.RequiredLevel && CanAccept(q, character, partySize);
 
         private static bool CanAccept(Quest q, Character character, int partySize = 1)
         {
@@ -191,9 +231,12 @@ namespace Myria.Lib.Core.Services.Manager
 
         /// <summary>Active completed quests the player can return to this NPC.</summary>
         public static List<Quest> GetReturnableForNpc(Character character, string npcId)
-            => character.ActiveQuests
+        {
+            UpdateItemProgress(character);   // what's in the bag now decides, not what was picked up once
+            return character.ActiveQuests
                 .Where(q => q.Status == QuestStatus.Completed && q.ReturnNpcIdResolved == npcId)
                 .ToList();
+        }
     }
 
 }

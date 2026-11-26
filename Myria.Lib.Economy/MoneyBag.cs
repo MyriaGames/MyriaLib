@@ -15,8 +15,11 @@ namespace Myria.Lib.Core.Entities.Characters
         public long Capacity { get; set; } = 300_000;
         public bool IsUnlimited => Capacity == long.MaxValue;
 
-        public bool CanAfford(long cost)  => Balance.BronzeTotal >= cost;
-        public bool CanHold(long amount)  => IsUnlimited || Balance.BronzeTotal + amount <= Capacity;
+        // Negative amounts are refused by every mutation: "spending" a negative cost used to credit it,
+        // and an overflowed price*quantity (player shop) turned into a ~9.2e18 credit that way
+        // (security review 2026-11-26, A06 F2). CanHold is written so a huge amount can't overflow.
+        public bool CanAfford(long cost)  => cost >= 0 && Balance.BronzeTotal >= cost;
+        public bool CanHold(long amount)  => amount >= 0 && (IsUnlimited || amount <= Capacity - Balance.BronzeTotal);
 
         public bool TryAdd(long amount)
         {

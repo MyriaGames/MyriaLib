@@ -320,7 +320,11 @@ namespace Myria.Lib.Core.Entities.Characters
         public void ApplyCharacterUpdate(CharacterUpdateDto update, string? source = null)
         {
             if (update.InventoryItems is not null)
+            {
                 Inventory.ApplySnapshot(update.InventoryItems, this);
+                // A snapshot replaces the bag without "item received" events - recount quest items.
+                Myria.Lib.Core.Services.Manager.QuestManager.UpdateItemProgress(this);
+            }
 
             if (update.Gold is long gold)
                 Money.SetBalance(gold);
@@ -398,6 +402,9 @@ namespace Myria.Lib.Core.Entities.Characters
                 if (quest is null) continue;
                 quest.KillProgress = new Dictionary<int, int>(p.KillProgress);
                 quest.ItemProgress = new Dictionary<string, int>(p.ItemProgress);
+                // The status follows the counters: online the kills happen on the server, so the client
+                // never completed the quest itself and the NPC wouldn't offer it for hand-in.
+                Myria.Lib.Core.Services.Manager.QuestManager.RefreshStatus(quest);
             }
         }
 
