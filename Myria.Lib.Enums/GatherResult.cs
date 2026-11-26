@@ -7,5 +7,6 @@ namespace Myria.Lib.Core.Systems.Enums
         Depleted,      // all gathers used up for this game-day
         NoTool,        // player lacks the required tool
         InventoryFull,
+        SkillTooLow,   // v0.3: every spot the player has the tool for needs a higher job skill level
     }
 }

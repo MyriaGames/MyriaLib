@@ -88,6 +88,58 @@
           "Amount": 3
         }
       ]
+    },
+    {
+      "OutputId": "silver_ingot",
+      "XpReward": 10,
+      "RequiredKnowledgeLevel": 8,
+      "Ingredients": [
+        {
+          "ItemId": "silver_ore",
+          "Amount": 2
+        }
+      ]
+    },
+    {
+      "OutputId": "mithril_ingot",
+      "XpReward": 20,
+      "RequiredKnowledgeLevel": 14,
+      "Ingredients": [
+        {
+          "ItemId": "mithril_ore",
+          "Amount": 2
+        }
+      ]
+    },
+    {
+      "OutputId": "silversteel_blade",
+      "XpReward": 180,
+      "RequiredKnowledgeLevel": 15,
+      "Ingredients": [
+        {
+          "ItemId": "silver_ingot",
+          "Amount": 6
+        },
+        {
+          "ItemId": "heartwood",
+          "Amount": 2
+        }
+      ]
+    },
+    {
+      "OutputId": "mithril_plate",
+      "XpReward": 220,
+      "RequiredKnowledgeLevel": 18,
+      "Ingredients": [
+        {
+          "ItemId": "mithril_ingot",
+          "Amount": 6
+        },
+        {
+          "ItemId": "raw_garnet",
+          "Amount": 1
+        }
+      ]
     }
   ],
   "leathersmith_default": [
@@ -147,6 +199,10 @@
         {
           "ItemId": "beast_fang",
           "Amount": 1
+        },
+        {
+          "ItemId": "pine_log",
+          "Amount": 2
         }
       ]
     },
@@ -181,6 +237,10 @@
         {
           "ItemId": "wind_whisper",
           "Amount": 2
+        },
+        {
+          "ItemId": "wood",
+          "Amount": 2
         }
       ]
     },
@@ -196,6 +256,25 @@
         {
           "ItemId": "shadow_remnant",
           "Amount": 2
+        }
+      ]
+    },
+    {
+      "OutputId": "heartwood_longbow",
+      "XpReward": 170,
+      "RequiredKnowledgeLevel": 14,
+      "Ingredients": [
+        {
+          "ItemId": "heartwood",
+          "Amount": 4
+        },
+        {
+          "ItemId": "cured_leather",
+          "Amount": 4
+        },
+        {
+          "ItemId": "silver_ingot",
+          "Amount": 1
         }
       ]
     }
@@ -273,6 +352,10 @@
         {
           "ItemId": "water_bead",
           "Amount": 2
+        },
+        {
+          "ItemId": "wood",
+          "Amount": 3
         }
       ]
     },
@@ -292,6 +375,21 @@
         {
           "ItemId": "wind_whisper",
           "Amount": 2
+        }
+      ]
+    },
+    {
+      "OutputId": "moonweave_robe",
+      "XpReward": 170,
+      "RequiredKnowledgeLevel": 14,
+      "Ingredients": [
+        {
+          "ItemId": "bolt_of_cloth",
+          "Amount": 6
+        },
+        {
+          "ItemId": "moonpetal",
+          "Amount": 4
         }
       ]
     }
@@ -398,6 +496,21 @@
           "Amount": 2
         }
       ]
+    },
+    {
+      "OutputId": "garnet_signet",
+      "XpReward": 160,
+      "RequiredKnowledgeLevel": 14,
+      "Ingredients": [
+        {
+          "ItemId": "silver_ingot",
+          "Amount": 2
+        },
+        {
+          "ItemId": "raw_garnet",
+          "Amount": 2
+        }
+      ]
     }
   ],
   "herbalist_master": [
@@ -408,6 +521,77 @@
       "Ingredients": [
         {
           "ItemId": "sunleaf",
+          "Amount": 2
+        }
+      ]
+    },
+    {
+      "OutputId": "t1_mana_potion",
+      "XpReward": 5,
+      "RequiredKnowledgeLevel": 1,
+      "Ingredients": [
+        {
+          "ItemId": "marshroot",
+          "Amount": 2
+        }
+      ]
+    },
+    {
+      "OutputId": "t2_healing_potion",
+      "XpReward": 15,
+      "RequiredKnowledgeLevel": 8,
+      "Ingredients": [
+        {
+          "ItemId": "moonpetal",
+          "Amount": 2
+        },
+        {
+          "ItemId": "sunleaf",
+          "Amount": 1
+        }
+      ]
+    },
+    {
+      "OutputId": "t2_mana_potion",
+      "XpReward": 15,
+      "RequiredKnowledgeLevel": 8,
+      "Ingredients": [
+        {
+          "ItemId": "glowcap",
+          "Amount": 2
+        },
+        {
+          "ItemId": "marshroot",
+          "Amount": 1
+        }
+      ]
+    },
+    {
+      "OutputId": "t3_healing_potion",
+      "XpReward": 30,
+      "RequiredKnowledgeLevel": 15,
+      "Ingredients": [
+        {
+          "ItemId": "frostbloom",
+          "Amount": 2
+        },
+        {
+          "ItemId": "moonpetal",
+          "Amount": 1
+        }
+      ]
+    },
+    {
+      "OutputId": "t3_mana_potion",
+      "XpReward": 30,
+      "RequiredKnowledgeLevel": 15,
+      "Ingredients": [
+        {
+          "ItemId": "frostbloom",
+          "Amount": 1
+        },
+        {
+          "ItemId": "glowcap",
           "Amount": 2
         }
       ]

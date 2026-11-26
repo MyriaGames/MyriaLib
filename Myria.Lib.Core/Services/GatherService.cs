@@ -37,50 +37,76 @@ namespace Myria.Lib.Core.Services
             if (room.GathersRemaining + bonus <= 0)
                 return new GatherOutcome(GatherResult.Depleted, null, 0, null, 0);
 
-            foreach (var spot in room.GatheringSpots)
+            var spot = PickSpot(character, room, out var failure);
+            if (spot is null)
+                return new GatherOutcome(failure, null, 0, null, 0);
+
+            if (!ItemFactory.TryCreateItem(spot.GatheredItemId, out var item))
+                return new GatherOutcome(GatherResult.NoSpots, null, 0, null, 0);
+
+            string jobId = JobFor(spot.Type);
+
+            long xpGranted = 0;
+            if (!string.IsNullOrEmpty(jobId))
             {
-                if (!string.IsNullOrEmpty(spot.RequiredToolId))
-                {
-                    bool hasTool = character.Inventory.Items.Any(i => i.Id == spot.RequiredToolId)
-                                || character.WeaponSlot?.Id == spot.RequiredToolId;
-                    if (!hasTool) continue;
-                }
-
-                if (!ItemFactory.TryCreateItem(spot.GatheredItemId, out var item))
-                    continue;
-
-                string jobId = spot.Type switch
-                {
-                    GatheringType.Ore  => "miner",
-                    GatheringType.Tree => "woodcutter",
-                    GatheringType.Herb => "herbalist",
-                    _                  => ""
-                };
-
-                long xpGranted = 0;
-                if (!string.IsNullOrEmpty(jobId))
-                {
-                    item.StackSize = JobManager.GetGatherAmount(character, jobId);
-                    xpGranted = 10;
-                }
-                if (item.StackSize <= 0)
-                    item.StackSize = 1;
-
-                // Capture before AddItem — it decrements StackSize during stack-merging.
-                int gatheredAmount = item.StackSize;
-
-                if (!character.Inventory.AddItem(item, character, "gather"))
-                    return new GatherOutcome(GatherResult.InventoryFull, null, 0, null, 0);
-
-                room.GathersRemaining--;
-                if (!string.IsNullOrEmpty(jobId))
-                    JobManager.GrantSkillXp(character, jobId, xpGranted);
-
-                DayCycleManager.AddTicks(GameTick.Gather);
-                return new GatherOutcome(GatherResult.Success, item.Id, gatheredAmount, jobId, xpGranted);
+                item.StackSize = JobManager.GetGatherAmount(character, jobId);
+                xpGranted = 10;
             }
+            if (item.StackSize <= 0)
+                item.StackSize = 1;
 
-            return new GatherOutcome(GatherResult.NoTool, null, 0, null, 0);
+            // Capture before AddItem — it decrements StackSize during stack-merging.
+            int gatheredAmount = item.StackSize;
+
+            if (!character.Inventory.AddItem(item, character, "gather"))
+                return new GatherOutcome(GatherResult.InventoryFull, null, 0, null, 0);
+
+            room.GathersRemaining--;
+            if (!string.IsNullOrEmpty(jobId))
+                JobManager.GrantSkillXp(character, jobId, xpGranted);
+
+            DayCycleManager.AddTicks(GameTick.Gather);
+            return new GatherOutcome(GatherResult.Success, item.Id, gatheredAmount, jobId, xpGranted);
+        }
+
+        /// <summary>The gathering job a spot type trains ("" for none).</summary>
+        public static string JobFor(string spotType) => spotType switch
+        {
+            GatheringType.Ore  => "miner",
+            GatheringType.Tree => "woodcutter",
+            GatheringType.Herb => "herbalist",
+            _                  => ""
+        };
+
+        /// <summary>Whether the character has the spot's tool (in the bag or equipped as weapon).</summary>
+        public static bool HasTool(Character character, GatheringSpot spot) =>
+            string.IsNullOrEmpty(spot.RequiredToolId)
+            || character.Inventory.Items.Any(i => i.Id == spot.RequiredToolId)
+            || character.WeaponSlot?.Id == spot.RequiredToolId;
+
+        /// <summary>Whether the character's job skill is high enough for the spot (v0.3).</summary>
+        public static bool HasSkill(Character character, GatheringSpot spot)
+        {
+            if (spot.RequiredSkillLevel <= 0) return true;
+            string jobId = JobFor(spot.Type);
+            return string.IsNullOrEmpty(jobId)
+                || JobXpService.GetLevel(JobManager.GetOrAdd(character, jobId).SkillXp) >= spot.RequiredSkillLevel;
+        }
+
+        /// <summary>
+        /// The spot one gather works: a random one among those the character has the tool and the
+        /// skill for, so a room with several resources yields all of them (it used to always take
+        /// the first workable spot). Null with the reason when none is workable - SkillTooLow if a
+        /// tool was there but the skill wasn't, else NoTool. Shared with the realm server.
+        /// </summary>
+        public static GatheringSpot? PickSpot(Character character, Room room, out GatherResult failure)
+        {
+            var withTool = room.GatheringSpots.Where(s => HasTool(character, s)).ToList();
+            var workable = withTool.Where(s => HasSkill(character, s)).ToList();
+            failure = workable.Count > 0 ? GatherResult.Success
+                    : withTool.Count > 0 ? GatherResult.SkillTooLow
+                    : GatherResult.NoTool;
+            return workable.Count == 0 ? null : workable[Random.Shared.Next(workable.Count)];
         }
     }
 }

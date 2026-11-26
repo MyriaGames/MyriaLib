@@ -30,7 +30,16 @@
       "34": 0.25,
       "35": 0.25,
       "36": 0.25
-    }
+    },
+    "GatheringSpots": [
+      {
+        "Id": "sunleaf_patch",
+        "Name": "Sunleaf Patch",
+        "Description": "Bright, broad-leafed herbs growing where the sun reaches the valley floor.",
+        "Type": "Herb",
+        "GatheredItemId": "sunleaf"
+      }
+    ]
   },
   {
     "Id": 3,
@@ -47,7 +56,24 @@
       "35": 0.25,
       "36": 0.25,
       "37": 0.15
-    }
+    },
+    "GatheringSpots": [
+      {
+        "Id": "sunleaf_patch",
+        "Name": "Sunleaf Patch",
+        "Description": "Bright, broad-leafed herbs growing where the sun reaches the valley floor.",
+        "Type": "Herb",
+        "GatheredItemId": "sunleaf"
+      },
+      {
+        "Id": "pine_stand",
+        "Name": "Pine Stand",
+        "Description": "Tall, straight pines - easy to fell and light to carry.",
+        "Type": "Tree",
+        "GatheredItemId": "pine_log",
+        "RequiredToolId": "woodcutter_axe"
+      }
+    ]
   },
   {
     "Id": 4,
@@ -65,7 +91,24 @@
       "35": 0.25,
       "36": 0.25,
       "38": 0.15
-    }
+    },
+    "GatheringSpots": [
+      {
+        "Id": "sunleaf_patch",
+        "Name": "Sunleaf Patch",
+        "Description": "Bright, broad-leafed herbs growing where the sun reaches the valley floor.",
+        "Type": "Herb",
+        "GatheredItemId": "sunleaf"
+      },
+      {
+        "Id": "pine_stand",
+        "Name": "Pine Stand",
+        "Description": "Tall, straight pines - easy to fell and light to carry.",
+        "Type": "Tree",
+        "GatheredItemId": "pine_log",
+        "RequiredToolId": "woodcutter_axe"
+      }
+    ]
   },
   {
     "Id": 5,
@@ -82,7 +125,16 @@
       "34": 0.25,
       "35": 0.25,
       "36": 0.25
-    }
+    },
+    "GatheringSpots": [
+      {
+        "Id": "marshroot_bank",
+        "Name": "Marshroot Bank",
+        "Description": "Pale, knotted roots poking out of the muddy riverbank.",
+        "Type": "Herb",
+        "GatheredItemId": "marshroot"
+      }
+    ]
   },
   {
     "Id": 6,
@@ -101,7 +153,24 @@
       "34": 0.25,
       "35": 0.25,
       "36": 0.25
-    }
+    },
+    "GatheringSpots": [
+      {
+        "Id": "marshroot_bank",
+        "Name": "Marshroot Bank",
+        "Description": "Pale, knotted roots poking out of the muddy riverbank.",
+        "Type": "Herb",
+        "GatheredItemId": "marshroot"
+      },
+      {
+        "Id": "pine_stand",
+        "Name": "Pine Stand",
+        "Description": "Tall, straight pines - easy to fell and light to carry.",
+        "Type": "Tree",
+        "GatheredItemId": "pine_log",
+        "RequiredToolId": "woodcutter_axe"
+      }
+    ]
   },
   {
     "Id": 7,
@@ -118,7 +187,24 @@
       "34": 0.25,
       "35": 0.25,
       "36": 0.25
-    }
+    },
+    "GatheringSpots": [
+      {
+        "Id": "marshroot_bank",
+        "Name": "Marshroot Bank",
+        "Description": "Pale, knotted roots poking out of the muddy riverbank.",
+        "Type": "Herb",
+        "GatheredItemId": "marshroot"
+      },
+      {
+        "Id": "pine_stand",
+        "Name": "Pine Stand",
+        "Description": "Tall, straight pines - easy to fell and light to carry.",
+        "Type": "Tree",
+        "GatheredItemId": "pine_log",
+        "RequiredToolId": "woodcutter_axe"
+      }
+    ]
   },
   {
     "Id": 8,
@@ -263,6 +349,14 @@
         "Type": "Ore",
         "GatheredItemId": "iron_ore",
         "RequiredToolId": "pickaxe"
+      },
+      {
+        "Id": "glowcap_cluster",
+        "Name": "Glowcap Cluster",
+        "Description": "Faintly glowing mushrooms clinging to the damp cave walls.",
+        "Type": "Herb",
+        "GatheredItemId": "glowcap",
+        "RequiredSkillLevel": 2
       }
     ]
   },
@@ -291,6 +385,14 @@
         "Type": "Ore",
         "GatheredItemId": "iron_ore",
         "RequiredToolId": "pickaxe"
+      },
+      {
+        "Id": "glowcap_cluster",
+        "Name": "Glowcap Cluster",
+        "Description": "Faintly glowing mushrooms clinging to the damp cave walls.",
+        "Type": "Herb",
+        "GatheredItemId": "glowcap",
+        "RequiredSkillLevel": 2
       }
     ]
   },
@@ -347,6 +449,15 @@
         "Type": "Ore",
         "GatheredItemId": "iron_ore",
         "RequiredToolId": "pickaxe"
+      },
+      {
+        "Id": "garnet_seam",
+        "Name": "Garnet Seam",
+        "Description": "Deep red crystals glinting in a crack of the cave rock.",
+        "Type": "Ore",
+        "GatheredItemId": "raw_garnet",
+        "RequiredToolId": "pickaxe",
+        "RequiredSkillLevel": 4
       }
     ]
   },
@@ -375,6 +486,23 @@
         "Type": "Ore",
         "GatheredItemId": "iron_ore",
         "RequiredToolId": "pickaxe"
+      },
+      {
+        "Id": "glowcap_cluster",
+        "Name": "Glowcap Cluster",
+        "Description": "Faintly glowing mushrooms clinging to the damp cave walls.",
+        "Type": "Herb",
+        "GatheredItemId": "glowcap",
+        "RequiredSkillLevel": 2
+      },
+      {
+        "Id": "garnet_seam",
+        "Name": "Garnet Seam",
+        "Description": "Deep red crystals glinting in a crack of the cave rock.",
+        "Type": "Ore",
+        "GatheredItemId": "raw_garnet",
+        "RequiredToolId": "pickaxe",
+        "RequiredSkillLevel": 4
       }
     ]
   },
@@ -403,6 +531,14 @@
         "Type": "Ore",
         "GatheredItemId": "iron_ore",
         "RequiredToolId": "pickaxe"
+      },
+      {
+        "Id": "glowcap_cluster",
+        "Name": "Glowcap Cluster",
+        "Description": "Faintly glowing mushrooms clinging to the damp cave walls.",
+        "Type": "Herb",
+        "GatheredItemId": "glowcap",
+        "RequiredSkillLevel": 2
       }
     ]
   },
@@ -432,6 +568,15 @@
         "Type": "Ore",
         "GatheredItemId": "iron_ore",
         "RequiredToolId": "pickaxe"
+      },
+      {
+        "Id": "garnet_seam",
+        "Name": "Garnet Seam",
+        "Description": "Deep red crystals glinting in a crack of the cave rock.",
+        "Type": "Ore",
+        "GatheredItemId": "raw_garnet",
+        "RequiredToolId": "pickaxe",
+        "RequiredSkillLevel": 4
       }
     ]
   },
@@ -452,7 +597,17 @@
       "20": 0.3,
       "21": 0.25,
       "29": 0.25
-    }
+    },
+    "GatheringSpots": [
+      {
+        "Id": "pine_stand",
+        "Name": "Pine Stand",
+        "Description": "Tall, straight pines - easy to fell and light to carry.",
+        "Type": "Tree",
+        "GatheredItemId": "pine_log",
+        "RequiredToolId": "woodcutter_axe"
+      }
+    ]
   },
   {
     "Id": 23,
@@ -472,7 +627,17 @@
       "20": 0.3,
       "21": 0.25,
       "29": 0.25
-    }
+    },
+    "GatheringSpots": [
+      {
+        "Id": "pine_stand",
+        "Name": "Pine Stand",
+        "Description": "Tall, straight pines - easy to fell and light to carry.",
+        "Type": "Tree",
+        "GatheredItemId": "pine_log",
+        "RequiredToolId": "woodcutter_axe"
+      }
+    ]
   },
   {
     "Id": 24,
@@ -491,7 +656,16 @@
       "20": 0.3,
       "21": 0.25,
       "29": 0.25
-    }
+    },
+    "GatheringSpots": [
+      {
+        "Id": "sunleaf_patch",
+        "Name": "Sunleaf Patch",
+        "Description": "Bright, broad-leafed herbs growing where the sun reaches the valley floor.",
+        "Type": "Herb",
+        "GatheredItemId": "sunleaf"
+      }
+    ]
   },
   {
     "Id": 25,
@@ -509,7 +683,17 @@
       "20": 0.3,
       "21": 0.25,
       "29": 0.25
-    }
+    },
+    "GatheringSpots": [
+      {
+        "Id": "pine_stand",
+        "Name": "Pine Stand",
+        "Description": "Tall, straight pines - easy to fell and light to carry.",
+        "Type": "Tree",
+        "GatheredItemId": "pine_log",
+        "RequiredToolId": "woodcutter_axe"
+      }
+    ]
   },
   {
     "Id": 26,
@@ -528,7 +712,17 @@
       "20": 0.3,
       "21": 0.25,
       "29": 0.25
-    }
+    },
+    "GatheringSpots": [
+      {
+        "Id": "pine_stand",
+        "Name": "Pine Stand",
+        "Description": "Tall, straight pines - easy to fell and light to carry.",
+        "Type": "Tree",
+        "GatheredItemId": "pine_log",
+        "RequiredToolId": "woodcutter_axe"
+      }
+    ]
   },
   {
     "Id": 27,
@@ -572,6 +766,14 @@
         "Type": "Tree",
         "GatheredItemId": "wood",
         "RequiredToolId": "woodcutter_axe"
+      },
+      {
+        "Id": "moonpetal_glade",
+        "Name": "Moonpetal Glade",
+        "Description": "Silver-white flowers that only open in the forest's deep shade.",
+        "Type": "Herb",
+        "GatheredItemId": "moonpetal",
+        "RequiredSkillLevel": 3
       }
     ]
   },
@@ -600,6 +802,14 @@
         "Type": "Tree",
         "GatheredItemId": "wood",
         "RequiredToolId": "woodcutter_axe"
+      },
+      {
+        "Id": "moonpetal_glade",
+        "Name": "Moonpetal Glade",
+        "Description": "Silver-white flowers that only open in the forest's deep shade.",
+        "Type": "Herb",
+        "GatheredItemId": "moonpetal",
+        "RequiredSkillLevel": 3
       }
     ]
   },
@@ -629,6 +839,14 @@
         "Type": "Tree",
         "GatheredItemId": "wood",
         "RequiredToolId": "woodcutter_axe"
+      },
+      {
+        "Id": "moonpetal_glade",
+        "Name": "Moonpetal Glade",
+        "Description": "Silver-white flowers that only open in the forest's deep shade.",
+        "Type": "Herb",
+        "GatheredItemId": "moonpetal",
+        "RequiredSkillLevel": 3
       }
     ]
   },
@@ -658,6 +876,14 @@
         "Type": "Tree",
         "GatheredItemId": "wood",
         "RequiredToolId": "woodcutter_axe"
+      },
+      {
+        "Id": "moonpetal_glade",
+        "Name": "Moonpetal Glade",
+        "Description": "Silver-white flowers that only open in the forest's deep shade.",
+        "Type": "Herb",
+        "GatheredItemId": "moonpetal",
+        "RequiredSkillLevel": 3
       }
     ]
   },
@@ -685,6 +911,15 @@
         "Type": "Tree",
         "GatheredItemId": "wood",
         "RequiredToolId": "woodcutter_axe"
+      },
+      {
+        "Id": "ancient_oak",
+        "Name": "Ancient Oak",
+        "Description": "A massive old oak whose dark core is as hard as iron.",
+        "Type": "Tree",
+        "GatheredItemId": "heartwood",
+        "RequiredToolId": "woodcutter_axe",
+        "RequiredSkillLevel": 4
       }
     ]
   },
@@ -714,6 +949,15 @@
         "Type": "Tree",
         "GatheredItemId": "wood",
         "RequiredToolId": "woodcutter_axe"
+      },
+      {
+        "Id": "ancient_oak",
+        "Name": "Ancient Oak",
+        "Description": "A massive old oak whose dark core is as hard as iron.",
+        "Type": "Tree",
+        "GatheredItemId": "heartwood",
+        "RequiredToolId": "woodcutter_axe",
+        "RequiredSkillLevel": 4
       }
     ]
   },
@@ -742,6 +986,15 @@
         "Type": "Tree",
         "GatheredItemId": "wood",
         "RequiredToolId": "woodcutter_axe"
+      },
+      {
+        "Id": "ancient_oak",
+        "Name": "Ancient Oak",
+        "Description": "A massive old oak whose dark core is as hard as iron.",
+        "Type": "Tree",
+        "GatheredItemId": "heartwood",
+        "RequiredToolId": "woodcutter_axe",
+        "RequiredSkillLevel": 4
       }
     ]
   },
@@ -770,6 +1023,15 @@
         "Type": "Tree",
         "GatheredItemId": "wood",
         "RequiredToolId": "woodcutter_axe"
+      },
+      {
+        "Id": "ancient_oak",
+        "Name": "Ancient Oak",
+        "Description": "A massive old oak whose dark core is as hard as iron.",
+        "Type": "Tree",
+        "GatheredItemId": "heartwood",
+        "RequiredToolId": "woodcutter_axe",
+        "RequiredSkillLevel": 4
       }
     ]
   },
@@ -789,7 +1051,18 @@
       "23": 0.25,
       "24": 0.25,
       "31": 0.25
-    }
+    },
+    "GatheringSpots": [
+      {
+        "Id": "silver_vein",
+        "Name": "Silver Vein",
+        "Description": "A pale, gleaming vein running through the mountain rock.",
+        "Type": "Ore",
+        "GatheredItemId": "silver_ore",
+        "RequiredToolId": "pickaxe",
+        "RequiredSkillLevel": 3
+      }
+    ]
   },
   {
     "Id": 37,
@@ -807,7 +1080,18 @@
       "23": 0.25,
       "24": 0.25,
       "31": 0.25
-    }
+    },
+    "GatheringSpots": [
+      {
+        "Id": "silver_vein",
+        "Name": "Silver Vein",
+        "Description": "A pale, gleaming vein running through the mountain rock.",
+        "Type": "Ore",
+        "GatheredItemId": "silver_ore",
+        "RequiredToolId": "pickaxe",
+        "RequiredSkillLevel": 3
+      }
+    ]
   },
   {
     "Id": 38,
@@ -825,7 +1109,18 @@
       "23": 0.25,
       "24": 0.25,
       "31": 0.25
-    }
+    },
+    "GatheringSpots": [
+      {
+        "Id": "silver_vein",
+        "Name": "Silver Vein",
+        "Description": "A pale, gleaming vein running through the mountain rock.",
+        "Type": "Ore",
+        "GatheredItemId": "silver_ore",
+        "RequiredToolId": "pickaxe",
+        "RequiredSkillLevel": 3
+      }
+    ]
   },
   {
     "Id": 39,
@@ -843,7 +1138,18 @@
       "23": 0.25,
       "24": 0.25,
       "31": 0.25
-    }
+    },
+    "GatheringSpots": [
+      {
+        "Id": "silver_vein",
+        "Name": "Silver Vein",
+        "Description": "A pale, gleaming vein running through the mountain rock.",
+        "Type": "Ore",
+        "GatheredItemId": "silver_ore",
+        "RequiredToolId": "pickaxe",
+        "RequiredSkillLevel": 3
+      }
+    ]
   },
   {
     "Id": 40,
@@ -861,7 +1167,18 @@
       "23": 0.25,
       "24": 0.25,
       "31": 0.25
-    }
+    },
+    "GatheringSpots": [
+      {
+        "Id": "silver_vein",
+        "Name": "Silver Vein",
+        "Description": "A pale, gleaming vein running through the mountain rock.",
+        "Type": "Ore",
+        "GatheredItemId": "silver_ore",
+        "RequiredToolId": "pickaxe",
+        "RequiredSkillLevel": 3
+      }
+    ]
   },
   {
     "Id": 41,
@@ -879,7 +1196,27 @@
       "24": 0.35,
       "25": 0.25,
       "31": 0.15
-    }
+    },
+    "GatheringSpots": [
+      {
+        "Id": "silver_vein",
+        "Name": "Silver Vein",
+        "Description": "A pale, gleaming vein running through the mountain rock.",
+        "Type": "Ore",
+        "GatheredItemId": "silver_ore",
+        "RequiredToolId": "pickaxe",
+        "RequiredSkillLevel": 3
+      },
+      {
+        "Id": "mithril_vein",
+        "Name": "Mithril Vein",
+        "Description": "A rare blue-silver vein, only found high in the mountains.",
+        "Type": "Ore",
+        "GatheredItemId": "mithril_ore",
+        "RequiredToolId": "pickaxe",
+        "RequiredSkillLevel": 5
+      }
+    ]
   },
   {
     "Id": 42,
@@ -897,7 +1234,27 @@
       "24": 0.35,
       "25": 0.25,
       "31": 0.15
-    }
+    },
+    "GatheringSpots": [
+      {
+        "Id": "silver_vein",
+        "Name": "Silver Vein",
+        "Description": "A pale, gleaming vein running through the mountain rock.",
+        "Type": "Ore",
+        "GatheredItemId": "silver_ore",
+        "RequiredToolId": "pickaxe",
+        "RequiredSkillLevel": 3
+      },
+      {
+        "Id": "mithril_vein",
+        "Name": "Mithril Vein",
+        "Description": "A rare blue-silver vein, only found high in the mountains.",
+        "Type": "Ore",
+        "GatheredItemId": "mithril_ore",
+        "RequiredToolId": "pickaxe",
+        "RequiredSkillLevel": 5
+      }
+    ]
   },
   {
     "Id": 43,
@@ -915,7 +1272,27 @@
       "24": 0.35,
       "25": 0.25,
       "31": 0.15
-    }
+    },
+    "GatheringSpots": [
+      {
+        "Id": "silver_vein",
+        "Name": "Silver Vein",
+        "Description": "A pale, gleaming vein running through the mountain rock.",
+        "Type": "Ore",
+        "GatheredItemId": "silver_ore",
+        "RequiredToolId": "pickaxe",
+        "RequiredSkillLevel": 3
+      },
+      {
+        "Id": "mithril_vein",
+        "Name": "Mithril Vein",
+        "Description": "A rare blue-silver vein, only found high in the mountains.",
+        "Type": "Ore",
+        "GatheredItemId": "mithril_ore",
+        "RequiredToolId": "pickaxe",
+        "RequiredSkillLevel": 5
+      }
+    ]
   },
   {
     "Id": 44,
@@ -933,7 +1310,26 @@
       "24": 0.35,
       "25": 0.25,
       "31": 0.15
-    }
+    },
+    "GatheringSpots": [
+      {
+        "Id": "mithril_vein",
+        "Name": "Mithril Vein",
+        "Description": "A rare blue-silver vein, only found high in the mountains.",
+        "Type": "Ore",
+        "GatheredItemId": "mithril_ore",
+        "RequiredToolId": "pickaxe",
+        "RequiredSkillLevel": 5
+      },
+      {
+        "Id": "frostbloom_ledge",
+        "Name": "Frostbloom Ledge",
+        "Description": "Hardy blue blossoms growing in the cold, thin air of the high pass.",
+        "Type": "Herb",
+        "GatheredItemId": "frostbloom",
+        "RequiredSkillLevel": 5
+      }
+    ]
   },
   {
     "Id": 45,
@@ -952,7 +1348,26 @@
       "24": 0.35,
       "25": 0.25,
       "31": 0.15
-    }
+    },
+    "GatheringSpots": [
+      {
+        "Id": "mithril_vein",
+        "Name": "Mithril Vein",
+        "Description": "A rare blue-silver vein, only found high in the mountains.",
+        "Type": "Ore",
+        "GatheredItemId": "mithril_ore",
+        "RequiredToolId": "pickaxe",
+        "RequiredSkillLevel": 5
+      },
+      {
+        "Id": "frostbloom_ledge",
+        "Name": "Frostbloom Ledge",
+        "Description": "Hardy blue blossoms growing in the cold, thin air of the high pass.",
+        "Type": "Herb",
+        "GatheredItemId": "frostbloom",
+        "RequiredSkillLevel": 5
+      }
+    ]
   },
   {
     "Id": 46,
@@ -970,7 +1385,26 @@
       "24": 0.35,
       "25": 0.25,
       "31": 0.15
-    }
+    },
+    "GatheringSpots": [
+      {
+        "Id": "mithril_vein",
+        "Name": "Mithril Vein",
+        "Description": "A rare blue-silver vein, only found high in the mountains.",
+        "Type": "Ore",
+        "GatheredItemId": "mithril_ore",
+        "RequiredToolId": "pickaxe",
+        "RequiredSkillLevel": 5
+      },
+      {
+        "Id": "frostbloom_ledge",
+        "Name": "Frostbloom Ledge",
+        "Description": "Hardy blue blossoms growing in the cold, thin air of the high pass.",
+        "Type": "Herb",
+        "GatheredItemId": "frostbloom",
+        "RequiredSkillLevel": 5
+      }
+    ]
   },
   {
     "Id": 48,
@@ -989,7 +1423,26 @@
       "24": 0.35,
       "25": 0.25,
       "31": 0.15
-    }
+    },
+    "GatheringSpots": [
+      {
+        "Id": "mithril_vein",
+        "Name": "Mithril Vein",
+        "Description": "A rare blue-silver vein, only found high in the mountains.",
+        "Type": "Ore",
+        "GatheredItemId": "mithril_ore",
+        "RequiredToolId": "pickaxe",
+        "RequiredSkillLevel": 5
+      },
+      {
+        "Id": "frostbloom_ledge",
+        "Name": "Frostbloom Ledge",
+        "Description": "Hardy blue blossoms growing in the cold, thin air of the high pass.",
+        "Type": "Herb",
+        "GatheredItemId": "frostbloom",
+        "RequiredSkillLevel": 5
+      }
+    ]
   },
   {
     "Id": 49,
@@ -1008,7 +1461,26 @@
       "24": 0.35,
       "25": 0.25,
       "31": 0.15
-    }
+    },
+    "GatheringSpots": [
+      {
+        "Id": "mithril_vein",
+        "Name": "Mithril Vein",
+        "Description": "A rare blue-silver vein, only found high in the mountains.",
+        "Type": "Ore",
+        "GatheredItemId": "mithril_ore",
+        "RequiredToolId": "pickaxe",
+        "RequiredSkillLevel": 5
+      },
+      {
+        "Id": "frostbloom_ledge",
+        "Name": "Frostbloom Ledge",
+        "Description": "Hardy blue blossoms growing in the cold, thin air of the high pass.",
+        "Type": "Herb",
+        "GatheredItemId": "frostbloom",
+        "RequiredSkillLevel": 5
+      }
+    ]
   },
   {
     "Id": 50,

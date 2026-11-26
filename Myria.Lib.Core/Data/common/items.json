@@ -1252,5 +1252,259 @@
     "BaseBonusSPR": 14,
     "MaxStackSize": 1,
     "Rarity": "Legendary"
+  },
+  {
+    "Id": "pine_log",
+    "Name": "item.pine_log",
+    "Description": "item.pine_log.desc",
+    "Type": "material",
+    "JobId": "woodcutter",
+    "BuyPrice": 9,
+    "MaxStackSize": 99
+  },
+  {
+    "Id": "heartwood",
+    "Name": "item.heartwood",
+    "Description": "item.heartwood.desc",
+    "Type": "material",
+    "JobId": "woodcutter",
+    "BuyPrice": 40,
+    "MaxStackSize": 99
+  },
+  {
+    "Id": "silver_ore",
+    "Name": "item.silver_ore",
+    "Description": "item.silver_ore.desc",
+    "Type": "material",
+    "JobId": "miner",
+    "BuyPrice": 30,
+    "MaxStackSize": 99
+  },
+  {
+    "Id": "mithril_ore",
+    "Name": "item.mithril_ore",
+    "Description": "item.mithril_ore.desc",
+    "Type": "material",
+    "JobId": "miner",
+    "BuyPrice": 60,
+    "MaxStackSize": 99
+  },
+  {
+    "Id": "raw_garnet",
+    "Name": "item.raw_garnet",
+    "Description": "item.raw_garnet.desc",
+    "Type": "material",
+    "JobId": "miner",
+    "BuyPrice": 50,
+    "MaxStackSize": 99
+  },
+  {
+    "Id": "silver_ingot",
+    "Name": "item.silver_ingot",
+    "Description": "item.silver_ingot.desc",
+    "Type": "material",
+    "JobId": "blacksmith",
+    "BuyPrice": 70,
+    "MaxStackSize": 99
+  },
+  {
+    "Id": "mithril_ingot",
+    "Name": "item.mithril_ingot",
+    "Description": "item.mithril_ingot.desc",
+    "Type": "material",
+    "JobId": "blacksmith",
+    "BuyPrice": 140,
+    "MaxStackSize": 99
+  },
+  {
+    "Id": "marshroot",
+    "Name": "item.marshroot",
+    "Description": "item.marshroot.desc",
+    "Type": "material",
+    "JobId": "herbalist",
+    "BuyPrice": 15,
+    "MaxStackSize": 99
+  },
+  {
+    "Id": "glowcap",
+    "Name": "item.glowcap",
+    "Description": "item.glowcap.desc",
+    "Type": "material",
+    "JobId": "herbalist",
+    "BuyPrice": 25,
+    "MaxStackSize": 99
+  },
+  {
+    "Id": "moonpetal",
+    "Name": "item.moonpetal",
+    "Description": "item.moonpetal.desc",
+    "Type": "material",
+    "JobId": "herbalist",
+    "BuyPrice": 35,
+    "MaxStackSize": 99
+  },
+  {
+    "Id": "frostbloom",
+    "Name": "item.frostbloom",
+    "Description": "item.frostbloom.desc",
+    "Type": "material",
+    "JobId": "herbalist",
+    "BuyPrice": 55,
+    "MaxStackSize": 99
+  },
+  {
+    "Id": "t2_healing_potion",
+    "Name": "item.t2_healing_potion",
+    "Description": "item.t2_healing_potion.desc",
+    "Type": "consumable",
+    "JobId": "alchemist",
+    "BuyPrice": 260,
+    "MaxStackSize": 100,
+    "HealAmount": 60,
+    "ManaRestore": 0
+  },
+  {
+    "Id": "t2_mana_potion",
+    "Name": "item.t2_mana_potion",
+    "Description": "item.t2_mana_potion.desc",
+    "Type": "consumable",
+    "JobId": "alchemist",
+    "BuyPrice": 300,
+    "MaxStackSize": 100,
+    "HealAmount": 0,
+    "ManaRestore": 50
+  },
+  {
+    "Id": "t3_healing_potion",
+    "Name": "item.t3_healing_potion",
+    "Description": "item.t3_healing_potion.desc",
+    "Type": "consumable",
+    "JobId": "alchemist",
+    "BuyPrice": 600,
+    "MaxStackSize": 100,
+    "HealAmount": 120,
+    "ManaRestore": 0
+  },
+  {
+    "Id": "t3_mana_potion",
+    "Name": "item.t3_mana_potion",
+    "Description": "item.t3_mana_potion.desc",
+    "Type": "consumable",
+    "JobId": "alchemist",
+    "BuyPrice": 680,
+    "MaxStackSize": 100,
+    "HealAmount": 0,
+    "ManaRestore": 100
+  },
+  {
+    "Id": "silversteel_blade",
+    "Name": "item.silversteel_blade",
+    "Description": "item.silversteel_blade.desc",
+    "Type": "equipment",
+    "SlotType": 0,
+    "UpgradeCategory": "blacksmith",
+    "BuyPrice": 3000,
+    "AllowedClasses": [
+      "Knight",
+      "Barbarian",
+      "Fighter",
+      "SoulsKnight"
+    ],
+    "BaseBonusATK": 58,
+    "BaseBonusAim": 12,
+    "BaseBonusSTR": 6,
+    "MaxStackSize": 1,
+    "Rarity": "Rare"
+  },
+  {
+    "Id": "mithril_plate",
+    "Name": "item.mithril_plate",
+    "Description": "item.mithril_plate.desc",
+    "Type": "equipment",
+    "SlotType": 1,
+    "UpgradeCategory": "blacksmith",
+    "BuyPrice": 4200,
+    "AllowedClasses": [
+      "Knight",
+      "Barbarian",
+      "Fighter",
+      "SoulsKnight"
+    ],
+    "BaseBonusDEF": 52,
+    "BaseBonusMDEF": 20,
+    "BaseBonusHP": 120,
+    "BaseBonusEND": 6,
+    "MaxStackSize": 1,
+    "Rarity": "Rare"
+  },
+  {
+    "Id": "heartwood_longbow",
+    "Name": "item.heartwood_longbow",
+    "Description": "item.heartwood_longbow.desc",
+    "Type": "equipment",
+    "SlotType": 0,
+    "UpgradeCategory": "leathersmith",
+    "BuyPrice": 3000,
+    "AllowedClasses": [
+      "Archer",
+      "Hunter"
+    ],
+    "BaseBonusATK": 56,
+    "BaseBonusAim": 24,
+    "BaseBonusDEX": 6,
+    "MaxStackSize": 1,
+    "Rarity": "Rare"
+  },
+  {
+    "Id": "moonweave_robe",
+    "Name": "item.moonweave_robe",
+    "Description": "item.moonweave_robe.desc",
+    "Type": "equipment",
+    "SlotType": 1,
+    "UpgradeCategory": "tailor",
+    "BuyPrice": 3000,
+    "AllowedClasses": [
+      "Cleric",
+      "ArcanMage",
+      "ElementalMage",
+      "Druid",
+      "RunicMage"
+    ],
+    "BaseBonusMDEF": 40,
+    "BaseBonusMATK": 20,
+    "BaseBonusMP": 100,
+    "BaseBonusSPR": 6,
+    "MaxStackSize": 1,
+    "Rarity": "Rare"
+  },
+  {
+    "Id": "garnet_signet",
+    "Name": "item.garnet_signet",
+    "Description": "item.garnet_signet.desc",
+    "Type": "equipment",
+    "SlotType": 2,
+    "UpgradeCategory": "artificer",
+    "BuyPrice": 2800,
+    "AllowedClasses": [
+      "Knight",
+      "Barbarian",
+      "Fighter",
+      "SoulsKnight",
+      "Rogue",
+      "Archer",
+      "Hunter",
+      "Cleric",
+      "ArcanMage",
+      "ElementalMage",
+      "Druid",
+      "RunicMage"
+    ],
+    "BaseBonusHP": 70,
+    "BaseBonusATK": 10,
+    "BaseBonusMATK": 10,
+    "BaseBonusDEF": 8,
+    "BaseBonusMDEF": 8,
+    "MaxStackSize": 1,
+    "Rarity": "Rare"
   }
 ]
