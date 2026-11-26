@@ -4,5 +4,23 @@
     "Name": "dungeon.hollow",
     "AnchorRoomId": 64,
     "RoomIds": [ 64, 65, 66, 67, 68, 69, 70, 71, 72 ]
+  },
+  {
+    "Id": "sunken_grotto",
+    "Name": "dungeon.sunken_grotto",
+    "AnchorRoomId": 74,
+    "RoomIds": [ 74, 75, 76, 77, 78, 79, 80 ]
+  },
+  {
+    "Id": "rootdeep_barrow",
+    "Name": "dungeon.rootdeep_barrow",
+    "AnchorRoomId": 81,
+    "RoomIds": [ 81, 82, 83, 84, 85, 86, 87, 88, 89 ]
+  },
+  {
+    "Id": "ashen_aerie",
+    "Name": "dungeon.ashen_aerie",
+    "AnchorRoomId": 90,
+    "RoomIds": [ 90, 91, 92, 93, 94, 95, 96, 97, 98 ]
   }
 ]
