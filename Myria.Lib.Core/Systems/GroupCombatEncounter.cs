@@ -551,7 +551,16 @@ namespace Myria.Lib.Core.Systems
                 foreach (var entry in EffectProcessor.Tick(monster))
                     Log.Add(entry);
 
-                if (!monster.IsAlive) continue;
+                // Killed by its own poison: a death like any other - resurrection check, XP, loot, quest
+                // credit, and the end of the fight once it was the last one. This used to just skip the
+                // monster, so a fight whose last monster died of poison never finished (all monsters
+                // dead, nothing left to attack - fleeing was the only way out) and gave no credit.
+                if (!monster.IsAlive)
+                {
+                    HandleMonsterDeath(monster);
+                    if (IsFinished) return;
+                    continue;
+                }
 
                 if (monsterStunned)
                 {
