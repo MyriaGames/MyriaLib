@@ -23,5 +23,26 @@
     "IsBig": true,
     "AnchorRoomId": 62,
     "RoomIds": [ 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63 ]
+  },
+  {
+    "Id": "village_selvra",
+    "Name": "village.selvra",
+    "IsVillage": true,
+    "AnchorRoomId": 99,
+    "RoomIds": [ 99 ]
+  },
+  {
+    "Id": "village_tornhal",
+    "Name": "village.tornhal",
+    "IsVillage": true,
+    "AnchorRoomId": 100,
+    "RoomIds": [ 100 ]
+  },
+  {
+    "Id": "village_kharvel",
+    "Name": "village.kharvel",
+    "IsVillage": true,
+    "AnchorRoomId": 101,
+    "RoomIds": [ 101 ]
   }
 ]
