@@ -58,6 +58,20 @@ namespace Myria.Lib.Core.Entities.Items
         public override void Use(Character character) { }
 
         /// <summary>
+        /// Puts a fresh item (from ItemFactory) into a saved upgrade state: the craft quality first,
+        /// then each upgrade level re-applied - exactly how the bonuses were reached in play. Used by
+        /// every load/sync path (local saves, the realm database, server pushes).
+        /// </summary>
+        public void RestoreUpgradeState(int upgradeLevel, float craftQuality)
+        {
+            CraftQuality = craftQuality > 0 ? craftQuality : 1f;
+            UpgradeLevel = 0;
+            Bonuses = BaseStats;
+            for (int i = 0; i < upgradeLevel; i++)
+                TryUpgrade_Internal();
+        }
+
+        /// <summary>
         /// Applies one upgrade level, scaling Bonuses from BaseStats.
         /// Called both from the UI upgrade flow and from save-file reload (ItemConverter).
         /// </summary>

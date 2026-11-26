@@ -31,15 +31,9 @@ namespace Myria.Lib.Core.Systems
             // Re-apply craft quality and upgrade level so upgraded/crafted gear isn't reset on load
             if (item is EquipmentItem equipment)
             {
-                if (root.TryGetProperty("CraftQuality", out var qualityProp))
-                    equipment.CraftQuality = qualityProp.GetSingle();
-
-                if (root.TryGetProperty("UpgradeLevel", out var upgradeProp))
-                {
-                    int savedLevel = upgradeProp.GetInt32();
-                    for (int i = 0; i < savedLevel; i++)
-                        equipment.TryUpgrade_Internal();
-                }
+                float quality = root.TryGetProperty("CraftQuality", out var qualityProp) ? qualityProp.GetSingle() : 1f;
+                int level = root.TryGetProperty("UpgradeLevel", out var upgradeProp) ? upgradeProp.GetInt32() : 0;
+                equipment.RestoreUpgradeState(level, quality);
             }
 
             return item;

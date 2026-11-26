@@ -353,17 +353,19 @@ namespace Myria.Lib.Core.Entities.Characters
         /// </summary>
         public void ApplySnapshot(IReadOnlyList<InventoryItemSnapshot> snapshot, Character character)
         {
+            // Keyed by item id plus, for equipment, upgrade level and craft quality - two swords of
+            // the same id at +0 and +3 are different things, and the right one must go or come back.
             var target = snapshot
-                .GroupBy(s => s.ItemId, StringComparer.OrdinalIgnoreCase)
-                .ToDictionary(g => g.Key, g => g.Sum(s => s.StackSize), StringComparer.OrdinalIgnoreCase);
+                .GroupBy(s => SnapshotKey(s.ItemId, s.UpgradeLevel, s.CraftQuality))
+                .ToDictionary(g => g.Key, g => (Snap: g.First(), Amount: g.Sum(s => s.StackSize)));
 
-            foreach (var itemId in Items.Select(i => i.Id).Distinct(StringComparer.OrdinalIgnoreCase).ToList())
+            foreach (var key in Items.Select(KeyOf).Distinct().ToList())
             {
-                int have = Items.Where(i => i.Id.Equals(itemId, StringComparison.OrdinalIgnoreCase)).Sum(i => i.StackSize);
-                int toRemove = have - target.GetValueOrDefault(itemId);
+                int have = Items.Where(i => KeyOf(i) == key).Sum(i => i.StackSize);
+                int toRemove = have - (target.TryGetValue(key, out var want) ? want.Amount : 0);
                 if (toRemove <= 0) continue;
 
-                foreach (var stack in Items.Where(i => i.Id.Equals(itemId, StringComparison.OrdinalIgnoreCase)).ToList())
+                foreach (var stack in Items.Where(i => KeyOf(i) == key).ToList())
                 {
                     if (toRemove <= 0) break;
                     int take = Math.Min(toRemove, stack.StackSize);
@@ -380,17 +382,14 @@ namespace Myria.Lib.Core.Entities.Characters
                 }
             }
 
-            foreach (var (itemId, want) in target)
+            foreach (var (key, want) in target)
             {
-                int have = Items.Where(i => i.Id.Equals(itemId, StringComparison.OrdinalIgnoreCase)).Sum(i => i.StackSize);
-                int toAdd = want - have;
+                int have = Items.Where(i => KeyOf(i) == key).Sum(i => i.StackSize);
+                int toAdd = want.Amount - have;
                 if (toAdd <= 0) continue;
 
-                if (ItemFactory.TryCreateItem(itemId, out var item) && item is not null)
-                {
-                    item.StackSize = toAdd;
+                if (ItemFactory.CreateItem(want.Snap.ItemId, toAdd, want.Snap.UpgradeLevel, want.Snap.CraftQuality) is { } item)
                     AddItem(item, character);
-                }
             }
 
             Restack();
@@ -416,6 +415,12 @@ namespace Myria.Lib.Core.Entities.Characters
             }
             return split;
         }
+
+        private static (string Id, int Level, int Quality) SnapshotKey(string id, int upgradeLevel, float craftQuality) =>
+            (id.ToLowerInvariant(), upgradeLevel, (int)Math.Round(craftQuality * 1000));
+
+        private static (string Id, int Level, int Quality) KeyOf(Item item) =>
+            item is EquipmentItem e ? SnapshotKey(e.Id, e.UpgradeLevel, e.CraftQuality) : SnapshotKey(item.Id, 0, 1f);
 
         public void Restack()
         {
