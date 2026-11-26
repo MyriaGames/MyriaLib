@@ -211,18 +211,30 @@ namespace Myria.Lib.Core.Entities.Characters
                 return false;
 
             consumable.Use(character);
+            ConsumeOne(item);
+            return true;
+        }
+
+        /// <summary>
+        /// Removes exactly one unit of <paramref name="item"/>: decrements its stack, or removes the
+        /// entry entirely when it's the last one. Shared by every "use a consumable" path (inventory
+        /// and combat) - <see cref="RemoveItem"/> drops the whole stack, which is wrong for using a
+        /// single potion out of a stack of several.
+        /// </summary>
+        /// <returns>false if <paramref name="item"/> isn't an entry in this inventory.</returns>
+        public bool ConsumeOne(Item item)
+        {
+            if (!Items.Contains(item)) return false;
+
             if (item.StackSize > 1)
             {
                 item.StackSize--;
                 Restack();
                 ItemRemoved?.Invoke(this, new ItemReceivedEventArgs(item.CloneOne(), 1));
-            }
-            else
-            {
-                RemoveItem(item);
+                return true;
             }
 
-            return true;
+            return RemoveItem(item);
         }
         /// <summary>
         /// tries to add item to the inventory

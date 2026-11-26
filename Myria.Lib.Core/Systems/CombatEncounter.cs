@@ -151,12 +151,16 @@ namespace Myria.Lib.Core.Systems
         }
 
         /// <summary>
-        /// Use a consumable item in combat. Consumes the item immediately;
-        /// the enemy gets one free attack in the recovery turn before the player can act again.
+        /// Use a consumable item from <see cref="Character"/>'s inventory in combat. Costs the
+        /// character's turn exactly like a basic attack (the enemy then gets its normal turn), and
+        /// consumes one unit of the item's stack.
         /// </summary>
+        /// <returns>false (no turn spent) if <paramref name="item"/> isn't in the character's
+        /// inventory or it isn't their turn.</returns>
         public bool CharacterUseItem(ConsumableItem item)
         {
             if (Phase != CombatPhase.CharacterTurn) return false;
+            if (!Character.Inventory.Items.Contains(item)) return false;
 
             bool characterStunned = EffectProcessor.IsStunned(Character);
             foreach (var entry in EffectProcessor.Tick(Character))
@@ -172,10 +176,9 @@ namespace Myria.Lib.Core.Systems
             }
 
             item.Use(Character);
-            Character.Inventory.RemoveItem(item);
+            Character.Inventory.ConsumeOne(item);
             Log.Add(new CombatLogEntry("pg.fight.log.usedItem", Character.Name, item.Name));
 
-            RecoveryTurnsRemaining = 1;
             EndCharacterAction();
             return true;
         }

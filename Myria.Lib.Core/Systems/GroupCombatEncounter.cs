@@ -1,5 +1,6 @@
 using Myria.Lib.Core.Entities;
 using Myria.Lib.Core.Entities.Effects;
+using Myria.Lib.Core.Entities.Items;
 using Myria.Lib.Core.Entities.Monsters;
 using Myria.Lib.Core.Entities.Characters;
 using Myria.Lib.Core.Entities.Skills;
@@ -413,6 +414,46 @@ namespace Myria.Lib.Core.Systems
             skill.Effect?.Invoke(caster, GetMonster(targetIndex) ?? (ICombatant)caster);
 
             if (!IsFinished) AdvanceAfterCharacterAction();
+            return true;
+        }
+
+        /// <summary>
+        /// Uses a consumable from the acting character's own inventory - costs their turn exactly
+        /// like <see cref="CharacterAttack"/>, consumes one unit of the stack, and always targets
+        /// the user (potions; no ally-targeted items exist yet). Generates no aggro: it neither
+        /// damages nor heals anyone but the user.
+        /// </summary>
+        /// <returns>false (no turn spent) if it isn't <paramref name="playerName"/>'s turn or
+        /// <paramref name="item"/> isn't in their inventory.</returns>
+        public bool CharacterUseItem(string playerName, ConsumableItem item)
+        {
+            if (IsFinished || !IsThisCharactersTurn(playerName)) return false;
+
+            var user = Characters[_currentCharacterIndex];
+            if (!user.Inventory.Items.Contains(item)) return false;
+
+            bool userStunned = EffectProcessor.IsStunned(user);
+            foreach (var entry in EffectProcessor.Tick(user))
+                Log.Add(entry);
+
+            if (!user.IsAlive)
+            {
+                AdvanceAfterCharacterAction();
+                return false;
+            }
+
+            if (userStunned)
+            {
+                Log.Add(new CombatLogEntry("pg.fight.effect.stunned", user.Name));
+                AdvanceAfterCharacterAction();
+                return true;
+            }
+
+            item.Use(user);
+            user.Inventory.ConsumeOne(item);
+            Log.Add(new CombatLogEntry("pg.fight.log.usedItem", user.Name, item.Name));
+
+            AdvanceAfterCharacterAction();
             return true;
         }
 
