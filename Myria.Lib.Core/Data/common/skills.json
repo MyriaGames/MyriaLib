@@ -442,7 +442,7 @@
     "MinLevel": 1,
     "AggroModifier": 1,
     "Effects": [
-      { "EffectId": "str_buff_minor", "ApplyTo": "Caster" }
+      { "EffectId": "barbarian_str_buff", "ApplyTo": "Caster" }
     ],
     "UpgradeOptions": [
       { "Id": "berserk_blow_power", "Description": "Increases damage.", "ScalingFactorDelta": 0.3 },
@@ -469,7 +469,7 @@
       { "Id": "cleave_efficiency", "Description": "Reduces mana cost.", "ManaCostDelta": -2, "MaxPurchases": 3 },
       { "Id": "cleave_mastery", "Description": "Greatly increases damage.", "ScalingFactorDelta": 0.3, "RequiredLevel": 6, "MaxPurchases": 2 },
       { "Id": "cleave_power_2", "Description": "Further increases damage.", "ScalingFactorDelta": 0.2, "RequiredLevel": 11 },
-      { "Id": "cleave_sunder", "Description": "Sunders the armor of everything it hits.", "RequiredLevel": 11, "MaxPurchases": 1, "AddedEffects": [ { "EffectId": "def_debuff_minor", "ApplyTo": "Target" } ] }
+      { "Id": "cleave_sunder", "Description": "Sunders the armor of everything it hits.", "RequiredLevel": 11, "MaxPurchases": 1, "AddedEffects": [ { "EffectId": "barbarian_def_debuff", "ApplyTo": "Target" } ] }
     ]
   },
   {
@@ -485,15 +485,15 @@
     "MinLevel": 1,
     "AggroModifier": 1,
     "Effects": [
-      { "EffectId": "str_debuff_minor", "ApplyTo": "Target" },
-      { "EffectId": "atk_buff_minor", "ApplyTo": "Caster" }
+      { "EffectId": "barbarian_str_debuff", "ApplyTo": "Target" },
+      { "EffectId": "barbarian_atk_buff", "ApplyTo": "Caster" }
     ],
     "UpgradeOptions": [
       { "Id": "battle_roar_power", "Description": "Increases damage.", "ScalingFactorDelta": 0.25 },
       { "Id": "battle_roar_efficiency", "Description": "Reduces mana cost.", "ManaCostDelta": -1, "MaxPurchases": 3 },
       { "Id": "battle_roar_mastery", "Description": "Greatly increases damage.", "ScalingFactorDelta": 0.4, "RequiredLevel": 6, "MaxPurchases": 2 },
       { "Id": "battle_roar_power_2", "Description": "Further increases damage.", "ScalingFactorDelta": 0.3, "RequiredLevel": 11 },
-      { "Id": "battle_roar_terrify", "Description": "The roar also throws off the target's aim.", "RequiredLevel": 11, "MaxPurchases": 1, "AddedEffects": [ { "EffectId": "aim_debuff_minor", "ApplyTo": "Target" } ] }
+      { "Id": "battle_roar_terrify", "Description": "The roar also throws off the target's aim.", "RequiredLevel": 11, "MaxPurchases": 1, "AddedEffects": [ { "EffectId": "barbarian_aim_debuff", "ApplyTo": "Target" } ] }
     ]
   },
   {
@@ -528,14 +528,14 @@
     "MinLevel": 1,
     "AggroModifier": 1.0,
     "Effects": [
-      { "EffectId": "atk_buff_strong", "ApplyTo": "Caster" }
+      { "EffectId": "barbarian_fury", "ApplyTo": "Caster" }
     ],
     "UpgradeOptions": [
       { "Id": "primal_fury_power", "Description": "Increases damage.", "ScalingFactorDelta": 0.35 },
       { "Id": "primal_fury_efficiency", "Description": "Reduces mana cost.", "ManaCostDelta": -2, "MaxPurchases": 2 },
       { "Id": "primal_fury_mastery", "Description": "Greatly increases damage.", "ScalingFactorDelta": 0.55, "RequiredLevel": 6, "MaxPurchases": 2 },
       { "Id": "primal_fury_power_2", "Description": "Further increases damage.", "ScalingFactorDelta": 0.45, "RequiredLevel": 11 },
-      { "Id": "primal_fury_unbridled", "Description": "Fury also raises your STR.", "RequiredLevel": 11, "MaxPurchases": 1, "AddedEffects": [ { "EffectId": "str_buff_minor", "ApplyTo": "Caster" } ] }
+      { "Id": "primal_fury_unbridled", "Description": "Fury also raises your STR.", "RequiredLevel": 11, "MaxPurchases": 1, "AddedEffects": [ { "EffectId": "barbarian_str_buff", "ApplyTo": "Caster" } ] }
     ]
   },
   {

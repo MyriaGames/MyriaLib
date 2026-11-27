@@ -56,14 +56,14 @@
   {
     "class": "Barbarian",
     "statGrowth": {
-      "STR": 9,
+      "STR": 12,
       "DEX": 3,
-      "END": 3,
+      "END": 1,
       "INT": 0,
-      "SPR": 2
+      "SPR": 1
     },
-    "hpPerLevel": 180,
-    "manaPerLevel": 10,
+    "hpPerLevel": 100,
+    "manaPerLevel": 50,
     "group": "Physical"
   },
   {

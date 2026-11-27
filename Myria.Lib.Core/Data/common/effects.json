@@ -376,5 +376,59 @@
     "Duration": 2,
     "Magnitude": -2.3,
     "StatName": "DEF"
+  },
+  {
+    "Id": "barbarian_str_buff",
+    "Name": "Bloodrage",
+    "Description": "Temporarily increases STR.",
+    "Type": "StatBuff",
+    "Duration": 3,
+    "Magnitude": 0.8,
+    "StatName": "STR"
+  },
+  {
+    "Id": "barbarian_atk_buff",
+    "Name": "War Fervor",
+    "Description": "Temporarily increases attack.",
+    "Type": "StatBuff",
+    "Duration": 3,
+    "Magnitude": 2.3,
+    "StatName": "ATK"
+  },
+  {
+    "Id": "barbarian_fury",
+    "Name": "Primal Fury",
+    "Description": "Greatly increases attack for a while.",
+    "Type": "StatBuff",
+    "Duration": 3,
+    "Magnitude": 2.7,
+    "StatName": "ATK"
+  },
+  {
+    "Id": "barbarian_def_debuff",
+    "Name": "Sundered",
+    "Description": "Temporarily reduces physical defense.",
+    "Type": "StatBuff",
+    "Duration": 2,
+    "Magnitude": -2.7,
+    "StatName": "DEF"
+  },
+  {
+    "Id": "barbarian_str_debuff",
+    "Name": "Cowed",
+    "Description": "Temporarily reduces STR.",
+    "Type": "StatBuff",
+    "Duration": 3,
+    "Magnitude": -0.8,
+    "StatName": "STR"
+  },
+  {
+    "Id": "barbarian_aim_debuff",
+    "Name": "Shaken",
+    "Description": "Temporarily reduces aim.",
+    "Type": "StatBuff",
+    "Duration": 2,
+    "Magnitude": -1.0,
+    "StatName": "AIM"
   }
 ]
