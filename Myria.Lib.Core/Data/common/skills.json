@@ -988,7 +988,7 @@
     "Description": "Whips the enemy with thorned vines, inflicting a venomous wound.",
     "Class": "Druid",
     "ManaCost": 8,
-    "Type": "Physical",
+    "Type": "Magical",
     "Target": "SingleEnemy",
     "ScalingFactor": 1,
     "StatToScaleFrom": "INT",
