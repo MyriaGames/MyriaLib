@@ -146,6 +146,8 @@ namespace Myria.Lib.Core.Entities
         public virtual int DealPhysicalDamage() => TotalPhysicalAttack;
         public virtual int DefandPhysical()      => TotalPhysicalDefense;
         public virtual float GetBlockChance()    => BlockChance;
+        /// <summary>Instinct passive dodge (see <see cref="Systems.CombatSystem.HitChance"/>); only some classes have it.</summary>
+        public virtual float InstinctDodge       => 0f;
 
         public int GetBonusFromGear(Func<EquipmentItem, int> selector)
             => Equipped.Values.Where(i => i != null).Sum(i => selector(i!));

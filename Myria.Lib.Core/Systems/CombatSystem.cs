@@ -15,17 +15,28 @@ namespace Myria.Lib.Core.Systems
         private static readonly Random _random = Random.Shared;
         public static bool TryHit(ICombatant attacker, ICombatant defender)
         {
-            float aim = attacker.TotalAim;
-            float evasion = defender.TotalEvasion;
+            float hitChance = HitChance(attacker.TotalAim, defender.TotalEvasion, defender.InstinctDodge);
+            if (hitChance >= 1f) return true;   // guaranteed hit
+            return (float)_random.NextDouble() <= hitChance;
+        }
 
-            if (aim >= evasion)
+        /// <summary>
+        /// Chance that an attack with <paramref name="aim"/> hits a defender with <paramref name="evasion"/>.
+        /// The same rule for players and monsters: aim at or above evasion always hits, below it the
+        /// chance is aim / evasion. A defender with an Instinct passive (<see cref="ICombatant.InstinctDodge"/>,
+        /// the Rogue and the Hunter) always keeps some dodge chance on top: instinct × evasion / aim,
+        /// never more than the instinct itself - so it shrinks against very accurate attackers but never
+        /// reaches zero, and it joins the normal rule without a jump at aim = evasion.
+        /// </summary>
+        public static float HitChance(float aim, float evasion, float instinct = 0f)
+        {
+            float hit = aim >= evasion ? 1f : aim / evasion;
+            if (instinct > 0f)
             {
-                return true; // Guaranteed hit
+                float dodge = instinct * (aim <= 0f ? 1f : MathF.Min(1f, evasion / aim));
+                hit = MathF.Min(hit, 1f - dodge);
             }
-            float hitChance = aim / evasion;
-            float roll = (float)_random.NextDouble();
-
-            return roll <= hitChance; // True = hit, False = miss
+            return Math.Clamp(hit, 0f, 1f);
         }
         /// <summary>
         /// Controls how steeply damage scales with the attack/defense gap. Higher values make

@@ -24,6 +24,7 @@
     },
     "hpPerLevel": 110,
     "manaPerLevel": 45,
+    "instinctDodge": 0.2,
     "group": "RangerRogue",
     "attackRange": 10.0
   },
@@ -90,6 +91,7 @@
     },
     "hpPerLevel": 130,
     "manaPerLevel": 35,
+    "instinctDodge": 0.25,
     "group": "RangerRogue"
   },
   {

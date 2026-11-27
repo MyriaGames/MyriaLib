@@ -26,6 +26,14 @@ namespace Myria.Lib.Core.Entities.Characters
         /// </summary>
         public float AttackRange { get; set; } = 2.4f;
 
+        /// <summary>
+        /// Instinct passive, always active: the dodge chance a character of this class keeps even when an
+        /// attacker's aim beats their evasion (where a hit would otherwise be guaranteed). Shrinks with
+        /// evasion / aim, never reaches zero. 0 = no Instinct (most classes); the Rogue and Hunter have it
+        /// so evasion stays a real defence for them against bosses. See CombatSystem.HitChance.
+        /// </summary>
+        public float InstinctDodge { get; set; }
+
         // ── Registry ─────────────────────────────────────────────────────────────
 
         private static Dictionary<string, ClassProfile> _all = new(StringComparer.OrdinalIgnoreCase);

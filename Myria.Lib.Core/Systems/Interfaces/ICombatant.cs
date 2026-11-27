@@ -26,6 +26,10 @@ namespace Myria.Lib.Core.Systems.Interfaces
         public int TotalSPR { get; }
         public float CritChance { get; }
         public float BlockChance { get; }
+        /// <summary>Instinct passive: the dodge chance this combatant keeps even against attackers whose
+        /// aim beats its evasion (see <see cref="CombatSystem.HitChance"/>). 0 for everyone but the
+        /// classes that have it.</summary>
+        public float InstinctDodge => 0f;
 
         public bool IsAlive => CurrentHealth > 0;
 

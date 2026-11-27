@@ -162,6 +162,10 @@ namespace Myria.Lib.Core.Entities.Characters
             ));
 
         }
+        /// <summary>The class's Instinct passive (classes.json "instinctDodge"), always active.</summary>
+        public override float InstinctDodge =>
+            ClassProfile.All.TryGetValue(Class, out var profile) ? profile.InstinctDodge : 0f;
+
         public override void TakeDamage(int amount)
         {
             int old = CurrentHealth;
