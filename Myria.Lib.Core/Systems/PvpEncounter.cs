@@ -413,30 +413,8 @@ namespace Myria.Lib.Core.Systems
             CheckFinished(); // nobody left who can act
         }
 
-        private static int ResolveBaseStat(Skill skill, Character c) => skill.StatToScaleFrom.ToUpper() switch
-        {
-            "ATK"  => c.TotalPhysicalAttack,
-            "MATK" => c.TotalMagicAttack,
-            "SPR"  => c.TotalSPR,
-            "INT"  => c.TotalMagicAttack,   // STR/INT skills scale like ATK/MATK (v0.3)
-            "DEX"  => c.DexterityAttack,
-            "AIM"  => c.TotalAim * 2,
-            "EVA"  => c.TotalEvasion * 2,
-            "END"  => c.TotalEND,
-            "STR"  => c.TotalPhysicalAttack,
-            _      => c.TotalPhysicalAttack
-        };
+        private static int ResolveBaseStat(Skill skill, Character c) => CombatSystem.SkillBaseStat(c, skill);
 
-        private static int ResolveEffectStat(Skill skill, Character c) => skill.StatToScaleFrom.ToUpper() switch
-        {
-            "ATK"                   => c.TotalSTR,
-            "MATK"                  => c.TotalINT,
-            "SPR"                   => c.TotalSPR,
-            "INT"                   => c.TotalINT,
-            "DEX" or "AIM" or "EVA" => c.TotalDEX,
-            "END"                   => c.TotalEND,
-            "STR"                   => c.TotalSTR,
-            _                       => c.TotalSTR
-        };
+        private static int ResolveEffectStat(Skill skill, Character c) => CombatSystem.SkillEffectStat(c, skill);
     }
 }

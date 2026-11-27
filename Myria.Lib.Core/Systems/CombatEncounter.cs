@@ -312,38 +312,9 @@ namespace Myria.Lib.Core.Systems
             return dmg;
         }
 
-        private int ResolveSkillBaseStat(Skill skill) =>
-            skill.StatToScaleFrom.ToUpper() switch
-            {
-                "ATK"  => Character.TotalPhysicalAttack,
-                "MATK" => Character.TotalMagicAttack,
-                "SPR"  => Character.TotalSPR,
-                // STR/INT skills scale like ATK/MATK skills (v0.3) - the raw stat left them at a third of
-                // the power of every ATK/MATK-scaled skill.
-                "INT"  => Character.TotalMagicAttack,
-                "DEX"  => Character.DexterityAttack,
-                "AIM"  => Character.TotalAim * 2,
-                "EVA"  => Character.TotalEvasion * 2,
-                "END"  => Character.TotalEND,
-                "STR"  => Character.TotalPhysicalAttack,
-                _      => Character.TotalPhysicalAttack
-            };
+        private int ResolveSkillBaseStat(Skill skill) => CombatSystem.SkillBaseStat(Character, skill);
 
-        // Uses the caster's PRIMARY stat for effect magnitude scaling.
-        // ATK/MATK map to their underlying stat (STR/INT) so all skills
-        // start at a similar baseline (~8-10 at level 1).
-        private int ResolveEffectStat(Skill skill) =>
-            skill.StatToScaleFrom.ToUpper() switch
-            {
-                "ATK"             => Character.TotalSTR,
-                "MATK"            => Character.TotalINT,
-                "SPR"             => Character.TotalSPR,
-                "INT"             => Character.TotalINT,
-                "DEX" or "AIM" or "EVA" => Character.TotalDEX,
-                "END"             => Character.TotalEND,
-                "STR"             => Character.TotalSTR,
-                _                 => Character.TotalSTR
-            };
+        private int ResolveEffectStat(Skill skill) => CombatSystem.SkillEffectStat(Character, skill);
 
         /// <summary>Decrements every active per-skill cooldown by one turn, removing any that
         /// reach zero. Called exactly once per completed player action (see ExecuteSkill's remark

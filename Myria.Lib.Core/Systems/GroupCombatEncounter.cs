@@ -490,12 +490,7 @@ namespace Myria.Lib.Core.Systems
         private int ExecuteSkillOnMonster(Skill skill, Character caster, ICombatant target)
         {
             if (skill.IsHealing) return 0;
-            int baseStat = ResolveBaseStat(skill, caster);
-            float raw = baseStat * skill.ScalingFactor;
-            float def = skill.Type == SkillType.Physical
-                ? target.TotalPhysicalDefense
-                : target.TotalMagicDefense;
-            int dmg = Math.Max(1, (int)(raw * (raw / (raw + def))));
+            int dmg = CombatSystem.SkillDamage(caster, skill, target);
             target.TakeDamage(dmg);
             Log.Add(new CombatLogEntry("pg.fight.log.skillHit", caster.Name, skill.Name, dmg));
             return dmg;
@@ -703,37 +698,8 @@ namespace Myria.Lib.Core.Systems
         private Character? GetCharacter(int index) =>
             index >= 0 && index < Characters.Count ? Characters[index] : null;
 
-        private static int ResolveBaseStat(Skill skill, Character character) =>
-            skill.StatToScaleFrom.ToUpper() switch
-            {
-                "ATK"  => character.TotalPhysicalAttack,
-                "MATK" => character.TotalMagicAttack,
-                "SPR"  => character.TotalSPR,
-                // STR/INT skills scale like ATK/MATK skills (v0.3) - the raw stat left them at a third of
-                // the power of every ATK/MATK-scaled skill.
-                "INT"  => character.TotalMagicAttack,
-                "DEX"  => character.DexterityAttack,
-                "AIM"  => character.TotalAim * 2,
-                "EVA"  => character.TotalEvasion * 2,
-                "END"  => character.TotalEND,
-                "STR"  => character.TotalPhysicalAttack,
-                _      => character.TotalPhysicalAttack
-            };
+        private static int ResolveBaseStat(Skill skill, Character character) => CombatSystem.SkillBaseStat(character, skill);
 
-        // Uses the caster's PRIMARY stat for effect magnitude scaling.
-        // ATK/MATK map to their underlying stat (STR/INT) so all skills
-        // start at a similar baseline (~8-10 at level 1).
-        private static int ResolveEffectStat(Skill skill, Character character) =>
-            skill.StatToScaleFrom.ToUpper() switch
-            {
-                "ATK"                   => character.TotalSTR,
-                "MATK"                  => character.TotalINT,
-                "SPR"                   => character.TotalSPR,
-                "INT"                   => character.TotalINT,
-                "DEX" or "AIM" or "EVA" => character.TotalDEX,
-                "END"                   => character.TotalEND,
-                "STR"                   => character.TotalSTR,
-                _                       => character.TotalSTR
-            };
+        private static int ResolveEffectStat(Skill skill, Character character) => CombatSystem.SkillEffectStat(character, skill);
     }
 }
