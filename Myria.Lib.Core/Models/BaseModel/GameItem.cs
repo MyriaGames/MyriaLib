@@ -19,6 +19,8 @@ namespace Myria.Lib.Core.Models.BaseModel
 
         // Consumable fields
         public int HealAmount { get; set; }
+        /// <summary>Heal as a percentage of max HP (e.g. 7.5); used instead of HealAmount when set.</summary>
+        public double HealPercent { get; set; }
         public int ManaRestore { get; set; }
         public string? UseEffect { get; set; }
 

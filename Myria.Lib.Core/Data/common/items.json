@@ -15,7 +15,8 @@
     "JobId": "alchemist",
     "BuyPrice": 100,
     "MaxStackSize": 100,
-    "HealAmount": 25,
+    "HealAmount": 0,
+    "HealPercent": 5,
     "ManaRestore": 0
   },
   {
@@ -1360,7 +1361,8 @@
     "JobId": "alchemist",
     "BuyPrice": 260,
     "MaxStackSize": 100,
-    "HealAmount": 60,
+    "HealAmount": 0,
+    "HealPercent": 7.5,
     "ManaRestore": 0
   },
   {
@@ -1382,7 +1384,8 @@
     "JobId": "alchemist",
     "BuyPrice": 600,
     "MaxStackSize": 100,
-    "HealAmount": 120,
+    "HealAmount": 0,
+    "HealPercent": 10,
     "ManaRestore": 0
   },
   {

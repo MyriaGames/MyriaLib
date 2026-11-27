@@ -58,10 +58,24 @@ namespace Myria.Lib.Core.Entities.Characters
         /// <summary>Same as <see cref="SwapEquipment(string, Character)"/>, but reports why it failed
         /// (used by the multiplayer server so it can tell the client what went wrong instead of
         /// silently doing nothing).</summary>
-        public bool SwapEquipment(string itemId, Character character, out string? reason)
+        public bool SwapEquipment(string itemId, Character character, out string? reason) =>
+            SwapEquipment(InventoryUtils.ResolveInventoryItem(itemId, character) as EquipmentItem, character, out reason);
+
+        /// <summary>
+        /// The piece of equipment in this inventory with this id AND upgrade state - several items
+        /// can share an id (a +4 and a +10 blade), and equipping by id alone took whichever came first.
+        /// </summary>
+        public EquipmentItem? FindEquipment(string itemId, int upgradeLevel, float craftQuality) =>
+            Items.OfType<EquipmentItem>().FirstOrDefault(e =>
+                string.Equals(e.Id, itemId, StringComparison.OrdinalIgnoreCase)
+                && e.UpgradeLevel == upgradeLevel
+                && Math.Abs(e.CraftQuality - craftQuality) < 0.0005f);
+
+        /// <summary>Equips exactly <paramref name="equipment"/> (an instance in this inventory),
+        /// putting whatever was in its slot back into the inventory.</summary>
+        public bool SwapEquipment(EquipmentItem? equipment, Character character, out string? reason)
         {
-            var match = InventoryUtils.ResolveInventoryItem(itemId, character);
-            if (match is not EquipmentItem equipment)
+            if (equipment is null || !Items.Contains(equipment))
             {
                 reason = "Item not found in inventory.";
                 return false;

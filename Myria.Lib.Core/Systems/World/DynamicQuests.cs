@@ -35,6 +35,9 @@ namespace Myria.Lib.Core.Systems.World
         public const string GuildNpcId = "adventurers_guild";
         /// <summary>A guild house offers bounties for overworld rooms within this many exits.</summary>
         public const int GuildRadius = 3;
+        /// <summary>Most bounties a guild house lists at once: the most overrun rooms first, then the
+        /// nearest. (Every overworld room can be overrun, so the full list ran to 30+ near Royas.)</summary>
+        public const int MaxBountiesShown = 6;
     }
 
     /// <summary>
@@ -166,7 +169,9 @@ namespace Myria.Lib.Core.Systems.World
             {
                 string monsterName = MonsterService.GetMonsterById(g.MonsterId!.Value)?.Name ?? g.MonsterId.ToString()!;
                 quest.Name = "quest.dyn.kill.name";
-                quest.NameArgs = new() { g.Target.ToString(), monsterName };
+                // The room is part of the name - bounties for the same monster in neighbouring rooms
+                // looked identical in the list ("Bounty: 5 Marsh Vipers" several times).
+                quest.NameArgs = new() { g.Target.ToString(), monsterName, roomName };
                 quest.Description = "quest.dyn.kill.desc";
                 quest.DescriptionArgs = new() { g.Target.ToString(), monsterName, roomName };
                 quest.GiverNpcId = DynamicQuestRules.GuildNpcId;
@@ -199,6 +204,27 @@ namespace Myria.Lib.Core.Systems.World
 
         /// <summary>Rooms within <paramref name="maxDistance"/> exits of <paramref name="originRoomId"/>
         /// (breadth-first over room exits), including the origin itself.</summary>
+        /// <summary>Exit distance from <paramref name="originRoomId"/> to every room within
+        /// <paramref name="maxDistance"/> exits (the origin itself at 0).</summary>
+        public static Dictionary<int, int> DistancesWithin(int originRoomId, int maxDistance)
+        {
+            var dist = new Dictionary<int, int> { [originRoomId] = 0 };
+            var frontier = new List<int> { originRoomId };
+            for (int d = 1; d <= maxDistance && frontier.Count > 0; d++)
+            {
+                var next = new List<int>();
+                foreach (var id in frontier)
+                {
+                    var room = RoomService.AllRooms.FirstOrDefault(r => r.Id == id);
+                    if (room == null) continue;
+                    foreach (var exit in room.ExitIds.Values)
+                        if (dist.TryAdd(exit, d)) next.Add(exit);
+                }
+                frontier = next;
+            }
+            return dist;
+        }
+
         public static HashSet<int> RoomsWithin(int originRoomId, int maxDistance)
         {
             var seen = new HashSet<int> { originRoomId };

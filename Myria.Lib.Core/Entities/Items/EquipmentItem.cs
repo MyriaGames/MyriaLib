@@ -89,12 +89,21 @@ namespace Myria.Lib.Core.Entities.Items
         public void TryUpgrade_Internal()
         {
             UpgradeLevel++;
-            float multiplier = UpgradeLevel <= 2 ? 1 + (UpgradeLevel * 0.1f)
-                             : UpgradeLevel <= 4 ? 1 + (UpgradeLevel * 0.2f)
-                             : UpgradeLevel <= 6 ? 1 + (UpgradeLevel * 0.35f)
-                             : UpgradeLevel <= 8 ? 1 + (UpgradeLevel * 0.6f)
-                                                 : 1 + (UpgradeLevel * 1.0f);
-            Bonuses = BaseStats.Scale(multiplier * CraftQuality);
+            Bonuses = BaseStats.Scale(UpgradeMultiplier(UpgradeLevel) * CraftQuality);
         }
+
+        /// <summary>
+        /// Stat multiplier per upgrade level (v0.3): +10 is x2.7. It used to climb to x11, which made
+        /// maxed normal gear trivialise dungeons - and stacked with craft quality (up to x3) to x33.
+        /// Maxed normal gear should make a dungeon of your level hard but possible solo; a master
+        /// smith's quality on top is what makes the strongest gear.
+        /// </summary>
+        public static float UpgradeMultiplier(int upgradeLevel) =>
+            upgradeLevel <= 0 ? 1f
+            : upgradeLevel < UpgradeMultipliers.Length ? UpgradeMultipliers[upgradeLevel]
+            : UpgradeMultipliers[^1] + 0.3f * (upgradeLevel - UpgradeMultipliers.Length + 1);
+
+        private static readonly float[] UpgradeMultipliers =
+            { 1f, 1.1f, 1.2f, 1.3f, 1.45f, 1.6f, 1.75f, 1.95f, 2.15f, 2.4f, 2.7f };
     }
 }

@@ -23,6 +23,16 @@ namespace Myria.Lib.Core.Entities.Monsters
         /// behaves reasonably; individual monsters can set a longer value in monsters.json.
         /// </summary>
         public float RespawnSeconds { get; set; } = 5f;
+
+        /// <summary>Max-HP multiplier (dungeon party scaling, v0.3): 1.5 = half again as much HP.</summary>
+        public float HealthScale { get; set; } = 1f;
+
+        /// <summary>Multiplier on the damage this monster deals (dungeon party scaling, v0.3) - applied
+        /// to the final damage, since attack stats feed a non-linear formula (and STR also adds defense).</summary>
+        public float DamageScale { get; set; } = 1f;
+
+        protected override int ExtraBaseHealth =>
+            HealthScale == 1f ? 0 : (int)Math.Round((Stats.BaseHealth + TotalEND * 5) * (HealthScale - 1f));
         public bool DropsCorpse =>
             Type != MonsterType.Spirit && Type != MonsterType.Shadow;
 
@@ -54,6 +64,8 @@ namespace Myria.Lib.Core.Entities.Monsters
             LootTable        = new List<Item>(LootTable),
             UniqueLootTable  = new List<UniqueLootEntry>(UniqueLootTable),
             RespawnSeconds   = RespawnSeconds,
+            HealthScale      = HealthScale,
+            DamageScale      = DamageScale,
         };
     }
 

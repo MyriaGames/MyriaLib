@@ -60,6 +60,9 @@ namespace Myria.Lib.Core.Systems
             if ((float)_random.NextDouble() < defender.GetBlockChance())
                 dmg /= 2;
 
+            if (attacker is Myria.Lib.Core.Entities.Monsters.Monster { DamageScale: not 1f } scaled)
+                dmg *= scaled.DamageScale;
+
             return Math.Max(1, (int)dmg);
         }
 

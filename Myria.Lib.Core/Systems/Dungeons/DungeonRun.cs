@@ -10,13 +10,32 @@ namespace Myria.Lib.Core.Systems.Dungeons
     {
         /// <summary>Most monsters of a room's pack one fight takes on, solo / as a party. A bigger
         /// pack takes several fights.</summary>
-        public const int SoloPackPerFight  = 3;
+        public const int SoloPackPerFight  = 2;
         public const int PartyPackPerFight = 5;
 
         /// <summary>Pack size for a normal dungeon room with no <see cref="Room.DungeonPack"/>.</summary>
         public const int DefaultPackSize = 3;
 
         public static int PackPerFight(bool party) => party ? PartyPackPerFight : SoloPackPerFight;
+
+        /// <summary>
+        /// Party scaling (v0.3): packs are sized for one player, so without it a group steamrolled
+        /// them - a 4-5 player group with two healers cleared the Grotto every time using a handful
+        /// of potions. Monster HP grows linearly per extra member; their damage grows with the square
+        /// of it, so big healer-backed groups still have to work (tuned with full-run simulations of
+        /// mixed class/race parties: the Grotto at level 12 with +4 gear clears ~75-90%).
+        /// </summary>
+        public const float PartyHealthPerMember = 0.30f;
+        public const float PartyDamagePerMemberSquared = 0.035f;
+
+        public static float PartyHealthScale(int partySize) =>
+            1f + PartyHealthPerMember * Math.Max(0, partySize - 1);
+
+        public static float PartyDamageScale(int partySize)
+        {
+            int extra = Math.Max(0, partySize - 1);
+            return 1f + PartyDamagePerMemberSquared * extra * extra;
+        }
 
         /// <summary>The dungeon a room belongs to, or null for any non-dungeon room.</summary>
         public static string? DungeonIdOf(Room? room) =>
@@ -42,6 +61,10 @@ namespace Myria.Lib.Core.Systems.Dungeons
         private readonly List<(List<Monster> Monsters, Func<bool> IsActive)> _engaged = new();
 
         public string DungeonId { get; }
+
+        /// <summary>How many players this run is for (party scaling). A room's pack takes the size it
+        /// has when the pack is rolled - the first time the room is looked at.</summary>
+        public int PartySize { get; set; } = 1;
 
         public DungeonRun(string dungeonId) => DungeonId = dungeonId;
 
@@ -113,12 +136,26 @@ namespace Myria.Lib.Core.Systems.Dungeons
         private List<Monster> RemainingLocked(Room room)
         {
             if (!_remaining.TryGetValue(room.Id, out var list))
-                _remaining[room.Id] = list = SpawnPack(room);
+                _remaining[room.Id] = list = SpawnPack(room, PartySize);
             return list;
         }
 
-        /// <summary>Fresh instances for a room's pack (see <see cref="Room.DungeonPack"/>).</summary>
-        public static List<Monster> SpawnPack(Room room)
+        /// <summary>Fresh instances for a room's pack (see <see cref="Room.DungeonPack"/>), scaled for
+        /// <paramref name="partySize"/> players (see <see cref="DungeonRules.PartyHealthScale"/>).</summary>
+        public static List<Monster> SpawnPack(Room room, int partySize = 1)
+        {
+            var pack = SpawnUnscaled(room);
+            if (partySize > 1)
+                foreach (var m in pack)
+                {
+                    m.HealthScale = DungeonRules.PartyHealthScale(partySize);
+                    m.DamageScale = DungeonRules.PartyDamageScale(partySize);
+                    m.ResetHealth();
+                }
+            return pack;
+        }
+
+        private static List<Monster> SpawnUnscaled(Room room)
         {
             var pack = new List<Monster>();
             if (!room.IsDungeonRoom || (room.Monsters.Count == 0 && room.DungeonPack.Count == 0)) return pack;

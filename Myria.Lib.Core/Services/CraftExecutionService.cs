@@ -106,7 +106,7 @@ namespace Myria.Lib.Core.Services
 
             if (output is EquipmentItem crafted && !string.IsNullOrEmpty(jobId))
             {
-                crafted.CraftQuality = (float)JobXpService.GetSkillMultiplierFromXp(JobManager.GetOrAdd(character, jobId).SkillXp);
+                crafted.CraftQuality = (float)JobXpService.GetCraftQualityFromXp(JobManager.GetOrAdd(character, jobId).SkillXp);
                 crafted.Bonuses = crafted.BaseStats.Scale(crafted.CraftQuality);
             }
 
@@ -164,7 +164,7 @@ namespace Myria.Lib.Core.Services
 
             if (!string.IsNullOrEmpty(jobId))
             {
-                float quality = (float)JobXpService.GetSkillMultiplierFromXp(JobManager.GetOrAdd(character, jobId).SkillXp);
+                float quality = (float)JobXpService.GetCraftQualityFromXp(JobManager.GetOrAdd(character, jobId).SkillXp);
                 if (quality > item.CraftQuality) item.CraftQuality = quality;
             }
 

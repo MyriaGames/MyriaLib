@@ -537,8 +537,20 @@ namespace Myria.Lib.Core.Systems
 
         private void AdvanceAfterCharacterAction()
         {
-            // Decrement whoever just acted's own skill cooldowns - _currentCharacterIndex still
-            // points at them here, before any of the advancement logic below runs.
+            // A DEX-earned bonus action keeps the turn on the same character instead of moving
+            // on - CurrentTurnCharacterName is unchanged, so no protocol/client change is needed
+            // for this to work; the client just gets prompted for the same character's action again.
+            if (_bonusActionsRemaining > 0)
+            {
+                _bonusActionsRemaining--;
+                return;
+            }
+
+            // The turn is over: decrement whoever just acted's own skill cooldowns once - per
+            // TURN, not per action. Ticking on every action let a DEX bonus action count as a
+            // cooldown turn, so a skill came back a round early (often right as the bonus action
+            // killed a monster, so it looked like the cooldown didn't carry over to the next one).
+            // _currentCharacterIndex still points at the actor here.
             var actor = Characters[_currentCharacterIndex];
             if (_skillCooldowns.TryGetValue(actor, out var actorCooldowns) && actorCooldowns.Count > 0)
             {
@@ -547,15 +559,6 @@ namespace Myria.Lib.Core.Systems
                     if (--actorCooldowns[key] <= 0)
                         actorCooldowns.Remove(key);
                 }
-            }
-
-            // A DEX-earned bonus action keeps the turn on the same character instead of moving
-            // on - CurrentTurnCharacterName is unchanged, so no protocol/client change is needed
-            // for this to work; the client just gets prompted for the same character's action again.
-            if (_bonusActionsRemaining > 0)
-            {
-                _bonusActionsRemaining--;
-                return;
             }
 
             int next = _currentCharacterIndex + 1;

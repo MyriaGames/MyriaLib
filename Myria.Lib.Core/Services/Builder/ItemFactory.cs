@@ -116,6 +116,7 @@ namespace Myria.Lib.Core.Services.Builder
             BuyPrice    = def.BuyPrice,
             MaxStackSize = def.MaxStackSize,
             HealAmount  = def.HealAmount,
+            HealPercent = def.HealPercent,
             ManaRestore = def.ManaRestore,
             UseEffect   = def.UseEffect,
             AllowedClasses = def.AllowedClasses ?? new(),

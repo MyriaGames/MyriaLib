@@ -49,6 +49,16 @@ namespace Myria.Lib.Core.Services.Manager
             if (game.Ticks < 0 || game.Ticks >= TicksPerSegment)
                 game.Ticks = 0;
 
+            RollGatherLimits();
+        }
+
+        /// <summary>
+        /// Rolls today's gather charges for every room with gathering spots. Also needed after a
+        /// data reload (GameService.InitializeGame with skipGameState): that builds new Room objects,
+        /// which start with no charges - online, no room offered gathering at all.
+        /// </summary>
+        public static void RollGatherLimits()
+        {
             foreach (var room in RoomService.AllRooms.Where(r => r.GatheringSpots.Count > 0))
                 room.RollGatherLimit();
         }
@@ -137,10 +147,6 @@ namespace Myria.Lib.Core.Services.Manager
             }
         }
 
-        private static void OnNewDay()
-        {
-            foreach (var room in RoomService.AllRooms.Where(r => r.GatheringSpots.Count > 0))
-                room.RollGatherLimit();
-        }
+        private static void OnNewDay() => RollGatherLimits();
     }
 }

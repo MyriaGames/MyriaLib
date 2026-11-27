@@ -120,6 +120,24 @@ namespace Myria.Lib.Core.Services
             return 1.0 + (clamped - 1) * (MaxSkillBonus / (MaxLevel - 1));
         }
 
+        /// <summary>
+        /// Quality of crafted (or master-upgraded) equipment from the crafter's skill level (v0.3):
+        /// x1.0 at level 1 up to x(1 + MaxSkillBonus) = x3.0 at max level, on a convex curve - about
+        /// x1.05 at 10, x1.3 at 30, x1.7 at 50, x2.4 at 80 - so the best gear comes from a master
+        /// smith and a low-level smith adds little. (It used the linear gather multiplier.)
+        /// </summary>
+        public static double GetCraftQuality(int level)
+        {
+            int clamped = Math.Clamp(level, 1, MaxLevel);
+            double t = (clamped - 1) / (double)(MaxLevel - 1);
+            return 1.0 + MaxSkillBonus * Math.Pow(t, CraftQualityExponent);
+        }
+
+        /// <summary>Shape of <see cref="GetCraftQuality"/>: 1 = linear, higher = slower early growth.</summary>
+        public static double CraftQualityExponent { get; set; } = 1.5;
+
+        public static double GetCraftQualityFromXp(long totalXp) => GetCraftQuality(GetLevel(totalXp));
+
         /// <summary>Skill multiplier derived from accumulated XP rather than a precomputed level.</summary>
         public static double GetSkillMultiplierFromXp(long totalXp)
             => GetSkillMultiplier(GetLevel(totalXp));
