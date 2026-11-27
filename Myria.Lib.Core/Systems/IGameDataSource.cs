@@ -37,6 +37,8 @@ namespace Myria.Lib.Core.Systems
         List<Cave> GetCaves();
         List<Dungeon> GetDungeons();
         List<Forest> GetForests();
+        /// <summary>Gear sets (v0.3); sources that predate them have none.</summary>
+        List<Myria.Lib.Core.Entities.Items.ItemSet> GetItemSets() => new();
         (List<RuneWord> Words, List<WordFamily> Families, List<WordPairRelation> Pairs) GetRuneWords();
         List<BaseRuneData> GetBaseRunes();
     }

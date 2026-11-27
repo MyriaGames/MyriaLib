@@ -163,6 +163,7 @@ namespace Myria.Lib.Core.Services
                 CaveRegistry.Load(ModLoader.ResolvePath("Data/common/caves.json"));
                 CityRegistry.Load(ModLoader.ResolvePath("Data/common/cities.json"));
                 ForestRegistry.Load(ModLoader.ResolvePath("Data/common/forests.json"));
+                ItemSetRegistry.Load(ModLoader.ResolvePath("Data/common/item_sets.json"));
             }
             else
             {
@@ -170,6 +171,7 @@ namespace Myria.Lib.Core.Services
                 CaveRegistry.Load(source.GetCaves());
                 CityRegistry.Load(source.GetCities());
                 ForestRegistry.Load(source.GetForests());
+                ItemSetRegistry.Load(source.GetItemSets());
             }
             Report("registries");
 

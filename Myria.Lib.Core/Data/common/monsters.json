@@ -831,12 +831,12 @@
     "Level": 20,
     "Exp": 186,
     "Stats": {
-      "Strength": 142,
-      "Dexterity": 77,
-      "Endurance": 194,
-      "Intelligence": 90,
-      "Spirit": 104,
-      "BaseHealth": 60,
+      "Strength": 156,
+      "Dexterity": 85,
+      "Endurance": 213,
+      "Intelligence": 99,
+      "Spirit": 114,
+      "BaseHealth": 66,
       "BaseMana": 20
     },
     "RespawnSeconds": 6.4
@@ -849,12 +849,12 @@
     "Level": 22,
     "Exp": 205,
     "Stats": {
-      "Strength": 71,
-      "Dexterity": 141,
-      "Endurance": 113,
-      "Intelligence": 198,
-      "Spirit": 198,
-      "BaseHealth": 65,
+      "Strength": 78,
+      "Dexterity": 155,
+      "Endurance": 124,
+      "Intelligence": 218,
+      "Spirit": 218,
+      "BaseHealth": 72,
       "BaseMana": 88
     },
     "RespawnSeconds": 6.6
@@ -867,12 +867,12 @@
     "Level": 24,
     "Exp": 223,
     "Stats": {
-      "Strength": 169,
-      "Dexterity": 92,
-      "Endurance": 230,
-      "Intelligence": 108,
-      "Spirit": 123,
-      "BaseHealth": 70,
+      "Strength": 186,
+      "Dexterity": 101,
+      "Endurance": 253,
+      "Intelligence": 119,
+      "Spirit": 135,
+      "BaseHealth": 77,
       "BaseMana": 24
     },
     "RespawnSeconds": 6.9
@@ -885,12 +885,12 @@
     "Level": 26,
     "Exp": 242,
     "Stats": {
-      "Strength": 150,
-      "Dexterity": 232,
-      "Endurance": 133,
-      "Intelligence": 116,
-      "Spirit": 133,
-      "BaseHealth": 75,
+      "Strength": 165,
+      "Dexterity": 255,
+      "Endurance": 146,
+      "Intelligence": 128,
+      "Spirit": 146,
+      "BaseHealth": 83,
       "BaseMana": 26
     },
     "RespawnSeconds": 7.1

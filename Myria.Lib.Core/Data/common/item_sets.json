@@ -1,0 +1,329 @@
+[
+  {
+    "Id": "siltshell",
+    "Name": "item_set.siltshell",
+    "Items": [
+      "siltshell_cleaver",
+      "siltshell_bow",
+      "siltshell_dirk",
+      "siltshell_wand",
+      "siltshell_plate",
+      "siltshell_jerkin",
+      "siltshell_robe",
+      "siltshell_band"
+    ],
+    "Tiers": [
+      {
+        "Pieces": 2,
+        "Bonuses": [
+          {
+            "SkillId": "quick_shot",
+            "Power": 0.1
+          },
+          {
+            "SkillId": "swift_strike",
+            "Power": 0.1
+          },
+          {
+            "SkillId": "guard_strike",
+            "Power": 0.1
+          },
+          {
+            "SkillId": "heavy_blow",
+            "Power": 0.1
+          },
+          {
+            "SkillId": "berserk_blow",
+            "Power": 0.1
+          },
+          {
+            "SkillId": "holy_light",
+            "Power": 0.1
+          },
+          {
+            "SkillId": "quick_slash",
+            "Power": 0.1
+          },
+          {
+            "SkillId": "spark",
+            "Power": 0.1
+          },
+          {
+            "SkillId": "arcane_bolt",
+            "Power": 0.1
+          },
+          {
+            "SkillId": "thorn_lash",
+            "Power": 0.1
+          },
+          {
+            "SkillId": "dark_slash",
+            "Power": 0.1
+          }
+        ]
+      },
+      {
+        "Pieces": 3,
+        "Bonuses": [
+          {
+            "SkillId": "quick_shot",
+            "ManaCost": -0.2
+          },
+          {
+            "SkillId": "crippling_shot",
+            "Power": 0.1
+          },
+          {
+            "SkillId": "swift_strike",
+            "ManaCost": -0.2
+          },
+          {
+            "SkillId": "snare",
+            "Power": 0.1
+          },
+          {
+            "SkillId": "guard_strike",
+            "ManaCost": -0.2
+          },
+          {
+            "SkillId": "shield_wall",
+            "Power": 0.1
+          },
+          {
+            "SkillId": "heavy_blow",
+            "ManaCost": -0.2
+          },
+          {
+            "SkillId": "slam",
+            "Power": 0.1
+          },
+          {
+            "SkillId": "berserk_blow",
+            "ManaCost": -0.2
+          },
+          {
+            "SkillId": "battle_roar",
+            "Power": 0.1
+          },
+          {
+            "SkillId": "holy_light",
+            "ManaCost": -0.2
+          },
+          {
+            "SkillId": "divine_protection",
+            "Power": 0.1
+          },
+          {
+            "SkillId": "quick_slash",
+            "ManaCost": -0.2
+          },
+          {
+            "SkillId": "evasive_strike",
+            "Power": 0.1
+          },
+          {
+            "SkillId": "spark",
+            "ManaCost": -0.2
+          },
+          {
+            "SkillId": "mana_barrier",
+            "Power": 0.1
+          },
+          {
+            "SkillId": "arcane_bolt",
+            "ManaCost": -0.2
+          },
+          {
+            "SkillId": "mana_drain",
+            "Power": 0.1
+          },
+          {
+            "SkillId": "thorn_lash",
+            "ManaCost": -0.2
+          },
+          {
+            "SkillId": "barkskin",
+            "Power": 0.1
+          },
+          {
+            "SkillId": "dark_slash",
+            "ManaCost": -0.2
+          },
+          {
+            "SkillId": "dark_shield",
+            "Power": 0.1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "Id": "breswelc",
+    "Name": "item_set.breswelc",
+    "Items": [
+      "breswelc_scale_charm",
+      "breswelc_greatblade",
+      "breswelc_spinebow",
+      "breswelc_coral_staff",
+      "breswelc_scale_plate",
+      "breswelc_scale_jerkin",
+      "breswelc_tide_robe",
+      "serpent_fang"
+    ],
+    "Tiers": [
+      {
+        "Pieces": 2,
+        "Bonuses": [
+          {
+            "SkillId": "venomous_shot",
+            "Power": 0.15
+          },
+          {
+            "SkillId": "hunters_focus",
+            "Power": 0.15
+          },
+          {
+            "SkillId": "crusader_strike",
+            "Power": 0.15
+          },
+          {
+            "SkillId": "battle_rush",
+            "Power": 0.15
+          },
+          {
+            "SkillId": "primal_fury",
+            "Power": 0.15
+          },
+          {
+            "SkillId": "minor_heal",
+            "Power": 0.15
+          },
+          {
+            "SkillId": "poison_dagger",
+            "Power": 0.15
+          },
+          {
+            "SkillId": "flame_bolt",
+            "Power": 0.15
+          },
+          {
+            "SkillId": "arcane_surge",
+            "Power": 0.15
+          },
+          {
+            "SkillId": "natures_healing",
+            "Power": 0.15
+          },
+          {
+            "SkillId": "soul_drain",
+            "Power": 0.15
+          }
+        ]
+      },
+      {
+        "Pieces": 3,
+        "Bonuses": [
+          {
+            "SkillId": "venomous_shot",
+            "ManaCost": -0.2,
+            "Cooldown": -1
+          },
+          {
+            "SkillId": "volley",
+            "Power": 0.15
+          },
+          {
+            "SkillId": "hunters_focus",
+            "ManaCost": -0.2,
+            "Cooldown": -1
+          },
+          {
+            "SkillId": "feral_slash",
+            "Power": 0.15
+          },
+          {
+            "SkillId": "crusader_strike",
+            "ManaCost": -0.2,
+            "Cooldown": -1
+          },
+          {
+            "SkillId": "holy_strike",
+            "Power": 0.15
+          },
+          {
+            "SkillId": "battle_rush",
+            "ManaCost": -0.2,
+            "Cooldown": -1
+          },
+          {
+            "SkillId": "double_strike",
+            "Power": 0.15
+          },
+          {
+            "SkillId": "primal_fury",
+            "ManaCost": -0.2,
+            "Cooldown": -1
+          },
+          {
+            "SkillId": "cleave",
+            "Power": 0.15
+          },
+          {
+            "SkillId": "minor_heal",
+            "ManaCost": -0.2,
+            "Cooldown": -1
+          },
+          {
+            "SkillId": "smite",
+            "Power": 0.15
+          },
+          {
+            "SkillId": "poison_dagger",
+            "ManaCost": -0.2,
+            "Cooldown": -1
+          },
+          {
+            "SkillId": "backstab",
+            "Power": 0.15
+          },
+          {
+            "SkillId": "flame_bolt",
+            "ManaCost": -0.2,
+            "Cooldown": -1
+          },
+          {
+            "SkillId": "elemental_wave",
+            "Power": 0.15
+          },
+          {
+            "SkillId": "arcane_surge",
+            "ManaCost": -0.2,
+            "Cooldown": -1
+          },
+          {
+            "SkillId": "arcane_blast",
+            "Power": 0.15
+          },
+          {
+            "SkillId": "natures_healing",
+            "ManaCost": -0.2,
+            "Cooldown": -1
+          },
+          {
+            "SkillId": "nature_bolt",
+            "Power": 0.15
+          },
+          {
+            "SkillId": "soul_drain",
+            "ManaCost": -0.2,
+            "Cooldown": -1
+          },
+          {
+            "SkillId": "shadow_veil",
+            "Power": 0.15
+          }
+        ]
+      }
+    ]
+  }
+]

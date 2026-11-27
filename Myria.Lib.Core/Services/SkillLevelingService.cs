@@ -204,6 +204,12 @@ namespace Myria.Lib.Core.Services
                 }
             }
 
+            // v0.3 gear sets: bonuses from the character's equipped set pieces.
+            var setBonus = Myria.Lib.Core.Services.Regestries.ItemSetRegistry.BonusFor(character, baseSkill.Id);
+            scalingDelta += baseSkill.ScalingFactor * setBonus.Power;
+            manaCostDelta += (int)Math.Round(baseSkill.ManaCost * setBonus.ManaCost);
+            cooldownDelta += setBonus.Cooldown;
+
             if (scalingDelta == 0f && manaCostDelta == 0 && cooldownDelta == 0 && castTimeDelta == 0
                 && recoveryTimeDelta == 0 && addedEffects.Count == 0)
                 return baseSkill; // nerf constants disabled and nothing purchased - raw template is exact
