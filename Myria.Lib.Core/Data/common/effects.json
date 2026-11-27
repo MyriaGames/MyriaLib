@@ -430,5 +430,23 @@
     "Duration": 2,
     "Magnitude": -1.0,
     "StatName": "AIM"
+  },
+  {
+    "Id": "druid_dex_buff",
+    "Name": "Tailwind",
+    "Description": "Temporarily increases DEX.",
+    "Type": "StatBuff",
+    "Duration": 3,
+    "Magnitude": 1.0,
+    "StatName": "DEX"
+  },
+  {
+    "Id": "druid_eva_buff",
+    "Name": "Rustling Cover",
+    "Description": "Temporarily improves evasion.",
+    "Type": "StatBuff",
+    "Duration": 3,
+    "Magnitude": 1.0,
+    "StatName": "EVA"
   }
 ]

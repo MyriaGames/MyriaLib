@@ -138,12 +138,12 @@
     "statGrowth": {
       "STR": 3,
       "DEX": 1,
-      "END": 6,
+      "END": 4,
       "INT": 1,
-      "SPR": 6
+      "SPR": 8
     },
-    "hpPerLevel": 170,
-    "manaPerLevel": 15,
+    "hpPerLevel": 180,
+    "manaPerLevel": 10,
     "group": "DivineHybrid"
   },
   {

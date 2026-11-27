@@ -990,7 +990,7 @@
     "ManaCost": 8,
     "Type": "Physical",
     "Target": "SingleEnemy",
-    "ScalingFactor": 1.5,
+    "ScalingFactor": 1,
     "StatToScaleFrom": "INT",
     "MinLevel": 1,
     "AggroModifier": 1,
@@ -998,10 +998,10 @@
       { "EffectId": "poison_weak", "ApplyTo": "Target" }
     ],
     "UpgradeOptions": [
-      { "Id": "thorn_lash_power", "Description": "Increases damage.", "ScalingFactorDelta": 0.25 },
+      { "Id": "thorn_lash_power", "Description": "Increases damage.", "ScalingFactorDelta": 0.16 },
       { "Id": "thorn_lash_efficiency", "Description": "Reduces mana cost.", "ManaCostDelta": -1, "MaxPurchases": 2 },
-      { "Id": "thorn_lash_mastery", "Description": "Greatly increases damage.", "ScalingFactorDelta": 0.4, "RequiredLevel": 6, "MaxPurchases": 2 },
-      { "Id": "thorn_lash_power_2", "Description": "Further increases damage.", "ScalingFactorDelta": 0.3, "RequiredLevel": 11 },
+      { "Id": "thorn_lash_mastery", "Description": "Greatly increases damage.", "ScalingFactorDelta": 0.26, "RequiredLevel": 6, "MaxPurchases": 2 },
+      { "Id": "thorn_lash_power_2", "Description": "Further increases damage.", "ScalingFactorDelta": 0.2, "RequiredLevel": 11 },
       { "Id": "thorn_lash_entangle", "Description": "Thorns can entangle the target, stunning it.", "RequiredLevel": 11, "MaxPurchases": 1, "AddedEffects": [ { "EffectId": "stun_short", "ApplyTo": "Target" } ] }
     ]
   },
@@ -1013,14 +1013,14 @@
     "ManaCost": 10,
     "Type": "Magical",
     "Target": "SingleEnemy",
-    "ScalingFactor": 1.6,
+    "ScalingFactor": 1.1,
     "StatToScaleFrom": "MATK",
     "MinLevel": 1,
     "UpgradeOptions": [
-      { "Id": "nature_bolt_power", "Description": "Increases damage.", "ScalingFactorDelta": 0.25 },
+      { "Id": "nature_bolt_power", "Description": "Increases damage.", "ScalingFactorDelta": 0.16 },
       { "Id": "nature_bolt_efficiency", "Description": "Reduces mana cost.", "ManaCostDelta": -1, "MaxPurchases": 3 },
-      { "Id": "nature_bolt_mastery", "Description": "Greatly increases damage.", "ScalingFactorDelta": 0.4, "RequiredLevel": 6, "MaxPurchases": 2 },
-      { "Id": "nature_bolt_power_2", "Description": "Further increases damage.", "ScalingFactorDelta": 0.3, "RequiredLevel": 11 },
+      { "Id": "nature_bolt_mastery", "Description": "Greatly increases damage.", "ScalingFactorDelta": 0.26, "RequiredLevel": 6, "MaxPurchases": 2 },
+      { "Id": "nature_bolt_power_2", "Description": "Further increases damage.", "ScalingFactorDelta": 0.2, "RequiredLevel": 11 },
       { "Id": "nature_bolt_verdant_echo", "Description": "Nature's echo briefly heals you.", "RequiredLevel": 11, "MaxPurchases": 1, "AddedEffects": [ { "EffectId": "hp_regen_burst", "ApplyTo": "Caster" } ] }
     ]
   },
@@ -1032,7 +1032,7 @@
     "ManaCost": 12,
     "Type": "Magical",
     "Target": "Self",
-    "ScalingFactor": 5,
+    "ScalingFactor": 1,
     "StatToScaleFrom": "INT",
     "MinLevel": 1,
     "IsHealing": true,
@@ -1041,10 +1041,10 @@
       { "EffectId": "hp_regen_small", "ApplyTo": "Caster" }
     ],
     "UpgradeOptions": [
-      { "Id": "barkskin_power", "Description": "Increases healing.", "ScalingFactorDelta": 0.75 },
+      { "Id": "barkskin_power", "Description": "Increases healing.", "ScalingFactorDelta": 0.15 },
       { "Id": "barkskin_efficiency", "Description": "Reduces mana cost.", "ManaCostDelta": -1, "MaxPurchases": 3 },
-      { "Id": "barkskin_mastery", "Description": "Greatly increases healing.", "ScalingFactorDelta": 1.25, "RequiredLevel": 6, "MaxPurchases": 2 },
-      { "Id": "barkskin_power_2", "Description": "Further increases healing.", "ScalingFactorDelta": 1.0, "RequiredLevel": 11 },
+      { "Id": "barkskin_mastery", "Description": "Greatly increases healing.", "ScalingFactorDelta": 0.25, "RequiredLevel": 6, "MaxPurchases": 2 },
+      { "Id": "barkskin_power_2", "Description": "Further increases healing.", "ScalingFactorDelta": 0.2, "RequiredLevel": 11 },
       { "Id": "barkskin_ironbark", "Description": "Bark hardens, also raising defense.", "RequiredLevel": 11, "MaxPurchases": 1, "AddedEffects": [ { "EffectId": "def_buff_minor", "ApplyTo": "Caster" } ] }
     ]
   },
@@ -1061,14 +1061,14 @@
     "MinLevel": 1,
     "AggroModifier": 0.5,
     "Effects": [
-      { "EffectId": "dex_buff_minor", "ApplyTo": "Target" }
+      { "EffectId": "druid_dex_buff", "ApplyTo": "Target" }
     ],
     "UpgradeOptions": [
       { "Id": "wind_gust_power", "Description": "Strengthens the effect.", "ScalingFactorDelta": 0.25 },
       { "Id": "wind_gust_efficiency", "Description": "Reduces mana cost.", "ManaCostDelta": -1, "MaxPurchases": 3 },
       { "Id": "wind_gust_mastery", "Description": "Greatly strengthens the effect.", "ScalingFactorDelta": 0.4, "RequiredLevel": 6, "MaxPurchases": 2 },
       { "Id": "wind_gust_power_2", "Description": "Further strengthens the effect.", "ScalingFactorDelta": 0.3, "RequiredLevel": 11 },
-      { "Id": "wind_gust_tailwind", "Description": "The tailwind also raises evasion.", "RequiredLevel": 11, "MaxPurchases": 1, "AddedEffects": [ { "EffectId": "eva_buff_minor", "ApplyTo": "Target" } ] }
+      { "Id": "wind_gust_tailwind", "Description": "The tailwind also raises evasion.", "RequiredLevel": 11, "MaxPurchases": 1, "AddedEffects": [ { "EffectId": "druid_eva_buff", "ApplyTo": "Target" } ] }
     ]
   },
   {
@@ -1079,7 +1079,7 @@
     "ManaCost": 20,
     "Type": "Magical",
     "Target": "SingleAlly",
-    "ScalingFactor": 3.2,
+    "ScalingFactor": 0.7,
     "StatToScaleFrom": "INT",
     "MinLevel": 1,
     "IsHealing": true,
@@ -1088,10 +1088,10 @@
       { "EffectId": "hp_regen_small", "ApplyTo": "Target" }
     ],
     "UpgradeOptions": [
-      { "Id": "natures_healing_power", "Description": "Increases healing.", "ScalingFactorDelta": 0.5 },
+      { "Id": "natures_healing_power", "Description": "Increases healing.", "ScalingFactorDelta": 0.11 },
       { "Id": "natures_healing_efficiency", "Description": "Reduces mana cost.", "ManaCostDelta": -2, "MaxPurchases": 3 },
-      { "Id": "natures_healing_mastery", "Description": "Greatly increases healing.", "ScalingFactorDelta": 0.8, "RequiredLevel": 6, "MaxPurchases": 2 },
-      { "Id": "natures_healing_power_2", "Description": "Further increases healing.", "ScalingFactorDelta": 0.65, "RequiredLevel": 11 },
+      { "Id": "natures_healing_mastery", "Description": "Greatly increases healing.", "ScalingFactorDelta": 0.17, "RequiredLevel": 6, "MaxPurchases": 2 },
+      { "Id": "natures_healing_power_2", "Description": "Further increases healing.", "ScalingFactorDelta": 0.14, "RequiredLevel": 11 },
       { "Id": "natures_healing_embrace", "Description": "The grove's embrace also raises magic resistance.", "RequiredLevel": 11, "MaxPurchases": 1, "AddedEffects": [ { "EffectId": "mdef_buff_minor", "ApplyTo": "Target" } ] }
     ]
   },
@@ -1144,7 +1144,7 @@
   {
     "Id": "dark_shield",
     "Name": "Dark Shield",
-    "Description": "Surrounds yourself with dark energy, hardening your defenses.",
+    "Description": "Surrounds yourself with dark energy, warding you against magic.",
     "Class": "SoulsKnight",
     "ManaCost": 10,
     "Type": "Magical",
@@ -1154,14 +1154,14 @@
     "MinLevel": 1,
     "AggroModifier": 1,
     "Effects": [
-      { "EffectId": "def_buff_minor", "ApplyTo": "Caster" }
+      { "EffectId": "mdef_buff_minor", "ApplyTo": "Caster" }
     ],
     "UpgradeOptions": [
       { "Id": "dark_shield_power", "Description": "Strengthens the effect.", "ScalingFactorDelta": 0.2 },
       { "Id": "dark_shield_efficiency", "Description": "Reduces mana cost.", "ManaCostDelta": -1, "MaxPurchases": 3 },
       { "Id": "dark_shield_mastery", "Description": "Greatly strengthens the effect.", "ScalingFactorDelta": 0.3, "RequiredLevel": 6, "MaxPurchases": 2 },
       { "Id": "dark_shield_power_2", "Description": "Further strengthens the effect.", "ScalingFactorDelta": 0.25, "RequiredLevel": 11 },
-      { "Id": "dark_shield_umbral_ward", "Description": "The shield also raises magic resistance.", "RequiredLevel": 11, "MaxPurchases": 1, "AddedEffects": [ { "EffectId": "mdef_buff_minor", "ApplyTo": "Caster" } ] }
+      { "Id": "dark_shield_umbral_ward", "Description": "The shield also raises physical defense.", "RequiredLevel": 11, "MaxPurchases": 1, "AddedEffects": [ { "EffectId": "def_buff_minor", "ApplyTo": "Caster" } ] }
     ]
   },
   {
