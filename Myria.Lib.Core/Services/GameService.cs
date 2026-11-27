@@ -109,7 +109,9 @@ namespace Myria.Lib.Core.Services
             NpcService.ConnectNpcRooms(NpcService.AllNpcs, RoomService.AllRooms);
             Report("connections");
 
-            if (!skipGameState)
+            if (skipGameState)
+                DayCycleManager.RollGatherLimits();   // the reload built new rooms with no gather charges
+            else
             {
                 DayCycleManager.Initialize();
                 DayCycleManager.DayAdvanced -= GameEvents.FireDayAdvanced;
