@@ -15,11 +15,15 @@
     "id": "shop_equipment",
     "itemIds": [
       "iron_sword",
+      "leather_bow",
+      "steel_dagger",
+      "flamecaster_staff",
+      "oaken_staff",
+      "chain_armor",
       "leather_vest",
-      "iron_band",
-      "tempered_blade",
-      "stalkers_leather",
-      "focus_crystal"
+      "linen_robe",
+      "imbued_ring",
+      "crystal_focus_band"
     ],
     "buyMultiplier": 1,
     "sellMultiplier": 0.75

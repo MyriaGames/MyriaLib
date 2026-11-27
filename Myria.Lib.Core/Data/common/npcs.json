@@ -24,16 +24,9 @@
     "itemNames": [
       "steel_sword",
       "iron_sword",
-      "starter_armor",
       "chain_armor",
-      "starter_gauntlets",
-      "starter_mace",
-      "souls_blade",
-      "bone_plate",
       "pickaxe",
-      "woodcutter_axe",
-      "tempered_blade",
-      "vanguard_mail"
+      "woodcutter_axe"
     ]
   },
   {
@@ -50,17 +43,9 @@
       "learn_job"
     ],
     "itemNames": [
-      "starter_dagger",
-      "rogue_cloak",
-      "fur_vest",
-      "archer_garb",
-      "hunter_coat",
       "leather_bow",
-      "starter_crossbow",
-      "padded_armor",
-      "leather_vest",
-      "swiftsteel_edge",
-      "stalkers_leather"
+      "steel_dagger",
+      "leather_vest"
     ]
   },
   {
@@ -77,14 +62,9 @@
       "learn_job"
     ],
     "itemNames": [
-      "prayer_robes",
-      "storm_robes",
-      "nature_robe",
-      "mage_robe",
       "linen_robe",
-      "bolt_of_cloth",
-      "runed_staff",
-      "sage_robes"
+      "storm_robes",
+      "bolt_of_cloth"
     ]
   },
   {
@@ -101,21 +81,8 @@
       "learn_job"
     ],
     "itemNames": [
-      "iron_band",
-      "crit_band",
-      "power_charm",
-      "focus_band",
-      "fighter_token",
-      "faith_charm",
-      "tracker_band",
-      "crystal_focus_band",
-      "mana_ring",
-      "soul_shard",
-      "life_leaf",
-      "soulbound_phylactery",
       "imbued_ring",
-      "champions_seal",
-      "focus_crystal"
+      "crystal_focus_band"
     ]
   },
   {
@@ -130,9 +97,8 @@
     ],
     "itemNames": [
       "flamecaster_staff",
-      "starter_branch",
       "mages_tome",
-      "runed_staff"
+      "oaken_staff"
     ]
   },
   {

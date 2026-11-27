@@ -109,7 +109,8 @@
     "AllowedClasses": [
       "Knight",
       "Barbarian",
-      "Fighter"
+      "Fighter",
+      "SoulsKnight"
     ]
   },
   {
@@ -438,7 +439,11 @@
     "UpgradeCategory": "artificer",
     "BuyPrice": 300,
     "AllowedClasses": [
-      "ElementalMage"
+      "ElementalMage",
+      "ArcanMage",
+      "Druid",
+      "Cleric",
+      "RunicMage"
     ],
     "BaseBonusMATK": 5,
     "BaseBonusINT": 2,
@@ -632,7 +637,8 @@
     "AllowedClasses": [
       "Knight",
       "Barbarian",
-      "Fighter"
+      "Fighter",
+      "SoulsKnight"
     ],
     "MaxStackSize": 1,
     "Rarity": "Common"
@@ -649,7 +655,9 @@
     "UpgradeCategory": "blacksmith",
     "AllowedClasses": [
       "Knight",
-      "Fighter"
+      "Fighter",
+      "Barbarian",
+      "SoulsKnight"
     ],
     "MaxStackSize": 1,
     "Rarity": "Common"
@@ -770,7 +778,8 @@
       "Cleric",
       "ArcanMage",
       "ElementalMage",
-      "Druid"
+      "Druid",
+      "RunicMage"
     ],
     "MaxStackSize": 1,
     "Rarity": "Common"
@@ -792,7 +801,8 @@
       "Cleric",
       "Archer",
       "Hunter",
-      "Rogue"
+      "Rogue",
+      "SoulsKnight"
     ],
     "MaxStackSize": 1,
     "Rarity": "Common"
@@ -1039,7 +1049,7 @@
     "Type": "equipment",
     "SlotType": 2,
     "UpgradeCategory": "artificer",
-    "BuyPrice": 3200,
+    "BuyPrice": 4750,
     "AllowedClasses": [
       "Knight",
       "Barbarian",
@@ -1054,12 +1064,13 @@
       "Druid",
       "RunicMage"
     ],
-    "BaseBonusHP": 80,
-    "BaseBonusDEF": 10,
-    "BaseBonusMDEF": 10,
-    "BaseBonusEND": 4,
+    "BaseBonusHP": 119,
+    "BaseBonusATK": 17,
+    "BaseBonusMATK": 17,
+    "BaseBonusDEF": 14,
+    "BaseBonusMDEF": 14,
     "MaxStackSize": 1,
-    "Rarity": "Rare"
+    "Rarity": "Epic"
   },
   {
     "Id": "serpent_fang",
@@ -1068,18 +1079,16 @@
     "Type": "equipment",
     "SlotType": 0,
     "UpgradeCategory": "leathersmith",
-    "BuyPrice": 3400,
+    "BuyPrice": 2300,
     "AllowedClasses": [
-      "Rogue",
-      "Archer",
-      "Hunter"
+      "Rogue"
     ],
-    "BaseBonusATK": 48,
-    "BaseBonusDEX": 8,
-    "BaseBonusAim": 14,
-    "BaseBonusCrit": 8,
+    "BaseBonusATK": 58,
+    "BaseBonusDEX": 12,
+    "BaseBonusAim": 31,
+    "BaseBonusCrit": 9,
     "MaxStackSize": 1,
-    "Rarity": "Rare"
+    "Rarity": "Epic"
   },
   {
     "Id": "wardens_thornmail",
@@ -1509,5 +1518,334 @@
     "BaseBonusMDEF": 8,
     "MaxStackSize": 1,
     "Rarity": "Rare"
+  },
+  {
+    "Id": "siltshell_cleaver",
+    "Name": "item.siltshell_cleaver",
+    "Description": "item.siltshell_cleaver.desc",
+    "Type": "equipment",
+    "SlotType": 0,
+    "UpgradeCategory": "blacksmith",
+    "BuyPrice": 3500,
+    "AllowedClasses": [
+      "Knight",
+      "Barbarian",
+      "Fighter",
+      "SoulsKnight"
+    ],
+    "BaseBonusATK": 68,
+    "BaseBonusAim": 14,
+    "BaseBonusSTR": 7,
+    "MaxStackSize": 1,
+    "Rarity": "Rare"
+  },
+  {
+    "Id": "siltshell_bow",
+    "Name": "item.siltshell_bow",
+    "Description": "item.siltshell_bow.desc",
+    "Type": "equipment",
+    "SlotType": 0,
+    "UpgradeCategory": "leathersmith",
+    "BuyPrice": 3500,
+    "AllowedClasses": [
+      "Archer",
+      "Hunter"
+    ],
+    "BaseBonusATK": 66,
+    "BaseBonusAim": 28,
+    "BaseBonusDEX": 7,
+    "MaxStackSize": 1,
+    "Rarity": "Rare"
+  },
+  {
+    "Id": "siltshell_dirk",
+    "Name": "item.siltshell_dirk",
+    "Description": "item.siltshell_dirk.desc",
+    "Type": "equipment",
+    "SlotType": 0,
+    "UpgradeCategory": "leathersmith",
+    "BuyPrice": 1600,
+    "AllowedClasses": [
+      "Rogue"
+    ],
+    "BaseBonusATK": 40,
+    "BaseBonusDEX": 8,
+    "BaseBonusAim": 21,
+    "BaseBonusCrit": 6,
+    "MaxStackSize": 1,
+    "Rarity": "Rare"
+  },
+  {
+    "Id": "siltshell_wand",
+    "Name": "item.siltshell_wand",
+    "Description": "item.siltshell_wand.desc",
+    "Type": "equipment",
+    "SlotType": 0,
+    "UpgradeCategory": "tailor",
+    "BuyPrice": 1750,
+    "AllowedClasses": [
+      "Cleric",
+      "ArcanMage",
+      "ElementalMage",
+      "Druid",
+      "RunicMage"
+    ],
+    "BaseBonusMATK": 49,
+    "BaseBonusAim": 12,
+    "BaseBonusINT": 6,
+    "BaseBonusSPR": 5,
+    "MaxStackSize": 1,
+    "Rarity": "Rare"
+  },
+  {
+    "Id": "siltshell_plate",
+    "Name": "item.siltshell_plate",
+    "Description": "item.siltshell_plate.desc",
+    "Type": "equipment",
+    "SlotType": 1,
+    "UpgradeCategory": "blacksmith",
+    "BuyPrice": 4900,
+    "AllowedClasses": [
+      "Knight",
+      "Barbarian",
+      "Fighter",
+      "SoulsKnight"
+    ],
+    "BaseBonusDEF": 61,
+    "BaseBonusMDEF": 23,
+    "BaseBonusHP": 140,
+    "BaseBonusEND": 7,
+    "MaxStackSize": 1,
+    "Rarity": "Rare"
+  },
+  {
+    "Id": "siltshell_jerkin",
+    "Name": "item.siltshell_jerkin",
+    "Description": "item.siltshell_jerkin.desc",
+    "Type": "equipment",
+    "SlotType": 1,
+    "UpgradeCategory": "leathersmith",
+    "BuyPrice": 1650,
+    "AllowedClasses": [
+      "Rogue",
+      "Archer",
+      "Hunter"
+    ],
+    "BaseBonusDEF": 28,
+    "BaseBonusEvasion": 14,
+    "BaseBonusHP": 53,
+    "BaseBonusDEX": 6,
+    "MaxStackSize": 1,
+    "Rarity": "Rare"
+  },
+  {
+    "Id": "siltshell_robe",
+    "Name": "item.siltshell_robe",
+    "Description": "item.siltshell_robe.desc",
+    "Type": "equipment",
+    "SlotType": 1,
+    "UpgradeCategory": "tailor",
+    "BuyPrice": 3500,
+    "AllowedClasses": [
+      "Cleric",
+      "ArcanMage",
+      "ElementalMage",
+      "Druid",
+      "RunicMage"
+    ],
+    "BaseBonusMDEF": 47,
+    "BaseBonusMATK": 23,
+    "BaseBonusMP": 117,
+    "BaseBonusSPR": 7,
+    "MaxStackSize": 1,
+    "Rarity": "Rare"
+  },
+  {
+    "Id": "siltshell_band",
+    "Name": "item.siltshell_band",
+    "Description": "item.siltshell_band.desc",
+    "Type": "equipment",
+    "SlotType": 2,
+    "UpgradeCategory": "artificer",
+    "BuyPrice": 3300,
+    "AllowedClasses": [
+      "Knight",
+      "Barbarian",
+      "Fighter",
+      "SoulsKnight",
+      "Rogue",
+      "Archer",
+      "Hunter",
+      "Cleric",
+      "ArcanMage",
+      "ElementalMage",
+      "Druid",
+      "RunicMage"
+    ],
+    "BaseBonusHP": 82,
+    "BaseBonusATK": 12,
+    "BaseBonusMATK": 12,
+    "BaseBonusDEF": 9,
+    "BaseBonusMDEF": 9,
+    "MaxStackSize": 1,
+    "Rarity": "Rare"
+  },
+  {
+    "Id": "breswelc_greatblade",
+    "Name": "item.breswelc_greatblade",
+    "Description": "item.breswelc_greatblade.desc",
+    "Type": "equipment",
+    "SlotType": 0,
+    "UpgradeCategory": "blacksmith",
+    "BuyPrice": 5100,
+    "AllowedClasses": [
+      "Knight",
+      "Barbarian",
+      "Fighter",
+      "SoulsKnight"
+    ],
+    "BaseBonusATK": 99,
+    "BaseBonusAim": 20,
+    "BaseBonusSTR": 10,
+    "MaxStackSize": 1,
+    "Rarity": "Epic"
+  },
+  {
+    "Id": "breswelc_spinebow",
+    "Name": "item.breswelc_spinebow",
+    "Description": "item.breswelc_spinebow.desc",
+    "Type": "equipment",
+    "SlotType": 0,
+    "UpgradeCategory": "leathersmith",
+    "BuyPrice": 5100,
+    "AllowedClasses": [
+      "Archer",
+      "Hunter"
+    ],
+    "BaseBonusATK": 95,
+    "BaseBonusAim": 41,
+    "BaseBonusDEX": 10,
+    "MaxStackSize": 1,
+    "Rarity": "Epic"
+  },
+  {
+    "Id": "breswelc_coral_staff",
+    "Name": "item.breswelc_coral_staff",
+    "Description": "item.breswelc_coral_staff.desc",
+    "Type": "equipment",
+    "SlotType": 0,
+    "UpgradeCategory": "tailor",
+    "BuyPrice": 2550,
+    "AllowedClasses": [
+      "Cleric",
+      "ArcanMage",
+      "ElementalMage",
+      "Druid",
+      "RunicMage"
+    ],
+    "BaseBonusMATK": 71,
+    "BaseBonusAim": 17,
+    "BaseBonusINT": 9,
+    "BaseBonusSPR": 7,
+    "MaxStackSize": 1,
+    "Rarity": "Epic"
+  },
+  {
+    "Id": "breswelc_scale_plate",
+    "Name": "item.breswelc_scale_plate",
+    "Description": "item.breswelc_scale_plate.desc",
+    "Type": "equipment",
+    "SlotType": 1,
+    "UpgradeCategory": "blacksmith",
+    "BuyPrice": 7150,
+    "AllowedClasses": [
+      "Knight",
+      "Barbarian",
+      "Fighter",
+      "SoulsKnight"
+    ],
+    "BaseBonusDEF": 88,
+    "BaseBonusMDEF": 34,
+    "BaseBonusHP": 204,
+    "BaseBonusEND": 10,
+    "MaxStackSize": 1,
+    "Rarity": "Epic"
+  },
+  {
+    "Id": "breswelc_scale_jerkin",
+    "Name": "item.breswelc_scale_jerkin",
+    "Description": "item.breswelc_scale_jerkin.desc",
+    "Type": "equipment",
+    "SlotType": 1,
+    "UpgradeCategory": "leathersmith",
+    "BuyPrice": 2400,
+    "AllowedClasses": [
+      "Rogue",
+      "Archer",
+      "Hunter"
+    ],
+    "BaseBonusDEF": 41,
+    "BaseBonusEvasion": 20,
+    "BaseBonusHP": 77,
+    "BaseBonusDEX": 9,
+    "MaxStackSize": 1,
+    "Rarity": "Epic"
+  },
+  {
+    "Id": "breswelc_tide_robe",
+    "Name": "item.breswelc_tide_robe",
+    "Description": "item.breswelc_tide_robe.desc",
+    "Type": "equipment",
+    "SlotType": 1,
+    "UpgradeCategory": "tailor",
+    "BuyPrice": 5100,
+    "AllowedClasses": [
+      "Cleric",
+      "ArcanMage",
+      "ElementalMage",
+      "Druid",
+      "RunicMage"
+    ],
+    "BaseBonusMDEF": 68,
+    "BaseBonusMATK": 34,
+    "BaseBonusMP": 170,
+    "BaseBonusSPR": 10,
+    "MaxStackSize": 1,
+    "Rarity": "Epic"
+  },
+  {
+    "Id": "steel_dagger",
+    "Name": "item.steel_dagger",
+    "Description": "item.steel_dagger.desc",
+    "Type": "equipment",
+    "SlotType": 0,
+    "UpgradeCategory": "leathersmith",
+    "BuyPrice": 320,
+    "AllowedClasses": [
+      "Rogue"
+    ],
+    "BaseBonusATK": 14,
+    "BaseBonusDEX": 4,
+    "BaseBonusAim": 6,
+    "MaxStackSize": 1,
+    "Rarity": "Common"
+  },
+  {
+    "Id": "oaken_staff",
+    "Name": "item.oaken_staff",
+    "Description": "item.oaken_staff.desc",
+    "Type": "equipment",
+    "SlotType": 0,
+    "UpgradeCategory": "tailor",
+    "BuyPrice": 420,
+    "AllowedClasses": [
+      "Cleric",
+      "Druid",
+      "RunicMage"
+    ],
+    "BaseBonusMATK": 16,
+    "BaseBonusSPR": 4,
+    "MaxStackSize": 1,
+    "Rarity": "Common"
   }
 ]

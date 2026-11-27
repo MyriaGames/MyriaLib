@@ -790,12 +790,36 @@
     "RespawnSeconds": 5.9,
     "UniqueLootTable": [
       {
-        "ItemId": "breswelc_scale_charm",
-        "DropChance": 0.1
+        "ItemId": "breswelc_greatblade",
+        "DropChance": 0.05
+      },
+      {
+        "ItemId": "breswelc_spinebow",
+        "DropChance": 0.05
       },
       {
         "ItemId": "serpent_fang",
-        "DropChance": 0.08
+        "DropChance": 0.05
+      },
+      {
+        "ItemId": "breswelc_coral_staff",
+        "DropChance": 0.05
+      },
+      {
+        "ItemId": "breswelc_scale_plate",
+        "DropChance": 0.05
+      },
+      {
+        "ItemId": "breswelc_scale_jerkin",
+        "DropChance": 0.05
+      },
+      {
+        "ItemId": "breswelc_tide_robe",
+        "DropChance": 0.05
+      },
+      {
+        "ItemId": "breswelc_scale_charm",
+        "DropChance": 0.05
       }
     ]
   },
@@ -1044,6 +1068,58 @@
       {
         "ItemId": "wardens_bone_aegis",
         "DropChance": 0.06
+      }
+    ]
+  },
+  {
+    "Id": 56,
+    "Name": "monster.silt_matron.name",
+    "Description": "monster.silt_matron.desc",
+    "Type": 0,
+    "Level": 14,
+    "Exp": 230,
+    "Stats": {
+      "Strength": 150,
+      "Dexterity": 105,
+      "Endurance": 145,
+      "Intelligence": 80,
+      "Spirit": 95,
+      "BaseHealth": 85,
+      "BaseMana": 16
+    },
+    "RespawnSeconds": 5.9,
+    "UniqueLootTable": [
+      {
+        "ItemId": "siltshell_cleaver",
+        "DropChance": 0.12
+      },
+      {
+        "ItemId": "siltshell_bow",
+        "DropChance": 0.12
+      },
+      {
+        "ItemId": "siltshell_dirk",
+        "DropChance": 0.12
+      },
+      {
+        "ItemId": "siltshell_wand",
+        "DropChance": 0.12
+      },
+      {
+        "ItemId": "siltshell_plate",
+        "DropChance": 0.12
+      },
+      {
+        "ItemId": "siltshell_jerkin",
+        "DropChance": 0.12
+      },
+      {
+        "ItemId": "siltshell_robe",
+        "DropChance": 0.12
+      },
+      {
+        "ItemId": "siltshell_band",
+        "DropChance": 0.12
       }
     ]
   }
