@@ -335,7 +335,7 @@
     "MinLevel": 1,
     "AggroModifier": 1,
     "Effects": [
-      { "EffectId": "def_debuff_minor", "ApplyTo": "Target" }
+      { "EffectId": "fighter_def_debuff", "ApplyTo": "Target" }
     ],
     "UpgradeOptions": [
       { "Id": "heavy_blow_power", "Description": "Increases damage.", "ScalingFactorDelta": 0.25 },
@@ -361,7 +361,7 @@
       { "Id": "double_strike_efficiency", "Description": "Reduces mana cost.", "ManaCostDelta": -1, "MaxPurchases": 3 },
       { "Id": "double_strike_mastery", "Description": "Greatly increases damage.", "ScalingFactorDelta": 0.4, "RequiredLevel": 6, "MaxPurchases": 2 },
       { "Id": "double_strike_power_2", "Description": "Further increases damage.", "ScalingFactorDelta": 0.3, "RequiredLevel": 11 },
-      { "Id": "double_strike_flurry", "Description": "The flurry also raises your attack.", "RequiredLevel": 11, "MaxPurchases": 1, "AddedEffects": [ { "EffectId": "atk_buff_minor", "ApplyTo": "Caster" } ] }
+      { "Id": "double_strike_flurry", "Description": "The flurry also raises your attack.", "RequiredLevel": 11, "MaxPurchases": 1, "AddedEffects": [ { "EffectId": "fighter_atk_buff", "ApplyTo": "Caster" } ] }
     ]
   },
   {
@@ -377,14 +377,14 @@
     "MinLevel": 1,
     "AggroModifier": 0.5,
     "Effects": [
-      { "EffectId": "str_buff_minor", "ApplyTo": "Caster" }
+      { "EffectId": "fighter_str_buff", "ApplyTo": "Caster" }
     ],
     "UpgradeOptions": [
       { "Id": "war_cry_power", "Description": "Increases damage.", "ScalingFactorDelta": 0.25 },
       { "Id": "war_cry_efficiency", "Description": "Reduces mana cost.", "ManaCostDelta": -1, "MaxPurchases": 3 },
       { "Id": "war_cry_mastery", "Description": "Greatly increases damage.", "ScalingFactorDelta": 0.4, "RequiredLevel": 6, "MaxPurchases": 2 },
       { "Id": "war_cry_power_2", "Description": "Further increases damage.", "ScalingFactorDelta": 0.3, "RequiredLevel": 11 },
-      { "Id": "war_cry_stand_firm", "Description": "Your cry also hardens your defense.", "RequiredLevel": 11, "MaxPurchases": 1, "AddedEffects": [ { "EffectId": "def_buff_minor", "ApplyTo": "Caster" } ] }
+      { "Id": "war_cry_stand_firm", "Description": "Your cry also hardens your defense.", "RequiredLevel": 11, "MaxPurchases": 1, "AddedEffects": [ { "EffectId": "fighter_def_buff", "ApplyTo": "Caster" } ] }
     ]
   },
   {
@@ -407,7 +407,7 @@
       { "Id": "slam_efficiency", "Description": "Reduces mana cost.", "ManaCostDelta": -1, "MaxPurchases": 3 },
       { "Id": "slam_mastery", "Description": "Greatly increases damage.", "ScalingFactorDelta": 0.4, "RequiredLevel": 6, "MaxPurchases": 2 },
       { "Id": "slam_power_2", "Description": "Further increases damage.", "ScalingFactorDelta": 0.3, "RequiredLevel": 11 },
-      { "Id": "slam_shatter", "Description": "Also shatters the target's guard, weakening its defense.", "RequiredLevel": 11, "MaxPurchases": 1, "AddedEffects": [ { "EffectId": "def_debuff_minor", "ApplyTo": "Target" } ] }
+      { "Id": "slam_shatter", "Description": "Also shatters the target's guard, weakening its defense.", "RequiredLevel": 11, "MaxPurchases": 1, "AddedEffects": [ { "EffectId": "fighter_def_debuff", "ApplyTo": "Target" } ] }
     ]
   },
   {
@@ -426,7 +426,7 @@
       { "Id": "battle_rush_efficiency", "Description": "Reduces mana cost.", "ManaCostDelta": -2, "MaxPurchases": 2 },
       { "Id": "battle_rush_mastery", "Description": "Greatly increases damage.", "ScalingFactorDelta": 0.5, "RequiredLevel": 6, "MaxPurchases": 2 },
       { "Id": "battle_rush_power_2", "Description": "Further increases damage.", "ScalingFactorDelta": 0.4, "RequiredLevel": 11 },
-      { "Id": "battle_rush_adrenaline", "Description": "The rush also raises your STR.", "RequiredLevel": 11, "MaxPurchases": 1, "AddedEffects": [ { "EffectId": "str_buff_minor", "ApplyTo": "Caster" } ] }
+      { "Id": "battle_rush_adrenaline", "Description": "The rush also raises your STR.", "RequiredLevel": 11, "MaxPurchases": 1, "AddedEffects": [ { "EffectId": "fighter_str_buff", "ApplyTo": "Caster" } ] }
     ]
   },
   {
@@ -773,7 +773,7 @@
     "ManaCost": 10,
     "Type": "Magical",
     "Target": "SingleEnemy",
-    "ScalingFactor": 1.8,
+    "ScalingFactor": 2.2,
     "StatToScaleFrom": "MATK",
     "MinLevel": 1,
     "AggroModifier": 1,
@@ -796,7 +796,7 @@
     "ManaCost": 10,
     "Type": "Magical",
     "Target": "SingleEnemy",
-    "ScalingFactor": 1.4,
+    "ScalingFactor": 1.8,
     "StatToScaleFrom": "MATK",
     "MinLevel": 1,
     "AggroModifier": 1,
@@ -819,7 +819,7 @@
     "ManaCost": 8,
     "Type": "Magical",
     "Target": "SingleEnemy",
-    "ScalingFactor": 1.2,
+    "ScalingFactor": 1.6,
     "StatToScaleFrom": "MATK",
     "MinLevel": 1,
     "AggroModifier": 1,
@@ -842,7 +842,7 @@
     "ManaCost": 22,
     "Type": "Magical",
     "Target": "AllEnemies",
-    "ScalingFactor": 1.1,
+    "ScalingFactor": 1.4,
     "StatToScaleFrom": "MATK",
     "MinLevel": 1,
     "AggroModifier": 1,

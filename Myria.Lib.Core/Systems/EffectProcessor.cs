@@ -46,7 +46,7 @@ namespace Myria.Lib.Core.Systems
                     }
                     case EffectType.HpRegen:
                     {
-                        int gain = Math.Max(1, (int)effect.Magnitude);
+                        int gain = Math.Max(1, CombatEntity.ScaleHeal((int)effect.Magnitude));
                         int actual = entity.Heal(gain);
                         if (actual > 0)
                             log.Add(new CombatLogEntry("pg.fight.effect.hpRegen", entity.Name, actual));

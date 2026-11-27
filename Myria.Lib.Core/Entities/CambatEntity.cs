@@ -39,7 +39,24 @@ namespace Myria.Lib.Core.Entities
         public int TotalSPR => Stats.TotalSpirit      + ExtraSPR + GetBonusFromGear(g => g.Bonuses.SPR) + GetEffectStatBonus("SPR");
 
         // MaxHealth/MaxMana live here so gear HP/MP bonuses are included
-        public int MaxHealth => Stats.BaseHealth + ExtraBaseHealth + TotalEND * 5 + GetBonusFromGear(g => g.Bonuses.HP);
+        public int MaxHealth => (int)Math.Round((Stats.BaseHealth + ExtraBaseHealth + TotalEND * 5 + GetBonusFromGear(g => g.Bonuses.HP)) * HealthMultiplier);
+
+        /// <summary>
+        /// Fight length (v0.3): every combatant's max HP - players and monsters alike - is multiplied
+        /// by this, while attack and damage stay as they are, so fights last proportionally longer.
+        /// 1 = the old fight length.
+        /// </summary>
+        public static float HealthMultiplier { get; set; } = 2f;
+
+        /// <summary>
+        /// Flat healing (heal skills, regeneration, flat potions) is multiplied by this - deliberately
+        /// less than <see cref="HealthMultiplier"/>: longer fights give healers more turns, so full
+        /// scaling made fights easier. Percentage heals (potions) follow max HP on their own.
+        /// </summary>
+        public static float HealMultiplier { get; set; } = 1f;
+
+        /// <summary>A flat heal amount scaled to <see cref="HealMultiplier"/>.</summary>
+        public static int ScaleHeal(int amount) => (int)Math.Round(amount * HealMultiplier);
         public int MaxMana   => Stats.BaseMana   + ExtraBaseMana   + TotalSPR * 5 + GetBonusFromGear(g => g.Bonuses.MP);
 
         public bool IsAlive => CurrentHealth > 0;

@@ -284,7 +284,7 @@ namespace Myria.Lib.Core.Systems
             if (skill.IsHealing)
             {
                 int baseStat = ResolveSkillBaseStat(skill);
-                int heal = (int)(baseStat * skill.ScalingFactor);
+                int heal = Myria.Lib.Core.Entities.CombatEntity.ScaleHeal((int)(baseStat * skill.ScalingFactor));
                 int healed = Math.Min(heal, Character.MaxHealth - Character.CurrentHealth);
                 Character.Heal(healed);
                 Log.Add(new CombatLogEntry("pg.fight.log.heal", Character.Name, healed));

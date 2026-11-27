@@ -14,7 +14,7 @@ namespace Myria.Lib.Core.Entities.Items
 
         /// <summary>The HP this item heals <paramref name="character"/> for (before the max-HP cap).</summary>
         public int HealFor(Character character) =>
-            HealPercent > 0 ? (int)Math.Ceiling(character.MaxHealth * HealPercent / 100.0) : HealAmount;
+            HealPercent > 0 ? (int)Math.Ceiling(character.MaxHealth * HealPercent / 100.0) : CombatEntity.ScaleHeal(HealAmount);
         public string? UseEffect { get; set; }
         /// <summary>
         /// uses the item and grants its effects

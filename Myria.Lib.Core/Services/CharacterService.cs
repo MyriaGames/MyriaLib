@@ -48,7 +48,16 @@ namespace Myria.Lib.Core.Services
         {
             string path = SavePath(user, character.Name);
             Directory.CreateDirectory("Data/saves");
+            File.WriteAllText(path, SerializeCharacter(character));
+        }
 
+        /// <summary>
+        /// A character as save-format JSON ({ "SaveVersion", "SavedWithMods", "Character" }) - exactly
+        /// what <see cref="SaveCharacter"/> writes to a file. For storing characters elsewhere (e.g. a
+        /// realm database); read it back with <see cref="DeserializeCharacter"/>.
+        /// </summary>
+        public static string SerializeCharacter(Character character)
+        {
             character.CurrentRoomId = character.CurrentRoom?.Id ?? character.CurrentRoomId;
 
             // Serialize character with its custom converters.
@@ -63,7 +72,7 @@ namespace Myria.Lib.Core.Services
                 ["Character"]     = JsonNode.Parse(charJson),
             };
 
-            File.WriteAllText(path, wrapper.ToJsonString(new JsonSerializerOptions { WriteIndented = true }));
+            return wrapper.ToJsonString(new JsonSerializerOptions { WriteIndented = true });
         }
 
         /// <summary>
@@ -88,8 +97,18 @@ namespace Myria.Lib.Core.Services
         {
             string path = SavePath(user, name);
             if (!File.Exists(path)) return null;
+            return DeserializeCharacter(File.ReadAllText(path));
+        }
 
-            var raw = File.ReadAllText(path);
+        /// <summary>
+        /// Reads a character from save-format JSON (<see cref="SerializeCharacter"/>, or the old bare
+        /// character JSON) through the full load path: save-version and legacy migrations, room
+        /// reconnect, skills, runes and slots, <c>RaceMigration</c>, <c>SplitOverfullStacks</c>.
+        /// Null if the JSON holds no character; malformed JSON throws like a corrupt save file.
+        /// </summary>
+        public static Character? DeserializeCharacter(string json)
+        {
+            var raw = json;
             string characterJson = raw;
 
             // Support both the wrapper format ({ "SaveVersion":…, "SavedWithMods":…, "Character":… })

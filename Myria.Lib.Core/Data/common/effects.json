@@ -340,5 +340,41 @@
     "Duration": 2,
     "Magnitude": -1.5,
     "StatName": "DEF"
+  },
+  {
+    "Id": "fighter_str_buff",
+    "Name": "Battle Fury",
+    "Description": "Temporarily increases STR.",
+    "Type": "StatBuff",
+    "Duration": 3,
+    "Magnitude": 1.0,
+    "StatName": "STR"
+  },
+  {
+    "Id": "fighter_atk_buff",
+    "Name": "Momentum",
+    "Description": "Temporarily increases attack.",
+    "Type": "StatBuff",
+    "Duration": 3,
+    "Magnitude": 2.8,
+    "StatName": "ATK"
+  },
+  {
+    "Id": "fighter_def_buff",
+    "Name": "Steeled",
+    "Description": "Temporarily increases physical defense.",
+    "Type": "StatBuff",
+    "Duration": 3,
+    "Magnitude": 2.6,
+    "StatName": "DEF"
+  },
+  {
+    "Id": "fighter_def_debuff",
+    "Name": "Battered Guard",
+    "Description": "Temporarily reduces physical defense.",
+    "Type": "StatBuff",
+    "Duration": 2,
+    "Magnitude": -2.3,
+    "StatName": "DEF"
   }
 ]

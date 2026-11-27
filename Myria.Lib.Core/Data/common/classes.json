@@ -112,11 +112,11 @@
       "STR": 0,
       "DEX": 2,
       "END": 1,
-      "INT": 10,
-      "SPR": 4
+      "INT": 12,
+      "SPR": 2
     },
-    "hpPerLevel": 60,
-    "manaPerLevel": 70,
+    "hpPerLevel": 40,
+    "manaPerLevel": 80,
     "group": "Mage",
     "attackRange": 8.0
   },
