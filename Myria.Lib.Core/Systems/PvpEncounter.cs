@@ -234,6 +234,26 @@ namespace Myria.Lib.Core.Systems
             }
         }
 
+        /// <summary>Skips the current turn right away if it belongs to <paramref name="name"/> - a
+        /// participant who lost their connection (v0.3: they get a grace period to come back instead
+        /// of forfeiting at once, and nobody waits out <see cref="TurnTimeout"/> for them meanwhile).</summary>
+        public bool SkipTurnOf(string name)
+        {
+            lock (_sync)
+            {
+                if (IsFinished || _turnIndex < 0 || !Is(_order[_turnIndex], name)) return false;
+                Log.Add(new CombatLogEntry("pg.fight.pvp.awaySkipped", name));
+                AdvanceTurn();
+                return true;
+            }
+        }
+
+        /// <summary>Adds a line to the fight log from outside a turn (connection lost / back).</summary>
+        public void Note(string key, params object[] args)
+        {
+            lock (_sync) Log.Add(new CombatLogEntry(key, args));
+        }
+
         /// <summary>Skips the current turn if it has run past <see cref="TurnTimeout"/>. Anyone may
         /// call it (there's no accept/decline, so a fight against an AFK player would otherwise
         /// stall forever); returns whether a turn was skipped.</summary>

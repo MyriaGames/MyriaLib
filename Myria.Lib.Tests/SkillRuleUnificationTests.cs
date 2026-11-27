@@ -54,7 +54,7 @@ public class SkillRuleUnificationTests
     {
         var ch = TestHelpers.CreateCharacter(level: 10);
         ch.Stats.BaseHealth = 1_000_000;
-        ch.CurrentHealth = 1;
+        ch.CurrentHealth = ch.MaxHealth / 2;   // monsters may act first; the heal is read from the log
         var monsters = new List<Monster> { Dummy(), Dummy(), Dummy() };
         var enc = new GroupCombatEncounter(new[] { ch }, monsters);
         var skill = Drain(SkillTarget.AllEnemies, "lifesteal_soul");
