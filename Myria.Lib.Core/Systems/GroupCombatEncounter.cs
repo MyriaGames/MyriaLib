@@ -483,6 +483,10 @@ namespace Myria.Lib.Core.Systems
             return dmg;
         }
 
+        /// <summary>Who gets every drop of this fight (a party's loot master in a dungeon). Null, or
+        /// not part of the fight: the first living player, as before.</summary>
+        public Character? LootRecipient { get; set; }
+
         private void HandleMonsterDeath(Monster monster)
         {
             if (monster.IsAlive) return;
@@ -511,7 +515,11 @@ namespace Myria.Lib.Core.Systems
                 XpGrantedByCharacter[p] = XpGrantedByCharacter.GetValueOrDefault(p) + xpGained;
             }
 
-            var recipient = Characters.FirstOrDefault(p => p.IsAlive);
+            // The party's loot master when one is set for this fight (dungeons; alive or not - they
+            // hand the loot out themselves through trades), otherwise the first living player.
+            var recipient = LootRecipient is not null && Characters.Contains(LootRecipient)
+                ? LootRecipient
+                : Characters.FirstOrDefault(p => p.IsAlive);
             if (recipient != null)
             {
                 var drops = LootGenerator.GetLootFor(monster);
