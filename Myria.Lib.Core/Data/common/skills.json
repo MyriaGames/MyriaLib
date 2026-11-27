@@ -1085,7 +1085,7 @@
     "IsHealing": true,
     "AggroModifier": 1.0,
     "Effects": [
-      { "EffectId": "hp_regen_small", "ApplyTo": "Target" }
+      { "EffectId": "druid_regen", "ApplyTo": "Target" }
     ],
     "UpgradeOptions": [
       { "Id": "natures_healing_power", "Description": "Increases healing.", "ScalingFactorDelta": 0.11 },
@@ -1206,6 +1206,25 @@
       { "Id": "shadow_veil_mastery", "Description": "Greatly increases damage.", "ScalingFactorDelta": 0.5, "RequiredLevel": 6, "MaxPurchases": 2 },
       { "Id": "shadow_veil_power_2", "Description": "Further increases damage.", "ScalingFactorDelta": 0.4, "RequiredLevel": 11 },
       { "Id": "shadow_veil_night", "Description": "The veil blinds the target, reducing its aim.", "RequiredLevel": 11, "MaxPurchases": 1, "AddedEffects": [ { "EffectId": "aim_debuff_minor", "ApplyTo": "Target" } ] }
+    ]
+  },
+  {
+    "Id": "verdant_vigor",
+    "Name": "Verdant Vigor",
+    "Description": "Fills an ally with the strength of the wild, raising their maximum HP and MP by 5% for 60 minutes - in and out of fights. Can be cast outside of combat.",
+    "Class": "Druid",
+    "ManaCost": 25,
+    "Type": "Magical",
+    "Target": "SingleAlly",
+    "ScalingFactor": 1.0,
+    "StatToScaleFrom": "SPR",
+    "MinLevel": 1,
+    "AggroModifier": 0.5,
+    "LastingBuff": { "HpPercent": 0.05, "MpPercent": 0.05, "DurationMinutes": 60 },
+    "UpgradeOptions": [
+      { "Id": "verdant_vigor_efficiency", "Description": "Reduces mana cost.", "ManaCostDelta": -2, "MaxPurchases": 3 },
+      { "Id": "verdant_vigor_power", "Description": "Raises max HP and MP a little more.", "ScalingFactorDelta": 0.1, "RequiredLevel": 6, "MaxPurchases": 2 },
+      { "Id": "verdant_vigor_power_2", "Description": "Further raises max HP and MP.", "ScalingFactorDelta": 0.1, "RequiredLevel": 11 }
     ]
   }
 ]

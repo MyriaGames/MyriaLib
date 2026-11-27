@@ -108,7 +108,15 @@ namespace Myria.Lib.Core.Models.Dto
         List<RuneSnapshot>? Runes = null,
         EquippedSnapshot? Equipment = null,
         List<SkillProgressSnapshot>? SkillProgress = null,
-        PvpStatsSnapshot? Pvp = null);
+        PvpStatsSnapshot? Pvp = null,
+        List<LastingBuffSnapshot>? LastingBuffs = null);
+
+    /// <summary>A lasting buff on the character (v0.3; see Character.LastingBuffs) - server-authoritative,
+    /// the full list each time. Percentages are fractions (0.05 = +5%).</summary>
+    /// <summary>Result of casting a skill outside a fight (v0.3, CastSkillOutOfCombat). Reason is a locale key on failure.</summary>
+    public record CastSkillResult(bool Success, string? Reason, int CasterMana, LastingBuffSnapshot? Buff);
+
+    public record LastingBuffSnapshot(string SkillId, string Name, string CasterName, float HpPercent, float MpPercent, DateTime ExpiresUtc);
 
     // ── PvP (v0.3) ──────────────────────────────────────────────────────────
 

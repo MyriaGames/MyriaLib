@@ -48,6 +48,7 @@
   "pg.fight.log.beginCast": "{0} beginnt {1} zu wirken.",
   "pg.fight.log.skillHit": "{0} nutzt {1} für {2}.",
   "pg.fight.log.heal": "{0} heilt {1}.",
+  "pg.fight.log.lastingBuff": "{0} gibt {1} {2} für {3} Minuten.",
   "pg.fight.log.nomana": "Nicht genug Mana.",
   "pg.fight.log.onCooldown": "{0} ist noch nicht bereit ({1} Runde(n) verbleibend).",
   "pg.fight.log.enemyHit": "{0} trifft dich für {1}.",
@@ -1358,5 +1359,12 @@
   "room.hollow_crypt.9": "Die Hohle Krypta — Atrium",
   "room.hollow_crypt.9.desc": "Ein gewaltiges Atrium mit zwei Pfeilerreihen, die eine Gewölbedecke tragen, die nach den Ingenieurgrundsätzen der letzten achthundert Jahre nicht stehen dürfte. Am fernen Ende steht ein mächtiger Altar einem steinernen Gebilde gegenüber, das so groß ist, dass es schwerfällt, es als einzelnes gemeißeltes Objekt zu begreifen — die Proportionen sind nicht menschlich.",
   "room.royas.main": "Royas",
-  "room.royas.main.desc": "Royas ist kaum mehr als ein Dorf — ein Dutzend fester Haushalte und die Schmiede, die es prägt. Der Rauch aus Taro Vaeres Schmiede ist das Erste, was man riecht, wenn man den Nuvmito hinabkommt. Ein paar Dorfbewohner gehen ihrem Tag mit der Ruhe von Menschen nach, die ihr ganzes Leben zwischen denselben zwei Gipfeln verbracht haben. Hier fühlt sich Lura anders an: etwas Altes, etwas Lebendiges, noch immer gegenwärtig."
+  "room.royas.main.desc": "Royas ist kaum mehr als ein Dorf — ein Dutzend fester Haushalte und die Schmiede, die es prägt. Der Rauch aus Taro Vaeres Schmiede ist das Erste, was man riecht, wenn man den Nuvmito hinabkommt. Ein paar Dorfbewohner gehen ihrem Tag mit der Ruhe von Menschen nach, die ihr ganzes Leben zwischen denselben zwei Gipfeln verbracht haben. Hier fühlt sich Lura anders an: etwas Altes, etwas Lebendiges, noch immer gegenwärtig.",
+  "skill.cast.notOutOfCombat": "Diese Fähigkeit kann nur im Kampf eingesetzt werden.",
+  "skill.cast.dead": "Weder Wirker noch Ziel dürfen besiegt sein.",
+  "skill.cast.noMana": "Nicht genug Mana.",
+  "skill.cast.noTarget": "Dieser Charakter ist nicht hier.",
+  "skill.cast.inCombat": "Du bist im Kampf - setze die Fähigkeit dort ein.",
+  "skill.cast.done": "{0} gibt {1} {2} für {3} Minuten.",
+  "buff.lasting.remaining": "{0}: +{1}% max. LP, +{2}% max. MP (noch {3} Min.)"
 }

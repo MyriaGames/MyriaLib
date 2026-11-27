@@ -21,6 +21,7 @@ namespace Myria.Lib.Core.Models
         public int Cooldown { get; set; } = 0;
         public List<SkillEffectEntry> Effects { get; set; } = new();
         public List<SkillUpgradeOption> UpgradeOptions { get; set; } = new();
+        public LastingBuffDefinition? LastingBuff { get; set; }
     }
 
 }

@@ -162,6 +162,46 @@ namespace Myria.Lib.Core.Entities.Characters
             ));
 
         }
+        // ── Lasting buffs (v0.3) ─────────────────────────────────────────────
+
+        /// <summary>Buffs that outlast fights (see <see cref="LastingBuff"/>); expired ones may still be
+        /// listed until <see cref="PruneLastingBuffs"/> runs, but never count.</summary>
+        public List<LastingBuff> LastingBuffs { get; set; } = new();
+
+        protected override float LastingHpPercent => LastingBuffs.Where(b => b.IsActive).Sum(b => b.HpPercent);
+        protected override float LastingMpPercent => LastingBuffs.Where(b => b.IsActive).Sum(b => b.MpPercent);
+
+        /// <summary>
+        /// Puts <paramref name="buff"/> on this character, replacing one from the same skill. The max HP/MP
+        /// it adds are added to current HP/MP too (a fresh buff fills its own share). Returns the buff.
+        /// </summary>
+        public LastingBuff ApplyLastingBuff(LastingBuff buff)
+        {
+            int hpBefore = MaxHealth, mpBefore = MaxMana;
+            LastingBuffs.RemoveAll(b => !b.IsActive || string.Equals(b.SkillId, buff.SkillId, StringComparison.OrdinalIgnoreCase));
+            LastingBuffs.Add(buff);
+            int hpGain = MaxHealth - hpBefore, mpGain = MaxMana - mpBefore;
+            if (hpGain > 0 && CurrentHealth > 0) CurrentHealth = Math.Min(MaxHealth, CurrentHealth + hpGain);
+            if (mpGain > 0) CurrentMana = Math.Min(MaxMana, CurrentMana + mpGain);
+            ClampVitalsToMax();
+            return buff;
+        }
+
+        /// <summary>Drops expired lasting buffs and pulls HP/MP back under the (now lower) maximum.
+        /// Returns true if anything was dropped.</summary>
+        public bool PruneLastingBuffs()
+        {
+            bool removed = LastingBuffs.RemoveAll(b => !b.IsActive) > 0;
+            ClampVitalsToMax();
+            return removed;
+        }
+
+        private void ClampVitalsToMax()
+        {
+            if (CurrentHealth > MaxHealth) CurrentHealth = MaxHealth;
+            if (CurrentMana > MaxMana) CurrentMana = MaxMana;
+        }
+
         /// <summary>The class's Instinct passive (classes.json "instinctDodge"), always active.</summary>
         public override float InstinctDodge =>
             ClassProfile.All.TryGetValue(Class, out var profile) ? profile.InstinctDodge : 0f;
@@ -335,6 +375,10 @@ namespace Myria.Lib.Core.Entities.Characters
         /// </summary>
         public void ApplyCharacterUpdate(CharacterUpdateDto update, string? source = null)
         {
+            // Lasting buffs first: they change MaxHealth/MaxMana, which the vitals below are clamped to.
+            if (update.LastingBuffs is not null)
+                LastingBuffs = Myria.Lib.Core.Services.LastingBuffService.FromSnapshots(update.LastingBuffs);
+
             if (update.InventoryItems is not null)
             {
                 Inventory.ApplySnapshot(update.InventoryItems, this);

@@ -281,6 +281,11 @@ namespace Myria.Lib.Core.Systems
 
         private void ExecuteSkillOnSelf(Skill skill)
         {
+            if (Myria.Lib.Core.Entities.Characters.LastingBuff.From(skill, Character.Name) is { } lasting)
+            {
+                Character.ApplyLastingBuff(lasting);
+                Log.Add(new CombatLogEntry("pg.fight.log.lastingBuff", Character.Name, Character.Name, skill.Name, skill.LastingBuff!.DurationMinutes));
+            }
             if (skill.IsHealing)
             {
                 int baseStat = ResolveSkillBaseStat(skill);

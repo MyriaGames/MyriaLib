@@ -60,6 +60,10 @@ namespace Myria.Lib.Core.Entities.Skills
         /// baseline growth, it just has nothing to spend points on yet).</summary>
         public List<SkillUpgradeOption> UpgradeOptions { get; set; } = new();
 
+        /// <summary>Optional lasting buff (max HP/MP for real-clock minutes, across fights) - see
+        /// <see cref="LastingBuffDefinition"/>. Null for every skill without one.</summary>
+        public LastingBuffDefinition? LastingBuff { get; set; }
+
         /// <summary>Returns a copy of this Skill with the given deltas applied - used by
         /// SkillLevelingService to build a character-specific effective Skill instance without
         /// mutating the shared template every character of this class points to.</summary>
@@ -86,7 +90,8 @@ namespace Myria.Lib.Core.Entities.Skills
                 AggroModifier = AggroModifier,
                 Effects = new List<SkillEffectEntry>(Effects),
                 Effect = Effect,
-                UpgradeOptions = UpgradeOptions
+                UpgradeOptions = UpgradeOptions,
+                LastingBuff = LastingBuff
             };
             clone.Effects.AddRange(addedEffects);
             return clone;

@@ -63,6 +63,7 @@ namespace Myria.Lib.Core.Services.Builder
                 Cooldown        = d.Cooldown,
                 Effects         = d.Effects,
                 UpgradeOptions  = d.UpgradeOptions,
+                LastingBuff     = d.LastingBuff,
             }).ToList();
 
             _skillsById = _skills.ToDictionary(s => s.Id);

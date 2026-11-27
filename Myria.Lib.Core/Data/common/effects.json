@@ -448,5 +448,14 @@
     "Duration": 3,
     "Magnitude": 1.0,
     "StatName": "EVA"
+  },
+  {
+    "Id": "druid_regen",
+    "Name": "Verdant Renewal",
+    "Description": "Nature's lasting regeneration, restoring HP each turn.",
+    "Type": "HpRegen",
+    "Duration": 4,
+    "Magnitude": 20,
+    "StatName": ""
   }
 ]

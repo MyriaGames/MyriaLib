@@ -88,6 +88,7 @@
   "pg.fight.log.beginCast": "{0} begins casting {1}.",
   "pg.fight.log.skillHit": "{0} uses {1} for {2}.",
   "pg.fight.log.heal": "{0} heals {1}.",
+  "pg.fight.log.lastingBuff": "{0} gives {1} {2} for {3} minutes.",
   "pg.fight.log.nomana": "Not enough mana.",
   "pg.fight.log.onCooldown": "{0} is still on cooldown ({1} turn(s) left).",
   "pg.fight.log.enemyHit": "{0} hits you for {1}.",
@@ -1370,5 +1371,12 @@
   "room.hollow_crypt.9": "The Hollow Crypt — Atrium",
   "room.hollow_crypt.9.desc": "A vast atrium with two rows of pillars carrying a vaulted ceiling that shouldn't stand by the engineering principles of the last eight hundred years. At the far end, a massive altar faces a stone figure so large it is difficult to understand as a single carved object — the proportions are not human.",
   "room.royas.main": "Royas",
-  "room.royas.main.desc": "Royas is barely a village — a dozen permanent households and the forge that defines it. The smoke from Taro Vaeres's smithy is the first thing you smell coming down the Nuvmito. A few villagers go about their day with the unhurried pace of people who have lived their whole lives between the same two peaks. The feeling here is different from anywhere else in Lura: something old, something alive, still present."
+  "room.royas.main.desc": "Royas is barely a village — a dozen permanent households and the forge that defines it. The smoke from Taro Vaeres's smithy is the first thing you smell coming down the Nuvmito. A few villagers go about their day with the unhurried pace of people who have lived their whole lives between the same two peaks. The feeling here is different from anywhere else in Lura: something old, something alive, still present.",
+  "skill.cast.notOutOfCombat": "This skill can only be used in a fight.",
+  "skill.cast.dead": "Neither caster nor target may be defeated.",
+  "skill.cast.noMana": "Not enough mana.",
+  "skill.cast.noTarget": "That character isn't here.",
+  "skill.cast.inCombat": "You are in a fight - use the skill there.",
+  "skill.cast.done": "{0} gives {1} {2} for {3} minutes.",
+  "buff.lasting.remaining": "{0}: +{1}% max HP, +{2}% max MP ({3} min left)"
 }

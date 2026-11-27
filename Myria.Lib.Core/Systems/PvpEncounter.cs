@@ -316,6 +316,11 @@ namespace Myria.Lib.Core.Systems
 
         private void SkillHeal(Skill skill, Character caster, Character target)
         {
+            if (LastingBuff.From(skill, caster.Name) is { } lasting)
+            {
+                target.ApplyLastingBuff(lasting);
+                Log.Add(new CombatLogEntry("pg.fight.log.lastingBuff", caster.Name, target.Name, skill.Name, skill.LastingBuff!.DurationMinutes));
+            }
             if (!skill.IsHealing) return;
             int heal = CombatEntity.ScaleHeal((int)(ResolveBaseStat(skill, caster) * skill.ScalingFactor));
             int healed = Math.Min(heal, target.MaxHealth - target.CurrentHealth);
