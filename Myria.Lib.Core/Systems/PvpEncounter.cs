@@ -333,6 +333,25 @@ namespace Myria.Lib.Core.Systems
             int effectStat = ResolveEffectStat(skill, caster);
             foreach (var entry in skill.Effects)
             {
+                // v0.3: lifesteal / mana siphon heal the caster once from the skill's total damage, not once
+                // per host (an area skill used to heal once per enemy hit).
+                var drain = EffectFactory.CreateEffect(entry.EffectId, skill.Id, skill.ScalingFactor, effectStat);
+                if (drain == null) continue;
+                if (drain.Type == EffectType.LifeSteal)
+                {
+                    int amount = Math.Max(1, (int)(totalDamage * drain.Magnitude));
+                    caster.Heal(amount);
+                    Log.Add(new CombatLogEntry("pg.fight.effect.lifesteal", caster.Name, amount));
+                    continue;
+                }
+                if (drain.Type == EffectType.ManaSiphon)
+                {
+                    int amount = Math.Max(1, (int)(totalDamage * drain.Magnitude));
+                    caster.RestoreMana(amount);
+                    Log.Add(new CombatLogEntry("pg.fight.effect.manasiphon", caster.Name, amount));
+                    continue;
+                }
+
                 var hosts = entry.ApplyTo switch
                 {
                     EffectTarget.Caster    => new List<Character> { caster },
@@ -345,23 +364,8 @@ namespace Myria.Lib.Core.Systems
                     if (effect == null) continue;
                     effect.SourceCharacterName = caster.Name;
 
-                    if (effect.Type == EffectType.LifeSteal)
-                    {
-                        int amount = Math.Max(1, (int)(totalDamage * effect.Magnitude));
-                        caster.Heal(amount);
-                        Log.Add(new CombatLogEntry("pg.fight.effect.lifesteal", caster.Name, amount));
-                    }
-                    else if (effect.Type == EffectType.ManaSiphon)
-                    {
-                        int amount = Math.Max(1, (int)(totalDamage * effect.Magnitude));
-                        caster.RestoreMana(amount);
-                        Log.Add(new CombatLogEntry("pg.fight.effect.manasiphon", caster.Name, amount));
-                    }
-                    else
-                    {
-                        EffectProcessor.Apply(host, effect);
-                        Log.Add(new CombatLogEntry("pg.fight.effect.applied", effect.Name, host.Name));
-                    }
+                    EffectProcessor.Apply(host, effect);
+                    Log.Add(new CombatLogEntry("pg.fight.effect.applied", effect.Name, host.Name));
                 }
             }
         }

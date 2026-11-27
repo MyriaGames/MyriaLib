@@ -301,12 +301,8 @@ namespace Myria.Lib.Core.Systems
         {
             if (skill.IsHealing) return 0;
 
-            int baseStat = ResolveSkillBaseStat(skill);
-            float raw = baseStat * skill.ScalingFactor;
-            float def = skill.Type == SkillType.Physical
-                ? target.TotalPhysicalDefense
-                : target.TotalMagicDefense;
-            int dmg = Math.Max(1, (int)CombatSystem.ExponentialDamage(raw, def));
+            // v0.3: one skill rule for solo, group and PvP fights (was ExponentialDamage here).
+            int dmg = CombatSystem.SkillDamage(Character, skill, target);
             target.TakeDamage(dmg);
             Log.Add(new CombatLogEntry("pg.fight.log.skillHit", Character.Name, skill.Name, dmg));
             return dmg;

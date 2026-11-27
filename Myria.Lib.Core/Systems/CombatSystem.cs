@@ -151,7 +151,7 @@ namespace Myria.Lib.Core.Systems
         /// <summary>
         /// Damage a skill does to <paramref name="target"/> (computed, not applied; 0 for healing skills):
         /// raw = base stat × ScalingFactor, damage = raw² / (raw + DEF or MDEF), at least 1. The rule of
-        /// group and PvP fights (solo fights still use ExponentialDamage - pending a decision).
+        /// solo, group and PvP fights (v0.3).
         /// </summary>
         public static int SkillDamage(Character caster, Skill skill, ICombatant target)
         {
