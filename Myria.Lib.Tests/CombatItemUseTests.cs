@@ -125,13 +125,17 @@ public class CombatItemUseTests
         var actor = encounter.Characters.First(c => c.Name == encounter.CurrentTurnCharacterName);
         var potion = GivePotions(actor, 3);
         int hpBefore = actor.CurrentHealth;
+        int logBefore = encounter.Log.Count;
 
         Assert.True(encounter.CharacterUseItem(actor.Name, potion));
 
-        Assert.Equal(hpBefore + PotionHeal, actor.CurrentHealth); // nobody else acts before the heal lands
+        // On the shared turn timeline the monster may act right after the potion - its hits
+        // (if any landed on the actor) come off the healed amount.
+        int hitsAfter = encounter.Log.Skip(logBefore).Where(e => e.Key == "pg.fight.log.enemyHit").Sum(e => Convert.ToInt32(e.Args[1]));
+        Assert.InRange(actor.CurrentHealth, hpBefore + PotionHeal - hitsAfter, hpBefore + PotionHeal);
         Assert.Equal(2, potion.StackSize);
         Assert.Contains(encounter.Log, e => e.Key == "pg.fight.log.usedItem");
-        Assert.NotEqual(actor.Name, encounter.CurrentTurnCharacterName);
+        Assert.NotEqual(actor.Name, encounter.CurrentTurnCharacterName);   // equal speed: the other one is next
     }
 
     [Fact]

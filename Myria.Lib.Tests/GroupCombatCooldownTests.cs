@@ -48,35 +48,26 @@ public class GroupCombatCooldownTests
         Assert.False(enc.CharacterCastSkill(ch.Name, skill, 1));   // still 2 actions to go
     }
 
-    /// <summary>
-    /// A cooldown counts TURNS, not actions: a DEX bonus action used to tick it too, so a skill
-    /// came back a round early (often right as the bonus action killed a monster).
-    /// </summary>
+    /// <summary>A cooldown counts the character's own turns: with cooldown 2 a skill is usable on
+    /// every third own turn, however the turns interleave with the monsters'.</summary>
     [Fact]
-    public void Cooldown_CountsTurns_BonusActionsDontShortenIt()
+    public void Cooldown_CountsTheCharactersOwnTurns()
     {
         var ch = TestHelpers.CreateCharacter(level: 10);
         ch.Stats.BaseHealth = 1_000_000; ch.CurrentHealth = ch.MaxHealth;
         var enc = new GroupCombatEncounter(new[] { ch }, new List<Monster> { Dummy(1_000_000) });
         var skill = CooldownSkill(2);
 
-        int BonusIn(int from) => enc.Log.Skip(from).Where(e => e.Key == "pg.fight.log.bonusTurn")
-            .Sum(e => Convert.ToInt32(e.Args[1]));
-        int round = 1, left = 1 + BonusIn(0), bonusActions = 0;
-        var castRounds = new List<int>();
-        for (int step = 0; step < 60 && !enc.IsFinished; step++)
+        var castTurns = new List<int>();
+        for (int turn = 1; turn <= 30 && !enc.IsFinished; turn++)
         {
-            int before = enc.Log.Count;
-            if (enc.CharacterCastSkill(ch.Name, skill, 0)) castRounds.Add(round);
+            Assert.Equal(ch.Name, enc.CurrentTurnCharacterName);
+            if (enc.CharacterCastSkill(ch.Name, skill, 0)) castTurns.Add(turn);
             else Assert.True(enc.CharacterAttack(ch.Name, 0));
-            if (--left > 0) { bonusActions++; continue; }
-            round++;
-            left = 1 + BonusIn(before);
         }
 
-        Assert.True(bonusActions > 0, "the test needs bonus actions to happen");
-        Assert.True(castRounds.Count >= 3);
-        for (int k = 1; k < castRounds.Count; k++)
-            Assert.Equal(3, castRounds[k] - castRounds[k - 1]);   // used, 2 turns blocked, usable
+        Assert.True(castTurns.Count >= 5);
+        for (int k = 1; k < castTurns.Count; k++)
+            Assert.Equal(3, castTurns[k] - castTurns[k - 1]);   // used, 2 turns blocked, usable
     }
 }

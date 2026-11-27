@@ -1,64 +1,64 @@
 [
   {
     "race": "Myralu",
-    "baseStatBonus": { "STR": 4, "DEX": 1, "END": 6, "INT": 4, "SPR": 3 },
+    "baseStatBonus": { "STR": 2, "DEX": 1, "END": 3, "INT": 2, "SPR": 2 },
     "baseHpBonus": 30,
     "baseManaBonus": 20,
-    "statGrowth": { "STR": 1, "DEX": 1, "END": 2, "INT": 2, "SPR": 2 },
+    "statGrowth": { "STR": 0, "DEX": 0, "END": 1, "INT": 1, "SPR": 1 },
     "hpPerLevel": 6,
     "manaPerLevel": 5
   },
   {
     "race": "Rotuka",
-    "baseStatBonus": { "STR": 8, "DEX": 5, "END": 5, "INT": -1, "SPR": 1 },
+    "baseStatBonus": { "STR": 4, "DEX": 3, "END": 3, "INT": -1, "SPR": 1 },
     "baseHpBonus": 30,
     "baseManaBonus": 10,
-    "statGrowth": { "STR": 3, "DEX": 2, "END": 2, "INT": 0, "SPR": 1 },
+    "statGrowth": { "STR": 1, "DEX": 1, "END": 1, "INT": 0, "SPR": 0 },
     "hpPerLevel": 7,
     "manaPerLevel": 1
   },
   {
     "race": "Iymva",
-    "baseStatBonus": { "STR": 3, "DEX": 7, "END": 2, "INT": 3, "SPR": 3 },
+    "baseStatBonus": { "STR": 2, "DEX": 4, "END": 1, "INT": 1, "SPR": 2 },
     "baseHpBonus": 20,
     "baseManaBonus": 15,
-    "statGrowth": { "STR": 2, "DEX": 3, "END": 1, "INT": 1, "SPR": 1 },
+    "statGrowth": { "STR": 1, "DEX": 1, "END": 0, "INT": 0, "SPR": 1 },
     "hpPerLevel": 4,
     "manaPerLevel": 3
   },
   {
     "race": "Elf",
-    "baseStatBonus": { "STR": 2, "DEX": 5, "END": 2, "INT": 5, "SPR": 4 },
+    "baseStatBonus": { "STR": 1, "DEX": 3, "END": 1, "INT": 3, "SPR": 2 },
     "baseHpBonus": 20,
     "baseManaBonus": 25,
-    "statGrowth": { "STR": 1, "DEX": 2, "END": 1, "INT": 2, "SPR": 2 },
+    "statGrowth": { "STR": 0, "DEX": 1, "END": 0, "INT": 1, "SPR": 1 },
     "hpPerLevel": 4,
     "manaPerLevel": 4
   },
   {
     "race": "Faerie",
-    "baseStatBonus": { "STR": -3, "DEX": 7, "END": 0, "INT": 6, "SPR": 8 },
+    "baseStatBonus": { "STR": -2, "DEX": 3, "END": 1, "INT": 4, "SPR": 4 },
     "baseHpBonus": 5,
     "baseManaBonus": 35,
-    "statGrowth": { "STR": 0, "DEX": 2, "END": 1, "INT": 2, "SPR": 3 },
+    "statGrowth": { "STR": 0, "DEX": 1, "END": 0, "INT": 1, "SPR": 1 },
     "hpPerLevel": 2,
     "manaPerLevel": 7
   },
   {
     "race": "Aoyu",
-    "baseStatBonus": { "STR": 3, "DEX": 3, "END": 4, "INT": 3, "SPR": 5 },
+    "baseStatBonus": { "STR": 2, "DEX": 1, "END": 2, "INT": 2, "SPR": 3 },
     "baseHpBonus": 25,
     "baseManaBonus": 20,
-    "statGrowth": { "STR": 1, "DEX": 1, "END": 2, "INT": 1, "SPR": 3 },
+    "statGrowth": { "STR": 1, "DEX": 0, "END": 1, "INT": 0, "SPR": 1 },
     "hpPerLevel": 5,
     "manaPerLevel": 3
   },
   {
     "race": "Amato",
-    "baseStatBonus": { "STR": 5, "DEX": 3, "END": 4, "INT": 3, "SPR": 3 },
+    "baseStatBonus": { "STR": 3, "DEX": 1, "END": 2, "INT": 2, "SPR": 2 },
     "baseHpBonus": 25,
     "baseManaBonus": 25,
-    "statGrowth": { "STR": 2, "DEX": 1, "END": 2, "INT": 1, "SPR": 2 },
+    "statGrowth": { "STR": 1, "DEX": 0, "END": 1, "INT": 0, "SPR": 1 },
     "hpPerLevel": 5,
     "manaPerLevel": 4,
     "forbiddenClasses": [ "ElementalMage", "ArcanMage", "Druid", "SoulsKnight" ]

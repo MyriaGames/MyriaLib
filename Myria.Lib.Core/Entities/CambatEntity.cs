@@ -69,10 +69,26 @@ namespace Myria.Lib.Core.Entities
             set => Equipped[EquipmentType.Accessory] = value;
         }
 
-        public int TotalPhysicalAttack  => (TotalSTR * 2 + TotalEND) + GetBonusFromGear(g => g.Bonuses.ATK)  + GetEffectStatBonus("ATK");
-        public int TotalPhysicalDefense => (TotalEND * 2 + TotalSTR) + GetBonusFromGear(g => g.Bonuses.DEF)  + GetEffectStatBonus("DEF");
-        public int TotalMagicAttack     => (TotalINT * 2 + TotalSPR) + GetBonusFromGear(g => g.Bonuses.MATK) + GetEffectStatBonus("MATK");
-        public int TotalMagicDefense    => (TotalSPR * 2 + TotalINT) + GetBonusFromGear(g => g.Bonuses.MDEF) + GetEffectStatBonus("MDEF");
+        /// <summary>
+        /// Each combat value comes from one stat (v0.3): STR -> ATK, END -> DEF, INT -> MATK,
+        /// SPR -> MDEF, x3 each. It used to be 2x the main stat plus the other one (ATK = 2 STR +
+        /// END), so tanky END builds hit as hard as strength builds; x3 keeps the old ATK+DEF total.
+        /// HP still comes from END and MP from SPR (see MaxHealth/MaxMana).
+        /// </summary>
+        public const int StatToCombatValue = 3;
+
+        public int TotalPhysicalAttack  => TotalSTR * StatToCombatValue + GetBonusFromGear(g => g.Bonuses.ATK)  + GetEffectStatBonus("ATK");
+        public int TotalPhysicalDefense => TotalEND * StatToCombatValue + GetBonusFromGear(g => g.Bonuses.DEF)  + GetEffectStatBonus("DEF");
+        public int TotalMagicAttack     => TotalINT * StatToCombatValue + GetBonusFromGear(g => g.Bonuses.MATK) + GetEffectStatBonus("MATK");
+        public int TotalMagicDefense    => TotalSPR * StatToCombatValue + GetBonusFromGear(g => g.Bonuses.MDEF) + GetEffectStatBonus("MDEF");
+
+        /// <summary>What DEX-scaled skills scale from: the ATK shape built on DEX instead of STR
+        /// (1.5x DEX plus the weapon/gear ATK). Raw DEX left them far behind ATK-scaled skills; 3x
+        /// overshot (a Rogue did 70% of a group's damage). 1.5 puts the Hunter level with the Archer.</summary>
+        public int DexterityAttack      => (int)(TotalDEX * DexSkillMultiplier) + GetBonusFromGear(g => g.Bonuses.ATK)  + GetEffectStatBonus("ATK");
+
+        /// <summary>DEX per point of <see cref="DexterityAttack"/> (tuned by simulation).</summary>
+        public static float DexSkillMultiplier { get; set; } = 1.5f;
         public int TotalAim             => TotalDEX + GetBonusFromGear(g => g.Bonuses.Aim)                   + GetEffectStatBonus("AIM");
         public int TotalEvasion         => (int)(TotalDEX * 0.85f) + GetBonusFromGear(g => g.Bonuses.Evasion) + GetEffectStatBonus("EVA");
 

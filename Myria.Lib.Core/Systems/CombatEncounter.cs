@@ -313,12 +313,14 @@ namespace Myria.Lib.Core.Systems
                 "ATK"  => Character.TotalPhysicalAttack,
                 "MATK" => Character.TotalMagicAttack,
                 "SPR"  => Character.TotalSPR,
-                "INT"  => Character.TotalINT,
-                "DEX"  => Character.TotalDEX,
+                // STR/INT skills scale like ATK/MATK skills (v0.3) - the raw stat left them at a third of
+                // the power of every ATK/MATK-scaled skill.
+                "INT"  => Character.TotalMagicAttack,
+                "DEX"  => Character.DexterityAttack,
                 "AIM"  => Character.TotalAim * 2,
                 "EVA"  => Character.TotalEvasion * 2,
                 "END"  => Character.TotalEND,
-                "STR"  => Character.TotalSTR,
+                "STR"  => Character.TotalPhysicalAttack,
                 _      => Character.TotalPhysicalAttack
             };
 

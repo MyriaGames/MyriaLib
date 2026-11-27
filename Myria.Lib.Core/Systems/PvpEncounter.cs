@@ -413,12 +413,12 @@ namespace Myria.Lib.Core.Systems
             "ATK"  => c.TotalPhysicalAttack,
             "MATK" => c.TotalMagicAttack,
             "SPR"  => c.TotalSPR,
-            "INT"  => c.TotalINT,
-            "DEX"  => c.TotalDEX,
+            "INT"  => c.TotalMagicAttack,   // STR/INT skills scale like ATK/MATK (v0.3)
+            "DEX"  => c.DexterityAttack,
             "AIM"  => c.TotalAim * 2,
             "EVA"  => c.TotalEvasion * 2,
             "END"  => c.TotalEND,
-            "STR"  => c.TotalSTR,
+            "STR"  => c.TotalPhysicalAttack,
             _      => c.TotalPhysicalAttack
         };
 

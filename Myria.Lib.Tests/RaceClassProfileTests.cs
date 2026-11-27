@@ -51,11 +51,16 @@ public class RaceClassProfileTests
             Assert.True(p.StatGrowth.Values.Sum() == 17, $"{cls} grows {p.StatGrowth.Values.Sum()} stat points per level");
             Assert.True(p.HpPerLevel + 2 * p.ManaPerLevel == 200, $"{cls}: HP {p.HpPerLevel} + 2×MP {p.ManaPerLevel} != 200");
         }
-        // Races, too: same start total and growth total, so no race is simply stronger.
+        // Races, too: same start total and growth total, so no race is simply stronger. And small
+        // next to a class (v0.3): at most 1 point per stat and level, so a race flavours a class
+        // but never grows a stat like the class does (a Rotuka Knight used to get as much STR per
+        // level from its race as from its class).
         foreach (var (race, p) in RaceProfile.All)
         {
-            Assert.True(p.StatGrowth.Values.Sum() == 8, $"{race} grows {p.StatGrowth.Values.Sum()}");
-            Assert.True(p.BaseStatBonus.Values.Sum() == 18, $"{race} starts with {p.BaseStatBonus.Values.Sum()} bonus points");
+            Assert.True(p.StatGrowth.Values.Sum() == 3, $"{race} grows {p.StatGrowth.Values.Sum()}");
+            Assert.All(p.StatGrowth.Values, g => Assert.InRange(g, 0, 1));
+            Assert.True(p.BaseStatBonus.Values.Sum() == 10, $"{race} starts with {p.BaseStatBonus.Values.Sum()} bonus points");
+            Assert.All(p.BaseStatBonus.Values, b => Assert.InRange(b, -2, 4));
         }
     }
 
@@ -133,6 +138,36 @@ public class RaceClassProfileTests
         Assert.Equal(expected.Stats.BaseHealth, old.Stats.BaseHealth);
         Assert.Equal(expected.Stats.BaseMana, old.Stats.BaseMana);
         Assert.False(RaceMigration.Apply(old));                  // once only
+    }
+
+    [Theory]
+    [InlineData("Rotuka", new[] { 8, 5, 5, -1, 1 }, new[] { 3, 2, 2, 0, 1 })]
+    [InlineData("Myralu", new[] { 4, 1, 6, 4, 3 }, new[] { 1, 1, 2, 2, 2 })]
+    [InlineData("Faerie", new[] { -3, 7, 0, 6, 8 }, new[] { 0, 2, 1, 2, 3 })]
+    public void ACharacterBuiltWithTheOldRaceBalance_IsMovedToTheNewOne(string race, int[] oldBase, int[] oldGrowth)
+    {
+        var old = Built(race, 12, oldBase, 0, 0, oldGrowth, 0, 0);
+        old.Stats.StrengthBonus = 4;                                // points the player spent stay
+        int hp = old.Stats.BaseHealth;
+        var expected = BuiltAs(race, 12);
+
+        Assert.True(RaceMigration.Apply(old));
+
+        foreach (var id in new[] { "STR", "DEX", "END", "INT", "SPR" })
+            Assert.Equal(expected.Stats.GetBase(id), old.Stats.GetBase(id));
+        Assert.Equal(4, old.Stats.StrengthBonus);
+        Assert.Equal(hp, old.Stats.BaseHealth);
+        Assert.False(RaceMigration.Apply(old));                  // once only
+    }
+
+    [Fact]
+    public void HandEditedStats_AreNotRebalanced()
+    {
+        var c = Built("Rotuka", 12, new[] { 8, 5, 5, -1, 1 }, 0, 0, new[] { 3, 2, 2, 0, 1 }, 0, 0);
+        c.Stats.Strength += 1;
+        int str = c.Stats.Strength;
+        Assert.False(RaceMigration.Apply(c));
+        Assert.Equal(str, c.Stats.Strength);
     }
 
     [Fact]

@@ -286,5 +286,59 @@
     "Duration": 1,
     "Magnitude": 0.0,
     "StatName": ""
+  },
+  {
+    "Id": "rogue_poison",
+    "Name": "Rogue's Venom",
+    "Description": "A toxin that deals damage each turn, stronger with the Rogue's agility.",
+    "Type": "Poison",
+    "Duration": 5,
+    "Magnitude": 3.0,
+    "StatName": ""
+  },
+  {
+    "Id": "rogue_poison_weak",
+    "Name": "Open Wound",
+    "Description": "A bleeding wound that deals small damage each turn.",
+    "Type": "Poison",
+    "Duration": 3,
+    "Magnitude": 0.8,
+    "StatName": ""
+  },
+  {
+    "Id": "rogue_atk_buff",
+    "Name": "Killer Instinct",
+    "Description": "Temporarily increases attack.",
+    "Type": "StatBuff",
+    "Duration": 3,
+    "Magnitude": 1.5,
+    "StatName": "ATK"
+  },
+  {
+    "Id": "rogue_dex_buff",
+    "Name": "Quickened Step",
+    "Description": "Temporarily increases DEX.",
+    "Type": "StatBuff",
+    "Duration": 3,
+    "Magnitude": 1.0,
+    "StatName": "DEX"
+  },
+  {
+    "Id": "rogue_eva_buff",
+    "Name": "Slip Away",
+    "Description": "Temporarily improves evasion.",
+    "Type": "StatBuff",
+    "Duration": 3,
+    "Magnitude": 0.9,
+    "StatName": "EVA"
+  },
+  {
+    "Id": "rogue_def_debuff",
+    "Name": "Exposed Guard",
+    "Description": "Temporarily reduces physical defense.",
+    "Type": "StatBuff",
+    "Duration": 2,
+    "Magnitude": -1.5,
+    "StatName": "DEF"
   }
 ]

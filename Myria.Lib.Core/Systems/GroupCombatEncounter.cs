@@ -45,20 +45,44 @@ namespace Myria.Lib.Core.Systems
             _skillCooldowns.TryGetValue(character, out var cds) && cds.TryGetValue(skillId, out var v)
                 ? v : 0;
 
-        // ── DEX-driven bonus turns ──────────────────────────────────────────────
-        // Turn order itself is still the initiative roll from the constructor (unchanged) - this
-        // only lets a character who's fast *relative to this fight's other participants* earn
-        // extra actions back-to-back on top of their normal turn, instead of a flat one-action-
-        // per-character-per-round cadence regardless of DEX. Each character accumulates a gauge
-        // by their own TotalDEX every time their normal turn comes up; once it crosses
-        // _speedGaugeThreshold (set once, from this encounter's average DEX, so it self-scales to
-        // whatever level/gear range the party is actually at) they immediately get another action
-        // before play moves on, consuming the gauge. A capped number of bonus actions per arrival
-        // keeps one extreme DEX outlier from monopolizing the whole round.
-        private readonly Dictionary<Character, double> _speedGauge = new();
-        private readonly double _speedGaugeThreshold;
-        private const int MaxBonusActionsPerTurn = 3;
-        private int _bonusActionsRemaining;
+        // ── Turn timeline (v0.3) ────────────────────────────────────────────
+        // Players and monsters share one timeline: everyone's next turn has a time, and whoever is
+        // next acts. Acting pushes your next turn back by your delay, which shrinks with DEX - a
+        // fast combatant's turns come round more often and slip past slower ones in the chain, so
+        // over time they get extra moves, but never two in a row out of nowhere. A player's speed is
+        // measured against the party's average DEX on a softened curve (capped); monsters act at
+        // normal speed - their DEX was tuned for hit/dodge, and counting it made every monster act
+        // up to twice per player turn. So within a party the fast act more and the slow less, while
+        // the party as a whole keeps its pace against the monsters.
+        // Replaces the DEX bonus-action gauge, which was measured against the party alone: every
+        // player got a bonus action every 2-3 turns whatever the monsters' speed (monsters never
+        // did), players of similar DEX all got theirs in the same round, and a Rogue well above the
+        // party's average got one nearly every turn.
+        private readonly Dictionary<CombatEntity, double> _nextTurnAt = new(ReferenceEqualityComparer.Instance);
+        private double _now;
+        private readonly double _referenceSpeed;
+        public const double BaseTurnDelay = 100.0;
+
+        /// <summary>How strongly DEX speeds turns up: turns per time = (DEX / fight average) ^ this,
+        /// clamped to [MinSpeedFactor, MaxSpeedFactor]. 0.5: twice the average DEX = ~1.4x the turns.
+        /// (Linear made monsters, whose DEX was tuned for hit/dodge, act twice per player turn.)</summary>
+        public static double SpeedExponent { get; set; } = 0.5;
+        public static double MinSpeedFactor { get; set; } = 0.67;
+        public static double MaxSpeedFactor { get; set; } = 1.5;
+
+        /// <summary>Monsters always act at normal speed and players' speed is measured against the
+        /// party's own average DEX (monster DEX was tuned for hit/dodge, not turn speed).</summary>
+        public static bool MonstersAtNormalSpeed { get; set; } = true;
+
+        /// <summary>Time between two turns of <paramref name="entity"/>: BaseTurnDelay for an
+        /// average-DEX combatant, shorter for a faster one (see <see cref="SpeedExponent"/>).</summary>
+        private double TurnDelay(CombatEntity entity)
+        {
+            if (MonstersAtNormalSpeed && entity is Monster) return BaseTurnDelay;
+            double ratio = Math.Max(0.01, entity.TotalDEX / _referenceSpeed);
+            double factor = Math.Clamp(Math.Pow(ratio, SpeedExponent), MinSpeedFactor, MaxSpeedFactor);
+            return BaseTurnDelay / factor;
+        }
 
         public string CurrentTurnCharacterName =>
             IsFinished || _currentCharacterIndex >= Characters.Count
@@ -96,18 +120,20 @@ namespace Myria.Lib.Core.Systems
             foreach (var c in Characters)
                 c.AggroLevel = 0f;
 
-            // 2.5x the party's own average DEX: an exactly-average character earns one bonus
-            // action roughly every 2-3 of their normal turns, a character at 2x average roughly
-            // every turn, and one well below average essentially never - self-scales to whatever
-            // level/gear range this specific fight's participants are at rather than a flat
-            // magic number that would be trivial at high level and unreachable at low level.
-            _speedGaugeThreshold = Math.Max(1.0, Characters.Average(c => c.TotalDEX) * 2.5);
+            // Everyone's first turn comes within their first delay; players get the earlier window,
+            // so a fight usually opens with them, but a fast monster can still strike first.
+            var all = Characters.Cast<CombatEntity>().Concat(Monsters).ToList();
+            _referenceSpeed = Math.Max(1.0, MonstersAtNormalSpeed
+                ? Characters.Average(c => (double)c.TotalDEX)
+                : all.Average(e => (double)e.TotalDEX));
+            foreach (var c in Characters) _nextTurnAt[c] = TurnDelay(c) * (0.1 + 0.6 * rng.NextDouble());
+            foreach (var m in Monsters)   _nextTurnAt[m] = TurnDelay(m) * (0.4 + 0.6 * rng.NextDouble());
 
             Log.Add(new CombatLogEntry("pg.fight.log.start",
                 string.Join(", ", Monsters.Select(m => m.Name))));
             Log.Add(new CombatLogEntry("pg.fight.log.order",
                 string.Join(", ", Characters.Select(p => p.Name))));
-            SkipDeadCharacters();
+            AdvanceTimeline();
         }
 
         // Guards only AddCharacter's own check-then-write (two late joiners arriving in the same
@@ -122,9 +148,8 @@ namespace Myria.Lib.Core.Systems
         /// "Start Group Fight" themselves while that fight is still going). Appended to the end of
         /// the turn order rather than reshuffled in, so nobody else's already-decided turn order
         /// shifts around mid-fight; they simply get their first turn once play reaches the end of
-        /// the (now longer) roster. Uses the encounter's existing <see cref="_speedGaugeThreshold"/>
-        /// rather than recalculating it — a late joiner shouldn't retroactively change everyone
-        /// else's bonus-turn pacing.
+        /// the (now longer) roster. Their first turn comes one full turn delay from now on the
+        /// timeline; the fight's reference speed isn't recalculated, so nobody else's pacing changes.
         ///
         /// GameHub can call this (from a joining player's connection) fully concurrently with
         /// CharacterAttack/CharacterCastSkill (from an already-fighting player's connection) on
@@ -147,6 +172,7 @@ namespace Myria.Lib.Core.Systems
                 if (IsFinished || _characters.Any(c => c == character)) return;
 
                 character.AggroLevel = 0f;
+                _nextTurnAt[character] = _now + TurnDelay(character);   // first turn after a full delay
                 _characters = new List<Character>(_characters) { character };
                 Log.Add(new CombatLogEntry("pg.fight.log.joined", character.Name));
             }
@@ -166,7 +192,7 @@ namespace Myria.Lib.Core.Systems
         /// simply drops out of it. If it was (or had just become, mid-removal) their turn, play
         /// advances to the next living character exactly as if they'd finished a do-nothing
         /// action. If the last remaining character flees, the fight ends as a loss (mirrors
-        /// <see cref="SkipDeadCharacters"/>/<see cref="MonstersTurn"/>'s "nobody left standing"
+        /// <see cref="AdvanceTimeline"/>/<see cref="MonsterTurn"/>'s "nobody left standing"
         /// handling) - there's nobody left to keep it going, and nobody left to see the result
         /// either way.
         /// </para>
@@ -187,6 +213,7 @@ namespace Myria.Lib.Core.Systems
                 newList.RemoveAt(idx);
                 _characters = newList;
                 Log.Add(new CombatLogEntry("pg.fight.log.fled", fled.Name));
+                _nextTurnAt.Remove(fled);
 
                 if (_characters.Count == 0) { FinishCharactersLost(); return; }
 
@@ -198,24 +225,10 @@ namespace Myria.Lib.Core.Systems
                     return;
                 }
 
-                if (!wasCurrentTurn) return; // idx > _currentCharacterIndex: nothing to adjust
+                if (!wasCurrentTurn) return; // someone else's turn: nothing to adjust
 
-                // The character who just left was up (or next up) - any bonus turns queued for
-                // them are now moot, and removal already shifted everyone after them down by one,
-                // so _currentCharacterIndex (left unchanged) now already points at whoever's next.
-                _bonusActionsRemaining = 0;
-                while (_currentCharacterIndex < _characters.Count && !Characters[_currentCharacterIndex].IsAlive)
-                    _currentCharacterIndex++;
-
-                if (_currentCharacterIndex >= _characters.Count)
-                {
-                    MonstersTurn();
-                    if (!IsFinished) SkipDeadCharacters();
-                }
-                else
-                {
-                    GrantGaugeForCurrentCharacter();
-                }
+                // The character who just left was up - play moves on along the timeline.
+                AdvanceTimeline();
             }
         }
 
@@ -545,19 +558,8 @@ namespace Myria.Lib.Core.Systems
 
         private void AdvanceAfterCharacterAction()
         {
-            // A DEX-earned bonus action keeps the turn on the same character instead of moving
-            // on - CurrentTurnCharacterName is unchanged, so no protocol/client change is needed
-            // for this to work; the client just gets prompted for the same character's action again.
-            if (_bonusActionsRemaining > 0)
-            {
-                _bonusActionsRemaining--;
-                return;
-            }
-
-            // The turn is over: decrement whoever just acted's own skill cooldowns once - per
-            // TURN, not per action. Ticking on every action let a DEX bonus action count as a
-            // cooldown turn, so a skill came back a round early (often right as the bonus action
-            // killed a monster, so it looked like the cooldown didn't carry over to the next one).
+            // The actor's turn is over: their own skill cooldowns go down by one (cooldowns count
+            // the character's turns), and their next turn moves back by their delay.
             // _currentCharacterIndex still points at the actor here.
             var actor = Characters[_currentCharacterIndex];
             if (_skillCooldowns.TryGetValue(actor, out var actorCooldowns) && actorCooldowns.Count > 0)
@@ -568,109 +570,96 @@ namespace Myria.Lib.Core.Systems
                         actorCooldowns.Remove(key);
                 }
             }
-
-            int next = _currentCharacterIndex + 1;
-            while (next < Characters.Count && !Characters[next].IsAlive) next++;
-
-            if (next >= Characters.Count)
-            {
-                // All living players have acted — monsters' turn
-                MonstersTurn();
-                if (!IsFinished)
-                    SkipDeadCharacters(); // restart from first living player
-            }
-            else
-            {
-                _currentCharacterIndex = next;
-                GrantGaugeForCurrentCharacter();
-            }
+            _nextTurnAt[actor] = _now + TurnDelay(actor);
+            AdvanceTimeline();
         }
 
-        private void SkipDeadCharacters()
+        /// <summary>
+        /// Plays the timeline forward to the next living player's turn: monsters whose turn comes
+        /// first act on their own (each at its own time). Ties go to players, then roster order.
+        /// </summary>
+        private void AdvanceTimeline()
         {
-            int idx = 0;
-            while (idx < Characters.Count && !Characters[idx].IsAlive) idx++;
-            _currentCharacterIndex = idx;
-            if (_currentCharacterIndex >= Characters.Count) { FinishCharactersLost(); return; }
-            GrantGaugeForCurrentCharacter();
-        }
-
-        /// <summary>Adds this round's DEX to the current character's speed gauge and queues
-        /// however many bonus actions (capped) that crosses the threshold for.</summary>
-        private void GrantGaugeForCurrentCharacter()
-        {
-            var character = Characters[_currentCharacterIndex];
-            double gauge = _speedGauge.GetValueOrDefault(character) + character.TotalDEX;
-
-            int bonus = 0;
-            while (gauge >= _speedGaugeThreshold && bonus < MaxBonusActionsPerTurn)
+            for (int guard = 0; guard < 10_000 && !IsFinished; guard++)
             {
-                gauge -= _speedGaugeThreshold;
-                bonus++;
+                if (!Characters.Any(c => c.IsAlive)) { FinishCharactersLost(); return; }
+
+                CombatEntity? next = null;
+                double nextAt = double.MaxValue;
+                foreach (var c in Characters.Where(c => c.IsAlive))
+                {
+                    double at = _nextTurnAt.TryGetValue(c, out var v) ? v : (_nextTurnAt[c] = _now + TurnDelay(c));
+                    if (at < nextAt) { next = c; nextAt = at; }
+                }
+                foreach (var m in Monsters.Where(m => m.IsAlive))
+                {
+                    double at = _nextTurnAt.TryGetValue(m, out var v) ? v : (_nextTurnAt[m] = _now + TurnDelay(m));
+                    if (at < nextAt) { next = m; nextAt = at; }   // strict: a tie stays with the player
+                }
+                if (next is null) return;   // no living monster: the fight is already finished
+
+                _now = Math.Max(_now, nextAt);
+                if (next is Character character)
+                {
+                    _currentCharacterIndex = _characters.IndexOf(character);
+                    return;
+                }
+
+                var monster = (Monster)next;
+                MonsterTurn(monster);
+                _nextTurnAt[monster] = _now + TurnDelay(monster);
             }
-
-            _speedGauge[character] = gauge;
-            _bonusActionsRemaining = bonus;
-
-            if (bonus > 0)
-                Log.Add(new CombatLogEntry("pg.fight.log.bonusTurn", character.Name, bonus));
         }
 
-        private void MonstersTurn()
+        /// <summary>One monster's turn: its effects tick (poison may kill it), then it attacks the
+        /// character with the most aggro unless it's stunned.</summary>
+        private void MonsterTurn(Monster monster)
         {
             var living = Characters.Where(p => p.IsAlive).ToList();
             if (living.Count == 0) { FinishCharactersLost(); return; }
 
-            foreach (var monster in Monsters.Where(m => m.IsAlive).ToList())
+            // Credit 0.5 aggro per Poison DoT tick to the character who applied each effect.
+            foreach (var effect in monster.ActiveEffects.Where(e => e.Type == EffectType.Poison && e.TurnsRemaining > 0))
             {
-                // Credit 0.5 aggro per Poison DoT tick to the character who applied each effect.
-                foreach (var effect in monster.ActiveEffects.Where(e => e.Type == EffectType.Poison && e.TurnsRemaining > 0))
+                var source = living.FirstOrDefault(c => c.Name == effect.SourceCharacterName);
+                if (source != null)
+                    source.AggroLevel += 0.5f;
+            }
+
+            bool monsterStunned = EffectProcessor.IsStunned(monster);
+            foreach (var entry in EffectProcessor.Tick(monster))
+                Log.Add(entry);
+
+            // Killed by its own poison: a death like any other - resurrection check, XP, loot, quest
+            // credit, and the end of the fight once it was the last one.
+            if (!monster.IsAlive)
+            {
+                HandleMonsterDeath(monster);
+                return;
+            }
+
+            if (monsterStunned)
+            {
+                Log.Add(new CombatLogEntry("pg.fight.effect.stunned", monster.Name));
+                return;
+            }
+
+            // Target the character with the highest aggro; on ties, first in initiative order.
+            var target = living.OrderByDescending(c => c.AggroLevel).First();
+
+            int dmg = CombatSystem.CalculateDamage(monster, target);
+            if (dmg <= 0)
+                Log.Add(new CombatLogEntry("pg.fight.log.enemyMiss", monster.Name));
+            else
+            {
+                target.ApplyDamage(dmg);
+                Log.Add(new CombatLogEntry("pg.fight.log.enemyHit", monster.Name, dmg));
+
+                if (!target.IsAlive)
                 {
-                    var source = living.FirstOrDefault(c => c.Name == effect.SourceCharacterName);
-                    if (source != null)
-                        source.AggroLevel += 0.5f;
-                }
-
-                bool monsterStunned = EffectProcessor.IsStunned(monster);
-                foreach (var entry in EffectProcessor.Tick(monster))
-                    Log.Add(entry);
-
-                // Killed by its own poison: a death like any other - resurrection check, XP, loot, quest
-                // credit, and the end of the fight once it was the last one. This used to just skip the
-                // monster, so a fight whose last monster died of poison never finished (all monsters
-                // dead, nothing left to attack - fleeing was the only way out) and gave no credit.
-                if (!monster.IsAlive)
-                {
-                    HandleMonsterDeath(monster);
-                    if (IsFinished) return;
-                    continue;
-                }
-
-                if (monsterStunned)
-                {
-                    Log.Add(new CombatLogEntry("pg.fight.effect.stunned", monster.Name));
-                    continue;
-                }
-
-                // Target the character with the highest aggro; on ties, first in initiative order.
-                var currentLiving = Characters.Where(c => c.IsAlive).ToList();
-                if (currentLiving.Count == 0) break;
-                var target = currentLiving.OrderByDescending(c => c.AggroLevel).First();
-
-                int dmg = CombatSystem.CalculateDamage(monster, target);
-                if (dmg <= 0)
-                    Log.Add(new CombatLogEntry("pg.fight.log.enemyMiss", monster.Name));
-                else
-                {
-                    target.ApplyDamage(dmg);
-                    Log.Add(new CombatLogEntry("pg.fight.log.enemyHit", monster.Name, dmg));
-
-                    if (!target.IsAlive)
-                    {
-                        bool hasCharAllies = Characters.Any(c => c.IsAlive && c != target);
-                        if (EffectProcessor.TryResurrect(target, hasCharAllies))
-                            Log.Add(new CombatLogEntry("pg.fight.effect.resurrected", target.Name));
-                    }
+                    bool hasCharAllies = Characters.Any(c => c.IsAlive && c != target);
+                    if (EffectProcessor.TryResurrect(target, hasCharAllies))
+                        Log.Add(new CombatLogEntry("pg.fight.effect.resurrected", target.Name));
                 }
             }
 
@@ -715,12 +704,14 @@ namespace Myria.Lib.Core.Systems
                 "ATK"  => character.TotalPhysicalAttack,
                 "MATK" => character.TotalMagicAttack,
                 "SPR"  => character.TotalSPR,
-                "INT"  => character.TotalINT,
-                "DEX"  => character.TotalDEX,
+                // STR/INT skills scale like ATK/MATK skills (v0.3) - the raw stat left them at a third of
+                // the power of every ATK/MATK-scaled skill.
+                "INT"  => character.TotalMagicAttack,
+                "DEX"  => character.DexterityAttack,
                 "AIM"  => character.TotalAim * 2,
                 "EVA"  => character.TotalEvasion * 2,
                 "END"  => character.TotalEND,
-                "STR"  => character.TotalSTR,
+                "STR"  => character.TotalPhysicalAttack,
                 _      => character.TotalPhysicalAttack
             };
 

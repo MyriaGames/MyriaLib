@@ -34,6 +34,59 @@ namespace Myria.Lib.Core.Services.Manager
         /// </summary>
         public static bool Apply(Character character)
         {
+            bool moved = MoveRetiredRace(character);
+            return Rebalance(character) | moved;
+        }
+
+        // ── v0.3 race rebalance ─────────────────────────────────────────────
+        // Race bonuses were shrunk so a race flavours a class instead of turning it into another
+        // one (a Rotuka Knight grew as much STR per level from its race as from its class). Start
+        // bonuses went from 18 points to 10, growth from 8 points per level to 3 (at most 1 per
+        // stat). These are the values as they shipped before; HP/MP were not changed.
+        private sealed record OldBalance(int[] Base, int[] Growth);
+        private static readonly Dictionary<string, OldBalance> _beforeRebalance = new(StringComparer.OrdinalIgnoreCase)
+        {
+            [CharacterRace.Myralu] = new([4, 1, 6, 4, 3],  [1, 1, 2, 2, 2]),
+            [CharacterRace.Rotuka] = new([8, 5, 5, -1, 1], [3, 2, 2, 0, 1]),
+            [CharacterRace.Iymva]  = new([3, 7, 2, 3, 3],  [2, 3, 1, 1, 1]),
+            [CharacterRace.Elf]    = new([2, 5, 2, 5, 4],  [1, 2, 1, 2, 2]),
+            [CharacterRace.Faerie] = new([-3, 7, 0, 6, 8], [0, 2, 1, 2, 3]),
+            [CharacterRace.Aoyu]   = new([3, 3, 4, 3, 5],  [1, 1, 2, 1, 3]),
+            [CharacterRace.Amato]  = new([5, 3, 4, 3, 3],  [2, 1, 2, 1, 2]),
+        };
+
+        /// <summary>
+        /// Moves a character's base stats from the old race balance to the current one. Base stats
+        /// are 10 + race start bonus + race growth × (level - 1) - points spent by the player are kept
+        /// apart (Stats.BonusValues) - so a character whose base stats still match the old balance
+        /// exactly is recalculated with the new one. Anything else (already moved, a race unchanged
+        /// by the rebalance, stats edited by hand) is left alone, so this is safe on every load.
+        /// </summary>
+        public static bool Rebalance(Character character)
+        {
+            if (!_beforeRebalance.TryGetValue(character.Race, out var old)) return false;
+            if (!RaceProfile.All.TryGetValue(character.Race, out var now)) return false;
+
+            int levelUps = Math.Max(0, character.Level - 1);
+            bool differs = false;
+            for (int i = 0; i < StatIds.Length; i++)
+            {
+                if (character.Stats.GetBase(StatIds[i]) != 10 + old.Base[i] + old.Growth[i] * levelUps) return false;
+                if (old.Base[i] != now.BaseStatBonus.GetValueOrDefault(StatIds[i]) ||
+                    old.Growth[i] != now.StatGrowth.GetValueOrDefault(StatIds[i])) differs = true;
+            }
+            if (!differs) return false;   // data set still ships the old balance
+
+            for (int i = 0; i < StatIds.Length; i++)
+            {
+                string id = StatIds[i];
+                character.Stats.SetBase(id, Math.Max(1, 10 + now.BaseStatBonus.GetValueOrDefault(id) + now.StatGrowth.GetValueOrDefault(id) * levelUps));
+            }
+            return true;
+        }
+
+        private static bool MoveRetiredRace(Character character)
+        {
             if (!_retired.TryGetValue(character.Race, out var old)) return false;
             if (RaceProfile.All.ContainsKey(character.Race)) return false;
             if (!RaceProfile.All.TryGetValue(old.NewRace, out var now)) return false;
@@ -44,6 +97,7 @@ namespace Myria.Lib.Core.Services.Manager
                 string id = StatIds[i];
                 int delta = now.BaseStatBonus.GetValueOrDefault(id) - old.Base[i]
                           + (now.StatGrowth.GetValueOrDefault(id) - old.Growth[i]) * levelUps;
+                // (Moves straight to the current balance; Rebalance afterwards then finds nothing to do.)
                 character.Stats.SetBase(id, Math.Max(1, character.Stats.GetBase(id) + delta));
             }
             character.Stats.BaseHealth = Math.Max(1, character.Stats.BaseHealth + now.BaseHpBonus - old.Hp + (now.HpPerLevel - old.HpPerLevel) * levelUps);

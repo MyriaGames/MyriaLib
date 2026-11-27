@@ -670,7 +670,7 @@
       { "Id": "quick_slash_efficiency", "Description": "Reduces mana cost.", "ManaCostDelta": -1, "MaxPurchases": 1 },
       { "Id": "quick_slash_mastery", "Description": "Greatly increases damage.", "ScalingFactorDelta": 0.4, "RequiredLevel": 6, "MaxPurchases": 2 },
       { "Id": "quick_slash_power_2", "Description": "Further increases damage.", "ScalingFactorDelta": 0.3, "RequiredLevel": 11 },
-      { "Id": "quick_slash_slip_away", "Description": "Slip away after striking, raising evasion.", "RequiredLevel": 11, "MaxPurchases": 1, "AddedEffects": [ { "EffectId": "eva_buff_minor", "ApplyTo": "Caster" } ] }
+      { "Id": "quick_slash_slip_away", "Description": "Slip away after striking, raising evasion.", "RequiredLevel": 11, "MaxPurchases": 1, "AddedEffects": [ { "EffectId": "rogue_eva_buff", "ApplyTo": "Caster" } ] }
     ]
   },
   {
@@ -686,7 +686,7 @@
     "MinLevel": 1,
     "AggroModifier": 0.5,
     "Effects": [
-      { "EffectId": "atk_buff_minor", "ApplyTo": "Caster" }
+      { "EffectId": "rogue_atk_buff", "ApplyTo": "Caster" }
     ],
     "UpgradeOptions": [
       { "Id": "backstab_power", "Description": "Increases damage.", "ScalingFactorDelta": 0.3 },
@@ -709,14 +709,14 @@
     "MinLevel": 1,
     "AggroModifier": 0.5,
     "Effects": [
-      { "EffectId": "poison_moderate", "ApplyTo": "Target" }
+      { "EffectId": "rogue_poison", "ApplyTo": "Target" }
     ],
     "UpgradeOptions": [
       { "Id": "poison_dagger_power", "Description": "Increases damage.", "ScalingFactorDelta": 0.25 },
       { "Id": "poison_dagger_efficiency", "Description": "Reduces mana cost.", "ManaCostDelta": -1, "MaxPurchases": 3 },
       { "Id": "poison_dagger_mastery", "Description": "Greatly increases damage.", "ScalingFactorDelta": 0.4, "RequiredLevel": 6, "MaxPurchases": 2 },
       { "Id": "poison_dagger_power_2", "Description": "Further increases damage.", "ScalingFactorDelta": 0.3, "RequiredLevel": 11 },
-      { "Id": "poison_dagger_corrode", "Description": "The venom also corrodes the target's defense.", "RequiredLevel": 11, "MaxPurchases": 1, "AddedEffects": [ { "EffectId": "def_debuff_minor", "ApplyTo": "Target" } ] }
+      { "Id": "poison_dagger_corrode", "Description": "The venom also corrodes the target's defense.", "RequiredLevel": 11, "MaxPurchases": 1, "AddedEffects": [ { "EffectId": "rogue_def_debuff", "ApplyTo": "Target" } ] }
     ]
   },
   {
@@ -732,14 +732,14 @@
     "MinLevel": 1,
     "AggroModifier": 0.5,
     "Effects": [
-      { "EffectId": "dex_buff_minor", "ApplyTo": "Caster" }
+      { "EffectId": "rogue_dex_buff", "ApplyTo": "Caster" }
     ],
     "UpgradeOptions": [
       { "Id": "evasive_strike_power", "Description": "Increases damage.", "ScalingFactorDelta": 0.25 },
       { "Id": "evasive_strike_efficiency", "Description": "Reduces mana cost.", "ManaCostDelta": -1, "MaxPurchases": 3 },
       { "Id": "evasive_strike_mastery", "Description": "Greatly increases damage.", "ScalingFactorDelta": 0.45, "RequiredLevel": 6, "MaxPurchases": 2 },
       { "Id": "evasive_strike_power_2", "Description": "Further increases damage.", "ScalingFactorDelta": 0.35, "RequiredLevel": 11 },
-      { "Id": "evasive_strike_shadowstep", "Description": "Also raises your evasion.", "RequiredLevel": 11, "MaxPurchases": 1, "AddedEffects": [ { "EffectId": "eva_buff_minor", "ApplyTo": "Caster" } ] }
+      { "Id": "evasive_strike_shadowstep", "Description": "Also raises your evasion.", "RequiredLevel": 11, "MaxPurchases": 1, "AddedEffects": [ { "EffectId": "rogue_eva_buff", "ApplyTo": "Caster" } ] }
     ]
   },
   {
@@ -755,14 +755,14 @@
     "MinLevel": 1,
     "AggroModifier": 0.5,
     "Effects": [
-      { "EffectId": "def_debuff_minor", "ApplyTo": "Target" }
+      { "EffectId": "rogue_def_debuff", "ApplyTo": "Target" }
     ],
     "UpgradeOptions": [
       { "Id": "exploit_weakness_power", "Description": "Increases damage.", "ScalingFactorDelta": 0.3 },
       { "Id": "exploit_weakness_efficiency", "Description": "Reduces mana cost.", "ManaCostDelta": -2, "MaxPurchases": 2 },
       { "Id": "exploit_weakness_mastery", "Description": "Greatly increases damage.", "ScalingFactorDelta": 0.5, "RequiredLevel": 6, "MaxPurchases": 2 },
       { "Id": "exploit_weakness_power_2", "Description": "Further increases damage.", "ScalingFactorDelta": 0.4, "RequiredLevel": 11 },
-      { "Id": "exploit_weakness_open_wound", "Description": "Leaves an open wound that poisons.", "RequiredLevel": 11, "MaxPurchases": 1, "AddedEffects": [ { "EffectId": "poison_weak", "ApplyTo": "Target" } ] }
+      { "Id": "exploit_weakness_open_wound", "Description": "Leaves an open wound that poisons.", "RequiredLevel": 11, "MaxPurchases": 1, "AddedEffects": [ { "EffectId": "rogue_poison_weak", "ApplyTo": "Target" } ] }
     ]
   },
   {
